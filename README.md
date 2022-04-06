@@ -19,17 +19,17 @@ A given Multimedia asset could be pointed at its Netx destination folder based o
 
 system | folder level-1 | folder level-2 | folder level-3
 -|-|-|-
-NetX | [Active/Restricted] | "**Multimedia**" | [Department-folder]
+NetX | [Active/Restricted] | "**Multimedia**" | [MM-Department folder]
 EMu | [emultimedia.SecRecordStatus] | [emultimedia module] | emultimedia.SecDepartment_tab 
 
 system | folder level-1 | folder level-2 | folder level-3 | folder level-4
 -|-|-|-|-
-NetX | [Active/Restricted] | "**Events**" | [Department-folder]
+NetX | [Active/Restricted] | "**Events**" | [Event-Department folder] | [Event Title folder]
 EMu | [emultimedia.SecRecordStatus] | [eevents module] | eevents.SecDepartment_tab | eevents.EveEventTitle
 
 system | folder level-1 | folder level-2 | folder level-3 | folder level-4
 -|-|-|-|-
-NetX | [Active/Restricted] | "**Catalogue**" | [Department-folder] | [Catalogue-folder]
+NetX | [Active/Restricted] | "**Catalogue**" | [Cat-Department folder] | [Catalogue folder]
 EMu | [emultimedia.SecRecordStatus] | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 
 
