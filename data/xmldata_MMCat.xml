@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    integer         irn
+    text short      MulDocumentType
+    text long       MulIdentifier
+    text short      AudAccessURI
+    text short      SecRecordStatus
+    table           SecDepartment_tab
+      text short      SecDepartment
+    end
+    table           MulMultiMediaRef_tab
+      text short      CatDepartment
+      text short      CatCatalog
+    end
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="irn">391705</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PSU_MPC_636.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/391/705/PSU_MPC_636.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="irn">479947</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PSU_MPC_815.pdf</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/479/947/PSU_MPC_815.pdf</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="irn">1189298</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE76735_fossiL_2.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1189/298/PE76735_fossiL_2.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="irn">1170068</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE78469_label.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1170/068/PE78469_label.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="irn">386024</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PSU_MPC_140.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/386/024/PSU_MPC_140.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="irn">698298</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PP13230_image_1.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/698/298/PP13230_image_1.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="irn">698299</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PP13774_image_1.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/698/299/PP13774_image_1.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="irn">1191028</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">UC18872_fossil_group.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/028/UC18872_fossil_group.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="irn">1189921</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE77622_L.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1189/921/PE77622_L.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="irn">1191990</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">UC33623_fossil_5.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/990/UC33623_fossil_5.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 11 -->
+  <tuple>
+    <atom name="irn">1191313</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">UC22141_fossil_2.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/313/UC22141_fossil_2.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 12 -->
+  <tuple>
+    <atom name="irn">1191709</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">UC2641_fossil_best_of_group.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/709/UC2641_fossil_best_of_group.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 13 -->
+  <tuple>
+    <atom name="irn">1187524</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">P_19894_fossil_group.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1187/524/P_19894_fossil_group.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 14 -->
+  <tuple>
+    <atom name="irn">390603</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PSU_MPC_538.pdf</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/390/603/PSU_MPC_538.pdf</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 15 -->
+  <tuple>
+    <atom name="irn">1171954</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE80574_label.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1171/954/PE80574_label.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 16 -->
+  <tuple>
+    <atom name="irn">1162325</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE77048_L.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1162/325/PE77048_L.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 17 -->
+  <tuple>
+    <atom name="irn">1173031</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">UC35743_label.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1173/031/UC35743_label.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 18 -->
+  <tuple>
+    <atom name="irn">2133508</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PP33104_image_2.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2133/508/PP33104_image_2.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 19 -->
+  <tuple>
+    <atom name="irn">1431947</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PE48945_n.JPG</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1431/947/PE48945_n.JPG</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Fossil Invertebrates</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 20 -->
+  <tuple>
+    <atom name="irn">2055546</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">PP18173_image_2.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2055/546/PP18173_image_2.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 21 -->
+  <tuple>
+    <atom name="irn">2312238</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">h2i_dwc_xml_json_224718638687.zip</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2312/238/h2i_dwc_xml_json_224718638687.zip</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 22 -->
+  <tuple>
+    <atom name="irn">902618</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">180659 side.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/618/180659 side.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 23 -->
+  <tuple>
+    <atom name="irn">902619</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">180683 side.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/619/180683 side.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 24 -->
+  <tuple>
+    <atom name="irn">902620</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">180699 side.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/620/180699 side.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 25 -->
+  <tuple>
+    <atom name="irn">1722677</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">GN90446_16d.jpg</atom>
+    <atom name="AudAccessURI"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 26 -->
+  <tuple>
+    <atom name="irn">1683148</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">GN91947_056Bd.jpg</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1683/148/GN91947_056Bd.jpg</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 27 -->
+  <tuple>
+    <atom name="irn">1628130</atom>
+    <atom name="MulDocumentType">M</atom>
+    <atom name="MulIdentifier">Enh_sch_fmnh_206655_rec2.mp4</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1628/130/Enh_sch_fmnh_206655_rec2.mp4</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Amphibians and Reptiles</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Zoology</atom>
+        <atom name="CatCatalog">Amphibians and Reptiles</atom>
+      </tuple>
+    </table>
+  </tuple>
+</table>
