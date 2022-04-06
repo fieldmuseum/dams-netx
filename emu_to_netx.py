@@ -27,7 +27,9 @@ session = imu_api.create_imu_session(
 
     # 2. Check for filename prefix:
     # 
-    #       IF filename-prefix == irn: pass
+    #       IF filename-prefix == [irn]_emu: pass
+    #       ELIF filename-prefix == [id]_netx:
+    #           check if dato has a matching record? (or just pass?)
     #       ELSE: prepend '[irn]_emu' to filename
 
 
