@@ -1,0 +1,3206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    text long       MulTitle
+    table           DetSubject_tab
+      text short      DetSubject
+    end
+    table           GUID
+      text short      AdmGUIDIsPreferred
+      text short      AdmGUIDType
+      text short      AdmGUIDValue
+    end
+    tuple           DetMediaRightsRef
+      integer         irn
+      text long       SummaryData
+    end
+    table           Creator
+      text long       SummaryData
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text short      MulMultimediaCreatorRole
+    end
+    table           Supplementary
+      text short      SupIdentifier
+      table           SupUsage_nesttab
+        text short      SupUsage
+      end
+    end
+    table           MulMultiMediaRef_tab
+      text short      DarGlobalUniqueIdentifier
+    end
+    text short      AudAssociatedSpecimen
+    table           SecDepartment_tab
+      text short      SecDepartment
+    end
+    integer         irn
+    tuple           RelParentMediaRef
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    text long       MulIdentifier
+    text short      ChaMd5Sum
+    table           OtherNums
+      text short      MulOtherNumber
+      text short      MulOtherNumberSource
+    end
+    text long       MulDescription
+    text short      MulMimeType
+    text short      MulMimeFormat
+    text short      MulDocumentType
+    tuple           DetPublisherRef
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetContributorRole_tab
+      text short      DetContributorRole
+    end
+    table           DetContributorRef_tab
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetResourceDetailsDate0
+      date            DetResourceDetailsDate
+    end
+    table           DetResourceDetailsDescription_tab
+      text long       DetResourceDetailsDescription
+    end
+    text long       DetResourceType
+    text long       DetCoverage
+    text long       DetSource
+    text long       ChaMediaForm
+    integer         ChaFileSize
+    text short      ChaImageResolution
+    text short      ChaImageHeight
+    text short      ChaImageWidth
+    text short      ChaImageColorDepth
+    text short      ChaVideoFilmLength
+    table           SupMimeType_tab
+      text short      SupMimeType
+    end
+    table           SupMimeFormat_tab
+      text short      SupMimeFormat
+    end
+    table           SupFileSize_tab
+      integer         SupFileSize
+    end
+    table           SupMD5Checksum_tab
+      text short      SupMD5Checksum
+    end
+    table           RelRelatedMediaRef_tab
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           RelRelationship_tab
+      text short      RelRelationship
+    end
+    date            AdmDateInserted
+    date            AdmDateModified
+    text short      AudAccessURI
+    text long       AudACDescription
+    text short      AudAssociatedObservation
+    text short      AudCaptureDevice
+    text short      AudCitation
+    text short      AudDerivedFrom
+    text short      AudFundingAttribution
+    text short      AudLifeStage
+    text long       AudNumbers
+    text long       AudRelatedGeography
+    text long       AudRelatedResourceID
+    text short      AudSex
+    text short      AudSubjectOrientation
+    table           AudSubjectPart_tab
+      text short      AudSubjectPart
+    end
+    text long       AudTaxonCoverage
+    text long       AudTemporalCoverage
+    text long       AudVernacularName
+    text short      SecRecordStatus
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="AudIdentifier">e60f822d-5e6f-4284-9610-8fe467ce1e82</atom>
+    <atom name="MulTitle">PSU_MPC_636</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fossil</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">e60f822d-5e6f-4284-9610-8fe467ce1e82</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">391705</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PSU_MPC_636.jpg</atom>
+    <atom name="ChaMd5Sum">2bcbe965f17102eed6ec9e24acc646df</atom>
+    <atom name="MulDescription">PSU_MPC_636, Trilete, Sc0, micropitted, TR_577,TR_578</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">623236</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1487</atom>
+    <atom name="ChaImageWidth">2404</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2012-08-24</atom>
+    <atom name="AdmDateModified">2021-04-21</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/391/705/PSU_MPC_636.jpg</atom>
+    <atom name="AudACDescription">PSU_MPC_636, Trilete, Sc0, micropitted, TR_577,TR_578</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/e60f822d-5e6f-4284-9610-8fe467ce1e82 (accessed on 21 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="AudIdentifier">afca8734-93ac-4a2c-b6cf-456769a848f6</atom>
+    <atom name="MulTitle">PSU_MPC_815</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fossil</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">afca8734-93ac-4a2c-b6cf-456769a848f6</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">479947</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PSU_MPC_815.pdf</atom>
+    <atom name="ChaMd5Sum">f424365590419c1be287bc7df7e97fdc</atom>
+    <atom name="MulDescription">PSU_MPC_815, Rosales, Moraceae, Morus, Moraceae, Morus alba, Diporate, Po2, micropitted, TR2_3444</atom>
+    <atom name="MulMimeType">application</atom>
+    <atom name="MulMimeFormat">pdf</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Text</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">609274</atom>
+    <atom name="ChaImageResolution"></atom>
+    <atom name="ChaImageHeight"></atom>
+    <atom name="ChaImageWidth"></atom>
+    <atom name="ChaImageColorDepth"></atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2013-08-14</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/479/947/PSU_MPC_815.pdf</atom>
+    <atom name="AudACDescription">PSU_MPC_815, Rosales, Moraceae, Morus, Moraceae, Morus alba, Diporate, Po2, micropitted, TR2_3444</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/afca8734-93ac-4a2c-b6cf-456769a848f6 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="AudIdentifier">17d89ca3-c0e0-45f9-a14a-eb62da166f21</atom>
+    <atom name="MulTitle">PE  76735</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">cephalopods</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">17d89ca3-c0e0-45f9-a14a-eb62da166f21</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Ryan Manzuk : Field Museum of Natural History - Geology Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">174664</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">270c1c48-9116-431c-8e71-e25635139f8c</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">270c1c48-9116-431c-8e71-e25635139f8c</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1189298</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE76735_fossiL_2.jpg</atom>
+    <atom name="ChaMd5Sum">5320d9dca40564f2e6d78cb9b57b6a60</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1098935</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1189/298/PE76735_fossiL_2.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: R. Manzuk. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/17d89ca3-c0e0-45f9-a14a-eb62da166f21 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 76735</atom>
+    <atom name="AudRelatedGeography">United States of America, Ohio, Clinton, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Cyrtoceras</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="AudIdentifier">162e04c3-c9ad-48c2-86db-c9f8f4b5b742</atom>
+    <atom name="MulTitle">PE 78469 label</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Label</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">162e04c3-c9ad-48c2-86db-c9f8f4b5b742</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">9d98d17f-a17f-4a0b-a044-f4dac28d7dc4</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1170068</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE78469_label.jpg</atom>
+    <atom name="ChaMd5Sum">d5d23469092cb58c46cba845d93d9130</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1932518</atom>
+    <atom name="ChaImageResolution">150</atom>
+    <atom name="ChaImageHeight">4752</atom>
+    <atom name="ChaImageWidth">3168</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-01</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1170/068/PE78469_label.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/162e04c3-c9ad-48c2-86db-c9f8f4b5b742 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 78469</atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Crinoidea</atom>
+    <atom name="AudTemporalCoverage">Silurian, Niagaran. NAS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="AudIdentifier">ac2b2c53-82ca-4b95-9157-cec0f5b85b25</atom>
+    <atom name="MulTitle">PSU_MPC_140</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fossil</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">ac2b2c53-82ca-4b95-9157-cec0f5b85b25</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">386024</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PSU_MPC_140.jpg</atom>
+    <atom name="ChaMd5Sum">39687a189b4a098a50216d0da4401669</atom>
+    <atom name="MulDescription">PSU_MPC_140, Alismatales, Hydrocharitaceae, Anacharis canadensis, Inaperturate, Po0,  TR2_1563</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1714715</atom>
+    <atom name="ChaImageResolution">600</atom>
+    <atom name="ChaImageHeight">2984</atom>
+    <atom name="ChaImageWidth">4826</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2012-08-01</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/386/024/PSU_MPC_140.jpg</atom>
+    <atom name="AudACDescription">PSU_MPC_140, Alismatales, Hydrocharitaceae, Anacharis canadensis, Inaperturate, Po0,  TR2_1563</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/ac2b2c53-82ca-4b95-9157-cec0f5b85b25 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="AudIdentifier">ea4ce244-cd70-4ff1-90bd-375246d15dd9</atom>
+    <atom name="MulTitle">PP13230_image_1</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Fossil Ferns</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">ea4ce244-cd70-4ff1-90bd-375246d15dd9</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">D. M. Le : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">7046</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PP13230_image_1.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">22fd513c-e8d6-4fa0-875b-299bcaf33d8a</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">22fd513c-e8d6-4fa0-875b-299bcaf33d8a</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">698298</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PP13230_image_1.jpg</atom>
+    <atom name="ChaMd5Sum">ae859464066e1bbe67b517a71e88785f</atom>
+    <atom name="MulDescription">PP 13230 [HS, F] Annularia tridactyla, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2014-07-29</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1434469</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1500</atom>
+    <atom name="ChaImageWidth">1553</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">29286942</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">e9ce5b24f4ea782021571cbf39de7fa4</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2014-07-31</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/698/298/PP13230_image_1.jpg</atom>
+    <atom name="AudACDescription">PP 13230 [HS, F] Annularia tridactyla, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: D. M. Le. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/ea4ce244-cd70-4ff1-90bd-375246d15dd9 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PP 13230</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Annularia tridactyla Langford</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian (Westphalian D). ICS/IUGS | Carbondale Formation, Francis Creek Shale Member</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="AudIdentifier">672a00b3-5b24-4621-9ef1-e3676d83a41f</atom>
+    <atom name="MulTitle">PP13774_image_1</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Fossil Ferns</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">672a00b3-5b24-4621-9ef1-e3676d83a41f</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">D. M. Le : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">7046</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PP13774_image_1.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">e535dd1d-4d02-43fc-84b2-ea53f4f88bb3</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">e535dd1d-4d02-43fc-84b2-ea53f4f88bb3</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">698299</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PP13774_image_1.jpg</atom>
+    <atom name="ChaMd5Sum">a7edf08e9d8501d6bc96ec756fb60274</atom>
+    <atom name="MulDescription">PP 13774 [HS, F] Annularia tridactyla, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2014-07-29</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1438997</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1500</atom>
+    <atom name="ChaImageWidth">1553</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">29009896</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">cd2127abb5f5e0b37ebd61b7e43fe204</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2014-07-31</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/698/299/PP13774_image_1.jpg</atom>
+    <atom name="AudACDescription">PP 13774 [HS, F] Annularia tridactyla, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: D. M. Le. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/672a00b3-5b24-4621-9ef1-e3676d83a41f (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PP 13774</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Annularia tridactyla Langford</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian (Westphalian D). ICS/IUGS | Carbondale Formation, Francis Creek Shale Member</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="AudIdentifier">762d1b91-8f28-40eb-88b3-c1a9db7c8532</atom>
+    <atom name="MulTitle">UC 18872</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Crinoids</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">762d1b91-8f28-40eb-88b3-c1a9db7c8532</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Sam Albright : University of Chicago</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">173738</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">3f51d394-70e9-4dc3-8d1a-76d16f479769</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">3f51d394-70e9-4dc3-8d1a-76d16f479769</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1191028</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">UC18872_fossil_group.jpg</atom>
+    <atom name="ChaMd5Sum">e8c10016597ed52a12dac38efc69b5e0</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1329077</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">4752</atom>
+    <atom name="ChaImageWidth">3168</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/028/UC18872_fossil_group.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: S. Albright. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/762d1b91-8f28-40eb-88b3-c1a9db7c8532 (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">UC 18872</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Stephanocrinus angulatus Conrad</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS | Clinton Group, Rochester Shale</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="AudIdentifier">bf5de688-3b0d-448c-a322-1d5f1e9b97e2</atom>
+    <atom name="MulTitle">PE  77622</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">gastropods</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">bf5de688-3b0d-448c-a322-1d5f1e9b97e2</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Ryan Manzuk : Field Museum of Natural History - Geology Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">174664</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">b2200e58-432f-4bc6-824f-bf3327f10dae</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">b2200e58-432f-4bc6-824f-bf3327f10dae</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1189921</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE77622_L.jpg</atom>
+    <atom name="ChaMd5Sum">878dfe112569621423728f21f35347ff</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1288804</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1189/921/PE77622_L.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: R. Manzuk. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/bf5de688-3b0d-448c-a322-1d5f1e9b97e2 (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 77622</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Gastropoda</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS | Clinton Group</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="AudIdentifier">6e2d9a85-0acc-4cf2-9df3-2022a7f254e6</atom>
+    <atom name="MulTitle">UC 33623</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Crinoids</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">6e2d9a85-0acc-4cf2-9df3-2022a7f254e6</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Sam Albright : University of Chicago</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">173738</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">c0699b8e-0456-4572-a860-4dc12dabadcc</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">c0699b8e-0456-4572-a860-4dc12dabadcc</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1191990</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">UC33623_fossil_5.jpg</atom>
+    <atom name="ChaMd5Sum">88e63a12a5f1c660739baece9a601f26</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1195478</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/990/UC33623_fossil_5.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: S. Albright. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/6e2d9a85-0acc-4cf2-9df3-2022a7f254e6 (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">UC 33623</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Stephanocrinus angulatus Conrad</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS | Clinton Group, Rochester Shale</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 11 -->
+  <tuple>
+    <atom name="AudIdentifier">88c28c04-3921-4296-8fab-7ad2463e5602</atom>
+    <atom name="MulTitle">UC 22141</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Crinoids</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">88c28c04-3921-4296-8fab-7ad2463e5602</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Sam Albright : University of Chicago</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">173738</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">76a39f14-d279-4546-aa85-28733610e9c7</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">76a39f14-d279-4546-aa85-28733610e9c7</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1191313</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">UC22141_fossil_2.jpg</atom>
+    <atom name="ChaMd5Sum">2f4254c92c5a21966858aaa0a19bd0e5</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1122238</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/313/UC22141_fossil_2.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: S. Albright. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/88c28c04-3921-4296-8fab-7ad2463e5602 (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">UC 22141</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Lecanocrinus macropetalus Hall, 1852</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS | Clinton Group, Rochester Shale</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 12 -->
+  <tuple>
+    <atom name="AudIdentifier">5dd90c33-3c99-4880-83af-7f3e2c3b276c</atom>
+    <atom name="MulTitle">UC 2641</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Crinoids</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">5dd90c33-3c99-4880-83af-7f3e2c3b276c</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Sam Albright : University of Chicago</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">173738</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">64975f58-bb55-4d59-b77d-811c9cf06a4b</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">64975f58-bb55-4d59-b77d-811c9cf06a4b</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1191709</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">UC2641_fossil_best_of_group.jpg</atom>
+    <atom name="ChaMd5Sum">dad31401c29d39d78550ecada353ed21</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1192489</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1191/709/UC2641_fossil_best_of_group.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: S. Albright. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/5dd90c33-3c99-4880-83af-7f3e2c3b276c (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">UC 2641</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Stephanocrinus angulatus Conrad</atom>
+    <atom name="AudTemporalCoverage">Silurian, Niagaran. NAS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 13 -->
+  <tuple>
+    <atom name="AudIdentifier">ab26888a-9100-4e5f-88ec-bc0ef23d8c54</atom>
+    <atom name="MulTitle">P 19894</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Crinoids</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">ab26888a-9100-4e5f-88ec-bc0ef23d8c54</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Sam Albright : University of Chicago</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">173738</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">41a9270b-ca43-491e-9d0e-55f958d5616e</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">41a9270b-ca43-491e-9d0e-55f958d5616e</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1187524</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">P_19894_fossil_group.jpg</atom>
+    <atom name="ChaMd5Sum">b551672d41f5dc389d44c39195ef4041</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1490458</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-18</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1187/524/P_19894_fossil_group.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: S. Albright. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/ab26888a-9100-4e5f-88ec-bc0ef23d8c54 (accessed on 23 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">P 19894</atom>
+    <atom name="AudRelatedGeography">United States of America, Indiana, Harrison, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Caryocrinus ornatus (Say, 1825)</atom>
+    <atom name="AudTemporalCoverage">Silurian, Niagaran. NAS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 14 -->
+  <tuple>
+    <atom name="AudIdentifier">94dc11ee-cf82-4f09-98e8-b4df2e354479</atom>
+    <atom name="MulTitle">PSU_MPC_538</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fossil</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">94dc11ee-cf82-4f09-98e8-b4df2e354479</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">390603</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PSU_MPC_538.pdf</atom>
+    <atom name="ChaMd5Sum">d29a11e2122ac46a6305f6599b8cd5a7</atom>
+    <atom name="MulDescription">PSU_MPC_538, Caryophyllales, Aizoaceae, Apatesia sabulosa, Tricolpate, Pc0, micropitted, AG_322</atom>
+    <atom name="MulMimeType">application</atom>
+    <atom name="MulMimeFormat">pdf</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Text</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">124540</atom>
+    <atom name="ChaImageResolution"></atom>
+    <atom name="ChaImageHeight"></atom>
+    <atom name="ChaImageWidth"></atom>
+    <atom name="ChaImageColorDepth"></atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2012-08-13</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/390/603/PSU_MPC_538.pdf</atom>
+    <atom name="AudACDescription">PSU_MPC_538, Caryophyllales, Aizoaceae, Apatesia sabulosa, Tricolpate, Pc0, micropitted, AG_322</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/94dc11ee-cf82-4f09-98e8-b4df2e354479 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 15 -->
+  <tuple>
+    <atom name="AudIdentifier">4514b097-986b-407c-9026-535eaa42605d</atom>
+    <atom name="MulTitle">PE 80574 label</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Label</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">4514b097-986b-407c-9026-535eaa42605d</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">421fe806-c37c-46e2-bb62-a3e3ac326f56</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">421fe806-c37c-46e2-bb62-a3e3ac326f56</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1171954</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE80574_label.jpg</atom>
+    <atom name="ChaMd5Sum">c0c9a2eb51b843829c5cd7d77f9cc18c</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1924997</atom>
+    <atom name="ChaImageResolution">150</atom>
+    <atom name="ChaImageHeight">4752</atom>
+    <atom name="ChaImageWidth">3168</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-02</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1171/954/PE80574_label.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/4514b097-986b-407c-9026-535eaa42605d (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 80574</atom>
+    <atom name="AudRelatedGeography">United States of America, New York?, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Favositidae</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 16 -->
+  <tuple>
+    <atom name="AudIdentifier">c3c4482d-4821-4fdd-b7af-b01161ebf93f</atom>
+    <atom name="MulTitle">PE 77048</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Brachiopod</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Fossil Group</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">c3c4482d-4821-4fdd-b7af-b01161ebf93f</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Alex P. Layng : Field Museum of Natural History - Geology Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">167411</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PE77048_L.dng</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">8a3bf3cc-b2ed-4acd-a92a-6f15672308e7</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">8a3bf3cc-b2ed-4acd-a92a-6f15672308e7</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1162325</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE77048_L.jpg</atom>
+    <atom name="ChaMd5Sum">a45faf9f39d2ba32838ddaa085587114</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian brachiopod PE 77048</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1429327</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">dng</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">25936836</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">2795372a1809cf86157995321e9aca3b</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-08-26</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1162/325/PE77048_L.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian brachiopod PE 77048</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: A. P. Layng. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/c3c4482d-4821-4fdd-b7af-b01161ebf93f (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 77048</atom>
+    <atom name="AudRelatedGeography">United States of America, New York, Cayuga, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Coelospira hemispherica (Sowerby, 1839)</atom>
+    <atom name="AudTemporalCoverage">Silurian, Niagaran. NAS | Clinton Group</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 17 -->
+  <tuple>
+    <atom name="AudIdentifier">e07d221e-c300-4992-aeec-1713c147a2b6</atom>
+    <atom name="MulTitle">UC 35743 label</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Silurian</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">IMLS</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Label</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">e07d221e-c300-4992-aeec-1713c147a2b6</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">57984585-490c-437c-819e-fd5786b32ca9</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">57984585-490c-437c-819e-fd5786b32ca9</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1173031</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">UC35743_label.jpg</atom>
+    <atom name="ChaMd5Sum">7bbcf8ab5a1a20b1d9732be67d6514e6</atom>
+    <atom name="MulDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Editor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">147000</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177271</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1723511</atom>
+    <atom name="ChaImageResolution">150</atom>
+    <atom name="ChaImageHeight">4752</atom>
+    <atom name="ChaImageWidth">3168</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-09-02</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1173/031/UC35743_label.jpg</atom>
+    <atom name="AudACDescription">IMLS Silurian Reef Digitization Project, Image of a Silurian specimen label</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/e07d221e-c300-4992-aeec-1713c147a2b6 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution">IMLS Silurian Reef Digitization Project 2014</atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">UC 35743</atom>
+    <atom name="AudRelatedGeography">Sweden, Gotland, Europe</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Ptychophyllum</atom>
+    <atom name="AudTemporalCoverage">Silurian. ICS/IUGS</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 18 -->
+  <tuple>
+    <atom name="AudIdentifier">0b97f86f-f83e-4f73-ad2f-e0172a1c3ae2</atom>
+    <atom name="MulTitle">PP33104_image_2</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Fossil Ferns</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">0b97f86f-f83e-4f73-ad2f-e0172a1c3ae2</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Mendkhuu Enkhbayar : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">205563</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PP33104_image_2.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">fb09dc05-869f-4ad7-8562-f582a2e8b491</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">fb09dc05-869f-4ad7-8562-f582a2e8b491</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">2133508</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PP33104_image_2.jpg</atom>
+    <atom name="ChaMd5Sum">7a8c511fb2bab0a9deb5b950844c061d</atom>
+    <atom name="MulDescription">PP 33104 [HS, M] Lepidodendron sp., Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Funded By</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2020-02-24</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Botany Department, Searle herbarium</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">908209</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">3879</atom>
+    <atom name="ChaImageWidth">1500</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">21358676</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">61e8effd9e276bcaa45afd1a0a303fdc</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2020-04-08</atom>
+    <atom name="AdmDateModified">2021-04-12</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2133/508/PP33104_image_2.jpg</atom>
+    <atom name="AudACDescription">PP 33104 [HS, M] Lepidodendron sp., Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: M. Enkhbayar. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/0b97f86f-f83e-4f73-ad2f-e0172a1c3ae2 (accessed on 26 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PP 33104</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Lepidodendron</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian (Westphalian D). ICS/IUGS | Carbondale Formation, Francis Creek Shale Member</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 19 -->
+  <tuple>
+    <atom name="AudIdentifier">c670c31f-bb86-4158-942e-107216512369</atom>
+    <atom name="MulTitle">PE48945_n</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">c670c31f-bb86-4158-942e-107216512369</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Janel Nelson : Field Museum of Natural History - Geology Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">184975</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">38aa77fc-5132-4dfe-bb97-9c18be919f0c</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">38aa77fc-5132-4dfe-bb97-9c18be919f0c</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Fossil Invertebrates</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1431947</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PE48945_n.JPG</atom>
+    <atom name="ChaMd5Sum">59dfec1843570a124dc010cc509bcf2d</atom>
+    <atom name="MulDescription">Mazon Creek Etacystis communis PE 48945 low-angle lighting</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">4747215</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">3168</atom>
+    <atom name="ChaImageWidth">4752</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2016-07-07</atom>
+    <atom name="AdmDateModified">2021-04-26</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1431/947/PE48945_n.JPG</atom>
+    <atom name="AudACDescription">Mazon Creek Etacystis communis PE 48945 low-angle lighting</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: J. Nelson. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/c670c31f-bb86-4158-942e-107216512369 (accessed on 26 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PE 48945</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Kankakee, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Etacystis communis Nitecki &amp; Schram, 1976</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian. ICS/IUGS | Carbondale Formation, Francis Creek Shale Member. Illinois basin.</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 20 -->
+  <tuple>
+    <atom name="AudIdentifier">363bf569-80ed-44d3-9d6f-0803345b04ea</atom>
+    <atom name="MulTitle">PP18173_image_2</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Fossil Ferns</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">363bf569-80ed-44d3-9d6f-0803345b04ea</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Mendkhuu Enkhbayar : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">205563</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PP18173_image_2.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">975617af-3c3a-4557-85ad-e9226529a7e9</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">975617af-3c3a-4557-85ad-e9226529a7e9</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">2055546</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PP18173_image_2.jpg</atom>
+    <atom name="ChaMd5Sum">a42cf6c79ad35f0b236b9767494a06b8</atom>
+    <atom name="MulDescription">PP 18173 [HS, M] Annularia sphenophylloides, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Funded By</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2019-10-29</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Botany Department, Searle herbarium</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">737396</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1500</atom>
+    <atom name="ChaImageWidth">2416</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">20876168</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">1d42cb53473a72211c1b1e2b1bc5300f</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2019-12-18</atom>
+    <atom name="AdmDateModified">2021-04-09</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2055/546/PP18173_image_2.jpg</atom>
+    <atom name="AudACDescription">PP 18173 [HS, M] Annularia sphenophylloides, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: M. Enkhbayar. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/363bf569-80ed-44d3-9d6f-0803345b04ea (accessed on 26 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PP 18173</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Annularia sphenophylloides (Zenker) Gutbier</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian (Westphalian D). ICS/IUGS | Carbondale Formation, Francis Creek Shale Member</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 21 -->
+  <tuple>
+    <atom name="AudIdentifier">9c72dd8f-fab1-483d-85e6-8babeb850b3f</atom>
+    <atom name="MulTitle">Philippine Heritage Darwin Core h2i JSON export file</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">9c72dd8f-fab1-483d-85e6-8babeb850b3f</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">751</atom>
+      <atom name="SummaryData">[Public Domain] : CC0 1.0 Universal</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Field Museum of Natural History - Technology Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">178793</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">2312238</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">h2i_dwc_xml_json_224718638687.zip</atom>
+    <atom name="ChaMd5Sum">df4f5905f4d4a1a02e6dd6eb062a418a</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">https://github.com/fieldmuseum/EMu-xml-to-json/issues/16</atom>
+        <atom name="MulOtherNumberSource">Github Issue Number</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Catalog record listing for Philippine Heritage Project.For more information see github issue.</atom>
+    <atom name="MulMimeType">application</atom>
+    <atom name="MulMimeFormat">x-zip-compressed</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2022-02-07</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Dataset</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">3240371</atom>
+    <atom name="ChaImageResolution"></atom>
+    <atom name="ChaImageHeight"></atom>
+    <atom name="ChaImageWidth"></atom>
+    <atom name="ChaImageColorDepth"></atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2022-02-07</atom>
+    <atom name="AdmDateModified">2022-02-08</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2312/238/h2i_dwc_xml_json_224718638687.zip</atom>
+    <atom name="AudACDescription">Catalog record listing for Philippine Heritage Project.For more information see github issue.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: Field Museum of Natural History. CC0 1.0 Universal. https://mm.fieldmuseum.org/9c72dd8f-fab1-483d-85e6-8babeb850b3f (accessed on 08 Feb 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 22 -->
+  <tuple>
+    <atom name="AudIdentifier">a92b6d06-ad00-42af-868e-e08a77b2a51d</atom>
+    <atom name="MulTitle">180659 flake</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">a92b6d06-ad00-42af-868e-e08a77b2a51d</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">777c7f5b-0ab4-40c9-a93e-b411c9d10f27</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">902618</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">180659 side.jpg</atom>
+    <atom name="ChaMd5Sum">4cefb14a61eb4a11788ce8e3622bc6d9</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">180659</atom>
+        <atom name="MulOtherNumberSource">Anthro Cat No.</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Evolving Planet exhibition image. Catalogue No.: 180659 - side view</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">74710</atom>
+    <atom name="ChaImageResolution">180</atom>
+    <atom name="ChaImageHeight">1024</atom>
+    <atom name="ChaImageWidth">546</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-02-23</atom>
+    <atom name="AdmDateModified">2021-09-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/618/180659 side.jpg</atom>
+    <atom name="AudACDescription">Evolving Planet exhibition image. Catalogue No.: 180659 - side view</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/a92b6d06-ad00-42af-868e-e08a77b2a51d (accessed on 27 Sep 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">180659.nosub[1]</atom>
+    <atom name="AudRelatedGeography">France, Somme, Europe</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">x136 stone</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 23 -->
+  <tuple>
+    <atom name="AudIdentifier">feda4bac-1b3f-4857-bf15-f60ef5ef1820</atom>
+    <atom name="MulTitle">180683 flake</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">feda4bac-1b3f-4857-bf15-f60ef5ef1820</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">ba2f62d3-ce04-411b-aae8-4055cf8a3b5c</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">902619</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">180683 side.jpg</atom>
+    <atom name="ChaMd5Sum">370cb827296fbc031cc46769fa18bf59</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">180683</atom>
+        <atom name="MulOtherNumberSource">Anthro Cat No.</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Evolving Planet exhibition image. Catalogue No.: 180683 - side view</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">97400</atom>
+    <atom name="ChaImageResolution">180</atom>
+    <atom name="ChaImageHeight">506</atom>
+    <atom name="ChaImageWidth">1024</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-02-23</atom>
+    <atom name="AdmDateModified">2021-09-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/619/180683 side.jpg</atom>
+    <atom name="AudACDescription">Evolving Planet exhibition image. Catalogue No.: 180683 - side view</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/feda4bac-1b3f-4857-bf15-f60ef5ef1820 (accessed on 27 Sep 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">180683.nosub[1]</atom>
+    <atom name="AudRelatedGeography">France, Somme, Europe</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">x136 stone</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 24 -->
+  <tuple>
+    <atom name="AudIdentifier">3492eae7-3007-4ff8-8c8e-f4863aa4fd9f</atom>
+    <atom name="MulTitle">180699 hand axe</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">3492eae7-3007-4ff8-8c8e-f4863aa4fd9f</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">41c38a6e-b561-4a05-814d-87989378e2d0</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Exhibitions</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">902620</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">180699 side.jpg</atom>
+    <atom name="ChaMd5Sum">a4f3c7fbd079b5758bc8c9f14cd4518c</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">180699</atom>
+        <atom name="MulOtherNumberSource">Anthro Cat No.</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Evolving Planet exhibition image. Catalogue No.: 180699 - side view</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">99783</atom>
+    <atom name="ChaImageResolution">180</atom>
+    <atom name="ChaImageHeight">532</atom>
+    <atom name="ChaImageWidth">1024</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2015-02-23</atom>
+    <atom name="AdmDateModified">2021-09-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/902/620/180699 side.jpg</atom>
+    <atom name="AudACDescription">Evolving Planet exhibition image. Catalogue No.: 180699 - side view</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/3492eae7-3007-4ff8-8c8e-f4863aa4fd9f (accessed on 27 Sep 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">180699.nosub[1]</atom>
+    <atom name="AudRelatedGeography">France, Somme, Europe</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">x136 stone</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 25 -->
+  <tuple>
+    <atom name="AudIdentifier">24ef8ac5-98eb-48d6-a578-ab73df84eb15</atom>
+    <atom name="MulTitle">Chicago Council on</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">24ef8ac5-98eb-48d6-a578-ab73df84eb15</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Mark Widhalm : Field Museum of Natural History - Photography Division</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">405813</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">GN90446_16d.jpg</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1722677</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">GN90446_16d.jpg</atom>
+    <atom name="ChaMd5Sum">da8c37af042401e6ad28730814c0eac5</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">GN90446_16d</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Chicago Council on Foreign Relations event in Simpson Theatre [theater].</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2002-04-30</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">2071298</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1303</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">jpeg</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">4688155</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">3d698d65b2463a5df33201140b32d099</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2018-05-17</atom>
+    <atom name="AdmDateModified">2021-10-12</atom>
+    <atom name="AudAccessURI"></atom>
+    <atom name="AudACDescription">Chicago Council on Foreign Relations event in Simpson Theatre [theater].</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: M. Widhalm. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/24ef8ac5-98eb-48d6-a578-ab73df84eb15 (accessed on 12 Oct 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 26 -->
+  <tuple>
+    <atom name="AudIdentifier">471118a2-9848-4b6a-abce-2ec61bf887e9</atom>
+    <atom name="MulTitle">Members' Night</atom>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">471118a2-9848-4b6a-abce-2ec61bf887e9</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">John Weinstein : Field Museum of Natural History</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">167568</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">GN91947_056Bd.jpg</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1683148</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">GN91947_056Bd.jpg</atom>
+    <atom name="ChaMd5Sum">20738fae83a34d8a8d248fd40e8a8742</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">GN91947_056Bd</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">63rd Annual Members' Night, activities. Main level in SFH</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2014-03-06</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">2787704</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1488</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">jpeg</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">9755977</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">fdd7f408fe73f5b464667ab660ca29b9</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2018-04-02</atom>
+    <atom name="AdmDateModified">2021-10-15</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1683/148/GN91947_056Bd.jpg</atom>
+    <atom name="AudACDescription">63rd Annual Members' Night, activities. Main level in SFH</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: J. Weinstein. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/471118a2-9848-4b6a-abce-2ec61bf887e9 (accessed on 15 Oct 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+
+  <!-- Row 27 -->
+  <tuple>
+    <atom name="AudIdentifier">876221f4-68a9-4072-a722-6dc68da09b78</atom>
+    <atom name="MulTitle">FMNH 206655 CT Scan</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">CT scan</atom>
+      </tuple>
+    </table>
+    <table name="GUID">
+      <tuple>
+        <atom name="AdmGUIDIsPreferred">Yes</atom>
+        <atom name="AdmGUIDType">UUID4</atom>
+        <atom name="AdmGUIDValue">876221f4-68a9-4072-a722-6dc68da09b78</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Dr Kate Sanders</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">145453</atom>
+        <atom name="MulMultimediaCreatorRole">Scanner</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">Enh_sch_fmnh_206655__rec2.tar</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+      <tuple>
+        <atom name="SupIdentifier">Enh_sch_fmnh_206655__rec_batman_txt.pdf</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Documentation</atom>
+          </tuple>
+        </table>
+      </tuple>
+      <tuple>
+        <atom name="SupIdentifier">Enh_sch_fmnh_206655__rec_batman_log.pdf</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Documentation</atom>
+          </tuple>
+        </table>
+      </tuple>
+      <tuple>
+        <atom name="SupIdentifier">Enh_sch_fmnh_206655__rec_log.pdf</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Documentation</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="DarGlobalUniqueIdentifier">871ed0b2-6897-4e8e-96b4-a43a438e115d</atom>
+      </tuple>
+    </table>
+    <atom name="AudAssociatedSpecimen">871ed0b2-6897-4e8e-96b4-a43a438e115d</atom>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Amphibians and Reptiles</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+    </table>
+    <atom name="irn">1628130</atom>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="MulIdentifier">Enh_sch_fmnh_206655_rec2.mp4</atom>
+    <atom name="ChaMd5Sum">059fc94409a2d27ff158c01b299cf6e1</atom>
+    <table name="OtherNums">
+      <tuple>
+        <atom name="MulOtherNumber">206655</atom>
+        <atom name="MulOtherNumberSource">FMNH Catalogue Number</atom>
+      </tuple>
+    </table>
+    <atom name="MulDescription">Video of CT image sequences, additional information on supplementary tab. For individual CT images please contact Alan Resetar, Division of Amphibians and Reptiles.</atom>
+    <atom name="MulMimeType">video</atom>
+    <atom name="MulMimeFormat">mp4</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2012</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Alan Resetar - Division of Amphibians and Reptiles</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">11705495</atom>
+    <atom name="ChaImageResolution"></atom>
+    <atom name="ChaImageHeight">472</atom>
+    <atom name="ChaImageWidth">646</atom>
+    <atom name="ChaImageColorDepth"></atom>
+    <atom name="ChaVideoFilmLength">00:00:29.09</atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-unknown</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeFormat">pdf</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeFormat">pdf</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMimeFormat">pdf</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">268018176</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupFileSize">10085</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupFileSize">9064</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupFileSize">18318</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">091d1fc336ff28b664ff1189331f996d</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMD5Checksum">ffbb2f6fb58bcec505d59254122004c8</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMD5Checksum">5686f3e48ea27f081e44eb73c2f9d5b2</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMD5Checksum">d38d2217f6a5b50f8d9ce54087325373</atom>
+      </tuple>
+    </table>
+    <table name="RelRelatedMediaRef_tab">
+      <tuple>
+        <atom name="AudIdentifier">9004a549-db0c-45da-b821-36c69162b765</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">1628131</atom>
+      </tuple>
+    </table>
+    <table name="RelRelationship_tab">
+      <tuple>
+        <atom name="RelRelationship">Constructed 3D Model</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2017-08-31</atom>
+    <atom name="AdmDateModified">2021-04-27</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1628/130/Enh_sch_fmnh_206655_rec2.mp4</atom>
+    <atom name="AudACDescription">Video of CT image sequences, additional information on supplementary tab. For individual CT images please contact Alan Resetar, Division of Amphibians and Reptiles.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: K. Sanders. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/876221f4-68a9-4072-a722-6dc68da09b78 (accessed on 27 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">206655</atom>
+    <atom name="AudRelatedGeography">Malaysia, Johore, Asia</atom>
+    <atom name="AudRelatedResourceID">9004a549-db0c-45da-b821-36c69162b765</atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Enhydrina schistosa</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+  </tuple>
+</table>
