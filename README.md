@@ -33,4 +33,13 @@ NetX | [Active/Restricted] | "**Catalogue**" | [Cat-Department folder] | [Catalo
 EMu | [emultimedia.SecRecordStatus] | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 
 
+## Output:
+
+AudIdentifier | pathMove (output path to renamed NetX file)
+-|-
+123-abc-987-def | Active/Multimedia/Paleobotany/98765_emu_PB1234.jpg
+
+
+
+
 
