@@ -32,14 +32,16 @@ system | folder level-1 | folder level-2 | folder level-3 | folder level-4
 NetX | [Active/Restricted] | "**Catalogue**" | [Cat-Department folder] | [Catalogue folder]
 EMu | [emultimedia.SecRecordStatus] | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 
+## NetX pathMove prep script - copy EMu files to NetX pathMove folder structure
+This script take an emultimedia XML export and copies each file into the appropriate
+folder location for NetX pathMove. The copied file should have a new filename, which
+prepends the IRN and `_emu_`. The output is a CSV of the multimedia record `AudIdentifier`
+and NetX `pathMove`. The `pathMove` value is the filepath of the media that NetX requires
+for ingestion. (see example below)
 
-## Output:
+### Output:
 
 AudIdentifier | pathMove (output path to renamed NetX file)
 -|-
 123-abc-987-def | Active/Multimedia/Paleobotany/98765_emu_PB1234.jpg
-
-
-
-
 
