@@ -47,26 +47,38 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path):
   invalid_records = validate_records(records)
   if invalid_records: output_error_log(invalid_records)
 
-  # Set up records for output to CSV
-  records_for_csv = []
+  # Set up pathMove values
+  records_pathmove = []
   for record in records:
     r = {}
     r['irn'] = record['irn']
     r['MulIdentifier'] = record['MulIdentifier']
     r['AudIdentifier'] = record['AudIdentifier']
     r['pathMove'] = pathmove(record)
-    records_for_csv.append(r)
+    records_pathmove.append(r)
 
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_for_csv)
+  copy_files(records_pathmove)
+
+  # Remove fields not needed for CSV
+  csv_records = []
+  for record in records_pathmove:
+    r = {}
+    r['AudIdentifier'] = record['AudIdentifier']
+    r['pathMove'] = record['pathMove']
+    csv_records.append(r)
+
+  # Validate that the copied files actually exist where we say they
+  # do in the pathMove value for the CSV file.
+  validate_files_copied(csv_records)
 
   # Write records to CSV
   with open(csv_output_file_path, mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=['AudIdentifier', 'pathMove'])
     writer.writeheader()
-    writer.writerows(records_for_csv)
+    writer.writerows(csv_records)
 
 def copy_files(records):
   """
@@ -80,7 +92,17 @@ def copy_files(records):
 
     # copy file to the new location for pathMove
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    shutil.copy2(full_path, dest_path)
+    if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
+
+def validate_files_copied(csv_records):
+  """
+  Verify that pathMove values are valid, i.e. a file exists at the path.
+  """
+  base_path = "/home/data/media/to_netx/"
+  for r in csv_records:
+    path = base_path + r['pathMove']
+    if not os.path.exists(base_path + r['pathMove']):
+      raise Exception(f'pathMove: {path} does not exist')
 
 def irn_dir(irn):
   """
