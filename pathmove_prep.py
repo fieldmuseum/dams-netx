@@ -62,7 +62,7 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path):
   # If this step fails, raise an exception so the CSV isn't created.
   copy_files(records_pathmove)
 
-  # Remove fields not needed for CSV
+  # Set up fields for CSV
   csv_records = []
   for record in records_pathmove:
     r = {}
@@ -74,7 +74,7 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path):
   # do in the pathMove value for the CSV file.
   validate_files_copied(csv_records)
 
-  # Write records to CSV
+  # FINAL STEP: Write records to CSV
   with open(csv_output_file_path, mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=['AudIdentifier', 'pathMove'])
     writer.writeheader()
@@ -101,7 +101,7 @@ def validate_files_copied(csv_records):
   base_path = "/home/data/media/to_netx/"
   for r in csv_records:
     path = base_path + r['pathMove']
-    if not os.path.exists(base_path + r['pathMove']):
+    if not os.path.exists(path):
       raise Exception(f'pathMove: {path} does not exist')
 
 def irn_dir(irn):
@@ -139,8 +139,8 @@ def pathmove(record):
 
 def validate_records(records):
   """
-  Before proceeding with the script, validate that every record has an
-  AudIdentifier and MulIdentifier value.
+  Before proceeding with the script, validate that every record has all
+  of the values in the list.
 
   Returns ALL invalid records.
   """
