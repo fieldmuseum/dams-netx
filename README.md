@@ -45,3 +45,8 @@ AudIdentifier | pathMove (output path to renamed NetX file)
 -|-
 123-abc-987-def | Active/Multimedia/Paleobotany/98765_emu_PB1234.jpg
 
+
+## Related Repo's
+
+- [`dams-beam`](https://github.com/fieldmuseum/dams-beam) - to cross-check and manage media from BEAM
+- [`EMu-xml-to-json`](https://github.com/fieldmuseum/EMu-xml-to-json) - to prep EMu XML for input to `dams-netx` (among other things)
