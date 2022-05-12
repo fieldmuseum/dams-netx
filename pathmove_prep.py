@@ -114,10 +114,22 @@ def irn_dir(irn):
   We will have to ensure this code still works for those values.
   """
   digits = list(irn)
-  end = digits[-3:]
-  del digits[-3:]
-  last_dir = ''.join(end)
-  first_dir = ''.join(digits)
+  if len(digits) > 3:
+    end = digits[-3:]
+    del digits[-3:]
+    last_dir = ''.join(end)
+    first_dir = ''.join(digits)
+  
+  # If irn == 3 digits, dir format is:  0/123
+  elif len(digits) == 3:
+    first_dir = "0"
+    last_dir = ''.join(digits)
+  
+  # If irn < 3 digits, dir format is:  0/001 or 0/012 
+  elif len(digits) < 3:
+    first_dir = "0"
+    zero_count = 3 - len(digits)
+    last_dir = zero_count * '0' + ''.join(digits)
 
   return f'{first_dir}/{last_dir}/'
 
