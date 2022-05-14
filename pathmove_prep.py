@@ -89,6 +89,8 @@ def copy_files(records, use_live_paths):
   """
   for r in records:
     dirs = irn_dir(r['irn'])
+    print('dirs = ' + str(dirs))
+    
     if use_live_paths == "LIVE":
       full_prefix = os.getenv('ORIGIN_PATH')
       dest_prefix = os.getenv('DESTIN_PATH')
@@ -96,8 +98,8 @@ def copy_files(records, use_live_paths):
       full_prefix = os.getenv('TEST_ORIGIN_PATH')
       dest_prefix = os.getenv('TEST_DESTIN_PATH')
     
-    print('full_prefix = ' + full_prefix + ' | dirs = ' + dirs)
-    print('dest_prefix = ' + dest_prefix + ' | pathMove = ' + r['pathMove'])
+    print('full_prefix = ' + str(full_prefix))
+    print('dest_prefix = ' + str(dest_prefix))
 
     full_path = full_prefix + dirs + r['MulIdentifier']
     dest_path = dest_prefix + r['pathMove']
