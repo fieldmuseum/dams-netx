@@ -5,7 +5,7 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
-# from distutils.command.config import config
+from decouple import config
 import os, sys, csv, shutil
 import xml.etree.ElementTree as ET
 
@@ -90,13 +90,13 @@ def copy_files(records, use_live_paths):
   for r in records:
     dirs = irn_dir(r['irn'])
     print('dirs = ' + str(dirs))
-    
+
     if use_live_paths == "LIVE":
-      full_prefix = os.getenv('ORIGIN_PATH')
-      dest_prefix = os.getenv('DESTIN_PATH')
+      full_prefix = config('ORIGIN_PATH')
+      dest_prefix = config('DESTIN_PATH')
     else: 
-      full_prefix = os.getenv('TEST_ORIGIN_PATH')
-      dest_prefix = os.getenv('TEST_DESTIN_PATH')
+      full_prefix = config('TEST_ORIGIN_PATH')
+      dest_prefix = config('TEST_DESTIN_PATH')
     
     print('full_prefix = ' + str(full_prefix))
     print('dest_prefix = ' + str(dest_prefix))
@@ -112,7 +112,7 @@ def validate_files_copied(csv_records):
   """
   Verify that pathMove values are valid, i.e. a file exists at the path.
   """
-  base_path = os.getenv('DESTIN_PATH')
+  base_path = config('DESTIN_PATH')
   for r in csv_records:
     path = base_path + r['pathMove']
     if not os.path.exists(path):
