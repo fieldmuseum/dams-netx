@@ -5,6 +5,7 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
+# from distutils.command.config import config
 import os, sys, csv, shutil
 import xml.etree.ElementTree as ET
 
@@ -12,10 +13,11 @@ def main():
   # Main function
   xml_input_file_path = sys.argv[1]
   csv_output_file_path = sys.argv[2]
+  use_test_paths = sys.argv[3]
 
-  setup_pathmove(xml_input_file_path, csv_output_file_path)
+  setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths)
 
-def setup_pathmove(xml_input_file_path, csv_output_file_path):
+def setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
@@ -60,7 +62,7 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path):
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_pathmove)
+  copy_files(records_pathmove, use_test_paths)
 
   # Set up fields for CSV
   csv_records = []
@@ -80,15 +82,22 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path):
     writer.writeheader()
     writer.writerows(csv_records)
 
-def copy_files(records):
+def copy_files(records, use_test_paths):
   """
   Given a list of records, copy all of the files to the new location required
   for the pathMove value that will end up in the CSV file.
   """
   for r in records:
     dirs = irn_dir(r['irn'])
-    full_path = "/home/data/media/" + dirs + r['MulIdentifier']
-    dest_path = "/home/data/media/to_netx/" + r['pathMove']
+    if use_test_paths == True:
+      full_prefix = os.getenv('TEST_ORIGIN_PATH')
+      dest_prefix = os.getenv('TEST_DESTIN_PATH')
+    else: 
+      full_prefix = os.getenv('ORIGIN_PATH')
+      dest_prefix = os.getenv('DESTIN_PATH')
+
+    full_path = full_prefix + dirs + r['MulIdentifier']
+    dest_path = dest_prefix + r['pathMove']
 
     # copy file to the new location for pathMove
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
@@ -98,7 +107,7 @@ def validate_files_copied(csv_records):
   """
   Verify that pathMove values are valid, i.e. a file exists at the path.
   """
-  base_path = "/home/data/media/to_netx/"
+  base_path = os.getenv('DESTIN_PATH')
   for r in csv_records:
     path = base_path + r['pathMove']
     if not os.path.exists(path):
@@ -120,13 +129,8 @@ def irn_dir(irn):
     last_dir = ''.join(end)
     first_dir = ''.join(digits)
   
-  # If irn == 3 digits, dir format is:  0/123
-  elif len(digits) == 3:
-    first_dir = "0"
-    last_dir = ''.join(digits)
-  
-  # If irn < 3 digits, dir format is:  0/001 or 0/012 
-  elif len(digits) < 3:
+  # If irn <= 3 digits, dir format is:  0/001 or 0/012 or 0/123
+  elif len(digits) <= 3:
     first_dir = "0"
     zero_count = 3 - len(digits)
     last_dir = zero_count * '0' + ''.join(digits)
