@@ -13,11 +13,11 @@ def main():
   # Main function
   xml_input_file_path = sys.argv[1]
   csv_output_file_path = sys.argv[2]
-  use_test_paths = sys.argv[3]
+  use_live_paths = sys.argv[3]
 
-  setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths)
+  setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths)
 
-def setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths):
+def setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
@@ -62,7 +62,7 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths):
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_pathmove, use_test_paths)
+  copy_files(records_pathmove, use_live_paths)
 
   # Set up fields for CSV
   csv_records = []
@@ -82,19 +82,22 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path, use_test_paths):
     writer.writeheader()
     writer.writerows(csv_records)
 
-def copy_files(records, use_test_paths):
+def copy_files(records, use_live_paths):
   """
   Given a list of records, copy all of the files to the new location required
   for the pathMove value that will end up in the CSV file.
   """
   for r in records:
     dirs = irn_dir(r['irn'])
-    if use_test_paths == "True":
-      full_prefix = os.getenv('TEST_ORIGIN_PATH')
-      dest_prefix = os.getenv('TEST_DESTIN_PATH')
-    else: 
+    if use_live_paths == "LIVE":
       full_prefix = os.getenv('ORIGIN_PATH')
       dest_prefix = os.getenv('DESTIN_PATH')
+    else: 
+      full_prefix = os.getenv('TEST_ORIGIN_PATH')
+      dest_prefix = os.getenv('TEST_DESTIN_PATH')
+    
+    print('full_prefix = ' + full_prefix + ' | dirs = ' + dirs)
+    print('dest_prefix = ' + dest_prefix + ' | pathMove = ' + r['pathMove'])
 
     full_path = full_prefix + dirs + r['MulIdentifier']
     dest_path = dest_prefix + r['pathMove']
