@@ -89,7 +89,7 @@ def copy_files(records, use_test_paths):
   """
   for r in records:
     dirs = irn_dir(r['irn'])
-    if use_test_paths == True:
+    if use_test_paths == "True":
       full_prefix = os.getenv('TEST_ORIGIN_PATH')
       dest_prefix = os.getenv('TEST_DESTIN_PATH')
     else: 
