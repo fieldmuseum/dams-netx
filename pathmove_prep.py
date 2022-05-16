@@ -38,7 +38,8 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths):
       if elem.tag == 'atom' and elem.text:
         attrib = elem.attrib['name']
         record[attrib] = elem.text
-      # Need to grab SecDepartment as well
+
+      # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
         sec_dept_tuple_elem = elem.find('tuple')
         sec_dept = sec_dept_tuple_elem.find('atom')
@@ -89,7 +90,7 @@ def copy_files(records, use_live_paths):
   """
   for r in records:
     dirs = irn_dir(r['irn'])
-    print('dirs = ' + str(dirs))
+    # print('dirs = ' + str(dirs))
 
     if use_live_paths == "LIVE":
       full_prefix = config('ORIGIN_PATH')
@@ -98,8 +99,8 @@ def copy_files(records, use_live_paths):
       full_prefix = config('TEST_ORIGIN_PATH')
       dest_prefix = config('TEST_DESTIN_PATH')
     
-    print('full_prefix = ' + str(full_prefix))
-    print('dest_prefix = ' + str(dest_prefix))
+    # print('full_prefix = ' + str(full_prefix))
+    # print('dest_prefix = ' + str(dest_prefix))
 
     full_path = full_prefix + dirs + r['MulIdentifier']
     dest_path = dest_prefix + r['pathMove']
@@ -107,6 +108,32 @@ def copy_files(records, use_live_paths):
     # copy file to the new location for pathMove
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
+
+def get_folder_hierarchy(department):
+  '''
+  Get the appropriate parent-folder value for a given SecDepartment value
+  '''
+  dept_csv = config('DEPARTMENT_CSV')
+  dept_folders = []
+  with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
+      reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+      for r in reader: dept_folders.append(r)
+
+  # make lists of level_1 & level_2 values
+  # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+  dept_level_1 = []
+  for row in dept_folders: dept_level_1.append(row['level_1'])
+
+  dept_level_2 = []
+  for row in dept_folders: dept_level_2.append(row['level_2'])
+
+  if department in dept_level_2:
+    # lookup level_1 value at same index for level_2 key/value
+    parent = dept_level_1[dept_level_2.index(department)]
+    return parent + '/' + department
+  
+  else: return department
+  
 
 def validate_files_copied(csv_records):
   """
@@ -152,7 +179,10 @@ def pathmove(record):
   """
   status = record['SecRecordStatus']
   record_type = 'Multimedia'
-  department = record['SecDepartment']
+  
+  department_orig = record['SecDepartment']
+  department = get_folder_hierarchy(department_orig)
+
   irn = record['irn']
   filename = record['MulIdentifier']
   pathmove = f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
