@@ -86,32 +86,6 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
     writer.writerows(csv_records)
 
 
-def copy_files(records, use_live_paths):
-  """
-  Given a list of records, copy all of the files to the new location required
-  for the prep_file value that will end up in the CSV file.
-  """
-  for r in records:
-    dirs = irn_dir(r['irn'])
-    # print('dirs = ' + str(dirs))
-
-    if use_live_paths == "LIVE":
-      full_prefix = config('ORIGIN_PATH')
-      dest_prefix = config('DESTIN_PATH')
-    else: 
-      full_prefix = config('TEST_ORIGIN_PATH')
-      dest_prefix = config('TEST_DESTIN_PATH')
-    
-    # print('full_prefix = ' + str(full_prefix))
-    # print('dest_prefix = ' + str(dest_prefix))
-
-    full_path = full_prefix + dirs + r['MulIdentifier']
-    dest_path = dest_prefix + r['pathMove'] + r['prep_file']
-
-    # copy file to the new location for prep_file
-    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
-
 def get_folder_hierarchy(department):
   '''
   Get the appropriate parent-folder value for a given SecDepartment value
@@ -138,15 +112,49 @@ def get_folder_hierarchy(department):
   else: return department
   
 
-def validate_files_copied(csv_records):
+def copy_files(records, use_live_paths):
+  """
+  Given a list of records, copy all of the files to the new location required
+  for the prep_file value that will end up in the CSV file.
+  """
+  for r in records:
+    dirs = irn_dir(r['irn'])
+    # print('dirs = ' + str(dirs))
+
+    if use_live_paths == "LIVE":
+      full_prefix = config('ORIGIN_PATH')
+      dest_prefix = config('DESTIN_PATH')
+    else: 
+      full_prefix = config('TEST_ORIGIN_PATH')
+      dest_prefix = config('TEST_DESTIN_PATH')
+    
+    # print('full_prefix = ' + str(full_prefix))
+    # print('dest_prefix = ' + str(dest_prefix))
+
+    full_path = full_prefix + dirs + r['MulIdentifier']
+    dest_path = dest_prefix + r['pathMove'] + r['prep_file']
+
+    # copy file to the new location for prep_file
+    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
+
+
+def validate_files_copied(csv_records, use_live_paths):
   """
   Verify that prep_file values are valid, i.e. a file exists at the path.
   """
-  base_path = config('DESTIN_PATH')
+  
+  if use_live_paths == "LIVE":
+    dest_prefix = config('DESTIN_PATH')
+  else: 
+    dest_prefix = config('TEST_DESTIN_PATH')
+
+  base_path = dest_prefix  # config('DESTIN_PATH')
   for r in csv_records:
-    path = base_path + r['prep_file']
+    path = base_path + r['pathMove'] + r['file']
     if not os.path.exists(path):
       raise Exception(f'prep_file: {path} does not exist')
+      
 
 def irn_dir(irn):
   """
