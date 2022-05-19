@@ -1,0 +1,12 @@
+# For setup help, see "Step 3: Use a config file instead of command-line arguments"
+# on this page: https://support.netx.net/hc/en-us/articles/4409798060823-NetX-I-O-4-CLI
+
+url=https://dams.host.com
+username=dams-id
+password=dams-pw
+netxSourceFolder=/
+localSourceDir=/path/to/local/staging/dir
+localStorageDir=/path/to/log/dir
+mode=watchedFolder
+blind=true
+replacementCharacter=_
