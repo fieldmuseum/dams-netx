@@ -77,7 +77,7 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
 
   # Validate that the copied files actually exist where we say they
   # do in the prep_file value for the CSV file.
-  validate_files_copied(csv_records)
+  validate_files_copied(csv_records, use_live_paths)
 
   # FINAL STEP: Write records to CSV
   with open(csv_output_file_path, mode='w') as csv_file:
@@ -154,7 +154,7 @@ def validate_files_copied(csv_records, use_live_paths):
     path = base_path + r['pathMove'] + r['file']
     if not os.path.exists(path):
       raise Exception(f'prep_file: {path} does not exist')
-      
+
 
 def irn_dir(irn):
   """
