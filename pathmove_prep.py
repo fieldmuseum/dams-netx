@@ -15,16 +15,16 @@ def main():
   csv_output_file_path = sys.argv[2]
   use_live_paths = sys.argv[3]
 
-  setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths)
+  setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths)
 
-def setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths):
+def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
-  identifier and pathMove.
+  identifier and prep_file.
 
   :param file_path: filename of the XML file to parse
-  :return: list of dictionaries, dictionary includes: AudIdentifier, pathMove
+  :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
   """
 
   tree = ET.parse(xml_input_file_path)
@@ -50,43 +50,46 @@ def setup_pathmove(xml_input_file_path, csv_output_file_path, use_live_paths):
   invalid_records = validate_records(records)
   if invalid_records: output_error_log(invalid_records)
 
-  # Set up pathMove values
-  records_pathmove = []
+  # Set up prep_file values
+  records_prep_file = []
   for record in records:
     r = {}
     r['irn'] = record['irn']
     r['MulIdentifier'] = record['MulIdentifier']
     r['AudIdentifier'] = record['AudIdentifier']
+    r['prep_file'] = prep_file(record)
     r['pathMove'] = pathmove(record)
-    records_pathmove.append(r)
+    records_prep_file.append(r)
 
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_pathmove, use_live_paths)
+  copy_files(records_prep_file, use_live_paths)
 
   # Set up fields for CSV
   csv_records = []
-  for record in records_pathmove:
+  for record in records_prep_file:
     r = {}
-    r['AudIdentifier'] = record['AudIdentifier']
+    # r['AudIdentifier'] = record['AudIdentifier']
+    r['file'] = record['prep_file']
     r['pathMove'] = record['pathMove']
     csv_records.append(r)
 
   # Validate that the copied files actually exist where we say they
-  # do in the pathMove value for the CSV file.
+  # do in the prep_file value for the CSV file.
   validate_files_copied(csv_records)
 
   # FINAL STEP: Write records to CSV
   with open(csv_output_file_path, mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=['AudIdentifier', 'pathMove'])
+    writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
     writer.writeheader()
     writer.writerows(csv_records)
+
 
 def copy_files(records, use_live_paths):
   """
   Given a list of records, copy all of the files to the new location required
-  for the pathMove value that will end up in the CSV file.
+  for the prep_file value that will end up in the CSV file.
   """
   for r in records:
     dirs = irn_dir(r['irn'])
@@ -103,9 +106,9 @@ def copy_files(records, use_live_paths):
     # print('dest_prefix = ' + str(dest_prefix))
 
     full_path = full_prefix + dirs + r['MulIdentifier']
-    dest_path = dest_prefix + r['pathMove']
+    dest_path = dest_prefix + r['pathMove'] + r['prep_file']
 
-    # copy file to the new location for pathMove
+    # copy file to the new location for prep_file
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
 
@@ -137,13 +140,13 @@ def get_folder_hierarchy(department):
 
 def validate_files_copied(csv_records):
   """
-  Verify that pathMove values are valid, i.e. a file exists at the path.
+  Verify that prep_file values are valid, i.e. a file exists at the path.
   """
   base_path = config('DESTIN_PATH')
   for r in csv_records:
-    path = base_path + r['pathMove']
+    path = base_path + r['prep_file']
     if not os.path.exists(path):
-      raise Exception(f'pathMove: {path} does not exist')
+      raise Exception(f'prep_file: {path} does not exist')
 
 def irn_dir(irn):
   """
@@ -169,10 +172,30 @@ def irn_dir(irn):
 
   return f'{first_dir}/{last_dir}/'
 
+def prep_file(record):
+  """
+  Creates the prepared file-path + file-name value for a record.
+  e.g. Active/Multimedia/Geology/Paleobotany/98765_emu_PB1234.jpg
+
+  :param record: dict of the record data
+  :return: returns a string of the prep_file value
+  """
+  # status = record['SecRecordStatus']
+  # record_type = 'Multimedia'
+  
+  # department_orig = record['SecDepartment']
+  # department = get_folder_hierarchy(department_orig)
+
+  irn = record['irn']
+  filename = record['MulIdentifier']
+  prep_file = f'{irn}_emu_{filename}' # f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
+  return prep_file
+  
+
 def pathmove(record):
   """
-  Creates the pathMove value for a record.
-  e.g. Active/Multimedia/Paleobotany/98765_emu_PB1234.jpg
+  Creates the pathMove value for a record (folder path without filename)
+  e.g. Active/Multimedia/Geology/Paleobotany/
 
   :param record: dict of the record data
   :return: returns a string of the pathMove value
@@ -183,10 +206,9 @@ def pathmove(record):
   department_orig = record['SecDepartment']
   department = get_folder_hierarchy(department_orig)
 
-  irn = record['irn']
-  filename = record['MulIdentifier']
-  pathmove = f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
+  pathmove = f'{status}/{record_type}/{department}'
   return pathmove
+
 
 def validate_records(records):
   """
@@ -220,7 +242,7 @@ def output_error_log(invalid_records):
     for key in keys:
       if key not in field_names: field_names.append(key)
 
-  with open('data/errors/pathmove_prep_errors.csv', mode='w') as csv_file:
+  with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=field_names)
     writer.writeheader()
     writer.writerows(invalid_records)

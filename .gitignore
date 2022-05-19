@@ -1,5 +1,6 @@
 \.env
 .DS_Store
+netxio.properties
 
 # Python
 __pycache__
