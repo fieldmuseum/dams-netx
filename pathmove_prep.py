@@ -116,9 +116,9 @@ def get_folder_hierarchy(department):
   if department in dept_level_2:
     # lookup level_1 value at same index for level_2 key/value
     parent = dept_level_1[dept_level_2.index(department)]
-    return parent + '/' + department
+    return parent + '/' + department + '/'
   
-  else: return department
+  else: return department + '/'
   
 
 def copy_files(records, full_prefix, dest_prefix):
@@ -182,11 +182,6 @@ def prep_file(record):
   :param record: dict of the record data
   :return: returns a string of the prep_file value
   """
-  # status = record['SecRecordStatus']
-  # record_type = 'Multimedia'
-  
-  # department_orig = record['SecDepartment']
-  # department = get_folder_hierarchy(department_orig)
 
   irn = record['irn']
   filename = record['MulIdentifier']
@@ -208,7 +203,7 @@ def pathmove(record):
   department_orig = record['SecDepartment']
   department = get_folder_hierarchy(department_orig)
 
-  pathmove = f'{status}/{record_type}/{department}/'
+  pathmove = f'{status}/{record_type}/{department}'
   return pathmove
 
 
