@@ -208,7 +208,7 @@ def pathmove(record):
   department_orig = record['SecDepartment']
   department = get_folder_hierarchy(department_orig)
 
-  pathmove = f'{status}/{record_type}/{department}'
+  pathmove = f'{status}/{record_type}/{department}/'
   return pathmove
 
 
