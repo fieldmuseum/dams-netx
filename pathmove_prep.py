@@ -15,9 +15,17 @@ def main():
   csv_output_file_path = sys.argv[2]
   use_live_paths = sys.argv[3]
 
-  setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths)
+  # Check if test or live paths should be used
+  if use_live_paths == "LIVE":
+    full_prefix = config('ORIGIN_PATH')
+    dest_prefix = config('DESTIN_PATH')
+  else: 
+    full_prefix = config('TEST_ORIGIN_PATH')
+    dest_prefix = config('TEST_DESTIN_PATH')
 
-def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
+  setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix)
+
+def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
@@ -64,7 +72,7 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_prep_file, use_live_paths)
+  copy_files(records_prep_file, full_prefix, dest_prefix)
 
   # Set up fields for CSV
   csv_records = []
@@ -73,11 +81,12 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, use_live_paths):
     # r['AudIdentifier'] = record['AudIdentifier']
     r['file'] = record['prep_file']
     r['pathMove'] = record['pathMove']
+    r['Identifier'] = record['AudIdentifier']
     csv_records.append(r)
 
   # Validate that the copied files actually exist where we say they
   # do in the prep_file value for the CSV file.
-  validate_files_copied(csv_records, use_live_paths)
+  validate_files_copied(csv_records, dest_prefix)
 
   # FINAL STEP: Write records to CSV
   with open(csv_output_file_path, mode='w') as csv_file:
@@ -112,46 +121,31 @@ def get_folder_hierarchy(department):
   else: return department
   
 
-def copy_files(records, use_live_paths):
+def copy_files(records, full_prefix, dest_prefix):
   """
   Given a list of records, copy all of the files to the new location required
   for the prep_file value that will end up in the CSV file.
   """
   for r in records:
     dirs = irn_dir(r['irn'])
-    # print('dirs = ' + str(dirs))
-
-    if use_live_paths == "LIVE":
-      full_prefix = config('ORIGIN_PATH')
-      dest_prefix = config('DESTIN_PATH')
-    else: 
-      full_prefix = config('TEST_ORIGIN_PATH')
-      dest_prefix = config('TEST_DESTIN_PATH')
-    
-    # print('full_prefix = ' + str(full_prefix))
-    # print('dest_prefix = ' + str(dest_prefix))
 
     full_path = full_prefix + dirs + r['MulIdentifier']
     dest_path = dest_prefix + r['pathMove'] + r['prep_file']
 
     # copy file to the new location for prep_file
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    if not os.path.exists(dest_path): shutil.copy2(full_path, dest_path)
+
+    # TODO - check server access
+    if not os.path.exists(dest_path): 
+      shutil.copy2(full_path, dest_path)
 
 
-def validate_files_copied(csv_records, use_live_paths):
+def validate_files_copied(csv_records, dest_prefix):
   """
   Verify that prep_file values are valid, i.e. a file exists at the path.
   """
-  
-  if use_live_paths == "LIVE":
-    dest_prefix = config('DESTIN_PATH')
-  else: 
-    dest_prefix = config('TEST_DESTIN_PATH')
-
-  base_path = dest_prefix  # config('DESTIN_PATH')
   for r in csv_records:
-    path = base_path + r['pathMove'] + r['file']
+    path = dest_prefix + r['pathMove'] + r['file']
     if not os.path.exists(path):
       raise Exception(f'prep_file: {path} does not exist')
 
