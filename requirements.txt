@@ -1,3 +1,4 @@
 imu-api>=1.0.2
 python-dotenv>=0.19
 decouple
+fabric
