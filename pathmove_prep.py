@@ -102,8 +102,8 @@ def main():
       
       try:
         # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
-        c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
-        print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
+        c.get(remote=full_path, local=dest_path, preserve_mode=False)
+        print(f'Full origin path = {full_path} | Destination path = {dest_path}')
       except Exception as err:
         print(f'An error occurred trying to copy media from {full_path}: {err}')
 
