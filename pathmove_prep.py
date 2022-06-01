@@ -1,12 +1,14 @@
 """
-Things to consider
+Rename files and copy them to NetX Multimedia folder-structure
 
 CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
 from decouple import config
-import os, sys, csv, shutil
+import csv, os, re, shutil, sys
+# from dotenv import dotenv_values
+from fabric import Connection
 import xml.etree.ElementTree as ET
 
 def main():
@@ -22,10 +24,16 @@ def main():
   else: 
     full_prefix = config('TEST_ORIGIN_PATH')
     dest_prefix = config('TEST_DESTIN_PATH')
+  
+  with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
+  
+    c.run('hostname')
 
-  setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix)
+    # Copy source-files to staging area & rename them
+    setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
 
-def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix):
+
+def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
@@ -52,6 +60,7 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest
         sec_dept_tuple_elem = elem.find('tuple')
         sec_dept = sec_dept_tuple_elem.find('atom')
         record['SecDepartment'] = sec_dept.text
+        
     records.append(record)
   
   # Validate our current record set before we proceed
@@ -72,7 +81,7 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_prep_file, full_prefix, dest_prefix)
+  copy_files(records_prep_file, full_prefix, dest_prefix, c)
 
   # Set up fields for CSV
   csv_records = []
@@ -119,9 +128,9 @@ def get_folder_hierarchy(department):
     return parent + '/' + department + '/'
   
   else: return department + '/'
-  
 
-def copy_files(records, full_prefix, dest_prefix):
+
+def copy_files(records, full_prefix, dest_prefix, c):
   """
   Given a list of records, copy all of the files to the new location required
   for the prep_file value that will end up in the CSV file.
@@ -132,12 +141,18 @@ def copy_files(records, full_prefix, dest_prefix):
     full_path = full_prefix + dirs + r['MulIdentifier']
     dest_path = dest_prefix + r['pathMove'] + r['prep_file']
 
-    # copy file to the new location for prep_file
-    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+    # # copy file to the new location for prep_file
+    # os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
+    
+    try:
+      # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
+      c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
+    except Exception as err:
+      print(f'An error occurred trying to copy media from origin to destination: {err}')
 
-    # TODO - check server access
     if not os.path.exists(dest_path): 
       shutil.copy2(full_path, dest_path)
+
 
 
 def validate_files_copied(csv_records, dest_prefix):
@@ -156,8 +171,7 @@ def irn_dir(irn):
   An IRN needs to be split by the last 3 digits of the IRN, and then the
   remainder of the digits in the first directory. Thus, you will often
   see the first dir with 3-4 digits, while the last dir should always
-  have 3 digits. This could get problematic for super low IRN values.
-  We will have to ensure this code still works for those values.
+  have 3 digits.
   """
   digits = list(irn)
   if len(digits) > 3:
@@ -167,12 +181,13 @@ def irn_dir(irn):
     first_dir = ''.join(digits)
   
   # If irn <= 3 digits, dir format is:  0/001 or 0/012 or 0/123
-  elif len(digits) <= 3:
+  else:  # elif len(digits) <= 3:
     first_dir = "0"
     zero_count = 3 - len(digits)
     last_dir = zero_count * '0' + ''.join(digits)
 
   return f'{first_dir}/{last_dir}/'
+
 
 def prep_file(record):
   """
@@ -183,27 +198,31 @@ def prep_file(record):
   :return: returns a string of the prep_file value
   """
 
-  irn = record['irn']
-  filename = record['MulIdentifier']
-  prep_file = f'{irn}_emu_{filename}' # f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
+  # irn = record['irn']
+  # filename = record['MulIdentifier']
+  filename = record['AudIdentifier']
+  file_ext = re.sub(r'(.*)(\..*)', r'\g<2>', record['MulIdentifier'])
+  # prep_file = f'{irn}_emu_{filename}' # f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
+  prep_file = f'{filename}.{file_ext}'
   return prep_file
   
 
 def pathmove(record):
   """
   Creates the pathMove value for a record (folder path without filename)
-  e.g. Active/Multimedia/Geology/Paleobotany/
+  e.g. Multimedia/Geology/Paleobotany/
 
   :param record: dict of the record data
   :return: returns a string of the pathMove value
   """
-  status = record['SecRecordStatus']
+  # status = record['SecRecordStatus']
   record_type = 'Multimedia'
   
   department_orig = record['SecDepartment']
   department = get_folder_hierarchy(department_orig)
 
-  pathmove = f'{status}/{record_type}/{department}'
+  # pathmove = f'{status}/{record_type}/{department}'
+  pathmove = f'{record_type}/{department}'
   return pathmove
 
 
@@ -215,13 +234,14 @@ def validate_records(records):
   Returns ALL invalid records.
   """
   invalid_records = []
-  fields_to_validate = ['irn', 'MulIdentifier', 'SecRecordStatus', 'SecDepartment']
+  fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecRecordStatus', 'SecDepartment']
 
   for record in records:
     for field in fields_to_validate:
       if field not in record: invalid_records.append(record)
 
   return invalid_records
+
 
 def output_error_log(invalid_records):
   """
@@ -243,6 +263,7 @@ def output_error_log(invalid_records):
     writer = csv.DictWriter(csv_file, fieldnames=field_names)
     writer.writeheader()
     writer.writerows(invalid_records)
+
   raise Exception('Records do not all contain all of the required fields!')
 
 if __name__ == '__main__':
