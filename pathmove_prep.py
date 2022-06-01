@@ -148,8 +148,9 @@ def copy_files(records, full_prefix, dest_prefix, c):
     try:
       # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
       c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
+      print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
     except Exception as err:
-      print(f'An error occurred trying to copy media from origin to destination: {err}')
+      print(f'An error occurred trying to copy media from {full_path}: {err}')
 
     # if not os.path.exists(dest_path): 
     #   shutil.copy2(full_path, dest_path)
