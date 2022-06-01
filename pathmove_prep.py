@@ -90,7 +90,7 @@ def main():
     # # Copy source-files to staging area & rename them
     # setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
 
-    for r in records:
+    for r in records_prep_file:
       dirs = irn_dir(r['irn'])
 
       full_path = full_prefix + dirs + r['MulIdentifier']
