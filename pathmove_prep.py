@@ -25,15 +25,15 @@ def main():
     full_prefix = config('TEST_ORIGIN_PATH')
     dest_prefix = config('TEST_DESTIN_PATH')
   
-  with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
+  # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
-    c.run('hostname')
+  #   c.run('hostname')
 
-    # Copy source-files to staging area & rename them
-    setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
+  #   # # Copy source-files to staging area & rename them
+  #   # setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
 
 
-def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
+  # def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
   """
   Outputs all records' data and copies files into dir for NetX
   Input is an EMu XML export file, outputs to a CSV file with the
@@ -81,27 +81,52 @@ def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
-  copy_files(records_prep_file, full_prefix, dest_prefix, c)
+  # copy_files(records_prep_file, full_prefix, dest_prefix, c)
 
-  # Set up fields for CSV
-  csv_records = []
-  for record in records_prep_file:
-    r = {}
-    # r['AudIdentifier'] = record['AudIdentifier']
-    r['file'] = record['prep_file']
-    r['pathMove'] = record['pathMove']
-    r['Identifier'] = record['AudIdentifier']
-    csv_records.append(r)
+  with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
+  
+    c.run('hostname')
 
-  # Validate that the copied files actually exist where we say they
-  # do in the prep_file value for the CSV file.
-  validate_files_copied(csv_records, dest_prefix)
+    # # Copy source-files to staging area & rename them
+    # setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
 
-  # FINAL STEP: Write records to CSV
-  with open(csv_output_file_path, mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
-    writer.writeheader()
-    writer.writerows(csv_records)
+    for r in records:
+      dirs = irn_dir(r['irn'])
+
+      full_path = full_prefix + dirs + r['MulIdentifier']
+      dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
+
+      # # copy file to the new location for prep_file
+      if not os.path.exists(dest_path):
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
+      
+      try:
+        # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
+        c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
+        print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
+      except Exception as err:
+        print(f'An error occurred trying to copy media from {full_path}: {err}')
+
+
+    # Set up fields for CSV
+    csv_records = []
+    for record in records_prep_file:
+      r = {}
+      # r['AudIdentifier'] = record['AudIdentifier']
+      r['file'] = record['prep_file']
+      r['pathMove'] = record['pathMove']
+      r['Identifier'] = record['AudIdentifier']
+      csv_records.append(r)
+
+    # Validate that the copied files actually exist where we say they
+    # do in the prep_file value for the CSV file.
+    validate_files_copied(csv_records, dest_prefix)
+
+    # FINAL STEP: Write records to CSV
+    with open(csv_output_file_path, mode='w') as csv_file:
+      writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
+      writer.writeheader()
+      writer.writerows(csv_records)
 
 
 def get_folder_hierarchy(department):
@@ -130,30 +155,30 @@ def get_folder_hierarchy(department):
   else: return department + '/'
 
 
-def copy_files(records, full_prefix, dest_prefix, c):
-  """
-  Given a list of records, copy all of the files to the new location required
-  for the prep_file value that will end up in the CSV file.
-  """
-  for r in records:
-    dirs = irn_dir(r['irn'])
+# def copy_files(records, full_prefix, dest_prefix, c):
+#   """
+#   Given a list of records, copy all of the files to the new location required
+#   for the prep_file value that will end up in the CSV file.
+#   """
+#   for r in records:
+#     dirs = irn_dir(r['irn'])
 
-    full_path = full_prefix + dirs + r['MulIdentifier']
-    dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
+#     full_path = full_prefix + dirs + r['MulIdentifier']
+#     dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
 
-    # # copy file to the new location for prep_file
-    if not os.path.exists(dest_path):
-      os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
+#     # # copy file to the new location for prep_file
+#     if not os.path.exists(dest_path):
+#       os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
     
-    try:
-      # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
-      c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
-      print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
-    except Exception as err:
-      print(f'An error occurred trying to copy media from {full_path}: {err}')
+#     try:
+#       # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
+#       c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
+#       print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
+#     except Exception as err:
+#       print(f'An error occurred trying to copy media from {full_path}: {err}')
 
-    # if not os.path.exists(dest_path): 
-    #   shutil.copy2(full_path, dest_path)
+#     # if not os.path.exists(dest_path): 
+#     #   shutil.copy2(full_path, dest_path)
 
 
 
