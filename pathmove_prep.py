@@ -94,7 +94,7 @@ def main():
       dirs = irn_dir(r['irn'])
 
       full_path = full_prefix + dirs + r['MulIdentifier']
-      dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
+      dest_path = dest_prefix + r['pathMove'] + r['prep_file']
 
       # # copy file to the new location for prep_file
       if not os.path.exists(dest_path):
