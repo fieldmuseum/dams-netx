@@ -139,10 +139,11 @@ def copy_files(records, full_prefix, dest_prefix, c):
     dirs = irn_dir(r['irn'])
 
     full_path = full_prefix + dirs + r['MulIdentifier']
-    dest_path = dest_prefix + r['pathMove'] + r['prep_file']
+    dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
 
     # # copy file to the new location for prep_file
-    # os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
+    if not os.path.exists(dest_path):
+      os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
     
     try:
       # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
@@ -150,8 +151,8 @@ def copy_files(records, full_prefix, dest_prefix, c):
     except Exception as err:
       print(f'An error occurred trying to copy media from origin to destination: {err}')
 
-    if not os.path.exists(dest_path): 
-      shutil.copy2(full_path, dest_path)
+    # if not os.path.exists(dest_path): 
+    #   shutil.copy2(full_path, dest_path)
 
 
 
