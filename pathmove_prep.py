@@ -204,7 +204,7 @@ def prep_file(record):
   filename = record['AudIdentifier']
   file_ext = re.sub(r'(.*)(\..*)', r'\g<2>', record['MulIdentifier'])
   # prep_file = f'{irn}_emu_{filename}' # f'{status}/{record_type}/{department}/{irn}_emu_{filename}'
-  prep_file = f'{filename}.{file_ext}'
+  prep_file = f'{filename}{file_ext}'
   return prep_file
   
 
