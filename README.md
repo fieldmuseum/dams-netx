@@ -3,47 +3,49 @@
 A repo for documentation and scripts for migrating and maintaining media and workflows related to NetX.
 
 NetX folder structures:
-Note - the top level 'Active/Restricted' folder might be removed, but for testing/for now:
 
 A given Multimedia asset could be pointed at its Netx destination folder based on these fields:
-- emultimedia.SecRecordStatus
-  - Multimedia fields:
-    - emultimedia.SecDepartment_tab
-    - emultimedia.SecRecordStatus
-  - Reverse-attached Event fields:
-    - eevents.SecDepartment_tab
-    - eevents.EveEventTitle
-  - Reverse-attached Catalogue fields:
-    - ecatalogue.CatDepartment
-    - ecatalogue.CatCatalogue
+- Multimedia fields:
+  - emultimedia.SecDepartment_tab
+  - emultimedia.SecRecordStatus
+- Reverse-attached Event fields:
+  - eevents.SecDepartment_tab
+  - eevents.EveEventTitle
+- Reverse-attached Catalogue fields:
+  - ecatalogue.CatDepartment
+  - ecatalogue.CatCatalogue
+
+system | folder level-1 | folder level-2
+-|-|-
+NetX |  "**Multimedia**" | [MM-Department folder]
+EMu | [emultimedia module] | emultimedia.SecDepartment_tab 
 
 system | folder level-1 | folder level-2 | folder level-3
 -|-|-|-
-NetX | [Active/Restricted] | "**Multimedia**" | [MM-Department folder]
-EMu | [emultimedia.SecRecordStatus] | [emultimedia module] | emultimedia.SecDepartment_tab 
+NetX | "**Events**" | [Event-Department folder] | [Event Title folder]
+EMu | [eevents module] | eevents.SecDepartment_tab | eevents.EveEventTitle
 
-system | folder level-1 | folder level-2 | folder level-3 | folder level-4
--|-|-|-|-
-NetX | [Active/Restricted] | "**Events**" | [Event-Department folder] | [Event Title folder]
-EMu | [emultimedia.SecRecordStatus] | [eevents module] | eevents.SecDepartment_tab | eevents.EveEventTitle
-
-system | folder level-1 | folder level-2 | folder level-3 | folder level-4
--|-|-|-|-
-NetX | [Active/Restricted] | "**Catalogue**" | [Cat-Department folder] | [Catalogue folder]
-EMu | [emultimedia.SecRecordStatus] | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
+system | folder level-1 | folder level-2 | folder level-3
+-|-|-|-
+NetX | "**Catalogue**" | [Cat-Department folder] | [Catalogue folder]
+EMu | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 
 ## NetX pathMove prep script - copy EMu files to NetX pathMove folder structure
+
+### How to run:
+`python3 pathmove_prep.py [path/to/input-emu-netx-export.xml] [path/to/output.csv] [LIVE/test]`
+
 This script takes an emultimedia XML export and copies each file into the appropriate
 folder location for NetX pathMove. The newly copied file has a new filename, which
-prepends the IRN and `_emu_`. The output is a CSV of each multimedia record, with
-the fields, `AudIdentifier` and NetX `pathMove`. The `pathMove` value 
+is the AudIdentifier value from EMu. The output is a CSV of each multimedia record, with
+the fields, `File`, NetX `pathMove` and `AudIdentifier`. The `pathMove` value 
 is the filepath of the media that NetX requires for ingestion. (see example below)
 
 ### Output:
 
-AudIdentifier | pathMove (output path to renamed NetX file)
+File | pathMove (output path where renamed file should go in NetX) | Identifier
 -|-
-123-abc-987-def | Active/Multimedia/Paleobotany/98765_emu_PB1234.jpg
+123-abc-987-def | Multimedia/Paleobotany/
 
 
 ## Related Repo's
