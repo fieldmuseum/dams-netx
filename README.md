@@ -32,7 +32,7 @@ EMu | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 
 ## NetX pathMove prep script - copy EMu files to NetX pathMove folder structure
 
-### How to run:
+### How to Prep Media-Files:
 `python3 pathmove_prep.py [path/to/input-emu-netx-export.xml] [path/to/output.csv] [LIVE/test]`
 
 This script takes an emultimedia XML export and copies each file into the appropriate
@@ -41,11 +41,22 @@ is the AudIdentifier value from EMu. The output is a CSV of each multimedia reco
 the fields, `File`, NetX `pathMove` and `AudIdentifier`. The `pathMove` value 
 is the filepath of the media that NetX requires for ingestion. (see example below)
 
-### Output:
+#### Output:
 
 File | pathMove (output path where renamed file should go in NetX) | Identifier
 -|-
 123-abc-987-def | Multimedia/Paleobotany/
+
+
+### How to Prep Media-Record-data:
+`python3 emu_xml_reshape.py [path/to/input-emu-netx-export.xml]`
+
+This script takes the same emultimedia XML export as pathmove_prep.py, and reshapes it into 
+the corresponding DSS XML input-file.
+
+#### Output
+The DSS XML input-file `dss_prepped.xml` is stored at the `XML_OUT_PATH` defined in `.env`
+
 
 
 ## Related Repo's

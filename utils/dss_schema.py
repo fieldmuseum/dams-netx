@@ -43,8 +43,6 @@ def media_schema_xml() -> ET.Element:
             <AudCaptureDevice/>
             <AudFundingAttribution/>
             <AudAccessURI/>
-            <DetMediaRightsRef_RigType/>
-            <DetMediaRightsRef_RigOtherNumber/>
             <EveEventsRef_tab_irn/>
             <EveEventsRef_tab_GUID/>
             <EveEventsRef_tab_SummaryData/>
