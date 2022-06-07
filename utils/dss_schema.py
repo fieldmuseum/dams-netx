@@ -1,10 +1,71 @@
 '''
 Schema for EMu Media records imported via DSS to NetX
 '''
+import xml.etree.ElementTree as ET
 
-def media_schema():
+def media_schema_xml() -> ET.Element:
+    '''basic XML schema for NetX media record imported via DSS'''
     
-    media_schema = {
+    media_schema_xml = ET.fromstring('''
+        <data>
+            <AudIdentifier/>
+            <irn/>
+            <MulTitle/>
+            <MulDescription/>
+            <DetSubject_tab/>
+            <AudAssociatedSpecimen/>
+            <AudAccessURI/>
+            <AudCitation/>
+            <MulCreator_tab/>
+            <MulMultimediaCreatorRef_tab_SummaryData/>
+            <MulMultimediaCreatorRef_tab_irn/>
+            <MulMultimediaCreatorRole_tab/>
+            <DetMediaRightsRef_irn/>
+            <DetMediaRightsRef_Summary/>
+            <DetMediaRightsRef_RigType/>
+            <DetMediaRightsRef_RigOwner_Summary/>
+            <DetMediaRightsRef_RigOtherNumber/>
+            <SecRecordStatus/>
+            <SecDepartment_tab/>
+            <AdmPublishWebNoPassword/>
+            <AdmPublishWebPassword/>
+            <AdmAssetSourceDAMS/>
+            <AudTaxonCoverage/>
+            <AudRelatedGeography/>
+            <AudAssociatedSpecimen/>
+            <AudAssociatedObservations/>
+            <AudNumbers/>
+            <AudVernacularName/>
+            <AudSex/>
+            <AudLifeStage/>
+            <AudSubjectOrientation_tab/>
+            <AudSubjectPart_tab/>
+            <AudCaptureDevice/>
+            <AudFundingAttribution/>
+            <AudAccessURI/>
+            <DetMediaRightsRef_RigType/>
+            <DetMediaRightsRef_RigOtherNumber/>
+            <EveEventsRef_tab_irn/>
+            <EveEventsRef_tab_GUID/>
+            <EveEventsRef_tab_SummaryData/>
+            <AdmDateInserted/>
+            <AdmDateModified/>
+            <AdmInsertedBy/>
+            <AdmModifiedBy/>
+            <RelChildMediaRef_tab_SummaryData/>
+            <RelNotes/>
+            <RelParentMediaRef_SummaryData/>
+            <RelRelatedMediaRef_tab_SummaryData/>
+            <RelRelationship_tab/>
+        </data>
+        ''')
+
+    return media_schema_xml
+
+def media_schema_json():
+    '''wishful thinking'''
+
+    media_schema_json = {
         'data': {
             'AudIdentifier': None,
             'irn': None,
@@ -58,4 +119,4 @@ def media_schema():
         }
     }
 
-    return media_schema
+    return media_schema_json

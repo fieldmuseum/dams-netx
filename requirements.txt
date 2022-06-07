@@ -1,4 +1,7 @@
-imu-api>=1.0.2
-python-dotenv>=0.19
+bs4>=4.10.0
 decouple>=3.4
+dict2xml>=1.7.1
 fabric>=2.7.0
+imu-api>=1.0.2
+lxml>=4.8.0
+python-dotenv>=0.19
