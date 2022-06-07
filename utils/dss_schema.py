@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 def media_schema_xml() -> ET.Element:
     '''basic XML schema for NetX media record imported via DSS'''
-    
+
     media_schema_xml = ET.fromstring('''
         <data>
             <AudIdentifier/>
@@ -27,7 +27,6 @@ def media_schema_xml() -> ET.Element:
             <SecDepartment_tab/>
             <AdmPublishWebNoPassword/>
             <AdmPublishWebPassword/>
-            <AdmAssetSourceDAMS/>
             <MulIdentifier/>
             <AudTaxonCoverage/>
             <AudRelatedGeography/>
@@ -41,9 +40,6 @@ def media_schema_xml() -> ET.Element:
             <AudSubjectPart_tab/>
             <AudCaptureDevice/>
             <AudFundingAttribution/>
-            <EveEventsRef_tab_irn/>
-            <EveEventsRef_tab_GUID/>
-            <EveEventsRef_tab_SummaryData/>
             <AdmDateInserted/>
             <AdmDateModified/>
             <AdmInsertedBy/>
@@ -54,6 +50,11 @@ def media_schema_xml() -> ET.Element:
             <RelRelationship_tab/>
         </data>
         ''')
+
+        # <AdmAssetSourceDAMS/>  # field not yet reportable
+        # <EveEventsRef_tab_irn/>
+        # <EveEventsRef_tab_GUID/>
+        # <EveEventsRef_tab_SummaryData/>
 
     return media_schema_xml
 
