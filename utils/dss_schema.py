@@ -13,10 +13,8 @@ def media_schema_xml() -> ET.Element:
             <MulTitle/>
             <MulDescription/>
             <DetSubject_tab/>
-            <AudAssociatedSpecimen/>
             <AudAccessURI/>
             <AudCitation/>
-            <MulCreator_tab/>
             <MulMultimediaCreatorRef_tab_SummaryData/>
             <MulMultimediaCreatorRef_tab_irn/>
             <MulMultimediaCreatorRole_tab/>
@@ -30,10 +28,11 @@ def media_schema_xml() -> ET.Element:
             <AdmPublishWebNoPassword/>
             <AdmPublishWebPassword/>
             <AdmAssetSourceDAMS/>
+            <MulIdentifier/>
             <AudTaxonCoverage/>
             <AudRelatedGeography/>
             <AudAssociatedSpecimen/>
-            <AudAssociatedObservations/>
+            <AudAssociatedObservation/>
             <AudNumbers/>
             <AudVernacularName/>
             <AudSex/>
@@ -42,7 +41,6 @@ def media_schema_xml() -> ET.Element:
             <AudSubjectPart_tab/>
             <AudCaptureDevice/>
             <AudFundingAttribution/>
-            <AudAccessURI/>
             <EveEventsRef_tab_irn/>
             <EveEventsRef_tab_GUID/>
             <EveEventsRef_tab_SummaryData/>
@@ -50,7 +48,6 @@ def media_schema_xml() -> ET.Element:
             <AdmDateModified/>
             <AdmInsertedBy/>
             <AdmModifiedBy/>
-            <RelChildMediaRef_tab_SummaryData/>
             <RelNotes/>
             <RelParentMediaRef_SummaryData/>
             <RelRelatedMediaRef_tab_SummaryData/>

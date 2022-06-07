@@ -18,6 +18,7 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
     # Setup record's DSS fields
     prepped_record = dss_schema.media_schema_xml()
 
+
     # Populate DSS fields for atomic EMu fields:
     atomic_fields = emu_netx.emu_netx_atoms()
 
@@ -27,16 +28,15 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
 
 
     # Populate table-fields
-
     table_fields = emu_netx.emu_netx_tables()
 
     for key, value in table_fields.items():
         if type(value) == list:
             print('figure this out')
+            
         elif value is not None and emu_record.find(value) is not None:
             prepped_record.find(key).text = emu_record.find(value).text
     
-    # prepped_record.find('DetSubject_tab').text = emu_record.find('DetSubject_tab').text
 
     return prepped_record
     
@@ -53,8 +53,8 @@ def main(xml_input, output_emu_prepped=True):
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # smaller test-set
-    emu_records = emu_records[:10]
+    # # smaller test-set
+    # emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records

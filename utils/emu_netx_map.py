@@ -38,7 +38,8 @@ def emu_netx_atoms() -> dict:
             'AdmDateModified':'AdmDateModified',
             'AdmInsertedBy':'AdmInsertedBy',
             'AdmModifiedBy':'AdmModifiedBy',
-            'RelNotes':'RelNotes'
+            'RelNotes':'RelNotes',
+            'MulIdentifier':'MulIdentifier'
             # 'RelParentMediaRef_SummaryData'
     }
 
@@ -54,13 +55,12 @@ def emu_netx_tables() -> dict:
     emu_netx_tables = {
         'DetMediaRightsRef_irn':['DetMediaRightsRef', 'irn'],
         'DetMediaRightsRef_Summary':['DetMediaRightsRef', 'SummaryData'],
-        'DetMediaRightsRef_RigType':None,
-        'DetMediaRightsRef_RigOwner_Summary':None,
-        'DetMediaRightsRef_RigOtherNumber':None,
+        'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
+        'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnerRef','SummaryData'],
+        'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
         'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier'],
         'DetSubject_tab':'DetSubject_tab',
-        'MulCreator_tab':'MulCreator_tab',
         'MulMultimediaCreatorRef_tab_SummaryData':['Creator','tuple','SummaryData'],
         'MulMultimediaCreatorRef_tab_irn':['Creator','tuple','irn'],
         'MulMultimediaCreatorRole_tab':['Creator','tuple','MulMultimediaCreatorRole'],
@@ -70,7 +70,6 @@ def emu_netx_tables() -> dict:
         'EveEventsRef_tab_irn':None,
         'EveEventsRef_tab_GUID':None,
         'EveEventsRef_tab_SummaryData':None,
-        'RelChildMediaRef_tab_SummaryData':None,
         'RelRelatedMediaRef_tab_SummaryData':None,
         'RelRelationship_tab':'RelRelationship_tab'
     }
