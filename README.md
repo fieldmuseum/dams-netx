@@ -56,6 +56,7 @@ the corresponding DSS XML input-file.
 
 #### Output
 The DSS XML input-file `dss_prepped.xml` is stored at the `XML_OUT_PATH` defined in `.env`
+For NetX, ingest this to the NetX front-end synced-metadata folder for the DSS autotask to pick up on its next run.
 
 
 
