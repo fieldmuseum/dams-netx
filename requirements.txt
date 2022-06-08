@@ -5,3 +5,4 @@ fabric>=2.7.0
 imu-api>=1.0.2
 lxml>=4.8.0
 python-dotenv>=0.19
+pyexiftool>=0.5.3

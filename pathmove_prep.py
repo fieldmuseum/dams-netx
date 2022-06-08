@@ -5,11 +5,12 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
+import csv, os, re, sys
 from decouple import config
-import csv, os, re, shutil, sys
-# from dotenv import dotenv_values
+from exiftool import ExifToolHelper
 from fabric import Connection
 import xml.etree.ElementTree as ET
+
 
 def main():
   # Main function
@@ -87,8 +88,7 @@ def main():
   
     c.run('hostname')
 
-    # # Copy source-files to staging area & rename them
-    # setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c)
+    # Copy source-files to staging area & Rename them
 
     for r in records_prep_file:
       dirs = irn_dir(r['irn'])
@@ -101,11 +101,18 @@ def main():
         os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
       
       try:
-        # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
         c.get(remote=full_path, local=dest_path, preserve_mode=False)
         print(f'Full origin path = {full_path} | Destination path = {dest_path}')
       except Exception as err:
         print(f'An error occurred trying to copy media from {full_path}: {err}')
+      
+      # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
+      if os.path.isfile(dest_path):
+        with ExifToolHelper() as exif:
+          exif.set_tags(
+            dest_path,
+            tags = {'Identifier':r['AudIdentifier']}
+          )
 
 
     # Set up fields for CSV
