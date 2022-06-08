@@ -111,7 +111,8 @@ def main():
         with ExifToolHelper() as exif:
           exif.set_tags(
             dest_path,
-            tags = {'Identifier':r['AudIdentifier']}
+            tags = {'Identifier':r['AudIdentifier']},
+            params=["-P", "-overwrite_original"]
           )
 
 
