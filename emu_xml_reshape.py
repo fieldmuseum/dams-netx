@@ -71,8 +71,8 @@ def main(xml_input, output_emu_prepped=True):
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # smaller test-set
-    emu_records = emu_records[:10]
+    # # smaller test-set
+    # emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records
