@@ -38,6 +38,24 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
             prepped_record.find(key).text = emu_record.find(value).text
     
 
+    # Populate ungrouped reference-fields
+    ref_fields = emu_netx.emu_netx_refs()
+
+    for key, value in ref_fields.items():
+        if type(value) == list:
+            ref_values = xml_tools.get_ref_value(emu_record, value[0], value[1])
+            prepped_record.find(key).text = ref_values
+
+
+    # Populate grouped fields
+    group_fields = emu_netx.emu_netx_groups()
+
+    for key, value in group_fields.items():
+        if type(value) == list:
+            grouped_value = xml_tools.get_grouped_value(emu_record, value[0], value[1])
+            prepped_record.find(key).text = grouped_value
+
+
     return prepped_record
     
 
@@ -47,14 +65,14 @@ def main(xml_input, output_emu_prepped=True):
     # Load EMu records & fix xml-tags
     emu_tree = ET.ElementTree()
     emu_records_raw1 = emu_tree.parse(xml_input)
-    emu_records_raw2 = xml_tools.emu_xml_tag_fix(emu_records_raw1)
+    emu_records_raw2 = xml_tools.fix_emu_xml_tags(emu_records_raw1)
     emu_records = xml_tools.convert_linebreaks_to_commas(emu_records_raw2)
 
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # # smaller test-set
-    # emu_records = emu_records[:10]
+    # smaller test-set
+    emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records
@@ -85,7 +103,7 @@ def main(xml_input, output_emu_prepped=True):
     
 
     if output_emu_prepped == True:
-        with open(config('XML_OUT_PATH') + "emu_prepped.xml", 'wb') as f:
+        with open("data/emu_prepped.xml", 'wb') as f:
             f.write(
                 ET.tostring(
                     emu_out, 

@@ -46,6 +46,7 @@ def media_schema_xml() -> ET.Element:
             <AdmModifiedBy/>
             <RelNotes/>
             <RelParentMediaRef_SummaryData/>
+            <RelParentMediaRef_AudIdentifier/>
             <RelRelatedMediaRef_tab_SummaryData/>
             <RelRelationship_tab/>
         </data>
