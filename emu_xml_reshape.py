@@ -15,6 +15,8 @@ import utils.emu_netx_map as emu_netx
 def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
     '''Parse exported EMu records to DSS-schema records'''
 
+    print(emu_record.find('irn').text)
+
     # Setup record's DSS fields
     prepped_record = dss_schema.media_schema_xml()
 

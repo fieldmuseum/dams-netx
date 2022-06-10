@@ -59,9 +59,7 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
 
     # len(re.findall(r'\.', str(child_tag)) > 0:
     if child_tag.find('.') > 0:
-        print('got 1 - ' + child_tag)
         nested_tag = child_tag.split(".")
-        print(nested_tag)
         child_tag = nested_tag[0]
         nested_child_tag = nested_tag[1]
 
@@ -70,15 +68,10 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
         # for child_field in tuple:
 
         if child_field.tag == child_tag:
-            # print(str(child_field.tag) + ' = ' + str(child_field.text))
-
             if nested_child_tag is not None:
-
                 for tuple in child_field:
                     for nested_child_field in tuple:
-                        print(nested_child_field.tag)
                         if nested_child_field.tag == nested_child_tag:
-                            print('nested ' + str(child_field.tag) + ' = ' + str(child_field.text))
                             child_list.append(nested_child_field.text)
 
             else:
@@ -99,11 +92,16 @@ def get_grouped_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: 
     '''
 
     child_list = []
-    for tuple in emu_record.find(group_tag): 
-        for child_field in tuple:
-            if str(child_field.tag) == child_tag:
-                child_list.append(child_field.text)
+
+    if emu_record.find(group_tag) is not None:
+        for tuple in emu_record.find(group_tag): 
+            for child_field in tuple:
+                if str(child_field.tag) == child_tag:
+                    child_list.append(child_field.text)
             
-    netx_attr = " | ".join(child_list)
+    if len(child_list) > 0:
+        netx_attr = " | ".join(child_list)
+    
+    else: netx_attr = None
 
     return netx_attr
