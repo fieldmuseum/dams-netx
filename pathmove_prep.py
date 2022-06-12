@@ -108,12 +108,13 @@ def main():
       
       # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
       if os.path.isfile(dest_path):
-        with ExifToolHelper() as exif:
-          exif.set_tags(
-            dest_path,
-            tags = {'Identifier':r['AudIdentifier']},
-            params=["-P", "-overwrite_original"]
-          )
+        if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
+          with ExifToolHelper() as exif:
+            exif.set_tags(
+              dest_path,
+              tags = {'Identifier':r['AudIdentifier']},
+              params=["-P", "-overwrite_original"]
+            )
 
 
     # Set up fields for CSV
