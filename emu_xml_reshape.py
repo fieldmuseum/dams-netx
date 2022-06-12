@@ -28,6 +28,9 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
         if value is not None and emu_record.find(value) is not None:
             prepped_record.find(key).text = emu_record.find(value).text
 
+            if key == "AssociatedSpecimen" and prepped_record.find(key).text is not None:
+                prepped_record.find(key).text = 'https://db.fieldmuseum.org/' + prepped_record.find(key).text
+
 
     # Populate table-fields
     table_fields = emu_netx.emu_netx_tables()
@@ -37,10 +40,11 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
             print('figure this out')
             
         elif value is not None and emu_record.find(value) is not None:
+            # This pulls the concatenated value from convert_linebreaks_to_commas()
             prepped_record.find(key).text = emu_record.find(value).text
     
 
-    # Populate ungrouped reference-fields
+    # Populate single-reference-fields (e.g. DetMediaRightsRef)
     ref_fields = emu_netx.emu_netx_refs()
 
     for key, value in ref_fields.items():
@@ -49,12 +53,12 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
             prepped_record.find(key).text = ref_values
 
 
-    # Populate grouped fields
-    group_fields = emu_netx.emu_netx_groups()
+    # Populate grouped or ref-table fields with nested tuples (e.g. 'Creator' group )
+    group_fields = emu_netx.emu_netx_groups_or_reftabs()
 
     for key, value in group_fields.items():
         if type(value) == list:
-            grouped_value = xml_tools.get_grouped_value(emu_record, value[0], value[1])
+            grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
             prepped_record.find(key).text = grouped_value
 
 
@@ -73,8 +77,8 @@ def main(xml_input, output_emu_prepped=True):
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # # smaller test-set
-    # emu_records = emu_records[:10]
+    # smaller test-set
+    emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records
