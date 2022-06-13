@@ -28,7 +28,7 @@ def parse_emu_to_dss(emu_record: ET.Element) -> ET.Element:
         if value is not None and emu_record.find(value) is not None:
             prepped_record.find(key).text = emu_record.find(value).text
 
-            if key == "AssociatedSpecimen" and prepped_record.find(key).text is not None:
+            if key == "AudAssociatedSpecimen" and prepped_record.find(key).text is not None:
                 prepped_record.find(key).text = 'https://db.fieldmuseum.org/' + prepped_record.find(key).text
 
 
@@ -77,8 +77,8 @@ def main(xml_input, output_emu_prepped=True):
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # smaller test-set
-    emu_records = emu_records[:10]
+    # # smaller test-set
+    # emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records
