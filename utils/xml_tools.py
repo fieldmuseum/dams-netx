@@ -85,7 +85,7 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
     return netx_attr
 
 
-def get_grouped_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: str) -> str:
+def get_group_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: str) -> str:
     '''
     Given an EMu xml group-label for multi-value table-fields, 
     return the flattened values of a nested or child field to populate a netx field
@@ -97,7 +97,7 @@ def get_grouped_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: 
         for tuple in emu_record.find(group_tag): 
             for child_field in tuple:
                 if str(child_field.tag) == child_tag:
-                    child_list.append(child_field.text)
+                    child_list.append(str(child_field.text))
             
     if len(child_list) > 0:
         netx_attr = " | ".join(child_list)

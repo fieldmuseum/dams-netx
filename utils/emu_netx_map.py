@@ -98,7 +98,7 @@ def emu_netx_refs() -> dict:
     return emu_netx_refs
 
 
-def emu_netx_groups() -> dict:
+def emu_netx_groups_or_reftabs() -> dict:
     '''
     Returns a list of dicts where keys = corresponding NetX fields
     and values = lists of Group names and nested EMu fields  
@@ -106,12 +106,12 @@ def emu_netx_groups() -> dict:
     (e.g. only "SummaryData", not "MulMultimediaCreatorRef_tab.SummaryData")
     '''
 
-    emu_netx_groups = {
+    emu_netx_groups_or_reftabs = {
         'MulMultimediaCreatorRef_tab_SummaryData':['Creator','SummaryData'],
         'MulMultimediaCreatorRef_tab_irn':['Creator','irn'],
         'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole']
     }
 
-    return emu_netx_groups
+    return emu_netx_groups_or_reftabs
 
     
