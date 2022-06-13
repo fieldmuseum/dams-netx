@@ -44,8 +44,8 @@ is the filepath of the media that NetX requires for ingestion. (see example belo
 #### Output:
 
 File | pathMove (output path where renamed file should go in NetX) | Identifier
--|-
-123-abc-987-def | Multimedia/Paleobotany/
+-|-|-
+123-abc-987-def.jpg | Multimedia/Paleobotany/ | 123-abc-987-def
 
 
 ### How to Prep Media-Record-data:
