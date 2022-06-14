@@ -43,9 +43,13 @@ is the filepath of the media that NetX requires for ingestion. (see example belo
 
 #### Output:
 
-File | pathMove (output path where renamed file should go in NetX) | Identifier
--|-|-
-123-abc-987-def.jpg | Multimedia/Paleobotany/ | 123-abc-987-def
+1. Renamed files referenced in the input-XML, saved to the `DESTIN_PATH` directory in a folder-structure that follows the [`DEPARTMENT_CSV`](https://github.com/fieldmuseum/dams-netx/blob/main/data/config/SecDepartment_hierarchy.csv) hierarchy
+    - `DESTIN_PATH` and `DEPARTMENT_CSV` should be defined in your `.env` file. See [example here](https://github.com/fieldmuseum/dams-netx/blob/main/.env.example).
+2. A CSV formatted like so:
+
+    File | pathMove (output path where renamed file should go in NetX) | Identifier
+    -|-|-
+    123-abc-987-def.jpg | Multimedia/Paleobotany/ | 123-abc-987-def
 
 
 ### How to Prep Media-Record-data:
