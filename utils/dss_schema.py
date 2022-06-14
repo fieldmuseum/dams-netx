@@ -8,6 +8,7 @@ def media_schema_xml() -> ET.Element:
 
     media_schema_xml = ET.fromstring('''
         <data>
+            <NetxFilename/>
             <AudIdentifier/>
             <irn/>
             <MulTitle/>
@@ -64,6 +65,7 @@ def media_schema_json():
 
     media_schema_json = {
         'data': {
+            'NetxFilename': None,
             'AudIdentifier': None,
             'irn': None,
             'MulTitle': None,
