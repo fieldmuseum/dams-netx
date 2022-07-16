@@ -52,7 +52,7 @@ is the filepath of the media that NetX requires for ingestion. (see example belo
     123-abc-987-def.jpg | Multimedia/Paleobotany/ | 123-abc-987-def
 
 
-### How to Prep Media-Record-data:
+### How to Prep Media Record data:
 `python3 emu_xml_reshape.py [path/to/input-emu-netx-export.xml]`
 
 This script takes the same emultimedia XML export as pathmove_prep.py, and reshapes it into 
