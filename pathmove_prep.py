@@ -17,14 +17,17 @@ def main():
   xml_input_file_path = sys.argv[1]
   csv_output_file_path = sys.argv[2]
   use_live_paths = sys.argv[3]
-
+  
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
     full_prefix = config('ORIGIN_PATH')
     dest_prefix = config('DESTIN_PATH')
-  else: 
+  elif use_live_paths == "TEST": 
     full_prefix = config('TEST_ORIGIN_PATH')
     dest_prefix = config('TEST_DESTIN_PATH')
+  else:
+    full_prefix = config('LOCAL_ORIGIN_PATH')
+    dest_prefix = config('LOCAL_DESTIN_PATH')
   
   # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
