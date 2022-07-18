@@ -89,7 +89,7 @@ def emu_netx_refs() -> dict:
         'DetMediaRightsRef_irn':['DetMediaRightsRef', 'irn'],
         'DetMediaRightsRef_Summary':['DetMediaRightsRef', 'SummaryData'],
         'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
-        'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'],
+        'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'],  # try RigOwnershipRef_tab/SummaryData ?
         'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
         'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier'],
@@ -109,9 +109,25 @@ def emu_netx_groups_or_reftabs() -> dict:
     emu_netx_groups_or_reftabs = {
         'MulMultimediaCreatorRef_tab_SummaryData':['Creator','SummaryData'],
         'MulMultimediaCreatorRef_tab_irn':['Creator','irn'],
-        'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole']
+        'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole'],
+        'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
+        'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'], # make unique list
     }
 
     return emu_netx_groups_or_reftabs
+
+
+def emu_netx_ref_concatenate() -> dict:
+    '''
+    Returns a list of dicts where keys = corresponding NetX fields
+    and values = list of EMu Ref fields to concatenate.
+    Values will be joined in the order they are listed, delimited by pipes: "a | b | c"
+    '''
+    emu_netx_ref_concatenate = {
+        'EveEvent':['MulMultiMediaRef_tab',['EveEventNumber','EveTypeOfEvent','EveEventTitle']],
+        'EveEventURLs':['MulMultiMediaRef_tab','AdmGUIDValue']
+    }
+
+    return emu_netx_ref_concatenate
 
     

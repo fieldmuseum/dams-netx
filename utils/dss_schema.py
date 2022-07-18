@@ -50,6 +50,10 @@ def media_schema_xml() -> ET.Element:
             <RelParentMediaRef_AudIdentifier/>
             <RelRelatedMediaRef_tab_SummaryData/>
             <RelRelationship_tab/>
+            <CatCatalog/>
+            <CatDepartment/>
+            <EveEvent/>
+            <sEveEventURLs/>
         </data>
         ''')
 
@@ -114,7 +118,11 @@ def media_schema_json():
             'RelNotes': None,
             'RelParentMediaRef_SummaryData': None,
             'RelRelatedMediaRef_tab_SummaryData': None,
-            'RelRelationship_tab': None
+            'RelRelationship_tab': None,
+            'CatDepartment':None,
+            'CatCatalog':None,
+            'EveEvent':None,
+            'EveEventURLs':None
         }
     }
 
