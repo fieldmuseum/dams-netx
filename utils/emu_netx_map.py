@@ -92,7 +92,7 @@ def emu_netx_refs() -> dict:
         'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'],  # try RigOwnershipRef_tab/SummaryData ?
         'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
-        'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier'],
+        'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier']
     }
 
     return emu_netx_refs
@@ -111,7 +111,7 @@ def emu_netx_groups_or_reftabs() -> dict:
         'MulMultimediaCreatorRef_tab_irn':['Creator','irn'],
         'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole'],
         'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
-        'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'], # make unique list
+        'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'] # make unique list
     }
 
     return emu_netx_groups_or_reftabs
