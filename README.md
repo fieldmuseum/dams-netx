@@ -33,7 +33,7 @@ EMu | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 ## NetX pathMove prep script - copy EMu files to NetX pathMove folder structure
 
 ### How to Prep Media-Files:
-`python3 pathmove_prep.py [path/to/input-emu-netx-export.xml] [path/to/output.csv] [LIVE/test]`
+`python3 prep_emu_media.py [path/to/input-emu-netx-export.xml] [path/to/output.csv] [LIVE/test]`
 
 This script takes an emultimedia XML export and copies each file into the appropriate
 folder location for NetX pathMove. The newly copied file has a new filename, which
@@ -43,8 +43,8 @@ is the filepath of the media that NetX requires for ingestion. (see example belo
 
 #### Output:
 
-1. Renamed files referenced in the input-XML, saved to the `DESTIN_PATH` directory in a folder-structure that follows the [`DEPARTMENT_CSV`](https://github.com/fieldmuseum/dams-netx/blob/main/data/config/SecDepartment_hierarchy.csv) hierarchy
-    - `DESTIN_PATH` and `DEPARTMENT_CSV` should be defined in your `.env` file. See [example here](https://github.com/fieldmuseum/dams-netx/blob/main/.env.example).
+1. Renamed files referenced in the input-XML, saved to the `DESTIN_PATH_MEDIA` directory in a folder-structure that follows the [`DEPARTMENT_CSV`](https://github.com/fieldmuseum/dams-netx/blob/main/data/config/SecDepartment_hierarchy.csv) hierarchy
+    - `DESTIN_PATH_MEDIA` and `DEPARTMENT_CSV` should be defined in your `.env` file. See [example here](https://github.com/fieldmuseum/dams-netx/blob/main/.env.example).
 2. A CSV formatted like so:
 
     File | pathMove (output path where renamed file should go in NetX) | Identifier
@@ -53,13 +53,13 @@ is the filepath of the media that NetX requires for ingestion. (see example belo
 
 
 ### How to Prep Media Record data:
-`python3 emu_xml_reshape.py [path/to/input-emu-netx-export.xml]`
+`python3 prep_emu_xml.py [path/to/input-emu-netx-export.xml]`
 
-This script takes the same emultimedia XML export as pathmove_prep.py, and reshapes it into 
+This script takes the same emultimedia XML export as prep_emu_media.py, and reshapes it into 
 the corresponding DSS XML input-file.
 
 #### Output
-The DSS XML input-file `dss_prepped.xml` is stored at the `XML_OUT_PATH` defined in `.env`
+The DSS XML input-file `dss_prepped.xml` is stored at the `DESTIN_PATH_XML` location defined in `.env`
 For NetX, ingest this to the NetX front-end synced-metadata folder for the DSS autotask to pick up on its next run.
 
 

@@ -15,7 +15,7 @@ import utils.emu_netx_map as emu_netx
 def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: ET.Element) -> ET.Element:
     '''Parse exported EMu records to DSS-schema records'''
 
-    # print(emu_record.find('irn').text)
+    print(emu_record.find('irn').text)
 
     # Setup record's DSS fields
     prepped_record = dss_schema.media_schema_xml()
@@ -74,14 +74,16 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
 
     # Populate fields where values need concatenation (e.g. reverse-attached Event fields)
     concat_fields = emu_netx.emu_netx_ref_concatenate()
-    # print(concat_fields)
 
     for key,value in concat_fields.items():
+
+        # TODO - loop through for multiple reverse-attachments of one kind (e.g. if >1 rev-attached Event records)
+
         concat_values = None
+        
         if type(value) == list:
             if type(value[1]) == list:
                 if len(mm_event.findall('.//' + value[1][0])) > 0:
-                    # print(mm_event.findall('.//' + value[1][0]))
                     concat_values_raw = []
 
                     for field_name in value[1]:
@@ -89,23 +91,16 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
                         if concat_value == None:
                             concat_value = 'NULL, check EMu'
 
-                        print("for field = " + field_name + " a concat val = " + str(concat_value))
                         concat_values_raw.append(concat_value)
-                        print("adding " + str(concat_value))
+
                     concat_values = ' | '.join(concat_values_raw)
                     prepped_record.find(key).text = concat_values
-                    print('concat_vals = ' + str(prepped_record.find(key).text))
+                    # print('concat_vals = ' + str(prepped_record.find(key).text))
 
-            elif key == 'EveEventURLs': # and mm_event is not None:
-                # print(str(mm_event.find(value[1])))
+            elif key == 'EveEventURLs':
                 if len(mm_event.findall('.//' + value[1])) > 0:
-                    print('EveEventURLs maybe? for field = ' + str(mm_event.find('.//' + value[1])))
-                    print('event info added')
                     prepped_record.find(key).text = 'https://pj.fieldmuseum.org/event/' + mm_event.find('.//' + value[1]).text
-                    # concat_values = xml_tools.get_group_value(emu_record, value[0], value[1])
-
-                    print('concat_vals = ' + str(prepped_record.find(key).text))
-            
+                    # print('concat_vals = ' + str(prepped_record.find(key).text))
 
 
     return prepped_record
@@ -121,11 +116,11 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
     # Check if test or live paths should be used
     if use_live_paths == "LIVE":
-        full_prefix = config('ORIGIN_PATH')
-        dest_prefix = config('XML_DESTIN_PATH')
+        full_prefix = config('ORIGIN_PATH_MEDIA')
+        dest_prefix = config('DESTIN_PATH_XML')
     elif use_live_paths == "TEST": 
-        full_prefix = config('TEST_ORIGIN_PATH')
-        dest_prefix = config('XML_TEST_DESTIN_PATH')
+        full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
+        dest_prefix = config('TEST_DESTIN_PATH_XML')
     else:
         full_prefix = config('LOCAL_ORIGIN_PATH')
         dest_prefix = config('XML_LOCAL_DESTIN_PATH')

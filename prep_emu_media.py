@@ -20,14 +20,11 @@ def main():
   
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
-    full_prefix = config('ORIGIN_PATH')
-    dest_prefix = config('DESTIN_PATH')
-  elif use_live_paths == "TEST": 
-    full_prefix = config('TEST_ORIGIN_PATH')
-    dest_prefix = config('TEST_DESTIN_PATH')
-  else:
-    full_prefix = config('LOCAL_ORIGIN_PATH')
-    dest_prefix = config('LOCAL_DESTIN_PATH')
+    full_prefix = config('ORIGIN_PATH_MEDIA')
+    dest_prefix = config('DESTIN_PATH_MEDIA')
+  else: 
+    full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
+    dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
   
   # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
