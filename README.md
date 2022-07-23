@@ -49,9 +49,9 @@ organized, renamed files to NetX -- a prerequisite to running NetX DSS. (see exa
 
 ...like so:
 
-    Filename | File path
-    -|-
-    123-abc-987-def.jpg | Multimedia/Geology/Paleobotany/
+  | Filename | File path |
+  |---|---|
+  | 123-abc-987-def.jpg | Multimedia/Geology/Paleobotany/ |
 
 
 ### How to Prep Media Record data:
