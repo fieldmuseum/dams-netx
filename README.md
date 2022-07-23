@@ -36,20 +36,22 @@ EMu | [ecatalogue module] | ecatalogue.CatDepartment | ecatalogue.CatCatalogue
 `python3 prep_emu_media.py [path/to/input-emu-netx-export.xml] [path/to/output.csv] [LIVE/test]`
 
 This script takes an emultimedia XML export and copies each file into the appropriate
-folder location for NetX pathMove. The newly copied file has a new filename, which
-is the AudIdentifier value from EMu. The output is a CSV of each multimedia record, with
-the fields, `File`, NetX `pathMove` and `AudIdentifier`. The `pathMove` value 
-is the filepath of the media that NetX requires for ingestion. (see example below)
+folder location for NetX IO to import files to NetX. The appropriate folder is defined
+by the SecDepartment values from EMu. The newly copied file's name is the AudIdentifier 
+value from EMu. Once complete, NetX IO can be run in watchedFolder mode to ingest the
+organized, renamed files to NetX -- a prerequisite to running NetX DSS. (see example below)
 
 #### Output:
 
-1. Renamed files referenced in the input-XML, saved to the `DESTIN_PATH_MEDIA` directory in a folder-structure that follows the [`DEPARTMENT_CSV`](https://github.com/fieldmuseum/dams-netx/blob/main/data/config/SecDepartment_hierarchy.csv) hierarchy
+1. Filenames replaced with AudIdentifier
+2. File paths defined by SecDepartment values in a folder-structure that follows the [`DEPARTMENT_CSV`](https://github.com/fieldmuseum/dams-netx/blob/main/data/config/SecDepartment_hierarchy.csv) hierarchy
     - `DESTIN_PATH_MEDIA` and `DEPARTMENT_CSV` should be defined in your `.env` file. See [example here](https://github.com/fieldmuseum/dams-netx/blob/main/.env.example).
-2. A CSV formatted like so:
 
-    File | pathMove (output path where renamed file should go in NetX) | Identifier
-    -|-|-
-    123-abc-987-def.jpg | Multimedia/Paleobotany/ | 123-abc-987-def
+...like so:
+
+    Filename | File path
+    -|-
+    123-abc-987-def.jpg | Multimedia/Geology/Paleobotany/
 
 
 ### How to Prep Media Record data:
