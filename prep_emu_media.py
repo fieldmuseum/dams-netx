@@ -65,13 +65,13 @@ def main():
         record['SecDepartment'] = sec_dept.text
 
         # Get secondary SecDepartment values for pathAdd
+        record['PathAddDepts'] = None
         sec_dept_others = elem.findall('tuple/atom')
-        print("# of Sec Depts = " + str(len(sec_dept_others)))
         if len(sec_dept_others) > 1:
           # secondary_dept_list = []
           # for dept in sec_dept_others[1:]:
-          record['PathAddDepts'] = '|'.join(sec_dept_others[1:])
-          path_add_rows = pathadd(record)
+          # record['PathAddDepts'] = '|'.join(sec_dept_others[1:])
+          path_add_rows = pathadd(record, sec_dept_others)  # pathadd(record)
           path_add_running_list.append(path_add_rows)
         
     records.append(record)
@@ -283,7 +283,7 @@ def pathmove(record):
   return pathmove
 
 
-def pathadd(record: dict):
+def pathadd(record: dict, other_departments):
   """
   Creates the pathAdd value(s) for a record (folder path without filename)
   e.g. 
@@ -300,20 +300,24 @@ def pathadd(record: dict):
   
   filename = prep_file(record)
 
-  other_departments_orig = record['PathAddDepts']
-  other_departments = other_departments_orig.split("|")
+  # other_departments_orig = record['PathAddDepts']
+  # other_departments = other_departments_orig.split("|")
 
-  if len(other_departments) > 0:
-    for dept in other_departments:
-      dept_folder = get_folder_hierarchy(dept.text)
-      pathadd = f'{record_type}/{dept_folder}'
-      path_add_row = {'file':filename, 'pathAdd':pathadd}
-  
-      if path_add_row not in path_add_list:
-        print('adding other dept: ' + str(pathadd))
-        path_add_list.append(path_add_row)
+  # if len(other_departments) == 1:
+  #   return None
 
-  return path_add_list
+  # elif len(other_departments) > 1:
+  for dept in other_departments:
+    dept_folder = get_folder_hierarchy(dept.text)
+    pathadd = f'{record_type}/{dept_folder}'
+    path_add_row = {'file':filename, 'pathAdd':pathadd}
+
+    if path_add_row not in path_add_list:
+      print('adding other dept: ' + str(pathadd))
+      path_add_list.append(path_add_row)
+
+  if len(path_add_list) > 0:
+    return path_add_list
 
 
 def validate_records(records):
