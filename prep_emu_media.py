@@ -65,7 +65,7 @@ def main():
         record['SecDepartment'] = sec_dept.text
 
         # Get secondary SecDepartment values for pathAdd
-        sec_dept_others = sec_dept_tuple_elem.findall('atom')
+        sec_dept_others = elem.findall('tuple/atom')
         print("# of Sec Depts = " + str(len(sec_dept_others)))
         if len(sec_dept_others) > 1:
           # secondary_dept_list = []
@@ -305,12 +305,12 @@ def pathadd(record: dict):
 
   if len(other_departments) > 0:
     for dept in other_departments:
-      print('adding other dept: ' + str(dept))
       dept_folder = get_folder_hierarchy(dept.text)
       pathadd = f'{record_type}/{dept_folder}'
       path_add_row = {'file':filename, 'pathAdd':pathadd}
   
       if path_add_row not in path_add_list:
+        print('adding other dept: ' + str(pathadd))
         path_add_list.append(path_add_row)
 
   return path_add_list
