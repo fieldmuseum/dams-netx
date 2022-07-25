@@ -57,7 +57,7 @@ def main():
       if elem.tag == 'atom' and elem.text:
         attrib = elem.attrib['name']
         record[attrib] = elem.text
-        print(elem.text)
+        print(attrib)
 
       # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
@@ -66,14 +66,11 @@ def main():
         record['SecDepartment'] = sec_dept.text
 
         # Get secondary SecDepartment values for pathAdd
-        record['PathAddDepts'] = None
         sec_dept_others = elem.findall('tuple/atom')
         if len(sec_dept_others) > 1:
-          # secondary_dept_list = []
-          # for dept in sec_dept_others[1:]:
-          # record['PathAddDepts'] = '|'.join(sec_dept_others[1:])
-          path_add_rows = pathadd(record, sec_dept_others)  # pathadd(record)
-          path_add_running_list.append(path_add_rows)
+          record['PathAddDepts'] = sec_dept_others
+        else:
+          record['PathAddDepts'] = None
         
     records.append(record)
   
@@ -82,7 +79,10 @@ def main():
   if invalid_records: output_error_log(invalid_records)
 
   # Set up prep_file values
+  
+  path_add_running_list = []  
   records_prep_file = []
+
   for record in records:
     r = {}
     r['irn'] = record['irn']
@@ -91,6 +91,10 @@ def main():
     r['prep_file'] = prep_file(record)
     r['pathMove'] = pathmove(record)
     records_prep_file.append(r)
+
+    if record['PathAddDepts'] is not None:  # len(sec_dept_others) > 1:
+      path_add_rows = pathadd(record)  # pathadd(record)
+      path_add_running_list.append(path_add_rows)
 
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
@@ -143,7 +147,6 @@ def main():
     # Validate that the copied files actually exist where we say they
     # do in the prep_file value for the CSV file.
     validate_files_copied(csv_records, dest_prefix)
-    validate_files_copied(path_add_running_list, dest_prefix)
 
     # FINAL STEP: Write pathAdd rows to CSV
     print("len for pathAdd list = " + str(len(path_add_running_list)))
@@ -284,7 +287,7 @@ def pathmove(record):
   return pathmove
 
 
-def pathadd(record: dict, other_departments):
+def pathadd(record: dict):
   """
   Creates the pathAdd value(s) for a record (folder path without filename)
   e.g. 
@@ -308,7 +311,9 @@ def pathadd(record: dict, other_departments):
   #   return None
 
   # elif len(other_departments) > 1:
-  for dept in other_departments:
+
+  # record['PathAddDepts'] should be a list of ET.Element
+  for dept in record['PathAddDepts']:
     dept_folder = get_folder_hierarchy(dept.text)
     pathadd = f'{record_type}/{dept_folder}'
     path_add_row = {'file':filename, 'pathAdd':pathadd}
