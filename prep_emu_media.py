@@ -57,6 +57,7 @@ def main():
       if elem.tag == 'atom' and elem.text:
         attrib = elem.attrib['name']
         record[attrib] = elem.text
+        print(elem.text)
 
       # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
