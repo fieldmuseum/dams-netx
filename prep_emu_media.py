@@ -155,7 +155,7 @@ def main():
       with open(csv_output_file_path, mode='w') as csv_file:
         # writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
         field_names=path_add_running_list[0].keys()
-        writer = csv.DictWriter(path_add_running_list, fieldnames=field_names )
+        writer = csv.DictWriter(csv_file, fieldnames=field_names )
         writer.writeheader()
         # writer.writerows(csv_records)
         writer.writerows(path_add_running_list)
