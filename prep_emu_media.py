@@ -94,7 +94,8 @@ def main():
 
     if record['PathAddDepts'] is not None:  # len(sec_dept_others) > 1:
       path_add_rows = pathadd(record)  # pathadd(record)
-      path_add_running_list.append(path_add_rows)
+      for row in path_add_rows:
+        path_add_running_list.append(row)
 
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
