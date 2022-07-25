@@ -57,7 +57,6 @@ def main():
       if elem.tag == 'atom' and elem.text:
         attrib = elem.attrib['name']
         record[attrib] = elem.text
-        print(attrib)
 
       # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
@@ -150,7 +149,7 @@ def main():
     validate_files_copied(csv_records, dest_prefix)
 
     # FINAL STEP: Write pathAdd rows to CSV
-    print("len for pathAdd list = " + str(len(path_add_running_list)))
+    # print("len for pathAdd list = " + str(len(path_add_running_list)))
     if len(path_add_running_list) > 0:
       with open(csv_output_file_path, mode='w') as csv_file:
         # writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
@@ -320,7 +319,7 @@ def pathadd(record: dict):
     path_add_row = {'file':filename, 'pathAdd':pathadd}
 
     if path_add_row not in path_add_list:
-      print('adding other dept: ' + str(pathadd))
+      # print('adding other dept: ' + str(pathadd))
       path_add_list.append(path_add_row)
 
   if len(path_add_list) > 0:
