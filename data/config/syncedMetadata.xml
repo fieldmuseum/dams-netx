@@ -2,13 +2,13 @@
 <metadatasync>
 
 
-        <!-- ===================== -->
-        <!-- XML Sync Task Example -->
-        <!-- ===================== -->
+    <!-- ===================== -->
+    <!-- XML Sync Task Example -->
+    <!-- ===================== -->
 
-        <sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="true">
-            <!-- example using a NetX Folder to identify the XML -->
-            <source name="XML Source" type="xml"
+    <sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="true">
+        <!-- example using a NetX Folder to identify the XML -->
+        <source name="XML Source" type="xml"
             category_id="103"
             container_type="elements"
             row_xpath="//data"
@@ -78,7 +78,7 @@
 
         </source>
 
-            <destination type="DAM">
+        <destination type="DAM">
             <records name="NetX Update" type="asset">
 
                 <link field="key_field" attribute="file" />
@@ -131,12 +131,12 @@
                 <!--map field="field_!!" attribute="" skip_null="true"/-->
 
             </records>
-            </destination>
+        </destination>
 
-        </sync>
+    </sync>
 
 
-<!-- AutoTask
+    <!-- AutoTask
 
     <task name="XML metadata sync">
         <matchCriteria type="and">
@@ -145,8 +145,7 @@
         <customJob className="com.netxposure.products.imageportal.module.metadata.sync.job.MetadataSyncJob" syncTaskNames="XML Metadata Sync"/>
     </task>
 
--->
-
+    -->
 
 </metadatasync>
 

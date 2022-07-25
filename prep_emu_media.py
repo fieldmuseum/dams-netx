@@ -13,8 +13,17 @@ import xml.etree.ElementTree as ET
 
 
 def main():
+  """
+  Outputs all records' data and copies files into dir for NetX
+  Input is an EMu XML export file, outputs to a CSV file with the
+  filename (identifier + file-extension) and filepath (prep_file).
+
+  :param file_path: filename of the XML file to parse
+  :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
+  """
+
   # Main function
-  xml_input_file_path = sys.argv[1]
+  xml_input_file_path = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
   csv_output_file_path = sys.argv[2]
   use_live_paths = sys.argv[3]
   
@@ -35,18 +44,11 @@ def main():
 
 
   # def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
-  """
-  Outputs all records' data and copies files into dir for NetX
-  Input is an EMu XML export file, outputs to a CSV file with the
-  identifier and prep_file.
-
-  :param file_path: filename of the XML file to parse
-  :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
-  """
 
   tree = ET.parse(xml_input_file_path)
   root = tree.getroot()
   records = []
+  path_add_running_list = []
 
   for xml_tuple in root:
     # New record
@@ -61,6 +63,15 @@ def main():
         sec_dept_tuple_elem = elem.find('tuple')
         sec_dept = sec_dept_tuple_elem.find('atom')
         record['SecDepartment'] = sec_dept.text
+
+        # Get secondary SecDepartment values for pathAdd
+        sec_dept_others = sec_dept_tuple_elem.findall('atom')
+        if len(sec_dept_others) > 1:
+          # secondary_dept_list = []
+          # for dept in sec_dept_others[1:]:
+          record['PathAddDepts'] = '|'.join(sec_dept_others[1:])
+          path_add_rows = pathadd(record)
+          path_add_running_list.append(path_add_rows)
         
     records.append(record)
   
@@ -130,12 +141,15 @@ def main():
     # Validate that the copied files actually exist where we say they
     # do in the prep_file value for the CSV file.
     validate_files_copied(csv_records, dest_prefix)
+    validate_files_copied(path_add_running_list, dest_prefix)
 
-    # FINAL STEP: Write records to CSV
+    # FINAL STEP: Write pathAdd rows to CSV
     with open(csv_output_file_path, mode='w') as csv_file:
-      writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
+      # writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
+      writer = csv.DictWriter(path_add_running_list, fieldnames=path_add_running_list[0].keys() )
       writer.writeheader()
-      writer.writerows(csv_records)
+      # writer.writerows(csv_records)
+      writer.writerows(path_add_running_list)
 
 
 def get_folder_hierarchy(department):
@@ -145,8 +159,8 @@ def get_folder_hierarchy(department):
   dept_csv = config('DEPARTMENT_CSV')
   dept_folders = []
   with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
-      reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-      for r in reader: dept_folders.append(r)
+    reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+    for r in reader: dept_folders.append(r)
 
   # make lists of level_1 & level_2 values
   # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
@@ -196,7 +210,10 @@ def validate_files_copied(csv_records, dest_prefix):
   Verify that prep_file values are valid, i.e. a file exists at the path.
   """
   for r in csv_records:
-    path = dest_prefix + r['pathMove'] + r['file']
+    if 'pathAdd' in r.keys():
+      path = dest_prefix + r['pathAdd'] + r['file']
+    else:  #  if 'pathMove' in r.keys():
+      path = dest_prefix + r['pathMove'] + r['file']
     if not os.path.exists(path):
       raise Exception(f'prep_file: {path} does not exist')
 
@@ -260,6 +277,38 @@ def pathmove(record):
   # pathmove = f'{status}/{record_type}/{department}'
   pathmove = f'{record_type}/{department}'
   return pathmove
+
+
+def pathadd(record: dict):
+  """
+  Creates the pathAdd value(s) for a record (folder path without filename)
+  e.g. 
+  [
+    {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
+    {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
+  ]
+
+  :param record: dict of the record data
+  :return: returns a list of dicts with an asset's pathAdd rows
+  """
+  record_type = 'Multimedia'
+  path_add_list = []
+  
+  filename = prep_file(record)
+
+  other_departments_orig = record['PathAddDepts']
+  other_departments = other_departments_orig.split("|")
+
+  if len(other_departments) > 0:
+    for dept in other_departments:
+      dept_folder = get_folder_hierarchy(dept)
+      pathadd = f'{record_type}/{dept_folder}'
+      path_add_row = {'file':filename, 'pathAdd':pathadd}
+  
+      if path_add_row not in path_add_list:
+        path_add_list.append(path_add_row)
+
+  return path_add_list
 
 
 def validate_records(records):
