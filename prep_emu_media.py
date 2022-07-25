@@ -66,6 +66,7 @@ def main():
 
         # Get secondary SecDepartment values for pathAdd
         sec_dept_others = sec_dept_tuple_elem.findall('atom')
+        print("# of Sec Depts = " + str(len(sec_dept_others)))
         if len(sec_dept_others) > 1:
           # secondary_dept_list = []
           # for dept in sec_dept_others[1:]:
@@ -144,12 +145,15 @@ def main():
     validate_files_copied(path_add_running_list, dest_prefix)
 
     # FINAL STEP: Write pathAdd rows to CSV
-    with open(csv_output_file_path, mode='w') as csv_file:
-      # writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
-      writer = csv.DictWriter(path_add_running_list, fieldnames=path_add_running_list[0].keys() )
-      writer.writeheader()
-      # writer.writerows(csv_records)
-      writer.writerows(path_add_running_list)
+    print("len for pathAdd list = " + str(len(path_add_running_list)))
+    if len(path_add_running_list) > 0:
+      with open(csv_output_file_path, mode='w') as csv_file:
+        # writer = csv.DictWriter(csv_file, fieldnames=csv_records[0].keys() )  # ['file', 'pathMove'])
+        field_names=path_add_running_list[0].keys()
+        writer = csv.DictWriter(path_add_running_list, fieldnames=field_names )
+        writer.writeheader()
+        # writer.writerows(csv_records)
+        writer.writerows(path_add_running_list)
 
 
 def get_folder_hierarchy(department):
@@ -301,7 +305,8 @@ def pathadd(record: dict):
 
   if len(other_departments) > 0:
     for dept in other_departments:
-      dept_folder = get_folder_hierarchy(dept)
+      print('adding other dept: ' + str(dept))
+      dept_folder = get_folder_hierarchy(dept.text)
       pathadd = f'{record_type}/{dept_folder}'
       path_add_row = {'file':filename, 'pathAdd':pathadd}
   
