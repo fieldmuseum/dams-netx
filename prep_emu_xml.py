@@ -178,7 +178,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
     # Output Prepped DSS-XML
-    print("# of dss_records is :  " + str(len(dss_records)))
+    print("# of dss_records is :  " + str(len(dss_records)) + " | output to: " + dest_prefix)
     if len(dss_records) > 1:
         if os.path.exists(dest_prefix) == False:
             os.makedirs(dest_prefix)
