@@ -131,7 +131,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
     # Load EMu records & fix xml-tags
-    print('main_xml_input is:  ' + main_xml_input)
+    print('main_xml_input is:  ' + str(glob.glob(main_xml_input)[0]))
     emu_tree = ET.ElementTree()
     emu_records_raw1 = emu_tree.parse(glob.glob(main_xml_input)[0])  # TODO - test/try to account for empty input-dir
     emu_records_raw2 = xml_tools.fix_emu_xml_tags(emu_records_raw1)
