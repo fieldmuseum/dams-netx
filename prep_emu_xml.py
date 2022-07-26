@@ -116,14 +116,14 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
     # Check if test or live paths should be used
     if use_live_paths == "LIVE":
-        full_prefix = config('ORIGIN_PATH_MEDIA')
+        full_prefix = config('ORIGIN_PATH_XML')
         dest_prefix = config('DESTIN_PATH_XML')
-    elif use_live_paths == "TEST": 
-        full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
+    else:  # if use_live_paths == "TEST": 
+        full_prefix = config('TEST_ORIGIN_PATH_XML')
         dest_prefix = config('TEST_DESTIN_PATH_XML')
-    else:
-        full_prefix = config('LOCAL_ORIGIN_PATH')
-        dest_prefix = config('XML_LOCAL_DESTIN_PATH')
+    # else:
+    #     full_prefix = config('LOCAL_ORIGIN_PATH')
+    #     dest_prefix = config('XML_LOCAL_DESTIN_PATH')
 
     main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
