@@ -46,7 +46,7 @@ def main():
 
   # def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
 
-  tree = ET.parse(main_xml_input)
+  tree = ET.parse(main_xml_input[0])
   root = tree.getroot()
   records = []
   path_add_running_list = []
