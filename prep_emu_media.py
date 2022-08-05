@@ -277,13 +277,14 @@ def pathmove(record):
   :return: returns a string of the pathMove value
   """
   # status = record['SecRecordStatus']
-  record_type = 'Multimedia'
+  # record_type = 'Multimedia'
   
   department_orig = record['SecDepartment']
   department = get_folder_hierarchy(department_orig)
 
   # pathmove = f'{status}/{record_type}/{department}'
-  pathmove = f'{record_type}/{department}'
+  # pathmove = f'{record_type}/{department}'  
+  pathmove = f'{department}'
   return pathmove
 
 
