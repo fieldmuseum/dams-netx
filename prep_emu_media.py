@@ -23,7 +23,7 @@ def main():
   """
 
   # Main function
-  xml_input_file_path = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
+  input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
   csv_output_file_path = sys.argv[2]
   use_live_paths = sys.argv[3]
   
@@ -37,6 +37,7 @@ def main():
   
   # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
+  main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
   #   c.run('hostname')
 
   #   # # Copy source-files to staging area & rename them
@@ -45,7 +46,7 @@ def main():
 
   # def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
 
-  tree = ET.parse(xml_input_file_path)
+  tree = ET.parse(main_xml_input)
   root = tree.getroot()
   records = []
   path_add_running_list = []
