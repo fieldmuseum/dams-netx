@@ -30,6 +30,7 @@ def main():
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
     full_prefix = config('ORIGIN_PATH_MEDIA')
+    full_xml_prefix = config('ORIGIN_PATH_XML')
     dest_prefix = config('DESTIN_PATH_MEDIA')
   else: 
     full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
@@ -37,7 +38,8 @@ def main():
   
   # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
-  main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
+  main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
+  print(main_xml_input)
   #   c.run('hostname')
 
   #   # # Copy source-files to staging area & rename them
