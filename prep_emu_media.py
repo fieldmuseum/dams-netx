@@ -5,7 +5,7 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
-import csv, os, re, sys
+import csv, glob, os, re, sys
 from decouple import config
 from exiftool import ExifToolHelper
 from fabric import Connection
@@ -46,7 +46,9 @@ def main():
 
   # def setup_prep_file(xml_input_file_path, csv_output_file_path, full_prefix, dest_prefix, c):
 
-  tree = ET.parse(main_xml_input[0])
+  # tree = ET.parse(main_xml_input[0])
+  tree = ET.parse(glob.glob(main_xml_input)[0])  # TODO - test/try to account for empty input-dir
+
   root = tree.getroot()
   records = []
   path_add_running_list = []
