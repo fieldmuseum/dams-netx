@@ -305,23 +305,14 @@ def pathadd(record: dict):
   :param record: dict of the record data
   :return: returns a list of dicts with an asset's pathAdd rows
   """
-  record_type = 'Multimedia'
   path_add_list = []
   
   filename = prep_file(record)
 
-  # other_departments_orig = record['PathAddDepts']
-  # other_departments = other_departments_orig.split("|")
-
-  # if len(other_departments) == 1:
-  #   return None
-
-  # elif len(other_departments) > 1:
-
   # record['PathAddDepts'] should be a list of ET.Element
   for dept in record['PathAddDepts']:
     dept_folder = get_folder_hierarchy(dept.text)
-    pathadd = f'{record_type}/{dept_folder}'
+    pathadd = f'{dept_folder}'
     path_add_row = {'file':filename, 'pathAdd':pathadd}
 
     if path_add_row not in path_add_list:
