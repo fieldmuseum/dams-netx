@@ -65,11 +65,7 @@ def main():
 
       # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
-        # sec_dept_tuple_elem = elem.find('tuple')
-
-        # sec_dept = sec_dept_tuple_elem.findall('atom')
-        # # if sec_dept.text is None:
-        
+                
         sec_dept_raw = elem.findall('tuple/atom')
         sec_dept_all = []
         print(sec_dept_raw)
@@ -81,12 +77,7 @@ def main():
 
         record['SecDepartment'] = sec_dept_all[0]
 
-
-        # record['SecDepartment'] = sec_dept.text
-
         # Get secondary SecDepartment values for pathAdd
-        # sec_dept_others = elem.findall('tuple/atom')
-        # if len(sec_dept_others) > 1:
         if len(sec_dept_all) > 1:
           record['PathAddDepts'] = sec_dept_all
         else:

@@ -176,3 +176,4 @@ examples/media/*.jpg
 tests/
 *.xml
 !data/config/*.xml
+!data/*.xml

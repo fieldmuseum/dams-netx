@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    integer         irn
+    text long       MulTitle
+    text long       MulDescription
+    table           DetSubject_tab
+      text short      DetSubject
+    end
+    tuple           DetMediaRightsRef
+      integer         irn
+      text long       SummaryData
+      text short      RigType
+      text short      RigOtherNumber
+      table           RigOwnershipRef_tab
+        text long       SummaryData
+      end
+    end
+    table           Creator
+      text long       SummaryData
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text short      MulMultimediaCreatorRole
+    end
+    table           Supplementary
+      text short      SupIdentifier
+      table           SupUsage_nesttab
+        text short      SupUsage
+      end
+    end
+    table           SecDepartment_tab
+      text short      SecDepartment
+    end
+    tuple           RelParentMediaRef
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text long       SummaryData
+    end
+    text long       MulIdentifier
+    text short      ChaMd5Sum
+    text short      MulMimeType
+    text short      MulMimeFormat
+    text short      MulDocumentType
+    tuple           DetPublisherRef
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetContributorRole_tab
+      text short      DetContributorRole
+    end
+    table           DetContributorRef_tab
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetResourceDetailsDate0
+      date            DetResourceDetailsDate
+    end
+    table           DetResourceDetailsDescription_tab
+      text long       DetResourceDetailsDescription
+    end
+    text long       DetResourceType
+    text long       DetCoverage
+    text long       DetSource
+    text long       ChaMediaForm
+    integer         ChaFileSize
+    text short      ChaImageResolution
+    text short      ChaImageHeight
+    text short      ChaImageWidth
+    text short      ChaImageColorDepth
+    text short      ChaVideoFilmLength
+    table           SupMimeType_tab
+      text short      SupMimeType
+    end
+    table           SupMimeFormat_tab
+      text short      SupMimeFormat
+    end
+    table           SupFileSize_tab
+      integer         SupFileSize
+    end
+    table           SupMD5Checksum_tab
+      text short      SupMD5Checksum
+    end
+    table           RelRelatedMediaRef_tab
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           RelRelationship_tab
+      text short      RelRelationship
+    end
+    date            AdmDateInserted
+    date            AdmDateModified
+    text short      AdmInsertedBy
+    text short      AdmModifiedBy
+    text short      AudAccessURI
+    text long       AudACDescription
+    text short      AudAssociatedObservation
+    text short      AudAssociatedSpecimen
+    text short      AudCaptureDevice
+    text short      AudCitation
+    text short      AudDerivedFrom
+    text short      AudFundingAttribution
+    text short      AudLifeStage
+    text long       AudNumbers
+    text long       AudRelatedGeography
+    text long       AudRelatedResourceID
+    text short      AudSex
+    text short      AudSubjectOrientation
+    table           AudSubjectPart_tab
+      text short      AudSubjectPart
+    end
+    text long       AudTaxonCoverage
+    text long       AudTemporalCoverage
+    text long       AudVernacularName
+    text short      SecRecordStatus
+    text long       MulIdentifier
+    text short      AdmPublishWebNoPassword
+    text short      AdmPublishWebPassword
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 - bad char on line 222 (AudNumbers) col 313-->
+  <tuple>
+    <atom name="AudIdentifier">b21e287d-d6e2-4959-9493-7c7f3d6ed50e</atom>
+    <atom name="irn">116231</atom>
+    <atom name="MulTitle">Hall 6 Case 20 "Household Equipment"</atom>
+    <atom name="MulDescription">Case 20 Installed May</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">A93589.jpg</atom>
+    <atom name="ChaMd5Sum">d9534a74a4d60a8693ce977c432b7d40</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1952-05-</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">8x10 in. b/w negative</atom>
+    <atom name="ChaFileSize">1139368</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1325</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2008-05-23</atom>
+    <atom name="AdmDateModified">2022-06-02</atom>
+    <atom name="AdmInsertedBy">Joanna McCaffrey</atom>
+    <atom name="AdmModifiedBy">Elana Carpinone</atom>
+    <atom name="AudAccessURI"></atom>
+    <atom name="AudACDescription">Case 20 Installed</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">bfa367fd-c859-46c7-abd7-9a76243fc8cf</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/b21e287d-d6e2-4959-9493-7c7f3d6ed50e (accessed on 02 Jun 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">69819 | 69820 | 69938.nosub[1] | 69940.nosub[1] | 67324.nosub[1] | 67610 | 67610.2 | 67610.1 | 69626.nosub[1] | 69627.nosub[1] | 69505.nosub[1] | 69572.nosub[1] | 115558.nosub[1] | 61081.nosub[0] | 61059.nosub[1] | 67809.1 | 60218 | 60218.1 | 60218.2 | 67932.nosub[1] | 69820.2 | 69767.nosub[1] | 69819.1 | 69819.2 | 69820.1 | 115525.nosub[1] | 61259.nosub[1] | 61281.nosub[1] | 61315.nosub[1] | 61404.nosub[1] | 58074.nosub[1] | 58204.nosub[1] | 69562 | 69562.nosub[1] | 69562.nosub[2] | 15948.nosub[1]</atom>
+    <atom name="AudRelatedGeography">United States of America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">utensils</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">A93589.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">No</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 2 - good -->
+  <tuple>
+    <atom name="AudIdentifier">b975e3db-7e9c-4a4a-890c-0df3edf31306</atom>
+    <atom name="irn">112644</atom>
+    <atom name="MulTitle">Case 20 "Household Equipment"</atom>
+    <atom name="MulDescription">Case 20 Installed May</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">A93590.jpg</atom>
+    <atom name="ChaMd5Sum">6bfca73e91fb7924739ab955a4c89431</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1952-05-</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">8x10 in. b/w negative</atom>
+    <atom name="ChaFileSize">1061487</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1893</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2008-05-23</atom>
+    <atom name="AdmDateModified">2022-06-02</atom>
+    <atom name="AdmInsertedBy">Joanna McCaffrey</atom>
+    <atom name="AdmModifiedBy">Elana Carpinone</atom>
+    <atom name="AudAccessURI"></atom>
+    <atom name="AudACDescription">FCase 20 Installed May</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">bfa367fd-c859-46c7-abd7-9a76243fc8cf</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/b975e3db-7e9c-4a4a-890c-0df3edf31306 (accessed on 02 Jun 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">69819 | 69820 | 69938.nosub[1] | 69940.nosub[1] | 67324.nosub[1] | 67610 | 67610.2 | 67610.1 | 69626.nosub[1] | 69627.nosub[1] | 69505.nosub[1] | 69572.nosub[1] | 115558.nosub[1] | 61081.nosub[0] | 61059.nosub[1] | 67809.1 | 60218 | 60218.1 | 60218.2 | 67932.nosub[1] | 69820.2 | 69767.nosub[1] | 69819.1 | 69819.2 | 69820.1 | 115525.nosub[1] | 61259.nosub[1] | 61281.nosub[1] | 61315.nosub[1] | 61404.nosub[1] | 58074.nosub[1] | 58204.nosub[1] | 69562 | 69562.nosub[1] | 69562.nosub[2] | 15948.nosub[1]</atom>
+    <atom name="AudRelatedGeography">United States of America | Wyoming</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">instruments | utensils</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">A93590.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">No</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+</table>
