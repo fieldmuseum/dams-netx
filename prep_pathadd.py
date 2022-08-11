@@ -1,8 +1,5 @@
 """
-Rename files and copy them to NetX Multimedia folder-structure
-
-CSV parsing and writing:
-https://realpython.com/python-csv/
+Setup the NetX pathAdd CSV
 """
 
 import csv, glob, os, re, sys
@@ -29,15 +26,9 @@ def main():
   
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
-    full_prefix = config('ORIGIN_PATH_MEDIA')
     full_xml_prefix = config('ORIGIN_PATH_XML')
-    dest_prefix = config('DESTIN_PATH_MEDIA')
   else: 
-    full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
-    dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
-  
-  # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
   main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
   print(main_xml_input)
@@ -61,8 +52,10 @@ def main():
                 
         sec_dept_raw = elem.findall('tuple/atom')
         sec_dept_all = []
+        print(sec_dept_raw)
         for dept in sec_dept_raw:
           if dept.text is not None:
+            print('dept.text =  ' + str(dept.text))
             if len(dept.text) > 0 and dept.text not in sec_dept_all:
               sec_dept_all.append(dept.text)
 
@@ -80,7 +73,8 @@ def main():
   invalid_records = validate_records(records)
   if invalid_records: output_error_log(invalid_records)
 
-  # Set up prep_file values  
+  # Set up prep_file values
+  
   path_add_running_list = []  
   records_prep_file = []
 
@@ -93,47 +87,10 @@ def main():
     r['pathMove'] = pathmove(record)
     records_prep_file.append(r)
 
-    if record['PathAddDepts'] is not None: 
-      path_add_rows = pathadd(record)
+    if record['PathAddDepts'] is not None:  # len(sec_dept_others) > 1:
+      path_add_rows = pathadd(record)  # pathadd(record)
       for row in path_add_rows:
         path_add_running_list.append(row)
-
-  # Copy all files to correct location, this should happen before we create
-  # the CSV to confirm that the files are actually there.
-  # If this step fails, raise an exception so the CSV isn't created.
-  # copy_files(records_prep_file, full_prefix, dest_prefix, c)
-
-  with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
-  
-    c.run('hostname')
-
-    # Copy source-files to staging area & Rename them
-
-    for r in records_prep_file:
-      dirs = irn_dir(r['irn'])
-
-      full_path = full_prefix + dirs + r['MulIdentifier']
-      dest_path = dest_prefix + r['pathMove'] + r['prep_file']
-
-      # # copy file to the new location for prep_file
-      if not os.path.exists(dest_path):
-        os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
-      
-      try:
-        c.get(remote=full_path, local=dest_path, preserve_mode=False)
-        print(f'Full origin path = {full_path} | Destination path = {dest_path}')
-      except Exception as err:
-        print(f'An error occurred trying to copy media from {full_path}: {err}')
-      
-      # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
-      if os.path.isfile(dest_path):
-        if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-          with ExifToolHelper() as exif:
-            exif.set_tags(
-              dest_path,
-              tags = {'Identifier':r['AudIdentifier']},
-              params=["-P", "-overwrite_original"]
-            )
 
 
     # Set up fields for CSV
@@ -146,9 +103,6 @@ def main():
       r['Identifier'] = record['AudIdentifier']
       csv_records.append(r)
 
-    # Validate that the copied files actually exist where we say they
-    # do in the prep_file value for the CSV file.
-    validate_files_copied(csv_records, dest_prefix)
 
     # FINAL STEP: Write pathAdd rows to CSV
     # print("len for pathAdd list = " + str(len(path_add_running_list)))
@@ -186,33 +140,6 @@ def get_folder_hierarchy(department):
   else: return department + '/'
 
 
-# def copy_files(records, full_prefix, dest_prefix, c):
-#   """
-#   Given a list of records, copy all of the files to the new location required
-#   for the prep_file value that will end up in the CSV file.
-#   """
-#   for r in records:
-#     dirs = irn_dir(r['irn'])
-
-#     full_path = full_prefix + dirs + r['MulIdentifier']
-#     dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
-
-#     # # copy file to the new location for prep_file
-#     if not os.path.exists(dest_path):
-#       os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
-    
-#     try:
-#       # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
-#       c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
-#       print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
-#     except Exception as err:
-#       print(f'An error occurred trying to copy media from {full_path}: {err}')
-
-#     # if not os.path.exists(dest_path): 
-#     #   shutil.copy2(full_path, dest_path)
-
-
-
 def validate_files_copied(csv_records, dest_prefix):
   """
   Verify that prep_file values are valid, i.e. a file exists at the path.
@@ -242,7 +169,7 @@ def irn_dir(irn):
     first_dir = ''.join(digits)
   
   # If irn <= 3 digits, dir format is:  0/001 or 0/012 or 0/123
-  else: 
+  else:  # elif len(digits) <= 3:
     first_dir = "0"
     zero_count = 3 - len(digits)
     last_dir = zero_count * '0' + ''.join(digits)
@@ -297,10 +224,9 @@ def pathadd(record: dict):
   
   filename = prep_file(record)
 
-  # record['PathAddDepts'] should be a list of ET.Element
   for dept in record['PathAddDepts']:
     if dept is not None:
-      dept_folder = get_folder_hierarchy(dept)
+      dept_folder = get_folder_hierarchy(dept) 
       pathadd = f'{dept_folder}'
       path_add_row = {'file':filename, 'pathAdd':pathadd}
 
