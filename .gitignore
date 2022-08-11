@@ -175,5 +175,5 @@ cython_debug/
 examples/media/*.jpg
 tests/
 *.xml
-!data/config/*.xml
 !data/*.xml
+!data/*/*.xml
