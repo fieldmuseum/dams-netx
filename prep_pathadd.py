@@ -52,10 +52,8 @@ def main():
                 
         sec_dept_raw = elem.findall('tuple/atom')
         sec_dept_all = []
-        print(sec_dept_raw)
         for dept in sec_dept_raw:
           if dept.text is not None:
-            print('dept.text =  ' + str(dept.text))
             if len(dept.text) > 0 and dept.text not in sec_dept_all:
               sec_dept_all.append(dept.text)
 
