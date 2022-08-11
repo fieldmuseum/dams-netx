@@ -1,0 +1,1419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    integer         irn
+    text long       MulTitle
+    text long       MulDescription
+    table           DetSubject_tab
+      text short      DetSubject
+    end
+    tuple           DetMediaRightsRef
+      integer         irn
+      text long       SummaryData
+      text short      RigType
+      text short      RigOtherNumber
+      table           RigOwnershipRef_tab
+        text long       SummaryData
+      end
+    end
+    table           Creator
+      text long       SummaryData
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text short      MulMultimediaCreatorRole
+    end
+    table           Supplementary
+      text short      SupIdentifier
+      table           SupUsage_nesttab
+        text short      SupUsage
+      end
+    end
+    table           SecDepartment_tab
+      text short      SecDepartment
+    end
+    tuple           RelParentMediaRef
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text long       SummaryData
+    end
+    text long       MulIdentifier
+    text short      ChaMd5Sum
+    text short      MulMimeType
+    text short      MulMimeFormat
+    text short      MulDocumentType
+    tuple           DetPublisherRef
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetContributorRole_tab
+      text short      DetContributorRole
+    end
+    table           DetContributorRef_tab
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           DetResourceDetailsDate0
+      date            DetResourceDetailsDate
+    end
+    table           DetResourceDetailsDescription_tab
+      text long       DetResourceDetailsDescription
+    end
+    text long       DetResourceType
+    text long       DetCoverage
+    text long       DetSource
+    text long       ChaMediaForm
+    integer         ChaFileSize
+    text short      ChaImageResolution
+    text short      ChaImageHeight
+    text short      ChaImageWidth
+    text short      ChaImageColorDepth
+    text short      ChaVideoFilmLength
+    table           SupMimeType_tab
+      text short      SupMimeType
+    end
+    table           SupMimeFormat_tab
+      text short      SupMimeFormat
+    end
+    table           SupFileSize_tab
+      integer         SupFileSize
+    end
+    table           SupMD5Checksum_tab
+      text short      SupMD5Checksum
+    end
+    table           RelRelatedMediaRef_tab
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           RelRelationship_tab
+      text short      RelRelationship
+    end
+    date            AdmDateInserted
+    date            AdmDateModified
+    text short      AdmInsertedBy
+    text short      AdmModifiedBy
+    text short      AudAccessURI
+    text long       AudACDescription
+    text short      AudAssociatedObservation
+    text short      AudAssociatedSpecimen
+    text short      AudCaptureDevice
+    text short      AudCitation
+    text short      AudDerivedFrom
+    text short      AudFundingAttribution
+    text short      AudLifeStage
+    text long       AudNumbers
+    text long       AudRelatedGeography
+    text long       AudRelatedResourceID
+    text short      AudSex
+    text short      AudSubjectOrientation
+    table           AudSubjectPart_tab
+      text short      AudSubjectPart
+    end
+    text long       AudTaxonCoverage
+    text long       AudTemporalCoverage
+    text long       AudVernacularName
+    text short      SecRecordStatus
+    text long       MulIdentifier
+    text short      AdmPublishWebNoPassword
+    text short      AdmPublishWebPassword
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="AudIdentifier">25be5308-0a98-4328-b7eb-0201b6a502e9</atom>
+    <atom name="irn">636911</atom>
+    <atom name="MulTitle">124105 Anatrytone logan d IN</atom>
+    <atom name="MulDescription">124105 Anatrytone logan d IN</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Lepidoptera</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Hesperiidae</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Field Museum of Natural History - Department of Zoology - Division of Insects</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">156724</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+      <tuple>
+        <atom name="SummaryData">GDI 2013-2015</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">177101</atom>
+        <atom name="MulMultimediaCreatorRole">Funded By</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">124105_Anatrytone_logan_d_IN.dng</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Insects</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="ChaMd5Sum">c08f1b80e63fa48fdae5e1a8eb20c815</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">300995</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2013</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Production</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage">GDI 2013-2015 Chicagoland Butterflies</atom>
+    <atom name="DetSource">Science and Education, Insect Collection</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1161747</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1001</atom>
+    <atom name="ChaImageWidth">1500</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">157194972</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">8938c6a64968b479fc9d611f3c82f07e</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2014-04-29</atom>
+    <atom name="AdmDateModified">2021-04-23</atom>
+    <atom name="AdmInsertedBy">Allie Stone</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/636/911/124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="AudACDescription">124105 Anatrytone logan d IN</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">3421cca3-6733-4346-8405-174cf3ca9aae</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: Field Museum of Natural History, GDI 2013-2015. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/25be5308-0a98-4328-b7eb-0201b6a502e9 (accessed on 23 Apr 2021</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage">adult unsexed</atom>
+    <atom name="AudNumbers">FMNHINS 0000 124 105</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex">adult unsexed</atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Anatrytone logan (Edwards, 1863)</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="AudIdentifier">5587c45a-30a5-43ad-a77c-c943b370e525</atom>
+    <atom name="irn">1478303</atom>
+    <atom name="MulTitle">86219_lat_FMNH_FZ</atom>
+    <atom name="MulDescription">86219:Notropis atherinoides:30::::Cyprinidae:237:JCB-77-29:North America:U.S.A.</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fish photo</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Great Lakes TCN</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">D. M. Le : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">7046</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">86219_lat_FMNH_FZ.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Fishes</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">86219_lat_FMNH_FZ.jpg</atom>
+    <atom name="ChaMd5Sum">ff1752a9ff5194f7a0740bcd5505906b</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole"></atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funded By</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177724</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">150485</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2016-10-19</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Field Museum Division of Fishes</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">690846</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1500</atom>
+    <atom name="ChaImageWidth">3239</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">22816648</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">1f2da63ad0e0843e01d864c55b52f49d</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2016-11-29</atom>
+    <atom name="AdmDateModified">2021-04-12</atom>
+    <atom name="AdmInsertedBy">Le, Daniel</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1478/303/86219_lat_FMNH_FZ.jpg</atom>
+    <atom name="AudACDescription">86219:Notropis atherinoides:30::::Cyprinidae:237:JCB-77-29:North America:U.S.A.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">b28cbb76-2453-48e6-8990-207c0ee8dc43</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: D. M. Le. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/5587c45a-30a5-43ad-a77c-c943b370e525 (accessed on 12 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">86219</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Notropis atherinoides</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">86219_lat_FMNH_FZ.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="AudIdentifier">583d49be-3d00-4d89-8914-10f9bc22a3a6</atom>
+    <atom name="irn">1478381</atom>
+    <atom name="MulTitle">87772_lat_FMNH_FZ_o</atom>
+    <atom name="MulDescription">87772:Notropis atherinoides:96::::Cyprinidae:237:Z87772:North America:U.S.A.</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fish photo</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Great Lakes TCN</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">D. M. Le : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">7046</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">87772_lat_FMNH_FZ_o.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Fishes</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">87772_lat_FMNH_FZ_o.jpg</atom>
+    <atom name="ChaMd5Sum">742180328d678cf2801914a6562a7445</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole"></atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Funded By</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177724</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">150485</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2016-10-19</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Field Museum Division of Fishes</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">587262</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1500</atom>
+    <atom name="ChaImageWidth">3239</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">22539548</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">b45ea088c3c6bc02aa03a148146e5f16</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2016-11-29</atom>
+    <atom name="AdmDateModified">2021-04-12</atom>
+    <atom name="AdmInsertedBy">Le, Daniel</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1478/381/87772_lat_FMNH_FZ_o.jpg</atom>
+    <atom name="AudACDescription">87772:Notropis atherinoides:96::::Cyprinidae:237:Z87772:North America:U.S.A.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">f6bc1239-16e5-4974-8f9c-8a0f763587cb</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: D. M. Le. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/583d49be-3d00-4d89-8914-10f9bc22a3a6 (accessed on 12 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">87772</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Tazewell, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Notropis atherinoides</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">87772_lat_FMNH_FZ_o.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="AudIdentifier">ef7e6415-5202-4b3e-8d3d-4cb57aa413e2</atom>
+    <atom name="irn">1239145</atom>
+    <atom name="MulTitle">V0374058F</atom>
+    <atom name="MulDescription">Carex spicata Huds., U.S.A., J. R. Churchill 250, F</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Seed Plants</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">vascular plant</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Dried specimen</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">herbarium sheet</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+      <tuple>
+        <atom name="SummaryData">National Science Foundation</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+        <atom name="MulMultimediaCreatorRole">Funded By</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">V0374058F.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Botany</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">V0374058F.jpg</atom>
+    <atom name="ChaMd5Sum">492ea981b9fde07ceafa2a9d1af92376</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177724</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2015-11-11</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Botany Department, Searle herbarium</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">554921</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">2250</atom>
+    <atom name="ChaImageWidth">1500</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">23610072</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">ae8021764c6e3a785544a91435635650</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-11-19</atom>
+    <atom name="AdmDateModified">2021-04-08</atom>
+    <atom name="AdmInsertedBy">Le, Daniel</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1239/145/V0374058F.jpg</atom>
+    <atom name="AudACDescription">Carex spicata Huds., U.S.A., J. R. Churchill 250, F</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">a4847889-d21e-4820-820a-20aa30c66f6e</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: National Science Foundation. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/ef7e6415-5202-4b3e-8d3d-4cb57aa413e2 (accessed on 08 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">205132</atom>
+    <atom name="AudRelatedGeography">United States of America, Massachusetts, Suffolk, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Carex spicata Huds.</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">V0374058F.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="AudIdentifier">95529b64-090f-41e5-a03e-82e6f16f1b9f</atom>
+    <atom name="irn">1112036</atom>
+    <atom name="MulTitle">C0610599F</atom>
+    <atom name="MulDescription">Ferns From Past to Present, funded by the Institute of Museum and Library Services (Award No. MA-30-13-0544-13).</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Ferns</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+      <tuple>
+        <atom name="SummaryData">IMLS Ferns From Past to Present</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">181073</atom>
+        <atom name="MulMultimediaCreatorRole">Funded By</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">C0610599F.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Botany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Technology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">C0610599F.jpg</atom>
+    <atom name="ChaMd5Sum">ccf00baae84ab757f7b98852830972c6</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Botany Department</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">581512</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">2248</atom>
+    <atom name="ChaImageWidth">1500</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">43952126</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">dbd43e39de106d96b48bc0bda3ca0c5e</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-08-17</atom>
+    <atom name="AdmDateModified">2021-04-09</atom>
+    <atom name="AdmInsertedBy">cmcgarrity</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1112/036/C0610599F.jpg</atom>
+    <atom name="AudACDescription">Ferns From Past to Present, funded by the Institute of Museum and Library Services (Award No. MA-30-13-0544-13).</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">a2829fa0-07b2-4082-a21f-63e20468790d</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: IMLS Ferns From Past to Present. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/95529b64-090f-41e5-a03e-82e6f16f1b9f (accessed on 09 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography">United States of America, Pennsylvania, Wayne, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Botrychium lanceolatum (S. G. Gmel.) Ångstr.</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">C0610599F.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="AudIdentifier">fe6d4500-a7de-4fd3-b1b8-6ee0c84e5083</atom>
+    <atom name="irn">387414</atom>
+    <atom name="MulTitle">PSU_MPC_284</atom>
+    <atom name="MulDescription">PSU_MPC_284, Rosales, Rosaceae, Aruncus vulgaris, Tricolpoidate, Pc3, other, TR2_3035</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">fossil</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PSU_MPC_284.jpg</atom>
+    <atom name="ChaMd5Sum">2dd9d724d3d02d448d632df5f357afe2</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <atom name="DetResourceType">Image</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Geology Department, Paleobotany Collections</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1311543</atom>
+    <atom name="ChaImageResolution">600</atom>
+    <atom name="ChaImageHeight">2966</atom>
+    <atom name="ChaImageWidth">4782</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2012-08-06</atom>
+    <atom name="AdmDateModified">2021-04-21</atom>
+    <atom name="AdmInsertedBy">Robert North</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/387/414/PSU_MPC_284.jpg</atom>
+    <atom name="AudACDescription">PSU_MPC_284, Rosales, Rosaceae, Aruncus vulgaris, Tricolpoidate, Pc3, other, TR2_3035</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/fe6d4500-a7de-4fd3-b1b8-6ee0c84e5083 (accessed on 21 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">PSU_MPC_284.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="AudIdentifier">c3c23418-a520-4b13-bddf-9e23cba61b87</atom>
+    <atom name="irn">2056752</atom>
+    <atom name="MulTitle">PP38574_image_1</atom>
+    <atom name="MulDescription">PP 38574 [HS, M] Annularia radiata, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">Fossil Ferns</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">N. Evans : Field Museum of Natural History - Botany Department</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">207094</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">PP38574_image_1.dng</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Paleobotany</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Geology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">PP38574_image_1.jpg</atom>
+    <atom name="ChaMd5Sum">2bcadea51a65b31b4e0695b6d9a01055</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="DetContributorRole_tab">
+      <tuple>
+        <atom name="DetContributorRole">Funded By</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="DetContributorRef_tab">
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">177718</atom>
+      </tuple>
+      <tuple>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">64</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2019-12-06</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource">Botany Department, Searle herbarium</atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">569054</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">1557</atom>
+    <atom name="ChaImageWidth">1500</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">AdobeRawDNG</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">22459030</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">0b1f93f4587418d54f46dfd90d4dc49a</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2019-12-18</atom>
+    <atom name="AdmDateModified">2021-04-12</atom>
+    <atom name="AdmInsertedBy">Le, Daniel</atom>
+    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2056/752/PP38574_image_1.jpg</atom>
+    <atom name="AudACDescription">PP 38574 [HS, M] Annularia radiata, Moscovian / Desmoinesian, Francis Creek Shale Member, United States of America, Illinois, Mazon Creek Region</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen">6cee8e81-8466-4aef-a2b2-ec9b422b0334</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: N. Evans. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/c3c23418-a520-4b13-bddf-9e23cba61b87 (accessed on 26 Apr 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">PP 38574</atom>
+    <atom name="AudRelatedGeography">United States of America, Illinois, Will, North America</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Annularia radiata (Brongniart) Sternberg</atom>
+    <atom name="AudTemporalCoverage">Pennsylvanian, Middle Pennsylvanian, Moscovian / Desmoinesian (Westphalian D). ICS/IUGS | Carbondale Formation, Francis Creek Shale Member</atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">PP38574_image_1.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="AudIdentifier">b0fccd89-52c3-4910-9657-7a52aebdc105</atom>
+    <atom name="irn">104067</atom>
+    <atom name="MulTitle">121488 marble Buddha head</atom>
+    <atom name="MulDescription">Brownish marble head of Yu Huang, Taoist god of heaven, in style of bodhisattva or Yuan-shi Tien-tsun. Front view</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Anthropology</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA39205.jpg</atom>
+    <atom name="ChaMd5Sum">13316fcac15c2ec868bea90f97f43175</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1914</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Circa</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">56912</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">614</atom>
+    <atom name="ChaImageWidth">422</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2008-05-23</atom>
+    <atom name="AdmDateModified">2021-06-08</atom>
+    <atom name="AdmInsertedBy">Joanna McCaffrey</atom>
+    <atom name="AdmModifiedBy">Elana Carpinone</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/104/067/CSA39205.jpg</atom>
+    <atom name="AudACDescription">Brownish marble head of Yu Huang, Taoist god of heaven, in style of bodhisattva or Yuan-shi Tien-tsun. Front view</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/b0fccd89-52c3-4910-9657-7a52aebdc105 (accessed on 08 Jun 2021)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers">121488 | 121488.nosub[1]</atom>
+    <atom name="AudRelatedGeography">China, Shaanxi, Asia</atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">54B3503: China: Ch'in-modern: sculpture heads: stone</atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA39205.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">No</atom>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="AudIdentifier">a0642d53-5b36-4a70-b101-09a8c2232456</atom>
+    <atom name="irn">2053546</atom>
+    <atom name="MulTitle">Women in Science</atom>
+    <atom name="MulDescription">Women's Board Women in Science Luncheon. Reception in the West Atrium, lecture in James Simpson Theater with Diana Rauner, Luncheon in Stanley Field Hall.</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Karen Bean : Field Museum of Natural History - Library</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">174634</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">GN92121_241d.jpg</atom>
+    <atom name="ChaMd5Sum">1b9e166d94117d6f7b60ef6efc94b348</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">2015-05-12</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">1300916</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">2803</atom>
+    <atom name="ChaImageWidth">4200</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2019-12-10</atom>
+    <atom name="AdmDateModified">2022-08-11</atom>
+    <atom name="AdmInsertedBy">Cummings, Nina</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2053/546/GN92121_241d.jpg</atom>
+    <atom name="AudACDescription">Women's Board Women in Science Luncheon. Reception in the West Atrium, lecture in James Simpson Theater with Diana Rauner, Luncheon in Stanley Field Hall.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: K. Bean. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/a0642d53-5b36-4a70-b101-09a8c2232456 (accessed on 11 Aug 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">GN92121_241d.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="AudIdentifier">6c383cfc-e316-4b02-a858-2dcdf9136b08</atom>
+    <atom name="irn">2363841</atom>
+    <atom name="MulTitle">Zoology Photo Album Z4</atom>
+    <atom name="MulDescription">Copy of 80 pages of photographs taken by Carl Akeley on the 1906 British East African expedition. Part of Photo Archives album Z4.</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Nina Cummings : Field Museum of Natural History - Library</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">405878</atom>
+        <atom name="MulMultimediaCreatorRole">Compiler</atom>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Zoology</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Mammals</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">Z4_CEA_1906_expedition.pdf</atom>
+    <atom name="ChaMd5Sum">a3538d5a5ee04b7f553891c5e9b82c8e</atom>
+    <atom name="MulMimeType">application</atom>
+    <atom name="MulMimeFormat">pdf</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="DetResourceDetailsDate0">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1907</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetResourceDetailsDate">2022</atom>
+      </tuple>
+    </table>
+    <table name="DetResourceDetailsDescription_tab">
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetResourceDetailsDescription">Archived</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">Text | Document</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">46398135</atom>
+    <atom name="ChaImageResolution">72</atom>
+    <atom name="ChaImageHeight">819</atom>
+    <atom name="ChaImageWidth">1047</atom>
+    <atom name="ChaImageColorDepth">25</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <atom name="AdmDateInserted">2022-07-01</atom>
+    <atom name="AdmDateModified">2022-07-01</atom>
+    <atom name="AdmInsertedBy">Cummings, Nina</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/2363/841/Z4_CEA_1906_expedition.pdf</atom>
+    <atom name="AudACDescription">Copy of 80 pages of photographs taken by Carl Akeley on the 1906 British East African expedition. Part of Photo Archives album Z4.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: N. Cummings. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/6c383cfc-e316-4b02-a858-2dcdf9136b08 (accessed on 11 Jul 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">Z4_CEA_1906_expedition.pdf</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+  </tuple>
+</table>

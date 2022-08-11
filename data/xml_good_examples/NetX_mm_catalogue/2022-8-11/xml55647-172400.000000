@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    text long       MulIdentifier
+    integer         irn
+    table           MulMultiMediaRef_tab
+      text short      CatDepartment
+      text short      CatCatalog
+    end
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="AudIdentifier">25be5308-0a98-4328-b7eb-0201b6a502e9</atom>
+    <atom name="MulIdentifier">124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="irn">636911</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Zoology</atom>
+        <atom name="CatCatalog">Insects</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="AudIdentifier">5587c45a-30a5-43ad-a77c-c943b370e525</atom>
+    <atom name="MulIdentifier">86219_lat_FMNH_FZ.jpg</atom>
+    <atom name="irn">1478303</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Zoology</atom>
+        <atom name="CatCatalog">Fishes</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="AudIdentifier">583d49be-3d00-4d89-8914-10f9bc22a3a6</atom>
+    <atom name="MulIdentifier">87772_lat_FMNH_FZ_o.jpg</atom>
+    <atom name="irn">1478381</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Zoology</atom>
+        <atom name="CatCatalog">Fishes</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="AudIdentifier">ef7e6415-5202-4b3e-8d3d-4cb57aa413e2</atom>
+    <atom name="MulIdentifier">V0374058F.jpg</atom>
+    <atom name="irn">1239145</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Botany</atom>
+        <atom name="CatCatalog">Botany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="AudIdentifier">95529b64-090f-41e5-a03e-82e6f16f1b9f</atom>
+    <atom name="MulIdentifier">C0610599F.jpg</atom>
+    <atom name="irn">1112036</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Botany</atom>
+        <atom name="CatCatalog">Botany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="AudIdentifier">fe6d4500-a7de-4fd3-b1b8-6ee0c84e5083</atom>
+    <atom name="MulIdentifier">PSU_MPC_284.jpg</atom>
+    <atom name="irn">387414</atom>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="AudIdentifier">c3c23418-a520-4b13-bddf-9e23cba61b87</atom>
+    <atom name="MulIdentifier">PP38574_image_1.jpg</atom>
+    <atom name="irn">2056752</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="AudIdentifier">b0fccd89-52c3-4910-9657-7a52aebdc105</atom>
+    <atom name="MulIdentifier">CSA39205.jpg</atom>
+    <atom name="irn">104067</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="AudIdentifier">a0642d53-5b36-4a70-b101-09a8c2232456</atom>
+    <atom name="MulIdentifier">GN92121_241d.jpg</atom>
+    <atom name="irn">2053546</atom>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="AudIdentifier">6c383cfc-e316-4b02-a858-2dcdf9136b08</atom>
+    <atom name="MulIdentifier">Z4_CEA_1906_expedition.pdf</atom>
+    <atom name="irn">2363841</atom>
+  </tuple>
+</table>
