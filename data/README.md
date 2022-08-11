@@ -2,14 +2,15 @@
 
 ## EMu data for determining NetX folder
 
-### xmldata_Events.xml
-An **eevents** export to find the right NetX "Events/[Event-Dept]/[Event-Title] with:
-1. Directly attached Multimedia via eevents.MulMultiMediaRef_tab
-2. Indirectly attached Multimedia via eevents.EveAssociatedRecordsRef_tab
-    - could filter for Keys (MM irn's) where GroupType="Static" 
-    - ...then retrieve those Keys' (MM irns') SecRecordStatus + SecDepartment_tab values
+### xml_good_examples
+These consist of the full folder structure for 3 EMu XML exports on 2022-8-11.
+Each XML files includes 10 corresponding multimedia records.
 
-### xmldata_MMCat.xml
-An **emultimedia** export with:
-1. Multimedia data to find the right NetX "Multimedia/[Dept]" folder/s
-2. Reverse-attached Catalog data to find the right NetX "Catalog/[Dept]/[Cat]" folder/s
+- "NetX_emultimedia" includes all mapped emultimedia fields, and is the main input for `prep_emu_media.py`.
+  - The SecDepartment values in this XML file determine an asset's NetX folders.
+
+- "NetX_mm_catalogue" includes 2 fields pulled from any reverse-attached ecatalogue records.
+- "NetX_mm_events" includes 5 fields pulled from any reverse-attached event records.
+
+### xml_bad_examples
+These include a variety of badly-formed individual files, as well as bad folder-structures missing export-files.
