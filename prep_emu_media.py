@@ -66,13 +66,27 @@ def main():
       # Need to grab SecDepartment as well (currently: use only the first value)
       if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
         sec_dept_tuple_elem = elem.find('tuple')
-        sec_dept = sec_dept_tuple_elem.find('atom')
-        record['SecDepartment'] = sec_dept.text
+
+        # sec_dept = sec_dept_tuple_elem.findall('atom')
+        # # if sec_dept.text is None:
+        
+        sec_dept_raw = sec_dept_tuple_elem.findall('tuple/atom')
+        sec_dept_all = []
+        for dept in sec_dept_raw:
+          if dept.text is not None:
+            if len(dept.text) > 0 and dept.text not in sec_dept_all:
+              sec_dept_all.append(dept.text)
+
+        record['SecDepartment'] = sec_dept_all[0]
+
+
+        # record['SecDepartment'] = sec_dept.text
 
         # Get secondary SecDepartment values for pathAdd
-        sec_dept_others = elem.findall('tuple/atom')
-        if len(sec_dept_others) > 1:
-          record['PathAddDepts'] = sec_dept_others
+        # sec_dept_others = elem.findall('tuple/atom')
+        # if len(sec_dept_others) > 1:
+        if len(sec_dept_all) > 1:
+          record['PathAddDepts'] = sec_dept_all
         else:
           record['PathAddDepts'] = None
         
@@ -311,13 +325,15 @@ def pathadd(record: dict):
 
   # record['PathAddDepts'] should be a list of ET.Element
   for dept in record['PathAddDepts']:
-    dept_folder = get_folder_hierarchy(dept.text)
-    pathadd = f'{dept_folder}'
-    path_add_row = {'file':filename, 'pathAdd':pathadd}
+    # if dept.text is not None:
+    if dept is not None:
+      dept_folder = get_folder_hierarchy(dept)  # dept.text)
+      pathadd = f'{dept_folder}'
+      path_add_row = {'file':filename, 'pathAdd':pathadd}
 
-    if path_add_row not in path_add_list:
-      # print('adding other dept: ' + str(pathadd))
-      path_add_list.append(path_add_row)
+      if path_add_row not in path_add_list:
+        # print('adding other dept: ' + str(pathadd))
+        path_add_list.append(path_add_row)
 
   if len(path_add_list) > 0:
     return path_add_list
