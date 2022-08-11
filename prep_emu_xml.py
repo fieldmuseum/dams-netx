@@ -69,7 +69,8 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
 
-            prepped_record.find(key).text = grouped_value
+            if grouped_value is not None:
+                prepped_record.find(key).text = grouped_value
 
 
     # Populate fields where values need concatenation (e.g. reverse-attached Event fields)
