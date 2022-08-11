@@ -73,6 +73,7 @@ def main():
         sec_dept_raw = sec_dept_tuple_elem.findall('tuple/atom')
         sec_dept_all = []
         for dept in sec_dept_raw:
+          print(dept)
           if dept.text is not None:
             print('dept.text =  ' + str(dept.text))
             if len(dept.text) > 0 and dept.text not in sec_dept_all:
