@@ -269,7 +269,7 @@ def output_error_log(invalid_records):
       if key not in field_names: field_names.append(key)
 
   with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, fieldnames=field_names)
+    writer = csv.DictWriter(csv_file, extrasaction='ignore', fieldnames=field_names)
     writer.writeheader()
     writer.writerows(invalid_records)
 
