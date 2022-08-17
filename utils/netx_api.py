@@ -84,8 +84,10 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None) -> di
         # NetX json-rpc API only permits POST ?
         r = requests.post(uri, json=json, headers=headers)
         r.raise_for_status()
-        print(r.status_code)
-        return r.json()
+        if r.status_code == 200:
+            return r.json()
+        else:
+            print(f'Error - {r.status_code}')
 
     except requests.exceptions.HTTPError as http_error:
         raise requests.exceptions.HTTPError("Could not " + method + " : " + http_error.response.text)
@@ -109,15 +111,15 @@ def netx_api_try_request(method, params, headers=None) -> dict:
         raise requests.exceptions.HTTPError("Could not " + method + " : " + http_error.response.text)
 
 
-def netx_add_asset_to_folder(asset_id:int, folder_id:int, field_list:list=None):
+def netx_add_asset_to_folder(asset_id:int, folder_id:int, data_to_get:list=None):
     '''
     In NetX, Adds an asset to a folder via the NetX API
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#getassetsbyfolder
     '''
 
-    if field_list==None:
-        field_list = [
+    if data_to_get==None:
+        data_to_get = [
             "asset.id",
             "asset.base",
             "asset.file",
@@ -129,22 +131,22 @@ def netx_add_asset_to_folder(asset_id:int, folder_id:int, field_list:list=None):
     params = [
         asset_id, 
         folder_id,
-        {"data": field_list}
+        {"data": data_to_get}
         ]
     # print(params)
 
     return netx_api_make_request(method, params)
 
 
-def netx_get_folder_by_path(folder_path:str, field_list:list=None):
+def netx_get_folder_by_path(folder_path:str, data_to_get:list=None):
     '''
-    Returns the NetX folder-id for a given NetX folder-path
+    Returns a dict that includes the NetX folder-id for a given NetX folder-path.
     - Also returns the folder name, description, path and child-folders.
     - See method help: https://developer.netx.net/#getfolderbypath
     '''
 
-    if field_list==None:
-        field_list = [
+    if data_to_get==None:
+        data_to_get = [
             "folder.id",
             "folder.base",
             "folder.children"
@@ -154,7 +156,41 @@ def netx_get_folder_by_path(folder_path:str, field_list:list=None):
 
     params = [
         folder_path,
-        {"data": field_list}
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    return netx_api_make_request(method, params)
+
+
+def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id']):
+    '''
+    For a given filename, returns a dict that includes NetX asset.id (default).
+    Other asset-data can be returned also/instead -- see https://developer.netx.net/#search.
+    
+    - NOTE - NetX getAssetsByQuery is more flexible, if this function should be more general.
+    '''
+    
+    method = 'getAssetsByQuery'
+
+    criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
+    operator = "and"  # must be one of: "and", "or", "not"
+
+    params = [
+        {
+            "query": [
+                {
+                    "operator": operator,
+                    criteria: {
+                        "field": "fileName",
+                        "value": file_name
+                    }
+                }
+            ]
+        },
+        {
+            "data": data_to_get
+        }
         ]
     # print(params)
 
