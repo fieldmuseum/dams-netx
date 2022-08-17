@@ -112,8 +112,10 @@ def netx_api_try_request(method, params, headers=None) -> dict:
 def netx_add_asset_to_folder(asset_id:int, folder_id:int, field_list:list=None):
     '''
     In NetX, Adds an asset to a folder via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#getassetsbyfolder
     '''
+
     if field_list==None:
         field_list = [
             "asset.id",
@@ -129,6 +131,31 @@ def netx_add_asset_to_folder(asset_id:int, folder_id:int, field_list:list=None):
         folder_id,
         {"data": field_list}
         ]
-    print(params)
+    # print(params)
+
+    return netx_api_make_request(method, params)
+
+
+def netx_get_folder_by_path(folder_path:str, field_list:list=None):
+    '''
+    Returns the NetX folder-id for a given NetX folder-path
+    - Also returns the folder name, description, path and child-folders.
+    - See method help: https://developer.netx.net/#getfolderbypath
+    '''
+
+    if field_list==None:
+        field_list = [
+            "folder.id",
+            "folder.base",
+            "folder.children"
+            ]
+
+    method = 'getFolderByPath'
+
+    params = [
+        folder_path,
+        {"data": field_list}
+        ]
+    # print(params)
 
     return netx_api_make_request(method, params)
