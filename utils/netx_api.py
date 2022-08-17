@@ -16,8 +16,8 @@ def netx_api_setup_headers(headers=None, netx_api_token=None) -> dict:
     # Set up default headers
     headers = {
         'Authorization': 'apiToken ' + netx_api_token,
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        'Content-Type': 'application/json'
+        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
         # 'jsonrpc': '2.0', # 'X-Api-Version': '3',
         # 'id': '1234567890'
     }
@@ -25,7 +25,7 @@ def netx_api_setup_headers(headers=None, netx_api_token=None) -> dict:
     return headers
 
 
-def netx_api_setup_json(method:str=None, params:list=None) -> dict:
+def netx_api_setup_request_body(method:str, params:list) -> dict:
     '''Sets up the required request object format for the NetX API. '''
 
     # Check that we have json record data
@@ -73,7 +73,7 @@ def netx_api_setup_request(headers=None) -> dict:
 def netx_api_make_request(method:str=None, params:list=None, headers=None) -> dict:
     '''Makes a request to the NetX API'''
     
-    json = netx_api_setup_json(method, params)
+    json = netx_api_setup_request_body(method, params)
 
     netx_request = netx_api_setup_request(headers)
 
@@ -94,7 +94,7 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None) -> di
 def netx_api_try_request(method, params, headers=None) -> dict:
     '''Tries a request to the NetX API, returns the HTTP status code 200/404/etc'''
 
-    json = netx_api_setup_json(method, params)
+    json = netx_api_setup_request_body(method, params)
 
     netx_request = netx_api_setup_request(headers)
 
