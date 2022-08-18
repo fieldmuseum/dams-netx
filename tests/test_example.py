@@ -3,7 +3,7 @@ import unittest
 """
 To execute tests, run this command from the root dir:
 
-python3 -m unittest tests/test_xml_functions.py
+python3 -m unittest tests/test_example.py
 """
 class XMLFunctionsTestCase(unittest.TestCase):
     def setUp(self):
