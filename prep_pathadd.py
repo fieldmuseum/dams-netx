@@ -4,9 +4,8 @@ Setup the NetX pathAdd CSV
 
 import csv, glob, os, re, sys
 from decouple import config
-from exiftool import ExifToolHelper
-from fabric import Connection
 import xml.etree.ElementTree as ET
+import utils.csv_tools as uc
 
 
 def main():
@@ -21,8 +20,8 @@ def main():
 
   # Main function
   input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-  csv_output_file_path = sys.argv[2]
-  use_live_paths = sys.argv[3]
+  csv_output_file_path = config('PATHADD_CSV_OUTPUT')
+  use_live_paths = sys.argv[2]
   
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
@@ -268,12 +267,16 @@ def output_error_log(invalid_records):
     for key in keys:
       if key not in field_names: field_names.append(key)
 
-  with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
-    writer = csv.DictWriter(csv_file, extrasaction='ignore', fieldnames=field_names)
-    writer.writeheader()
-    writer.writerows(invalid_records)
+  filename = 'data/errors/prep_file_prep_errors.csv'
 
-  raise Exception('Records do not all contain all of the required fields!')
+  uc.write_dict_to_csv(invalid_records, field_names, filename)
+
+  # with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
+  #   writer = csv.DictWriter(csv_file, extrasaction='ignore', fieldnames=field_names)
+  #   writer.writeheader()
+  #   writer.writerows(invalid_records)
+
+  # raise Exception('Records do not all contain all of the required fields!')
 
 if __name__ == '__main__':
   main()
