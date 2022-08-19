@@ -1,5 +1,6 @@
 import unittest, csv, random
 import utils.netx_api as netx_api
+from dotenv import dotenv_values
 
 """
 Tests for netx_api utils
@@ -13,6 +14,28 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
             reader = csv.reader(csvfile, delimiter=',')
             next(reader)
             for row in reader: self.csvrows.append(row)
+        
+        # QUESTIONS on added setup:
+
+        # Q1 - Are any env-variables/overrides or safety-nets needed or does this clutter?
+        config = dotenv_values(".env")
+        if not config: raise Exception("No .env config file found")
+        
+        # Q2 - Is there a way to hard-code NetX env to "TEST"?
+        netx_env = config['NETX_ENV']
+        
+        # For now, static values for each env:
+        if netx_env == "LIVE":
+            print("CAUTION - Tests are running in LIVE NetX env")
+            self.asset_id = 0  # this will error
+            self.folder_id = 0  # this will error
+
+        else:
+            self.asset_id = 18201  # "featherswitheye.png" test-image
+            self.folder_id = 341  #  "NetX Test" test-folder
+        
+        # TODO - check that asset is not yet in folder before adding
+
 
     def test_netx_get_asset_by_filename(self):
         """Tests that netx_get_asset_by_filename returns asset info"""
@@ -25,6 +48,7 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
         # TODO: once the query works properly, assert we're getting back some of the correct
         # data. e.g. Check for dict keys, using assertIn, etc.
 
+
     def test_netx_get_folder_by_path(self):
         """Tests that netx_get_folder_by_path returns folder info"""
         
@@ -35,6 +59,7 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
         
         # TODO: once the query works properly, assert we're getting back some of the correct
         # data. e.g. Check for dict keys, using assertIn, etc.
+
 
     def test_netx_add_asset_to_folder(self):
         """Tests that netx_add_asset_to_folder can add asset to a folder"""
@@ -49,5 +74,24 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
         self.assertNotIn("error", netx_folder)
 
         # TODO: set up asset_id, folder_id, and additional info to test this properly
-        netx_asset_transfer_info = netx_api.netx_add_asset_to_folder(asset_id, folder_id)
+        #  + check that asset is not yet in folder before adding
+        netx_asset_transfer_info = netx_api.netx_add_asset_to_folder(self.asset_id, self.folder_id)
+        self.assertNotIn("error", netx_asset_transfer_info)
+
+
+    def test_netx_remove_asset_from_folder(self):
+        """Tests that netx_add_asset_to_folder can add asset to a folder"""
+
+        random_row = random.choice(self.csvrows) # Get a random filename for unexpectedness
+        filename = random_row[0]
+        folder = random_row[1]
+
+        netx_asset = netx_api.netx_get_asset_by_filename(filename)
+        netx_folder = netx_api.netx_get_folder_by_path(folder)
+        self.assertNotIn("error", netx_asset)
+        self.assertNotIn("error", netx_folder)
+
+        # TODO: set up asset_id, folder_id, and additional info to test this properly
+        #  + check that asset is in folder before removing
+        netx_asset_transfer_info = netx_api.netx_remove_asset_from_folder(self.asset_id, self.folder_id)
         self.assertNotIn("error", netx_asset_transfer_info)

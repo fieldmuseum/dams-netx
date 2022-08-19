@@ -17,7 +17,7 @@ def netx_api_setup_headers(headers=None, netx_api_token=None) -> dict:
     headers = {
         'Authorization': 'apiToken ' + netx_api_token,
         'Content-Type': 'application/json'
-        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
         # 'jsonrpc': '2.0', # 'X-Api-Version': '3',
         # 'id': '1234567890'
     }
@@ -37,7 +37,7 @@ def netx_api_setup_request_body(method:str, params:list) -> dict:
     # Setup request-object
     request_object = {
         'jsonrpc': '2.0', # 'X-Api-Version': '3',
-        'id': '12345',
+        'id': '1234',
         'method': method,  # e.g. "getAssets"
         'params': params   # list of [record-ids] and {'data' : ['fields']}
         }
@@ -111,11 +111,38 @@ def netx_api_try_request(method, params, headers=None) -> dict:
         raise requests.exceptions.HTTPError("Could not " + method + " : " + http_error.response.text)
 
 
+def netx_remove_asset_from_folder(asset_id:int, folder_id:int, data_to_get:list=None):
+    '''
+    In NetX, Removes an asset from a folder via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#removeassetfromfolder
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "asset.id",
+            "asset.base",
+            "asset.file",
+            "asset.folders"
+            ]
+
+    method = 'removeAssetFromFolder'
+
+    params = [
+        asset_id, 
+        folder_id,
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    return netx_api_make_request(method, params)
+
+
 def netx_add_asset_to_folder(asset_id:int, folder_id:int, data_to_get:list=None):
     '''
     In NetX, Adds an asset to a folder via the NetX API
     - Also returns the asset's id, name, filename, and folders.
-    - See method help: https://developer.netx.net/#getassetsbyfolder
+    - See method help: https://developer.netx.net/#addassettofolder
     '''
 
     if data_to_get==None:
