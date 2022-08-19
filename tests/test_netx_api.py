@@ -21,7 +21,7 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
         config = dotenv_values(".env")
         if not config: raise Exception("No .env config file found")
         
-        # Q2 - Is there a way to hard-code NetX env to "TEST"?
+        # Q2 - Is there a way (or bad idea) to hard-code NetX env to "TEST"?
         netx_env = config['NETX_ENV']
         
         # For now, static values for each env:
@@ -34,7 +34,10 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
             self.asset_id = 18201  # "featherswitheye.png" test-image
             self.folder_id = 341  #  "NetX Test" test-folder
         
-        # TODO - check that asset is not yet in folder before adding
+        # TODO: 
+        # -- check that asset is not yet in folder before adding
+        # -- check config for up-to-date API token 
+        #    - e.g. if request status_code == 415: ... (not sure that's specific to token-issue tho)
 
 
     def test_netx_get_asset_by_filename(self):
