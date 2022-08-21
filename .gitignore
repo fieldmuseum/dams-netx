@@ -173,6 +173,7 @@ cython_debug/
 
 # Examples ignore
 examples/media/*.jpg
+logs/
 testing/
 *.xml
 !data/*.xml
