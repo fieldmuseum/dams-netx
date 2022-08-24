@@ -104,8 +104,8 @@ def main():
         path_add_running_list.append(row)
     
 
-  # SKIP FIRST 21.1k records 
-  records_prep_file = records_prep_file[21100:]
+  # # SKIP FIRST 21.1k records 
+  # records_prep_file = records_prep_file[21100:]
 
 
   # Copy all files to correct location, this should happen before we create
