@@ -104,6 +104,10 @@ def main():
         path_add_running_list.append(row)
     
 
+  # SKIP FIRST 21.1k records 
+  records_prep_file = records_prep_file[21100:]
+
+
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
   # If this step fails, raise an exception so the CSV isn't created.
