@@ -144,7 +144,7 @@ def main():
             dest_format = exif.get_tags(dest_path, tags='Format')
             if len(dest_format) > 0:
               if ('XMP:Format','image/tiff') in dest_format[0].items():
-                format_warn = "TIFF File - needs check/fix in EMu"
+                format_warn = f"{dest_path} - possible TIFF File - needs check/fix in EMu"
                 print(format_warn)
                 logging.warning(format_warn)
 
