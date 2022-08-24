@@ -27,9 +27,8 @@ def main():
   setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
 
   # Main function
-  input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-  csv_output_file_path = sys.argv[2]
-  use_live_paths = sys.argv[3]
+  input_date = sys.argv[1]
+  use_live_paths = sys.argv[2]
   
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
@@ -40,8 +39,6 @@ def main():
     full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
     dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
-  
-  # with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
   
   main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
   print(main_xml_input)
@@ -125,7 +122,7 @@ def main():
       full_path = full_prefix + dirs + r['MulIdentifier']
       dest_path = dest_prefix + r['pathMove'] + r['prep_file']
 
-      # # copy file to the new location for prep_file
+      # Copy file to the new location for prep_file
       if not os.path.exists(dest_path):
         os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
       
@@ -173,16 +170,7 @@ def main():
     # Validate that the copied files actually exist where we say they
     # do in the prep_file value for the CSV file.
     validate_files_copied(csv_records, dest_prefix)
-
-    # FINAL STEP: Write pathAdd rows to CSV
-    # print("len for pathAdd list = " + str(len(path_add_running_list)))
-    if len(path_add_running_list) > 0:
-      with open(csv_output_file_path, mode='w') as csv_file:
-        field_names=path_add_running_list[0].keys()
-        writer = csv.DictWriter(csv_file, fieldnames=field_names )
-        writer.writeheader()
-        writer.writerows(path_add_running_list)
-
+    
 
   # Stop logging
   setup.stop_log_dams_netx()

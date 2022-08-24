@@ -20,8 +20,8 @@ def main():
 
   # Main function
   input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-  csv_output_file_path = config('PATHADD_CSV_FILE')
   use_live_paths = sys.argv[2]
+  csv_output_file_path = config('PATHADD_CSV_FILE')
   
   # Check if test or live paths should be used
   if use_live_paths == "LIVE":
