@@ -34,9 +34,14 @@ def main():
     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
   
   main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-  input_log = f'Input XML = {main_xml_input}'
-  print(input_log)
-  logging.info(input_log)
+  input_path_log = f'Input XML path = {main_xml_input}'
+  print(input_path_log)
+  logging.info(input_path_log)
+
+  input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
+  print(input_file_log)
+  logging.info(input_file_log)
+
 
   tree = ET.parse(glob.glob(main_xml_input)[0])  # TODO - test/try to account for empty input-dir
 
@@ -111,7 +116,11 @@ def main():
       output_log = f'outputing pathAdd CSV to {csv_output_file_path}'
       print(output_log)
       logging.info(output_log)
+      
       field_names=path_add_running_list[0].keys()
+      
+      print(field_names)
+
       uc.write_list_of_dict_to_csv(path_add_running_list, field_names, csv_output_file_path)
 
   # Stop logging
