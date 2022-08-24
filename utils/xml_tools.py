@@ -72,15 +72,17 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
                 for tuple in child_field:
                     for nested_child_field in tuple:
                         if nested_child_field.tag == nested_child_tag:
-                            child_list.append(nested_child_field.text)
+                            if nested_child_field.text is not None:  # and re.match(r'^\s+$', nested_child_field.text) is None:
+                                print(nested_child_field.text)
+                                child_list.append(nested_child_field.text)
 
             else:
                 child_list.append(str(child_field.text))
             
-    if len(child_list) > 0:
+    if len(child_list) > 0:  # and re.match(r'^\s+$', child_list) is None:
         netx_attr = " | ".join(child_list)
     
-    else: netx_attr = None
+    else: netx_attr = ''
     
     return netx_attr
 

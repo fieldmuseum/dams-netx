@@ -24,7 +24,7 @@ def main():
   """
 
   # Start logs
-  setup.start_log_dams_netx(cmd_args=sys.argv)
+  setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
 
   # Main function
   input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
