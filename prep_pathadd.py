@@ -102,13 +102,15 @@ def main():
 
 
     # FINAL STEP: Write pathAdd rows to CSV
-    # print("len for pathAdd list = " + str(len(path_add_running_list)))
     if len(path_add_running_list) > 0:
-      with open(csv_output_file_path, mode='w') as csv_file:
-        field_names=path_add_running_list[0].keys()
-        writer = csv.DictWriter(csv_file, fieldnames=field_names )
-        writer.writeheader()
-        writer.writerows(path_add_running_list)
+      print(f'outputing pathAdd CSV to {csv_output_file_path}')
+      field_names=path_add_running_list[0].keys()
+      uc.write_list_of_dict_to_csv(path_add_running_list, field_names, csv_output_file_path)
+
+      # with open(csv_output_file_path, mode='w') as csv_file:
+      #   writer = csv.DictWriter(csv_file, fieldnames=field_names )
+      #   writer.writeheader()
+      #   writer.writerows(path_add_running_list)
 
 
 def get_folder_hierarchy(department):
@@ -269,7 +271,7 @@ def output_error_log(invalid_records):
 
   filename = 'data/errors/prep_file_prep_errors.csv'
 
-  uc.write_dict_to_csv(invalid_records, field_names, filename)
+  uc.write_list_of_dict_to_csv(invalid_records, field_names, filename)
 
   # with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
   #   writer = csv.DictWriter(csv_file, extrasaction='ignore', fieldnames=field_names)

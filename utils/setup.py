@@ -40,4 +40,4 @@ def stop_log_dams_netx():
     '''Record finish time and stop logging'''
 
     stop_time = datetime.datetime.now()
-    logging.info(f'STOPPED {stop_time} : {__file__}')
+    logging.info(f'FINISHED {stop_time} : {__file__}')
