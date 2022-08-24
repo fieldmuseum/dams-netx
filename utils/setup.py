@@ -30,14 +30,14 @@ def start_log_dams_netx(config:dict, log_level=logging.INFO, cmd_args:list=sys.a
         filename=log_file, 
         level=log_level, 
         format='%(asctime)s %(message)s', 
-        datefmt='%m/%d/%Y %I:%M:%S %p')
+        datefmt='%H:%M:%S')
 
     start_time = datetime.datetime.now()
-    logging.info(f'{start_time} - Started : {__file__} {cmd_args}')
+    logging.info(f'STARTED - {start_time} : {__file__} {cmd_args}')
     
     
 def stop_log_dams_netx():
     '''Record finish time and stop logging'''
 
     stop_time = datetime.datetime.now()
-    logging.info(f'{stop_time} - Stopped - {__file__}')
+    logging.info(f'STOPPED {stop_time} : {__file__}')
