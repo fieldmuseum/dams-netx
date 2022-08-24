@@ -2,10 +2,11 @@
 Setup the NetX pathAdd CSV
 """
 
-import csv, glob, os, re, sys
+import csv, glob, logging, os, re, sys
 from decouple import config
 import xml.etree.ElementTree as ET
 import utils.csv_tools as uc
+import utils.setup as setup
 
 
 def main():
@@ -17,6 +18,9 @@ def main():
   :param file_path: filename of the XML file to parse
   :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
   """
+
+  # Start logs
+  setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
 
   # Main function
   input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
@@ -30,7 +34,9 @@ def main():
     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
   
   main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-  print(main_xml_input)
+  input_log = f'Input XML = {main_xml_input}'
+  print(input_log)
+  logging.info(input_log)
 
   tree = ET.parse(glob.glob(main_xml_input)[0])  # TODO - test/try to account for empty input-dir
 
@@ -89,7 +95,6 @@ def main():
       for row in path_add_rows:
         path_add_running_list.append(row)
 
-
     # Set up fields for CSV
     csv_records = []
     for record in records_prep_file:
@@ -103,14 +108,14 @@ def main():
 
     # FINAL STEP: Write pathAdd rows to CSV
     if len(path_add_running_list) > 0:
-      print(f'outputing pathAdd CSV to {csv_output_file_path}')
+      output_log = f'outputing pathAdd CSV to {csv_output_file_path}'
+      print(output_log)
+      logging.info(output_log)
       field_names=path_add_running_list[0].keys()
       uc.write_list_of_dict_to_csv(path_add_running_list, field_names, csv_output_file_path)
 
-      # with open(csv_output_file_path, mode='w') as csv_file:
-      #   writer = csv.DictWriter(csv_file, fieldnames=field_names )
-      #   writer.writeheader()
-      #   writer.writerows(path_add_running_list)
+  # Stop logging
+  setup.stop_log_dams_netx()
 
 
 def get_folder_hierarchy(department):
