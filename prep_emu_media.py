@@ -5,11 +5,12 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
-import csv, glob, os, re, sys
+import csv, glob, logging, os, re, sys
 from decouple import config
 from exiftool import ExifToolHelper
 from fabric import Connection
 import xml.etree.ElementTree as ET
+import utils.setup as setup
 
 
 def main():
@@ -21,6 +22,9 @@ def main():
   :param file_path: filename of the XML file to parse
   :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
   """
+
+  # Start logs
+  setup.start_log_dams_netx(cmd_args=sys.argv)
 
   # Main function
   input_date = sys.argv[1]  # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
@@ -47,6 +51,7 @@ def main():
   root = tree.getroot()
   records = []
   path_add_running_list = []
+
 
   for xml_tuple in root:
     # New record
@@ -97,6 +102,7 @@ def main():
       path_add_rows = pathadd(record)
       for row in path_add_rows:
         path_add_running_list.append(row)
+    
 
   # Copy all files to correct location, this should happen before we create
   # the CSV to confirm that the files are actually there.
@@ -121,19 +127,33 @@ def main():
       
       try:
         c.get(remote=full_path, local=dest_path, preserve_mode=False)
-        print(f'Full origin path = {full_path} | Destination path = {dest_path}')
+        log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
+        print(log_message)
+        logging.info(log_message)
+
       except Exception as err:
-        print(f'An error occurred trying to copy media from {full_path}: {err}')
+        err_message = f'An error occurred trying to copy media from {full_path}: {err}'
+        print(err_message)
+        logging.error(err_message)
       
       # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
       if os.path.isfile(dest_path):
         if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-          with ExifToolHelper() as exif:
-            exif.set_tags(
-              dest_path,
-              tags = {'Identifier':r['AudIdentifier']},
-              params=["-P", "-overwrite_original"]
-            )
+          with ExifToolHelper() as exif:  # exif.get_tags(dest_path, tags)
+            
+            dest_format = exif.get_tags(dest_path, tags='Format')
+            if len(dest_format) > 0:
+              if ('XMP:Format','image/tiff') in dest_format[0]:
+                format_warn = "TIFF File - needs check/fix in EMu"
+                print(format_warn)
+                logging.warning(format_warn)
+
+              else:
+                exif.set_tags(
+                  dest_path,
+                  tags = {'Identifier':r['AudIdentifier']},
+                  params=["-P", "-overwrite_original"]
+                )
 
 
     # Set up fields for CSV
@@ -160,6 +180,10 @@ def main():
         writer.writerows(path_add_running_list)
 
 
+  # Stop logging
+  setup.stop_log_dams_netx()
+
+
 def get_folder_hierarchy(department):
   '''
   Get the appropriate parent-folder value for a given SecDepartment value
@@ -184,33 +208,6 @@ def get_folder_hierarchy(department):
     return parent + '/' + department + '/'
   
   else: return department + '/'
-
-
-# def copy_files(records, full_prefix, dest_prefix, c):
-#   """
-#   Given a list of records, copy all of the files to the new location required
-#   for the prep_file value that will end up in the CSV file.
-#   """
-#   for r in records:
-#     dirs = irn_dir(r['irn'])
-
-#     full_path = full_prefix + dirs + r['MulIdentifier']
-#     dest_path = dest_prefix + r['pathMove']  # + r['prep_file']
-
-#     # # copy file to the new location for prep_file
-#     if not os.path.exists(dest_path):
-#       os.makedirs(os.path.dirname(dest_path), exist_ok=True)    
-    
-#     try:
-#       # media_file_loc = full_prefix + config('ORIGIN_MEDIA_EXAMPLE_FILE_LOC')
-#       c.get(remote=full_path, local=dest_prefix, preserve_mode=False)
-#       print(f'Full origin path = {full_path} | Dest base-prefix = {dest_prefix}')
-#     except Exception as err:
-#       print(f'An error occurred trying to copy media from {full_path}: {err}')
-
-#     # if not os.path.exists(dest_path): 
-#     #   shutil.copy2(full_path, dest_path)
-
 
 
 def validate_files_copied(csv_records, dest_prefix):
