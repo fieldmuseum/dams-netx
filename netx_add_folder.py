@@ -10,8 +10,8 @@ from dotenv import dotenv_values
 def add_to_folder(row:dict, folder_id_list:dict):
     '''For a given asset's filename and pathAdd folder-name, add the asset to the folder'''
 
-    # In case API needs rate-limiting
-    time.sleep(0.25)
+    # # In case API needs rate-limiting
+    # time.sleep(0.25)
 
     # Given Identifier/Filename, Get Asset ID 
     asset_data = un.netx_get_asset_by_filename(row['file'], data_to_get=['asset.id','asset.folders'])
