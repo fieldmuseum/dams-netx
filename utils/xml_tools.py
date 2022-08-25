@@ -2,7 +2,6 @@
 Tools for prepping/reshaping XML
 '''
 
-import re
 import xml.etree.ElementTree as ET
 
 def convert_linebreaks_to_commas(root):
@@ -13,7 +12,6 @@ def convert_linebreaks_to_commas(root):
                 row_list = []
                 for tuple in table_as_text:
                     for row in tuple:
-
                         if row.text is not None:
                             row_list.append(row.text)
 
@@ -36,7 +34,6 @@ def fix_emu_xml_tags(emu_records: ET.Element) -> ET.Element:
                 thing.tag = "data"
             thing.set('name', thing.tag)
 
-
     # Turn EMu col-names into XML-tags instead of attributes:
     for child in emu_records.findall('.//*'):
 
@@ -44,7 +41,7 @@ def fix_emu_xml_tags(emu_records: ET.Element) -> ET.Element:
             child.set('name', 'tuple')
         child.tag = child.get('name')
         child.attrib = {}
-    
+
     return emu_records
 
 
@@ -56,34 +53,30 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
 
     child_list = []
     nested_child_tag = None
+    netx_attr = None
 
-    # len(re.findall(r'\.', str(child_tag)) > 0:
     if child_tag.find('.') > 0:
         nested_tag = child_tag.split(".")
         child_tag = nested_tag[0]
         nested_child_tag = nested_tag[1]
 
-    # else:
     for child_field in emu_record.find(ref_tag): 
-        # for child_field in tuple:
-
         if child_field.tag == child_tag:
             if nested_child_tag is not None:
                 for tuple in child_field:
                     for nested_child_field in tuple:
                         if nested_child_field.tag == nested_child_tag:
                             if nested_child_field.text is not None:  # and re.match(r'^\s+$', nested_child_field.text) is None:
-                                print(nested_child_field.text)
                                 child_list.append(nested_child_field.text)
 
-            else:
-                child_list.append(str(child_field.text))
-            
+            # else:
+            #     print('nested_child_tag IS None')
+            #     child_list.append(str(child_field.text))
+            #     print(f'...added to child_list:  {child_list}')
+
     if len(child_list) > 0:  # and re.match(r'^\s+$', child_list) is None:
         netx_attr = " | ".join(child_list)
-    
-    else: netx_attr = ''
-    
+
     return netx_attr
 
 
@@ -100,10 +93,10 @@ def get_group_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: st
             for child_field in tuple:
                 if str(child_field.tag) == child_tag:
                     child_list.append(str(child_field.text))
-            
+
     if len(child_list) > 0:
         netx_attr = " | ".join(child_list)
-    
+
     else: netx_attr = None
 
     return netx_attr

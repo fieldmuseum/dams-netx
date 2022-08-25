@@ -10,6 +10,7 @@ from decouple import config
 import utils.dss_schema as dss_schema
 import utils.xml_tools as xml_tools
 import utils.emu_netx_map as emu_netx
+import utils.setup as setup
 
 
 def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: ET.Element) -> ET.Element:
@@ -52,10 +53,17 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
     ref_fields = emu_netx.emu_netx_refs()
 
     for key, value in ref_fields.items():
+        print(prepped_record.find(key).tail)
+        print(f'value = {value}')
         if type(value) == list:
             ref_values = xml_tools.get_ref_value(emu_record, value[0], value[1])
-            if ref_values is not None:
+            print(f'ref_values = {ref_values}')
+            if ref_values is not None: # and re.match(r'^\s+$', ref_values) is None:
                 prepped_record.find(key).text = ref_values
+            else:
+                prepped_record.find(key).text = ''
+        print(f'prepped_record.find(key).text = {prepped_record.find(key).text}')
+        print(f'len(prepped_record.find(key).text) = {len(prepped_record.find(key).text)}')
 
 
     # Populate grouped or ref-table fields with nested tuples (e.g. 'Creator' group, rev-attached Catalog fields)
@@ -109,6 +117,8 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
 
 def main():  # main_xml_input, event_xml, catalog_xml):
     '''Given an input-date, prep XML export from that date'''
+
+    setup.start_log_dams_netx(config=None)
     
     # Setup paths to input XML
     input_date = str(sys.argv[1])
@@ -122,9 +132,6 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     else:  # if use_live_paths == "TEST": 
         full_prefix = config('TEST_ORIGIN_PATH_XML')
         dest_prefix = config('TEST_DESTIN_PATH_XML')
-    # else:
-    #     full_prefix = config('LOCAL_ORIGIN_PATH')
-    #     dest_prefix = config('XML_LOCAL_DESTIN_PATH')
 
     main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
@@ -132,7 +139,6 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
     # Load EMu records & fix xml-tags
-    # print('main_xml_input is:  ' + main_xml_input + ' | and this file: ' + str(glob.glob(main_xml_input)))
     emu_tree = ET.ElementTree()
     emu_records_raw1 = emu_tree.parse(glob.glob(main_xml_input)[0])  # TODO - test/try to account for empty input-dir
     emu_records_raw2 = xml_tools.fix_emu_xml_tags(emu_records_raw1)
@@ -193,6 +199,8 @@ def main():  # main_xml_input, event_xml, catalog_xml):
                     short_empty_elements=True
                     )
                 )
+
+    setup.stop_log_dams_netx()
     
 
     # if output_emu_prepped == True:
