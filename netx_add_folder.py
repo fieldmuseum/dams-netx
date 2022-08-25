@@ -1,7 +1,6 @@
 '''Add ingested assets to secondary folders via NetX API'''
 
 import logging, time
-from datetime import date
 import utils.netx_api as un
 import utils.csv_tools as uc
 import utils.setup as setup
