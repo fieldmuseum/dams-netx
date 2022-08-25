@@ -11,7 +11,7 @@ def get_config_dams_netx():
     return config
 
 
-def start_log_dams_netx(config:dict, log_level=logging.INFO, cmd_args:list=sys.argv):
+def start_log_dams_netx(config:dict=None, log_level=logging.INFO, cmd_args:list=sys.argv):
     '''
     Append console output to log-file
     See https://docs.python.org/2/howto/logging.html#logging-to-a-file

@@ -233,7 +233,7 @@ def netx_get_asset_by_field(field:str="fileChecksum", file_name:str=None, data_t
     
     method = 'getAssetsByQuery'
 
-    if field not in ["assetId", "creationDate", "fileName", "fileType", "importDate", "keywords", "name"]:
+    if field not in ["assetId", "creationDate", "fileName", "fileType", "fileChecksum", "importDate", "keywords", "name"]:
         print('WARNING - check search field-name')
 
     criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
