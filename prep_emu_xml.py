@@ -53,18 +53,13 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
     ref_fields = emu_netx.emu_netx_refs()
 
     for key, value in ref_fields.items():
-        print(prepped_record.find(key).tail)
-        print(f'value = {value}')
+
         if type(value) == list:
             ref_values = xml_tools.get_ref_value(emu_record, value[0], value[1])
-            print(f'ref_values = {ref_values}')
             if ref_values is not None: # and re.match(r'^\s+$', ref_values) is None:
                 prepped_record.find(key).text = ref_values
             else:
                 prepped_record.find(key).text = ''
-        print(f'prepped_record.find(key).text = {prepped_record.find(key).text}')
-        print(f'len(prepped_record.find(key).text) = {len(prepped_record.find(key).text)}')
-
 
     # Populate grouped or ref-table fields with nested tuples (e.g. 'Creator' group, rev-attached Catalog fields)
     group_fields = emu_netx.emu_netx_groups_or_reftabs()
