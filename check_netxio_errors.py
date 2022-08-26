@@ -29,11 +29,18 @@ def main():
     setup.start_log_dams_netx()
 
     config = setup.get_config_dams_netx()
-    lost_and_found_files = list_files(config['NETXIO_LOSTANDFOUND']) 
 
+    if config['NETX_ENV'] == 'LIVE':
+        netxio_source_dir = config['NETXIO_LOCAL_SOURCE_DIR']
+        netxio_lost_dir = config['NETXIO_LOSTANDFOUND']
+
+    else:
+        netxio_source_dir = config['TEST_NETXIO_LOCAL_SOURCE_DIR']
+        netxio_lost_dir = config['TEST_NETXIO_LOSTANDFOUND']
+    
+    lost_and_found_files = list_files(netxio_lost_dir) 
 
     # check for trailing slash in NetXIO source dir value
-    netxio_source_dir = config['NETXIO_LOCAL_SOURCE_DIR']
     if re.match(r'.*/$', netxio_source_dir) is None:
         netxio_source_dir += '/'
 
@@ -83,7 +90,7 @@ def main():
 
             elif 'result' in asset_data and len(asset_data['result']['results']) < 1:
 
-                file_path_edit = re.sub(config['NETXIO_LOSTANDFOUND'] ,'', file_path)
+                file_path_edit = re.sub(netxio_lost_dir ,'', file_path)
                 file_path_edit = re.sub(file_name ,'', file_path_edit)
 
                 log_message = f'No NetX match for {file_name} (md5 {file_md5}) - moving file for NetXIO back to: {netxio_source_dir + file_path_edit}'
