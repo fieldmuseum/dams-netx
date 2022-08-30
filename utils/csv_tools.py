@@ -19,4 +19,4 @@ def write_list_of_dict_to_csv(input_records:list, field_names:list, output_csv_f
         writer.writeheader()
         writer.writerows(input_records)
 
-    raise Exception('Records do not all contain all of the required fields!')
+    # raise Exception('Records do not all contain all of the required fields!')
