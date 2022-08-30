@@ -56,7 +56,6 @@ def netx_api_setup_request(config:dict=None, headers:dict=None, netx_env:str=Non
         if not config:  
             raise Exception("No .env config file found")
 
-
     # Get API base URL + token for selected NetX env
     # netx_env = config["NETX_ENV"]
     if netx_env is None:
@@ -71,17 +70,18 @@ def netx_api_setup_request(config:dict=None, headers:dict=None, netx_env:str=Non
 
 
     # Set default HTTP headers
-    headers = netx_api_setup_headers(headers, netx_api_token)
+    headers = netx_api_setup_headers(headers=headers, netx_api_token=netx_api_token)
 
     return {'config': config, 'base_url':netx_base_url, 'headers': headers}
 
 
 def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None) -> dict:
     '''Makes a request to the NetX API'''
-    
-    json = netx_api_setup_request_body(method, params)
 
-    netx_request = netx_api_setup_request(headers, netx_env)
+    json = netx_api_setup_request_body(method=method, params=params)
+
+    netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
+    # print(netx_request)
 
     uri = netx_request['base_url']
     headers = netx_request['headers']
@@ -104,7 +104,7 @@ def netx_api_try_request(method:str, params:dict, headers:dict=None, netx_env:st
 
     json = netx_api_setup_request_body(method, params)
 
-    netx_request = netx_api_setup_request(headers, netx_env)
+    netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
 
     uri = netx_request['base_url']
     headers = netx_request['headers']
@@ -227,7 +227,7 @@ def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], net
         ]
     # print(params)
 
-    return netx_api_make_request(method, params, netx_env=netx_env)
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 def netx_get_asset_by_field(field:str="fileChecksum", file_name:str=None, data_to_get:list=['asset.id'], netx_test:str=None) -> dict:
     '''

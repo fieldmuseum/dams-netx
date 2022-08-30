@@ -1,22 +1,25 @@
 '''Add ingested assets to secondary folders via NetX API'''
 
-import logging, time
+import logging, sys
+from this import d
 import utils.netx_api as un
 import utils.csv_tools as uc
 import utils.setup as setup
 from dotenv import dotenv_values
 
 
-def add_to_folder(row:dict, folder_id_list:dict):
+def add_to_folder(row:dict, folder_id_list:dict, use_live_paths:str):
     '''For a given asset's filename and pathAdd folder-name, add the asset to the folder'''
 
     # # In case API needs rate-limiting
     # time.sleep(0.25)
 
     # Given Identifier/Filename, Get Asset ID 
-    asset_data = un.netx_get_asset_by_filename(row['file'], data_to_get=['asset.id','asset.folders'])
+    asset_data = un.netx_get_asset_by_filename(row['file'], data_to_get=['asset.id','asset.folders'], netx_env=use_live_paths)
 
-    if 'result' not in asset_data:
+    # print(f'asset_data = {asset_data}')
+
+    if 'result' not in asset_data or len(asset_data['result']['results']) < 1:
         logging.error(asset_data)
         return
 
@@ -41,7 +44,7 @@ def add_to_folder(row:dict, folder_id_list:dict):
 
 
     # Add Asset to Folder/s -- https://developer.netx.net/#addassettofolder
-    folder_data = un.netx_add_asset_to_folder(asset_id, folder_id)
+    folder_data = un.netx_add_asset_to_folder(asset_id, folder_id, netx_env=use_live_paths)
 
     if 'result' in folder_data:
         folders = [folder['path'] for folder in folder_data['result']['folders']]
@@ -59,7 +62,7 @@ def add_to_folder(row:dict, folder_id_list:dict):
     return
 
 
-def get_unique_folder_id_list(path_add_rows:list):
+def get_unique_folder_id_list(path_add_rows:list, use_live_paths:str):
     '''
     Given a pathAdd CSV, retrieve folder IDs for a unique list of folder-names
     Return a list of {folder_name:folder_id}
@@ -78,7 +81,7 @@ def get_unique_folder_id_list(path_add_rows:list):
         for folder_name in unique_folders:
 
             # Get Asset's Secondary Departments
-            folder_data = un.netx_get_folder_by_path(folder_name)
+            folder_data = un.netx_get_folder_by_path(folder_path=folder_name, data_to_get=None, netx_env=use_live_paths)
 
             if 'result' not in folder_data:
                 print(f'ERROR - {folder_data}')
@@ -97,16 +100,18 @@ def main():
 
     setup.start_log_dams_netx(config=None)
 
+    use_live_paths = sys.argv[1]
+
     config = dotenv_values(".env")
     input_csv = config['PATHADD_CSV_FILE']
     path_add_rows = uc.rows(input_csv)
 
     # Get id's for unique list of folders may be quicker
-    folder_id_list = get_unique_folder_id_list(path_add_rows)
+    folder_id_list = get_unique_folder_id_list(path_add_rows, use_live_paths)
 
     # Add assets to folders
     for row in path_add_rows:
-        add_to_folder(row, folder_id_list)
+        add_to_folder(row, folder_id_list, use_live_paths)
 
     setup.stop_log_dams_netx()
 
