@@ -22,23 +22,29 @@ def main():
     :param file_path: filename of the XML file to parse
     :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
     """
+    # Main function
 
     # Start logs
     setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
+    # input_date = sys.argv[1]
+    # live_or_test = sys.argv[2]
+    live_or_test, input_date = setup.get_sys_argv()
 
-    # Main function
-    input_date = sys.argv[1]
-    use_live_paths = sys.argv[2]
+    config = setup.get_config_dams_netx(live_or_test)
     
     # Check if test or live paths should be used
-    if use_live_paths == "LIVE":
-        full_prefix = config('ORIGIN_PATH_MEDIA')
-        full_xml_prefix = config('ORIGIN_PATH_XML')
-        dest_prefix = config('DESTIN_PATH_MEDIA')
-    else: 
-        full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
-        full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
-        dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
+    full_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_MEDIA'], config['TEST_ORIGIN_PATH_MEDIA'])
+    full_xml_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_XML'], config['TEST_ORIGIN_PATH_XML'])
+    dest_prefix = setup.get_path_from_env(live_or_test, config['DESTIN_PATH_MEDIA'], config['TEST_DESTIN_PATH_MEDIA'])
+
+    # if live_or_test == "LIVE":
+    #     full_prefix = config('ORIGIN_PATH_MEDIA')
+    #     full_xml_prefix = config('ORIGIN_PATH_XML')
+    #     dest_prefix = config('DESTIN_PATH_MEDIA')
+    # else: 
+    #     full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
+    #     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
+    #     dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
     
     main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     print(main_xml_input)
@@ -48,7 +54,6 @@ def main():
     root = tree.getroot()
     records = []
     path_add_running_list = []
-
 
     for xml_tuple in root:
         # New record
@@ -110,7 +115,7 @@ def main():
     # If this step fails, raise an exception so the CSV isn't created.
     # copy_files(records_prep_file, full_prefix, dest_prefix, c)
 
-    with Connection(host=config('ORIGIN_IP'), user=config('ORIGIN_USER')) as c:
+    with Connection(host=config['ORIGIN_IP'], user=config['ORIGIN_USER']) as c:
     
         c.run('hostname')
 

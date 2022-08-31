@@ -6,7 +6,7 @@ Parse EMu XML to DAMS-ready XML
 import xml.etree.ElementTree as ET
 import os, re, sys
 import glob
-from decouple import config
+# from decouple import config
 import utils.dss_schema as dss_schema
 import utils.xml_tools as xml_tools
 import utils.emu_netx_map as emu_netx
@@ -113,20 +113,25 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
 def main():  # main_xml_input, event_xml, catalog_xml):
     '''Given an input-date, prep XML export from that date'''
 
-    setup.start_log_dams_netx(config=None)
-    
-    # Setup paths to input XML
-    input_date = str(sys.argv[1])
-    use_live_paths = sys.argv[2]
-    # output_emu_prepped = sys.argv[3]  # not useful here
+    # Main function
 
-    # Check if test or live paths should be used
-    if use_live_paths == "LIVE":
-        full_prefix = config('ORIGIN_PATH_XML')
-        dest_prefix = config('DESTIN_PATH_XML')
-    else:  # if use_live_paths == "TEST": 
-        full_prefix = config('TEST_ORIGIN_PATH_XML')
-        dest_prefix = config('TEST_DESTIN_PATH_XML')
+    # Setup paths to input XML
+    live_or_test, input_date = setup.get_sys_argv(2)
+
+    config = setup.get_config_dams_netx(live_or_test)
+
+    # Start logs
+    setup.start_log_dams_netx(config=config, cmd_args=sys.argv)
+
+    # # Check if test or live paths should be used
+    # if live_or_test == "LIVE":
+    #     full_prefix = config['ORIGIN_PATH_XML']
+    #     dest_prefix = config['DESTIN_PATH_XML']
+    # else:  # if live_or_test == "TEST": 
+    #     full_prefix = config['TEST_ORIGIN_PATH_XML']
+    #     dest_prefix = config['TEST_DESTIN_PATH_XML']
+    full_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_XML'], config['TEST_ORIGIN_PATH_XML'])
+    dest_prefix = setup.get_path_from_env(live_or_test, config['DESTIN_PATH_XML'], config['TEST_DESTIN_PATH_XML'])
 
     main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
