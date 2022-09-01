@@ -4,7 +4,7 @@ import logging, time
 import utils.netx_api as un
 import utils.csv_tools as uc
 import utils.setup as setup
-from dotenv import dotenv_values
+# from dotenv import dotenv_values
 
 
 def add_to_folder(row:dict, folder_id_list:dict, live_or_test:str):

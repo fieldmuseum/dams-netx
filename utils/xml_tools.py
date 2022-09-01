@@ -53,12 +53,14 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
 
     child_list = []
     nested_child_tag = None
+    nested_tag = None
     netx_attr = None
 
     if child_tag.find('.') > 0:
         nested_tag = child_tag.split(".")
         child_tag = nested_tag[0]
         nested_child_tag = nested_tag[1]
+    print(f'{ref_tag} - {nested_tag} - {child_tag} - {nested_child_tag}')
 
     for child_field in emu_record.find(ref_tag): 
         if child_field.tag == child_tag:
@@ -69,10 +71,9 @@ def get_ref_value(emu_record: ET.Element, ref_tag: ET.Element, child_tag: str) -
                             if nested_child_field.text is not None:  # and re.match(r'^\s+$', nested_child_field.text) is None:
                                 child_list.append(nested_child_field.text)
 
-            # else:
-            #     print('nested_child_tag IS None')
-            #     child_list.append(str(child_field.text))
-            #     print(f'...added to child_list:  {child_list}')
+            elif child_field.text is not None:
+                child_list.append(str(child_field.text))
+                # print(f'...added to child_list:  {child_list}')
 
     if len(child_list) > 0:  # and re.match(r'^\s+$', child_list) is None:
         netx_attr = " | ".join(child_list)
@@ -98,5 +99,5 @@ def get_group_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: st
         netx_attr = " | ".join(child_list)
 
     else: netx_attr = None
-
+    
     return netx_attr
