@@ -50,6 +50,9 @@ def main():
     print(main_xml_input)
 
     tree = ET.parse(glob.glob(main_xml_input)[0])    # TODO - test/try to account for empty input-dir
+    input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
+    print(input_file_log)
+    logging.info(input_file_log)
 
     root = tree.getroot()
     records = []
