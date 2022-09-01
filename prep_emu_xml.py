@@ -66,8 +66,13 @@ def parse_emu_to_dss(emu_record: ET.Element, mm_event: ET.Element, mm_catalog: E
 
     for key, value in group_fields.items():
         if type(value) == list:
+            
+            grouped_value = None
+
             if key in ['CatDepartment', 'CatCatalog'] and mm_catalog is not None:
-                grouped_value = xml_tools.get_group_value(mm_catalog, value[0], value[1])
+                grouped_value = xml_tools.get_unique_group_value(mm_catalog, value[0], value[1])
+                # if grouped_value_raw is not None:
+                #     grouped_value = grouped_value_raw.split(" | ")
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
