@@ -140,30 +140,30 @@ def main():
                 print(log_message)
                 logging.info(log_message)
 
+                # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
+                if os.path.isfile(dest_path):
+                    if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
+                        with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
+                            
+                            dest_format = exif.get_tags(dest_path, tags='Format')
+                            if len(dest_format) > 0:
+                                if ('XMP:Format','image/tiff') in dest_format[0].items():
+                                    format_warn = f"WARNING - {dest_path} - possible TIFF File - needs check/fix in EMu"
+                                    print(format_warn)
+                                    logging.warning(format_warn)
+
+                                else:
+                                    exif.set_tags(
+                                        dest_path,
+                                        tags = {'Identifier':r['AudIdentifier']},
+                                        params=["-P", "-overwrite_original"]
+                                    )
+
             except Exception as err:
                 err_message = f'An error occurred trying to copy media from {full_path}: {err}'
                 print(err_message)
                 logging.error(err_message)
-            
-            # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
-            if os.path.isfile(dest_path):
-                if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-                    with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
-                        
-                        dest_format = exif.get_tags(dest_path, tags='Format')
-                        if len(dest_format) > 0:
-                            if ('XMP:Format','image/tiff') in dest_format[0].items():
-                                format_warn = f"WARNING - {dest_path} - possible TIFF File - needs check/fix in EMu"
-                                print(format_warn)
-                                logging.warning(format_warn)
-
-                            else:
-                                exif.set_tags(
-                                    dest_path,
-                                    tags = {'Identifier':r['AudIdentifier']},
-                                    params=["-P", "-overwrite_original"]
-                                )
-
+                
 
         # Set up fields for CSV
         csv_records = []
