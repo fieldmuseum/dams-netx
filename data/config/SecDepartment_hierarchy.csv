@@ -1,25 +1,26 @@
-"level_1","level_2"
-"Action",
-"Anthropology",
-"Botany",
-"Consultations",
-"Exhibitions",
-"Geology",
-"Geology","Fossil Invertebrates"
-"Geology","Fossil Vertebrates"
-"Geology","Paleobotany"
-"Geology","Physical Geology"
-"Library",
-"Library","Photo Archives"
-"Zoology",
-"Zoology","Amphibians and Reptiles"
-"Zoology","Birds"
-"Zoology","Fishes"
-"Zoology","Insects"
-"Zoology","Invertebrate Zoology"
-"Zoology","Mammals"
-"Communications",
-"Education",
-"Marketing",
-"Photography",
-"Technology",
+"emu","netx_level_1","netx_level_2"
+"Action","Action",
+"Anthropology","Anthropology",
+"Botany","Botany",
+"Consultation","Consultation",
+"Exhibitions","Exhibitions",
+"Geology","Geology",
+"Fossil Invertebrates","Geology","Fossil Invertebrates"
+"Fossil Vertebrates","Geology","Fossil Vertebrates"
+"Institutional Advancement","IA",
+"Paleobotany","Geology","Paleobotany"
+"Physical Geology","Geology","Physical Geology"
+"Library","Library",
+"Photo Archives","Library","Photo Archives"
+"Zoology","Zoology",
+"Amphibians and Reptiles","Zoology","Amphibians and Reptiles"
+"Birds","Zoology","Birds"
+"Fishes","Zoology","Fishes"
+"Insects","Zoology","Insects"
+"Invertebrate Zoology","Zoology","Invertebrate Zoology"
+"Mammals","Zoology","Mammals"
+"Communications","Communications",
+"Education","Learning",
+"Marketing","Marketing",
+"Photography","Photography",
+"Technology","Technology",

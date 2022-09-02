@@ -197,10 +197,10 @@ def get_folder_hierarchy(department):
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
     dept_level_1 = []
-    for row in dept_folders: dept_level_1.append(row['level_1'])
+    for row in dept_folders: dept_level_1.append(row['netx_level_1'])
 
     dept_level_2 = []
-    for row in dept_folders: dept_level_2.append(row['level_2'])
+    for row in dept_folders: dept_level_2.append(row['netx_level_2'])
 
     if department in dept_level_2:
         # lookup level_1 value at same index for level_2 key/value
