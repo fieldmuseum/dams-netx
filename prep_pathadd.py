@@ -121,11 +121,37 @@ def main():
     setup.stop_log_dams_netx()
 
 
+# def get_folder_hierarchy(department:str, dept_csv:str):
+#     '''
+#     Get the appropriate parent-folder value for a given SecDepartment value
+#     '''
+#     dept_csv = dept_csv
+#     dept_folders = []
+#     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
+#         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+#         for r in reader: dept_folders.append(r)
+
+#     # make lists of level_1 & level_2 values
+#     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+#     dept_level_1 = []
+#     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
+
+#     dept_level_2 = []
+#     for row in dept_folders: dept_level_2.append(row['netx_level_2'])
+
+#     if department in dept_level_2:
+#         # lookup level_1 value at same index for level_2 key/value
+#         parent = dept_level_1[dept_level_2.index(department)]
+#         return parent + '/' + department + '/'
+    
+#     else: return department + '/'
+
+
 def get_folder_hierarchy(department:str, dept_csv:str):
     '''
     Get the appropriate parent-folder value for a given SecDepartment value
     '''
-    dept_csv = dept_csv
+    dept_csv = dept_csv  # config('DEPARTMENT_CSV')
     dept_folders = []
     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -133,6 +159,9 @@ def get_folder_hierarchy(department:str, dept_csv:str):
 
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+    dept_emu = []
+    for row in dept_folders: dept_emu.append(row['emu'])
+
     dept_level_1 = []
     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
 
@@ -144,8 +173,9 @@ def get_folder_hierarchy(department:str, dept_csv:str):
         parent = dept_level_1[dept_level_2.index(department)]
         return parent + '/' + department + '/'
     
-    else: return department + '/'
-
+    else: 
+        # return department + '/'
+        return dept_level_1[dept_emu.index(department)]
 
 # def validate_files_copied(csv_records, dest_prefix):
 #     """

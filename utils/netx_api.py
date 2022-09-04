@@ -229,7 +229,7 @@ def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], net
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
-def netx_get_asset_by_field(field:str="fileChecksum", file_name:str=None, data_to_get:list=['asset.id'], netx_test:str=None) -> dict:
+def netx_get_asset_by_field(search_field:str="fileChecksum", search_value:str=None, data_to_get:list=['asset.id'], netx_test:str=None) -> dict:
     '''
     For a given basic field and filename, returns a dict that includes NetX asset.id (default).
     Other asset-data can be returned also/instead -- see https://developer.netx.net/#search.
@@ -246,7 +246,7 @@ def netx_get_asset_by_field(field:str="fileChecksum", file_name:str=None, data_t
         "keywords"
         ]
 
-    if field not in netx_api_fields:
+    if search_field not in netx_api_fields:
         print('WARNING - check search field-name')
 
     criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
@@ -258,8 +258,8 @@ def netx_get_asset_by_field(field:str="fileChecksum", file_name:str=None, data_t
                 {
                     "operator": operator,
                     criteria: {
-                        "field": field,
-                        "value": file_name
+                        "field": search_field,
+                        "value": search_value
                     }
                 }
             ]

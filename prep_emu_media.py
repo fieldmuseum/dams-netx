@@ -163,7 +163,7 @@ def main():
                 err_message = f'An error occurred trying to copy media from {full_path}: {err}'
                 print(err_message)
                 logging.error(err_message)
-                
+
 
         # Set up fields for CSV
         csv_records = []
@@ -196,6 +196,9 @@ def get_folder_hierarchy(department):
 
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+    dept_emu = []
+    for row in dept_folders: dept_emu.append(row['emu'])
+
     dept_level_1 = []
     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
 
@@ -207,7 +210,9 @@ def get_folder_hierarchy(department):
         parent = dept_level_1[dept_level_2.index(department)]
         return parent + '/' + department + '/'
     
-    else: return department + '/'
+    else: 
+        # return department + '/'
+        return dept_level_1[dept_emu.index(department)]
 
 
 def validate_files_copied(csv_records, dest_prefix):
