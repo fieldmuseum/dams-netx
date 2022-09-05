@@ -4,8 +4,7 @@ Parse EMu XML to DAMS-ready XML
 '''
 
 import xml.etree.ElementTree as ET
-import os, re, sys
-import glob
+import glob, logging, os, re, sys
 # from decouple import config
 import utils.dss_schema as dss_schema
 import utils.xml_tools as xml_tools
@@ -142,6 +141,9 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
     catalog_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
 
+    input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
+    print(input_file_log)
+    logging.info(input_file_log)
 
     # Load EMu records & fix xml-tags
     emu_tree = ET.ElementTree()
