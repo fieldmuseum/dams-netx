@@ -5,8 +5,9 @@ import xml.etree.ElementTree as ET
 
 def media_schema_xml() -> ET.Element:
     '''basic XML schema for NetX media record imported via DSS'''
-
-    media_schema_xml = ET.fromstring('''
+    
+    media_schema_xml = ET.fromstring(
+        text='''
         <data>
             <NetxFilename/>
             <AudIdentifier/>
@@ -48,13 +49,19 @@ def media_schema_xml() -> ET.Element:
             <RelNotes/>
             <RelParentMediaRef_SummaryData/>
             <RelParentMediaRef_AudIdentifier/>
+            <RelRelatedMediaRef_tab_SummaryData/>
             <RelRelationship_tab/>
             <CatCatalog/>
             <CatDepartment/>
             <EveEvent/>
             <EveEventURLs/>
+            <MulOtherNumber_tab/>
+            <MulOtherNumberSource_tab/>
+            <ChaRepository_tab/>
+            <DetSource/>
         </data>
-        ''')
+        '''
+        )
 
         # <AdmAssetSourceDAMS/>  # field not yet reportable
         # <EveEventsRef_tab_irn/>
@@ -116,12 +123,16 @@ def media_schema_json():
             'RelChildMediaRef_tab_SummaryData': None,
             'RelNotes': None,
             'RelParentMediaRef_SummaryData': None,
-            # 'RelRelatedMediaRef_tab_SummaryData': None,
+            'RelRelatedMediaRef_tab_SummaryData': None,
             'RelRelationship_tab': None,
             'CatDepartment':None,
             'CatCatalog':None,
             'EveEvent':None,
-            'EveEventURLs':None
+            'EveEventURLs':None,
+            'MulOtherNumber_tab':None,
+            'MulOtherNumberSource_tab':None,
+            'ChaRepository_tab':None,
+            'DetSource':None
         }
     }
 

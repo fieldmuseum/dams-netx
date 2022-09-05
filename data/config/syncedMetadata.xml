@@ -1,142 +1,149 @@
-<?xml version="2.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <metadatasync>
 
 
-    <!-- ===================== -->
-    <!-- XML Sync Task Example -->
-    <!-- ===================== -->
+        <!-- ===================== -->
+        <!-- XML Sync Task Example -->
+        <!-- ===================== -->
 
-    <sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="true">
-        <!-- example using a NetX Folder to identify the XML -->
-        <source name="XML Source" type="xml"
-            category_id="103"
+        <sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="false">
+                <!-- example using a NetX Folder to identify the XML -->
+            <source name="XML Source" type="xml"
+            category_id="203"
             container_type="elements"
             row_xpath="//data"
             delete_data_file="false"
             file_to_process="newest">
 
-            <!-- example using a local filesystem folder to identify the XML
-            <source name="XML Source" type="xml" filepath="/opt/netx/xml/teams.xml" row_xpath="//row" container_type="attributes" delete_data_file="false" file_to_process="newest">
-            -->
+                <!-- example using a local filesystem folder to identify the XML
+                <source name="XML Source" type="xml" filepath="/opt/netx/xml/teams.xml" row_xpath="//row" container_type="attributes" delete_data_file="false" file_to_process="newest">
+                -->
 
-            <field name="key_field" column="NetxFilename"/>
+                <field name="key_field" column="NetxFilename"/>
 
-            <field name="field_01" column="MulTitle"/>
-            <field name="field_02" column="DetSubject_tab"/>
-            <field name="field_03" column="AudAssociatedSpecimen"/>
-            <field name="field_04" column="AudAccessURI"/>
-            <field name="field_05" column="irn"/>
-            <field name="field_06" column="MulDescription"/>
-            <field name="field_07" column="DetMediaRightsRef_irn"/>
-            <field name="field_08" column="DetMediaRightsRef_SummaryData"/>
-            <field name="field_09" column="MulMultimediaCreatorRef_tab_SummaryData"/>
-            <field name="field_10" column="MulMultimediaCreatorRef_tab_irn"/>
-            <field name="field_11" column="MulMultimediaCreatorRole_tab"/>
-            <field name="field_12" column="AudCitation"/>
-            <field name="field_13" column="SecRecordStatus"/>
-            <field name="field_14" column="SecDepartment_tab"/>
-            <field name="field_15" column="AdmPublishWebNoPassword"/>
-            <field name="field_16" column="AdmPublishWebPassword"/>
-            <field name="field_17" column="MulIdentifier"/>
-            <field name="field_18" column="AudTaxonCoverage"/>
-            <field name="field_19" column="AudRelatedGeography"/>
-            <field name="field_20" column="AudAssociatedObservation"/>
-            <field name="field_21" column="AudNumbers"/>
-            <field name="field_22" column="AudVernacularName"/>
-            <field name="field_23" column="AudSex"/>
-            <field name="field_24" column="AudLifeStage"/>
-            <field name="field_25" column="AudSubjectOrientation_tab"/>
-            <field name="field_26" column="AudSubjectPart_tab"/>
-            <field name="field_27" column="AudCaptureDevice"/>
-            <field name="field_28" column="AudFundingAttribution"/>
-            <field name="field_29" column="AdmDateInserted"/>
-            <field name="field_30" column="AdmDateModified"/>
-            <field name="field_31" column="AdmInsertedBy"/>
-            <field name="field_32" column="AdmModifiedBy"/>
-            <field name="field_33" column="RelNotes"/>
-            <field name="field_34" column="RelParentMediaRef_SummaryData"/>
-            <field name="field_35" column="RelRelatedMediaRef_tab_SummaryData"/>
-            <field name="field_36" column="RelRelationship_tab"/>
-            <field name="field_37" column="DetMediaRightsRef_RigOwner_Summary"/>
-            <field name="field_38" column="DetMediaRightsRef_RigOtherNumber"/>
-            <field name="field_39" column="DetMediaRightsRef_RigType"/>
-            <field name="field_40" column="RelParentMediaRef_AudIdentifier"/>
-            <field name="field_41" column="AudIdentifier"/>
-            <field name="field_42" column="CatCatalog"/>
-            <field name="field_43" column="CatDepartment"/>
-            <field name="field_44" column="EveEvent"/>
-            <field name="field_45" column="EveEventURLs"/>
-            <!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
-            <!--field name="field_!!" column=""/-->
+                <field name="field_01" column="MulTitle"/>
+                <field name="field_02" column="DetSubject_tab"/>
+				<field name="field_03" column="AudAssociatedSpecimen"/>
+                <field name="field_04" column="AudAccessURI"/>
+                <field name="field_05" column="irn"/>
+				<field name="field_06" column="MulDescription"/>
+				<field name="field_07" column="DetMediaRightsRef_irn"/>
+				<field name="field_08" column="DetMediaRightsRef_Summary"/>
+				<field name="field_09" column="MulMultimediaCreatorRef_tab_SummaryData"/>
+				<field name="field_10" column="MulMultimediaCreatorRef_tab_irn"/>
+				<field name="field_11" column="MulMultimediaCreatorRole_tab"/>
+				<field name="field_12" column="AudCitation"/>
+				<field name="field_13" column="SecRecordStatus"/>
+				<field name="field_14" column="SecDepartment_tab"/>
+				<field name="field_15" column="AdmPublishWebNoPassword"/>
+				<field name="field_16" column="AdmPublishWebPassword"/>
+				<field name="field_17" column="MulIdentifier"/>				
+				<field name="field_18" column="AudTaxonCoverage"/>
+				<field name="field_19" column="AudRelatedGeography"/>
+				<field name="field_20" column="AudAssociatedObservation"/>
+				<field name="field_21" column="AudNumbers"/>
+				<field name="field_22" column="AudVernacularName"/>
+				<field name="field_23" column="AudSex"/>
+				<field name="field_24" column="AudLifeStage"/>
+				<field name="field_25" column="AudSubjectOrientation_tab"/>
+				<field name="field_26" column="AudSubjectPart_tab"/>
+				<field name="field_27" column="AudCaptureDevice"/>
+				<field name="field_28" column="AudFundingAttribution"/>
+				<field name="field_29" column="AdmDateInserted"/>
+				<field name="field_30" column="AdmDateModified"/>
+				<field name="field_31" column="AdmInsertedBy"/>
+				<field name="field_32" column="AdmModifiedBy"/>
+				<field name="field_33" column="RelNotes"/>
+				<field name="field_34" column="RelParentMediaRef_SummaryData"/>
+				<field name="field_35" column="RelRelatedMediaRef_tab_SummaryData"/>
+				<field name="field_36" column="RelRelationship_tab"/>
+				<field name="field_37" column="DetMediaRightsRef_RigOwner_Summary"/>
+				<field name="field_38" column="DetMediaRightsRef_RigOtherNumber"/>
+				<field name="field_39" column="DetMediaRightsRef_RigType"/>
+				<field name="field_40" column="RelParentMediaRef_AudIdentifier"/>
+				<field name="field_41" column="AudIdentifier"/>
+				<field name="field_42" column="CatCatalog"/>
+				<field name="field_43" column="CatDepartment"/>
+				<field name="field_44" column="EveEvent"/>
+				<field name="field_45" column="EveEventURLs"/>
+				<field name="field_46" column="MulOtherNumber_tab"/>
+				<field name="field_47" column="MulOtherNumberSource_tab"/>
+				<field name="field_48" column="ChaRepository_tab"/>
+				<field name="field_49" column="DetSource"/>
+				<!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
 
-            <!--
-            <field name="field_!!" column=""/>
-            EveEventsRef_tab_irn
-            EveEventsRef_tab_GUID
-            EveEventsRef_tab_SummaryData
-            -->
+				<!--
+				<field name="field_!!" column=""/>
+				EveEventsRef_tab_irn
+				EveEventsRef_tab_GUID
+				EveEventsRef_tab_SummaryData
+				-->
 
         </source>
 
-        <destination type="DAM">
+            <destination type="DAM">
             <records name="NetX Update" type="asset">
-
-                <link field="key_field" attribute="file" />
-                <map field="field_01" attribute="Title" skip_null="true"/>
+			
+		    <link field="key_field" attribute="file" />
+				<map field="field_01" attribute="Title" skip_null="true"/>
                 <map field="field_02" attribute="Subjects" skip_null="true"/>
-                <map field="field_03" attribute="Associated Specimens" skip_null="true"/>
+				<map field="field_03" attribute="Associated Specimens" skip_null="true"/>
                 <map field="field_04" attribute="Access URI" skip_null="true"/>
-                <map field="field_05" attribute="IRN" skip_null="true"/>
-                <map field="field_06" attribute="Description" skip_null="true"/>
-                <map field="field_07" attribute="Rights record IRN" skip_null="true"/>
-                <map field="field_08" attribute="Rights Summary" skip_null="true"/>
-                <map field="field_09" attribute="Creator" skip_null="true"/>
-                <map field="field_10" attribute="Creator IRN" skip_null="true"/>
-                <map field="field_11" attribute="Creator Role" skip_null="true"/>
-                <map field="field_12" attribute="Citation" skip_null="true"/>
-                <map field="field_13" attribute="Record Status" skip_null="true"/>
-                <map field="field_14" attribute="Security Department" skip_null="true"/>
-                <map field="field_15" attribute="Publish on Internet" skip_null="true"/>
-                <map field="field_16" attribute="Publish on Intranet" skip_null="true"/>
-                <map field="field_17" attribute="EMu Filename" skip_null="true"/>
-                <map field="field_18" attribute="Taxon Coverage" skip_null="true"/>
-                <map field="field_19" attribute="Related Geography" skip_null="true"/>
-                <map field="field_20" attribute="Associated Observations" skip_null="true"/>
-                <map field="field_21" attribute="Catalog Numbers" skip_null="true"/>
-                <map field="field_22" attribute="Common Name" skip_null="true"/>
-                <map field="field_23" attribute="Sex" skip_null="true"/>
-                <map field="field_24" attribute="Life Stage" skip_null="true"/>
-                <map field="field_25" attribute="Subject Orientation" skip_null="true"/>
-                <map field="field_26" attribute="Subject Part" skip_null="true"/>
-                <map field="field_27" attribute="Capture Device" skip_null="true"/>
-                <map field="field_28" attribute="Funding Attribution" skip_null="true"/>
-                <map field="field_29" attribute="Date Inserted in EMu" skip_null="true"/>
-                <map field="field_30" attribute="Date Modified in EMu" skip_null="true"/>
-                <map field="field_31" attribute="Inserted By" skip_null="true"/>
-                <map field="field_32" attribute="Modified By" skip_null="true"/>
-                <map field="field_33" attribute="Related Media Notes" skip_null="true"/>
-                <map field="field_34" attribute="Parent Media Summary" skip_null="true"/>
-                <map field="field_35" attribute="Related Media Summary" skip_null="true"/>
-                <map field="field_36" attribute="Media Relationship Type" skip_null="true"/>
-                <map field="field_37" attribute="Rights record Owner" skip_null="true"/>
-                <map field="field_38" attribute="Rights License" skip_null="true"/>
-                <map field="field_39" attribute="Rights Type" skip_null="true"/>
-                <map field="field_40" attribute="Parent Media Identifier" skip_null="true"/>
-                <map field="field_41" attribute="Identifier" skip_null="true"/>
-                <map field="field_42" attribute="Collection Catalogue" skip_null="true"/>
-                <map field="field_43" attribute="Collection Department" skip_null="true"/>
-                <map field="field_44" attribute="Related Events" skip_null="true"/>
-                <map field="field_45" attribute="Related Event URLs" skip_null="true"/>
-                <!--map field="field_!!" attribute="Data Source" skip_null="true"/-->
-                <!--map field="field_!!" attribute="" skip_null="true"/-->
+				<map field="field_05" attribute="IRN" skip_null="true"/>
+				<map field="field_06" attribute="Description" skip_null="true"/>
+				<map field="field_07" attribute="Rights record IRN" skip_null="true"/>
+				<map field="field_08" attribute="Rights Summary" skip_null="true"/>
+				<map field="field_09" attribute="Creator" skip_null="true"/>
+				<map field="field_10" attribute="Creator IRN" skip_null="true"/>
+				<map field="field_11" attribute="Creator Role" skip_null="true"/>
+				<map field="field_12" attribute="Citation" skip_null="true"/>
+				<map field="field_13" attribute="Record Status" skip_null="true"/>
+				<map field="field_14" attribute="Security Department" skip_null="true"/>
+				<map field="field_15" attribute="Publish on Internet" skip_null="true"/>
+				<map field="field_16" attribute="Publish on Intranet" skip_null="true"/>
+				<map field="field_17" attribute="EMu Filename" skip_null="true"/>
+				<map field="field_18" attribute="Taxon Coverage" skip_null="true"/>
+				<map field="field_19" attribute="Related Geography" skip_null="true"/>
+				<map field="field_20" attribute="Associated Observations" skip_null="true"/>
+				<map field="field_21" attribute="Catalog Numbers" skip_null="true"/>
+				<map field="field_22" attribute="Common Name" skip_null="true"/>
+				<map field="field_23" attribute="Sex" skip_null="true"/>
+				<map field="field_24" attribute="Life Stage" skip_null="true"/>
+				<map field="field_25" attribute="Subject Orientation" skip_null="true"/>
+				<map field="field_26" attribute="Subject Part" skip_null="true"/>
+				<map field="field_27" attribute="Capture Device" skip_null="true"/>
+				<map field="field_28" attribute="Funding Attribution" skip_null="true"/>
+				<map field="field_29" attribute="Date Inserted in EMu" skip_null="true"/>
+				<map field="field_30" attribute="Date Modified in EMu" skip_null="true"/>
+				<map field="field_31" attribute="Inserted By" skip_null="true"/>
+				<map field="field_32" attribute="Modified By" skip_null="true"/>
+				<map field="field_33" attribute="Related Media Notes" skip_null="true"/>
+				<map field="field_34" attribute="Parent Media Summary" skip_null="true"/>
+				<map field="field_35" attribute="Related Media Summary" skip_null="true"/>
+				<map field="field_36" attribute="Media Relationship Type" skip_null="true"/>
+				<map field="field_37" attribute="Rights record Owner" skip_null="true"/>
+				<map field="field_38" attribute="Rights License" skip_null="true"/>
+				<map field="field_39" attribute="Rights Type" skip_null="true"/>
+				<map field="field_40" attribute="Parent Media Identifier" skip_null="true"/>
+				<map field="field_41" attribute="Identifier" skip_null="true"/>
+				<map field="field_42" attribute="Related Object Catalogs" skip_null="true"/>
+				<map field="field_43" attribute="Related Object Departments" skip_null="true"/>
+				<map field="field_44" attribute="Related Events" skip_null="true"/>
+				<map field="field_45" attribute="Related Event URLs" skip_null="true"/>
+				<map field="field_46" attribute="Other Number" skip_null="true"/>
+				<map field="field_47" attribute="Other Number Source" skip_null="true"/>
+				<map field="field_48" attribute="Repository" skip_null="true"/>
+				<map field="field_49" attribute="Source" skip_null="true"/>
+				<!--map field="field_!!" attribute="Data Source" skip_null="true"/-->
+				<!--map field="field_!!" attribute="" skip_null="true"/-->
 
             </records>
-        </destination>
+            </destination>
 
-    </sync>
+        </sync>
 
 
-    <!-- AutoTask
+<!-- AutoTask
 
     <task name="XML metadata sync">
         <matchCriteria type="and">
@@ -145,7 +152,47 @@
         <customJob className="com.netxposure.products.imageportal.module.metadata.sync.job.MetadataSyncJob" syncTaskNames="XML Metadata Sync"/>
     </task>
 
-    -->
+-->
+
+	<sync type="scalar" log="debug" name="XML Metadata export" include_in_default="false">
+		<!-- The period string may contain spaces between components, so either of the following is valid: "2d10h30m" or "2d 10h 30m" -->
+		<!--  try category_id="710" vs mod_date_period="1d" attribute in source tag / in next line -->
+ 		<source type="DAM" name="netx dam" objectType="asset" category_id="508">
+			<field name="field_identifier" column="Identifier"/>
+			<field name="field_title" column="Title"/>
+			<field name="field_description" column="Description"/>
+			<field name="field_rights" column="Rights Summary"/>
+			<field name="field_subjects" column="Subjects"/>
+			<field name="field_assetId" column="assetId"/>
+			<!-- field name="field_netxid" column="assetId"/>
+			<field name="field_othernumber" column="Other Number"/>
+			<field name="field_othernumbersource" column="Other Number Source"/>
+			<field name="field_modified" column="modified"/>
+			<field name="field_checksum" column="checksum"/ -->
+		</source>
+		<destination type="xml">
+			<!-- NOTE: Each records block would result in its own XML file -->
+			<!-- NOTE: Use $TIMESTAMP in the filename to include date/time in YYYYMMDDHHSS format -->
+			<!-- Alternative output filepath="/home/fmit/xml/netx_to_emu_$TIMESTAMP.xml" -->
+			<records name="EMu_Multimedia" container_type="elements" filepath="/opt/netx/xml/netx_to_emu_$TIMESTAMP.xml">
+			<!-- NOTE: See metadata sync docs in confluence for discussion of container_type (attributes vs. elements) -->
+				<!-- NOTE: There is no link element, we're just dumping records -->
+				<!-- NOTE: In this context attribute is the name of the data field in the XML (either the XML element or the XML attribute, depending on what is specified in the container_type setting -->
+				<map field="field_identifier" attribute="AudIdentifier"/>
+				<map field="field_title" attribute="MulTitle"/>
+				<map field="field_rights" attribute="DetMediaRightsRef_Summary"/>
+				<map field="field_description" attribute="MulDescription"/>
+				<map field="field_subjects" attribute="DetSubjects"/>
+				<map field="field_assetId" attribute="MulOtherNumber"/>
+				<!-- map field="field_netxid" attribute="MulOtherNumber_tab_1"/>
+				<map field="field_othernumber" attribute="MulOtherNumber_tab_n"/>
+				<map field="field_othernumbersource" attribute="MulOtherNumberSource_tab_n"/>
+				<map field="field_modified" attribute="DetResourceDetailsDate0"/>
+				<map field="field_checksum" attribute="ChaMd5Sum"/ -->
+			</records>
+		</destination>
+
+
+	</sync>
 
 </metadatasync>
-

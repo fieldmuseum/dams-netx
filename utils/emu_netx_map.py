@@ -39,7 +39,8 @@ def emu_netx_atoms() -> dict:
             'AdmInsertedBy':'AdmInsertedBy',
             'AdmModifiedBy':'AdmModifiedBy',
             'RelNotes':'RelNotes',
-            'MulIdentifier':'MulIdentifier'
+            'MulIdentifier':'MulIdentifier',
+            'DetSource':'DetSource'
             # 'RelParentMediaRef_SummaryData'
     }
 
@@ -56,7 +57,8 @@ def emu_netx_tables() -> dict:
         'DetSubject_tab':'DetSubject_tab',
         'SecDepartment_tab':'SecDepartment_tab',
         'AudSubjectOrientation_tab':'AudSubjectOrientation_tab',
-        'AudSubjectPart_tab':'AudSubjectPart_tab'
+        'AudSubjectPart_tab':'AudSubjectPart_tab',
+        'ChaRepository_tab':'ChaRepository_tab'
         # 'DetMediaRightsRef_irn':['DetMediaRightsRef', 'irn'],
         # 'DetMediaRightsRef_Summary':['DetMediaRightsRef', 'SummaryData'],
         # 'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
@@ -110,6 +112,10 @@ def emu_netx_groups_or_reftabs() -> dict:
         'MulMultimediaCreatorRef_tab_SummaryData':['Creator','SummaryData'],
         'MulMultimediaCreatorRef_tab_irn':['Creator','irn'],
         'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole'],
+        'MulOtherNumber_tab':['OtherNumbers','MulOtherNumber'],
+        'MulOtherNumberSource_tab':['OtherNumbers','MulOtherNumberSource'],
+        'RelRelatedMediaRef_tab_SummaryData':['RelatedMedia','SummaryData'],
+        'RelRelationship_tab':['RelatedMedia','RelRelationship'],
         'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
         'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'] # make unique list
     }
