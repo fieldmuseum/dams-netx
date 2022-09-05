@@ -63,7 +63,8 @@ def start_log_dams_netx(config:dict=None, log_level=logging.INFO, cmd_args:list=
         config = get_config_dams_netx()
 
     today = datetime.datetime.today().strftime('%Y%m%d')
-    log_file = config['LOG_OUTPUT'] + f'dams-netx-{today}.log'
+    script_to_log = re.sub(r'\.py$', '', sys.argv[0])
+    log_file = config['LOG_OUTPUT'] + f'{script_to_log}-{today}.log'
 
     if type(cmd_args) == list:
         cmd_args = ' '.join(cmd_args)
