@@ -271,3 +271,20 @@ def netx_get_asset_by_field(search_field:str="fileChecksum", search_value:str=No
     # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_test=netx_test)
+
+
+def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
+    '''
+    CAREFUL: In NetX, Deletes an asset via the NetX API
+    - Returns an empty object.
+    - See method help: https://developer.netx.net/#removeassetfromfolder
+    '''
+
+    method = 'deleteAsset'
+
+    params = [
+        asset_id
+        ]
+    # print(params)
+
+    return netx_api_make_request(method, params, netx_env=netx_env)
