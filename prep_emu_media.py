@@ -212,7 +212,7 @@ def get_folder_hierarchy(department):
     
     else: 
         # return department + '/'
-        return dept_level_1[dept_emu.index(department)]
+        return dept_level_1[dept_emu.index(department)] + '/'
 
 
 def validate_files_copied(csv_records, dest_prefix):
