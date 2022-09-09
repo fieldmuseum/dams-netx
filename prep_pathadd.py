@@ -238,7 +238,10 @@ def pathmove(record:dict, dept_csv:str):
     :return: returns a string of the pathMove value
     """
     
-    department_orig = record['SecDepartment']
+    department_orig_raw = record['SecDepartment']
+    department_orig = department_orig_raw.title()
+    if re.match('Amphibian', department_orig) is not None:
+        department_orig = "Amphibians and Reptiles"
     department = get_folder_hierarchy(department_orig, dept_csv)
 
     pathmove = f'{department}'
@@ -261,8 +264,11 @@ def pathadd(record:dict, dept_csv:str):
     
     filename = prep_file(record)
 
-    for dept in record['PathAddDepts']:
-        if dept is not None:
+    for dept_raw in record['PathAddDepts']:
+        if dept_raw is not None:
+            dept = dept_raw.title()
+            if re.match('Amphibian', dept) is not None:
+                dept = "Amphibians and Reptiles"
             dept_folder = get_folder_hierarchy(dept, dept_csv) 
             pathadd = f'{dept_folder}'
             path_add_row = {'file':filename, 'pathAdd':pathadd}
