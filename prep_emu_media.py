@@ -321,7 +321,7 @@ def validate_records(records):
     Returns ALL invalid records.
     """
     invalid_records = []
-    fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecRecordStatus', 'SecDepartment']
+    fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecDepartment']  # 'SecRecordStatus'
 
     for record in records:
         for field in fields_to_validate:
@@ -351,7 +351,7 @@ def output_error_log(invalid_records):
         writer.writeheader()
         writer.writerows(invalid_records)
 
-    raise Exception('Records do not all contain all of the required fields!')
+    # raise Exception('Records do not all contain all of the required fields!')
 
 if __name__ == '__main__':
     main()
