@@ -74,15 +74,16 @@ def main():
                 for dept in sec_dept_raw:
                     if dept.text is not None:
                         if len(dept.text) > 0 and dept.text not in sec_dept_all:
-                            sec_dept_all.append(dept.text)
+                            if dept.text != " ":
+                                sec_dept_all.append(dept.text)
 
                 record['SecDepartment'] = sec_dept_all[0]
 
-                # Get secondary SecDepartment values for pathAdd
-                if len(sec_dept_all) > 1:
-                    record['PathAddDepts'] = sec_dept_all
-                else:
-                    record['PathAddDepts'] = None
+                # # Get secondary SecDepartment values for pathAdd
+                # if len(sec_dept_all) > 1:
+                #     record['PathAddDepts'] = sec_dept_all
+                # else:
+                #     record['PathAddDepts'] = None
                 
         records.append(record)
     
@@ -103,10 +104,10 @@ def main():
         r['pathMove'] = pathmove(record)
         records_prep_file.append(r)
 
-        if record['PathAddDepts'] is not None: 
-            path_add_rows = pathadd(record)
-            for row in path_add_rows:
-                path_add_running_list.append(row)
+        # if record['PathAddDepts'] is not None: 
+        #     path_add_rows = pathadd(record)
+        #     for row in path_add_rows:
+        #         path_add_running_list.append(row)
         
 
     # # SKIP FIRST 21.1k records 
@@ -286,37 +287,37 @@ def pathmove(record):
     return pathmove
 
 
-def pathadd(record: dict):
-    """
-    Creates the pathAdd value(s) for a record (folder path without filename)
-    e.g. 
-    [
-        {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
-        {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
-    ]
+# def pathadd(record: dict):
+#     """
+#     Creates the pathAdd value(s) for a record (folder path without filename)
+#     e.g. 
+#     [
+#         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
+#         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
+#     ]
 
-    :param record: dict of the record data
-    :return: returns a list of dicts with an asset's pathAdd rows
-    """
-    path_add_list = []
+#     :param record: dict of the record data
+#     :return: returns a list of dicts with an asset's pathAdd rows
+#     """
+#     path_add_list = []
     
-    filename = prep_file(record)
+#     filename = prep_file(record)
 
-    # record['PathAddDepts'] should be a list of ET.Element
-    for dept_raw in record['PathAddDepts']:
-        if dept_raw is not None:
-            dept = dept_raw.title()
-            if re.match('Amphibian', dept) is not None:
-                dept = "Amphibians and Reptiles"
-            dept_folder = get_folder_hierarchy(dept)
-            pathadd = f'{dept_folder}'
-            path_add_row = {'file':filename, 'pathAdd':pathadd}
+#     # record['PathAddDepts'] should be a list of ET.Element
+#     for dept_raw in record['PathAddDepts']:
+#         if dept_raw is not None:
+#             dept = dept_raw.title()
+#             if re.match('Amphibian', dept) is not None:
+#                 dept = "Amphibians and Reptiles"
+#             dept_folder = get_folder_hierarchy(dept)
+#             pathadd = f'{dept_folder}'
+#             path_add_row = {'file':filename, 'pathAdd':pathadd}
 
-            if path_add_row not in path_add_list:
-                path_add_list.append(path_add_row)
+#             if path_add_row not in path_add_list:
+#                 path_add_list.append(path_add_row)
 
-    if len(path_add_list) > 0:
-        return path_add_list
+#     if len(path_add_list) > 0:
+#         return path_add_list
 
 
 def validate_records(records):
