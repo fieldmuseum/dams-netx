@@ -4,7 +4,7 @@ Functions for using the NetX JSON-RPC API
 - NetX API docs - https://developer.netx.net
 '''
 
-import requests
+import datetime, re, requests
 import utils.setup as setup
 
 
@@ -79,6 +79,7 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_
     '''Makes a request to the NetX API'''
 
     json = netx_api_setup_request_body(method=method, params=params)
+    # print(json)
 
     netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
     # print(netx_request)
@@ -229,9 +230,17 @@ def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], net
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
-def netx_get_asset_by_field(search_field:str="fileChecksum", search_value:str=None, data_to_get:list=['asset.id'], netx_test:str=None) -> dict:
+def netx_get_asset_by_field(
+    search_field:str="fileChecksum", 
+    search_value:str=None, 
+    data_to_get:list=['asset.id'], 
+    netx_test:str=None,
+    criteria:str='exact'
+    ) -> dict:
     '''
-    For a given basic field and filename, returns a dict that includes NetX asset.id (default).
+    For a given basic/system field and value, returns a dict that includes NetX asset.id (default).
+     - To search by a NetX system field, use camel case, e.g. "assetId" or "fileName"
+     - To search by a custom attribute, match the frontend case, e.g. "IRN" or "Other Number"
     Other asset-data can be returned also/instead -- see https://developer.netx.net/#search.
     
     - NOTE - NetX getAssetsByQuery is more flexible, if this function should be more general.
@@ -246,10 +255,25 @@ def netx_get_asset_by_field(search_field:str="fileChecksum", search_value:str=No
         "keywords"
         ]
 
-    if search_field not in netx_api_fields:
-        print('WARNING - check search field-name')
+    field_or_attribute = "field"
 
-    criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
+    if search_field not in netx_api_fields:
+        print(f'WARNING - check search field-name {search_field}')
+        field_or_attribute = "attribute"
+    
+    elif re.match(r".*Date$", search_field) is not None:
+        search_value = convert_date_for_netx(search_value)
+
+    netx_api_criteria = [
+        "exact", "contains"  # , "range", "folder", "subquery"
+        ]
+    
+    if criteria is None:
+        criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
+
+    elif criteria not in netx_api_criteria:
+        print(f'WARNING - check search criteria {criteria}')
+
     operator = "and"  # must be one of: "and", "or", "not"
 
     params = [
@@ -258,19 +282,110 @@ def netx_get_asset_by_field(search_field:str="fileChecksum", search_value:str=No
                 {
                     "operator": operator,
                     criteria: {
-                        "field": search_field,
+                        field_or_attribute: search_field,
                         "value": search_value
                     }
                 }
             ]
         },
         {
+            "page": {
+                "startIndex":0,
+                "size": 10
+            },
             "data": data_to_get
         }
         ]
     # print(params)
 
-    return netx_api_make_request(method=method, params=params, netx_test=netx_test)
+    check = netx_api_make_request(method=method, params=params, netx_env=netx_test)
+
+    if check is not None:
+        if 'result' in check.keys():
+            param_size = check['result']['size']
+            if param_size > 200:
+                print(f'adjusting orig param_size to 200; full results size is {param_size}')
+                param_size = 200
+            params[1]['page']['size'] = param_size
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_test)
+
+
+def netx_get_asset_by_range(
+    search_field:str="modDate", 
+    search_min:str=None, 
+    search_max:str=None, 
+    data_to_get:list=['asset.id'], 
+    netx_test:str=None,
+    ) -> dict:
+    '''
+    For a given basic/system range-field and value, 
+    returns a dict that includes NetX asset.id (default).
+    Other asset-data can be returned also/instead -- see https://developer.netx.net/#search.
+
+    Leave the 'search_max' / 'search_min' value blank for greater than / less than searches.
+    '''
+    
+    method = 'getAssetsByQuery'
+
+    netx_api_fields = [
+        "assetId", "name",
+        "fileChecksum", "fileName", "fileType", 
+        "creationDate", "importDate", "modDate",
+        "keywords"
+        ]
+
+    field_or_attribute = "field"
+
+    if search_field not in netx_api_fields:
+        print(f'WARNING - check search field-name {search_field}')
+        field_or_attribute = "attribute"
+    
+    elif re.match(r".*Date$", search_field) is not None:
+        if search_min is not None:
+            search_min = convert_date_for_netx(search_min)
+        if search_max is not None:
+            search_max = convert_date_for_netx(search_max)
+
+    # operator = "and"  # must be one of: "and", "or", "not"
+
+    params = [
+        {
+            "query": [
+                {
+                    "operator": "and",
+                    "range": {
+                        field_or_attribute: search_field,
+                        "min": search_min,
+                        "max": search_max,
+                        "includeMin": False,
+                        "includeMax": False
+                    }
+                }
+            ]
+        },
+        {
+            "page": {
+                "startIndex":0,
+                "size": 10
+            },
+            "data": data_to_get
+        }
+        ]
+    # print(params)
+
+    check = netx_api_make_request(method=method, params=params, netx_env=netx_test)
+
+    if check is not None:
+        if 'result' in check.keys():
+            param_size = check['result']['size']
+            if param_size > 200:
+                print(f'adjusting orig param_size to 200; full results size is {param_size}')
+                param_size = 200
+            params[1]['page']['size'] = param_size
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_test)
+
 
 
 def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
@@ -288,3 +403,25 @@ def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
     # print(params)
 
     return netx_api_make_request(method, params, netx_env=netx_env)
+
+
+def convert_date_for_netx(date_string_raw:str, time_string_raw:str='00:00:00') -> str:
+    '''
+    Convert a date-string from a "YYYY-M-D" format (and optional time-string in H:M:S) 
+    to NetX's preferred milliseconds-since-epoch
+    '''
+
+    epoch = datetime.datetime.utcfromtimestamp(0)
+
+    if not re.match(r'^\d{4}-\d{1,2}-\d{1,2}$', date_string_raw): 
+        raise Exception(f'Input date {date_string_raw} is not formatted in "YYYY-MM-DD"')
+    
+    date_time_string = f'{date_string_raw} {time_string_raw}'
+
+    # re-format input date from string 'YYYY-MM-DD' to datetime-object
+    # # https://pythonguides.com/convert-a-string-to-datetime-in-python/ 
+    date_ymd = datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M:%S')
+
+    print(date_ymd)
+
+    return str(int((date_ymd - epoch).total_seconds() * 1000))
