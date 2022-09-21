@@ -315,7 +315,7 @@ def netx_get_asset_by_range(
     search_field:str="modDate", 
     search_min:str=None, 
     search_max:str=None, 
-    data_to_get:list=['asset.id'], 
+    data_to_get:list=['asset.id'],  #  'asset.attributes'], 
     netx_test:str=None,
     ) -> dict:
     '''
@@ -405,14 +405,21 @@ def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
     return netx_api_make_request(method, params, netx_env=netx_env)
 
 
-def convert_date_for_netx(date_string_raw:str, time_string_raw:str='00:00:00') -> str:
+def convert_date_for_netx(date_string_raw:str) -> str:
     '''
-    Convert a date-string from a "YYYY-M-D" format (and optional time-string in H:M:S) 
-    to NetX's preferred milliseconds-since-epoch
+    Convert a date-string from a "YYYY-M-D" format to NetX's preferred milliseconds-since-epoch
     '''
 
     epoch = datetime.datetime.utcfromtimestamp(0)
 
+    # parse H:M:S from date-string, if present
+    if re.match(r'.*\s+\d{1,2}:\d{1,2}(:\d{1,2})*', date_string_raw) is not None:
+        time_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)', r'\g<3>', date_string_raw)
+        date_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)', r'\g<1>', date_string_raw)
+    else:
+        time_string_raw:str='00:00:00'
+
+    # check date-formate
     if not re.match(r'^\d{4}-\d{1,2}-\d{1,2}$', date_string_raw): 
         raise Exception(f'Input date {date_string_raw} is not formatted in "YYYY-MM-DD"')
     
