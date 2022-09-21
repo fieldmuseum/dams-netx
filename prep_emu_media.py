@@ -185,7 +185,7 @@ def main():
     setup.stop_log_dams_netx()
 
 
-def get_folder_hierarchy(department):
+def get_folder_hierarchy(department_raw):
     '''
     Get the appropriate parent-folder value for a given SecDepartment value
     '''
@@ -205,6 +205,8 @@ def get_folder_hierarchy(department):
 
     dept_level_2 = []
     for row in dept_folders: dept_level_2.append(row['netx_level_2'])
+
+    department = department_raw.strip()
 
     if department in dept_level_2:
         # lookup level_1 value at same index for level_2 key/value
