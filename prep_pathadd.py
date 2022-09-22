@@ -7,6 +7,7 @@ from decouple import config
 import xml.etree.ElementTree as ET
 import utils.csv_tools as uc
 import utils.setup as setup
+import utils.emu_netx_map as emu_netx
 
 
 def main():
@@ -122,11 +123,11 @@ def main():
     setup.stop_log_dams_netx()
 
 
-# def get_folder_hierarchy(department:str, dept_csv:str):
+# def get_folder_hierarchy(department_raw:str, dept_csv:str):
 #     '''
 #     Get the appropriate parent-folder value for a given SecDepartment value
 #     '''
-#     dept_csv = dept_csv
+#     dept_csv = dept_csv  # config('DEPARTMENT_CSV')
 #     dept_folders = []
 #     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
 #         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -134,61 +135,25 @@ def main():
 
 #     # make lists of level_1 & level_2 values
 #     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+#     dept_emu = []
+#     for row in dept_folders: dept_emu.append(row['emu'])
+
 #     dept_level_1 = []
 #     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
 
 #     dept_level_2 = []
 #     for row in dept_folders: dept_level_2.append(row['netx_level_2'])
 
+#     department = department_raw.strip()
+
 #     if department in dept_level_2:
 #         # lookup level_1 value at same index for level_2 key/value
 #         parent = dept_level_1[dept_level_2.index(department)]
 #         return parent + '/' + department + '/'
     
-#     else: return department + '/'
-
-
-def get_folder_hierarchy(department:str, dept_csv:str):
-    '''
-    Get the appropriate parent-folder value for a given SecDepartment value
-    '''
-    dept_csv = dept_csv  # config('DEPARTMENT_CSV')
-    dept_folders = []
-    with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for r in reader: dept_folders.append(r)
-
-    # make lists of level_1 & level_2 values
-    # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
-    dept_emu = []
-    for row in dept_folders: dept_emu.append(row['emu'])
-
-    dept_level_1 = []
-    for row in dept_folders: dept_level_1.append(row['netx_level_1'])
-
-    dept_level_2 = []
-    for row in dept_folders: dept_level_2.append(row['netx_level_2'])
-
-    if department in dept_level_2:
-        # lookup level_1 value at same index for level_2 key/value
-        parent = dept_level_1[dept_level_2.index(department)]
-        return parent + '/' + department + '/'
-    
-    else: 
-        # return department + '/'
-        return dept_level_1[dept_emu.index(department)]
-
-# def validate_files_copied(csv_records, dest_prefix):
-#     """
-#     Verify that prep_file values are valid, i.e. a file exists at the path.
-#     """
-#     for r in csv_records:
-#         if 'pathAdd' in r.keys():
-#             path = dest_prefix + r['pathAdd'] + r['file']
-#         else:    #    if 'pathMove' in r.keys():
-#             path = dest_prefix + r['pathMove'] + r['file']
-#         if not os.path.exists(path):
-#             raise Exception(f'prep_file: {path} does not exist')
+#     else: 
+#         # return department + '/'
+#         return dept_level_1[dept_emu.index(department)]
 
 
 def irn_dir(irn):
@@ -243,7 +208,7 @@ def pathmove(record:dict, dept_csv:str):
     department_orig = department_orig_raw.title()
     if re.match('Amphibian', department_orig) is not None:
         department_orig = "Amphibians and Reptiles"
-    department = get_folder_hierarchy(department_orig, dept_csv)
+    department = emu_netx.get_folder_hierarchy(department_orig, dept_csv)
 
     pathmove = f'{department}'
     return pathmove
@@ -270,7 +235,7 @@ def pathadd(record:dict, dept_csv:str):
             dept = dept_raw.title()
             if re.match('Amphibian', dept) is not None:
                 dept = "Amphibians and Reptiles"
-            dept_folder = get_folder_hierarchy(dept, dept_csv) 
+            dept_folder = emu_netx.get_folder_hierarchy(dept, dept_csv) 
             pathadd = f'{dept_folder}'
             path_add_row = {'file':filename, 'pathAdd':pathadd}
 

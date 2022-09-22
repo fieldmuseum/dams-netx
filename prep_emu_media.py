@@ -6,10 +6,11 @@ https://realpython.com/python-csv/
 """
 
 import csv, glob, logging, os, re, sys
-from decouple import config
+# from decouple import config
 from exiftool import ExifToolHelper
 from fabric import Connection
 import xml.etree.ElementTree as ET
+import utils.emu_netx_map as emu_netx
 import utils.setup as setup
 
 
@@ -31,6 +32,8 @@ def main():
     live_or_test, input_date = setup.get_sys_argv()
 
     config = setup.get_config_dams_netx(live_or_test)
+
+    dept_csv = config['DEPARTMENT_CSV']
     
     # Check if test or live paths should be used
     full_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_MEDIA'], config['TEST_ORIGIN_PATH_MEDIA'])
@@ -101,7 +104,7 @@ def main():
         r['MulIdentifier'] = record['MulIdentifier']
         r['AudIdentifier'] = record['AudIdentifier']
         r['prep_file'] = prep_file(record)
-        r['pathMove'] = pathmove(record)
+        r['pathMove'] = pathmove(record, dept_csv)
         records_prep_file.append(r)
 
         # if record['PathAddDepts'] is not None: 
@@ -185,37 +188,37 @@ def main():
     setup.stop_log_dams_netx()
 
 
-def get_folder_hierarchy(department_raw):
-    '''
-    Get the appropriate parent-folder value for a given SecDepartment value
-    '''
-    dept_csv = config('DEPARTMENT_CSV')
-    dept_folders = []
-    with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for r in reader: dept_folders.append(r)
+# def get_folder_hierarchy(department_raw):
+#     '''
+#     Get the appropriate parent-folder value for a given SecDepartment value
+#     '''
+#     dept_csv = config('DEPARTMENT_CSV')
+#     dept_folders = []
+#     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
+#         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+#         for r in reader: dept_folders.append(r)
 
-    # make lists of level_1 & level_2 values
-    # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
-    dept_emu = []
-    for row in dept_folders: dept_emu.append(row['emu'])
+#     # make lists of level_1 & level_2 values
+#     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
+#     dept_emu = []
+#     for row in dept_folders: dept_emu.append(row['emu'])
 
-    dept_level_1 = []
-    for row in dept_folders: dept_level_1.append(row['netx_level_1'])
+#     dept_level_1 = []
+#     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
 
-    dept_level_2 = []
-    for row in dept_folders: dept_level_2.append(row['netx_level_2'])
+#     dept_level_2 = []
+#     for row in dept_folders: dept_level_2.append(row['netx_level_2'])
 
-    department = department_raw.strip()
+#     department = department_raw.strip()
 
-    if department in dept_level_2:
-        # lookup level_1 value at same index for level_2 key/value
-        parent = dept_level_1[dept_level_2.index(department)]
-        return parent + '/' + department + '/'
+#     if department in dept_level_2:
+#         # lookup level_1 value at same index for level_2 key/value
+#         parent = dept_level_1[dept_level_2.index(department)]
+#         return parent + '/' + department + '/'
     
-    else: 
-        # return department + '/'
-        return dept_level_1[dept_emu.index(department)] + '/'
+#     else: 
+#         # return department + '/'
+#         return dept_level_1[dept_emu.index(department)] + '/'
 
 
 def validate_files_copied(csv_records, dest_prefix):
@@ -270,7 +273,7 @@ def prep_file(record):
     return prep_file
     
 
-def pathmove(record):
+def pathmove(record, dept_csv):
     """
     Creates the pathMove value for a record (folder path without filename)
     e.g. Multimedia/Geology/Paleobotany/
@@ -283,43 +286,10 @@ def pathmove(record):
     department_orig = department_orig_raw.title()
     if re.match('Amphibian', department_orig) is not None:
         department_orig = "Amphibians and Reptiles"
-    department = get_folder_hierarchy(department_orig)
+    department = emu_netx.get_folder_hierarchy(department_orig, dept_csv)
 
     pathmove = f'{department}'
     return pathmove
-
-
-# def pathadd(record: dict):
-#     """
-#     Creates the pathAdd value(s) for a record (folder path without filename)
-#     e.g. 
-#     [
-#         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
-#         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
-#     ]
-
-#     :param record: dict of the record data
-#     :return: returns a list of dicts with an asset's pathAdd rows
-#     """
-#     path_add_list = []
-    
-#     filename = prep_file(record)
-
-#     # record['PathAddDepts'] should be a list of ET.Element
-#     for dept_raw in record['PathAddDepts']:
-#         if dept_raw is not None:
-#             dept = dept_raw.title()
-#             if re.match('Amphibian', dept) is not None:
-#                 dept = "Amphibians and Reptiles"
-#             dept_folder = get_folder_hierarchy(dept)
-#             pathadd = f'{dept_folder}'
-#             path_add_row = {'file':filename, 'pathAdd':pathadd}
-
-#             if path_add_row not in path_add_list:
-#                 path_add_list.append(path_add_row)
-
-#     if len(path_add_list) > 0:
-#         return path_add_list
 
 
 def validate_records(records):
