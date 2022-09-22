@@ -414,8 +414,10 @@ def convert_date_for_netx(date_string_raw:str) -> str:
 
     # parse H:M:S from date-string, if present
     if re.match(r'.*\s+\d{1,2}:\d{1,2}(:\d{1,2})*', date_string_raw) is not None:
-        time_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)', r'\g<3>', date_string_raw)
-        date_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)', r'\g<1>', date_string_raw)
+        time_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)', r'\g<3>', date_string_raw)
+        date_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)', r'\g<1>', date_string_raw)
+        # print(f'time string: {time_string_raw}')
+        # print(f'date string: {date_string_raw}')
     else:
         time_string_raw:str='00:00:00'
 
