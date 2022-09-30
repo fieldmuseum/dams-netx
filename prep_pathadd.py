@@ -55,8 +55,10 @@ def main():
     root = tree.getroot()
     records = []
     path_add_running_list = []
+    count_loops = 0
 
     for xml_tuple in root:
+
         # New record
         record = {}
         for elem in xml_tuple:
@@ -118,6 +120,11 @@ def main():
         field_names = path_add_running_list[0].keys()
 
         uc.write_list_of_dict_to_csv(path_add_running_list, field_names, csv_output_file_path)
+    
+    else: 
+        no_pathadd = 'No pathAdd required -- All assets in single folders.'
+        print(no_pathadd)
+        logging.info(no_pathadd)
 
     # Stop logging
     setup.stop_log_dams_netx()
