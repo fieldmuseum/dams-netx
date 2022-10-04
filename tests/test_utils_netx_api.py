@@ -10,27 +10,12 @@ from dotenv import dotenv_values
 
 class NetxAPIUtilsTestCase(unittest.TestCase):
     def setUp(self):
-        self.csvrows = []
-        with open('data/csv_good_examples/pathAdd_20220811_test.csv', newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=',')
-            next(reader)
-            for row in reader: self.csvrows.append(row)
 
-        random_row = random.choice(self.csvrows) # Get a random filename for unexpectedness
-        self.asset_name = random_row[0]
-        self.folder_name = random_row[1]
-        
-        # QUESTIONS on added setup:
-
-        # Q1 - Are any env-variables/overrides or safety-nets needed or does this clutter?
         config = dotenv_values(".env")
         if not config: raise Exception("No .env config file found")
-        
-        # Q2 - Is there a way (or bad idea) to hard-code NetX env to "TEST"?
-        # netx_env = config['NETX_ENV']
+
         netx_env = "TEST"
         
-        # For now, static values for each env:
         if netx_env == "LIVE":
             print("CAUTION - Tests are running in LIVE NetX env")
             sys.exit(1)
@@ -38,9 +23,20 @@ class NetxAPIUtilsTestCase(unittest.TestCase):
             # self.folder_id = 0  # this will error
 
         else:
-            print("Tests are running in ")
+            print("Tests are running in TEST NetX env")
             self.static_asset_id = 18201  # "featherswitheye.png" test-image
             self.static_folder_id = 341  #  "NetX Test" test-folder
+
+        input_csv = 'data/csv_good_examples/pathAdd_20220811_test.csv'
+        self.csvrows = []
+        with open(input_csv, newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            next(reader)
+            for row in reader: self.csvrows.append(row)
+
+        random_row = random.choice(self.csvrows) # Get a random filename for unexpectedness
+        self.asset_name = random_row[0]
+        self.folder_name = random_row[1]
         
         # TODO: 
         # -- check config for up-to-date API token 
