@@ -1,6 +1,6 @@
 '''Utils for general setup, config, and logging'''
 
-import datetime, logging, re, sys
+import datetime, logging, os, re, sys
 from dotenv import dotenv_values
 
 def get_config_dams_netx(netx_env:str=None):
@@ -84,3 +84,20 @@ def stop_log_dams_netx():
 
     stop_time = datetime.datetime.now()
     logging.info(f'FINISHED {stop_time} : {__file__}')
+
+
+def get_most_recent_file_in_dir(directory:str) -> str:
+    '''Return filepath for most recently modified file in a given dir'''
+
+    max_mod_time = 0
+    
+    for dirname,subdirs,files in os.walk(directory):
+        for fname in files:
+            full_path = os.path.join(dirname, fname)
+            mod_time = os.stat(full_path).st_mtime
+            if mod_time > max_mod_time:
+                max_mod_time = mod_time
+                max_dir = dirname
+                max_file = fname
+    
+    return f'{max_dir}/{max_file}'
