@@ -99,6 +99,7 @@ def main():
     records_prep_file = []
 
     for record in records:
+        print(record['irn'])
         r = {}
         r['irn'] = record['irn']
         r['MulIdentifier'] = record['MulIdentifier']
