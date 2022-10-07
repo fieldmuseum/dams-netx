@@ -57,7 +57,7 @@ def main():
             bytes = f.read()
             file_md5 = hashlib.md5(bytes).hexdigest()
 
-        asset_data_md5 = netx_api.netx_get_asset_by_field("fileChecksum", file_md5)
+        asset_data_md5 = netx_api.netx_get_asset_by_field(search_field="fileChecksum", search_value=file_md5, netx_test=config['NETX_ENV'])
 
         # Get NetX Asset ID by md5
         # If found, remove 
@@ -76,7 +76,7 @@ def main():
 
             # Check if file is in NetX
             # - by filename
-            asset_data = netx_api.netx_get_asset_by_filename(file_name)
+            asset_data = netx_api.netx_get_asset_by_filename(file_name=file_name, netx_env=config['NETX_ENV'])
 
             if 'result' in asset_data and len(asset_data['result']['results']) > 0:
 

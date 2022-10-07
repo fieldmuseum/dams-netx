@@ -28,9 +28,9 @@ def fix_emu_xml_tags(emu_records: ET.Element) -> ET.Element:
     return emu_records
 
 
-def convert_linebreaks_to_commas(root):
+def convert_linebreaks_to_commas(emu_records: ET.Element) -> ET.Element:
     '''Convert an EMu table field to comma-delimited quoted values'''
-    for table_as_text in root.findall('.//*'):
+    for table_as_text in emu_records.findall('.//*'):
         if table_as_text.tag is not None:
             if table_as_text.tag.find("_tab") > 0:  # and table_as_text.text.find("\n") > 0:
                 row_list = []
@@ -44,7 +44,7 @@ def convert_linebreaks_to_commas(root):
                     table_as_text.text = '"' + table_as_text.text + '"'
                     row_list = None
 
-    return root
+    return emu_records
 
 
 def convert_pipe_to_unique_commas(pipe_delim_string:str) -> str:
