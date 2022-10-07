@@ -65,7 +65,7 @@ def main():
 
             asset_id = asset_data_md5['result']['results'][0]['id']
 
-            log_message = f'Removed {file_name} from lostandfound - md5 {file_md5}) matches NetX asset {asset_id}'
+            log_message = f'Removed {file_name} from lostandfound - md5 {file_md5} matches NetX asset {asset_id}'
             print(log_message)
             logging.info(log_message)
 
