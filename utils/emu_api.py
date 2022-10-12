@@ -5,10 +5,16 @@ Functions for using texcdp (the EMu API)
 '''
 
 import datetime, re, requests
+from urllib.parse import urlencode
 import utils.setup as setup
 
 
-def emu_api_get_token(config:dict=None, user_id:str=None, user_pw:str=None) -> dict:
+def emu_api_get_token(
+    config:dict=None, 
+    user_id:str=None, 
+    user_pw:str=None, 
+    base_uri:str=None
+    ) -> dict:
     '''Retrieves a JWT token from texcdp'''
 
     # Load the config
@@ -32,11 +38,14 @@ def emu_api_get_token(config:dict=None, user_id:str=None, user_pw:str=None) -> d
 
     headers = emu_api_setup_headers()
 
-    base_uri = config["EMU_API_BASE_URL"] + "tokens"
+    uri = base_uri + "tokens"
     
-    r = requests.post(url=base_uri, headers=headers, json=json)
+    r = requests.post(url=uri, headers=headers, json=json)
 
-    return r.json()
+    if r.status_code == 201:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {r.text}')
 
 
 def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
@@ -55,29 +64,12 @@ def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
     }
 
     if emu_api_token is not None:
-        headers['Authorization'] = 'Bearer' + str(emu_api_token['id'])
+        # print(f'emu_api_token = {emu_api_token}')
+        token_prepped = re.sub(r'.*/tokens/', '', emu_api_token['id'])
+        # print(f'token = {token_prepped}')
+        headers['Authorization'] = 'Bearer ' + str(token_prepped)  # str(emu_api_token['id'])
 
     return headers
-
-
-def emu_api_setup_request_body(method:str, params:list) -> dict:
-    '''Sets up the required request object format for the NetX API.'''
-
-    # Check that we have json record data
-    if not method: raise Exception("No NetX API method has been provided")
-
-    # Check that we have json record data
-    if not params: raise Exception("No NetX API parameter data has been provided")
-
-    # Setup request-object
-    request_object = {
-        'jsonrpc': '2.0', # 'X-Api-Version': '3',
-        'id': '1234',
-        'method': method,  # e.g. "getAssets"
-        'params': params   # list of [record-ids] and {'data' : ['fields']}
-        }
-    
-    return request_object
 
 
 def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None) -> dict:
@@ -97,15 +89,72 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
         emu_env == "TEST"
 
     if emu_env=="LIVE":
-        emu_base_url = config["NETX_API_BASE_URL"]
-        emu_api_token = config["NETX_API_TOKEN"]
+        base_uri = config["EMU_API_BASE_URL"]
     else:
-        emu_base_url = config["TEST_NETX_API_BASE_URL"]
-        emu_api_token = config["TEST_NETX_API_TOKEN"]
+        base_uri = config["TEST_EMU_API_BASE_URL"]
 
+
+    emu_api_token = emu_api_get_token(base_uri=base_uri)
 
     # Set default HTTP headers
     headers = emu_api_setup_headers(headers=headers, emu_api_token=emu_api_token)
 
-    return {'config': config, 'base_url':emu_base_url, 'headers': headers}
+    return {'config': config, 'base_url':base_uri, 'headers': headers, 'token': emu_api_token}
 
+def emu_api_get_resources(emu_env:str=None):
+    '''Get a list of current resources available on the API'''
+
+    if emu_env is None:
+        emu_env = "TEST"
+
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    config = emu_api_setup['config']
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+    token = emu_api_setup['token']
+
+    uri = base_url + 'resources'
+
+    print(f'header = {headers}')
+    print(f'uri = {uri}')
+
+    r = requests.get(url=uri, headers=headers)  # json=json, 
+
+    if r.status_code == 201:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {r.text}')
+
+
+def emu_api_query_general(
+    emu_table:str='eparties',
+    search_field:str='irn',
+    operator:str='contains',
+    search_value:str=None,
+    emu_env:str=None
+    ) -> dict:
+    '''Queries texp for search field/value, and returns a dict of results'''
+    
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    config = emu_api_setup['config']
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+    token = emu_api_setup['token']
+
+    json = {}
+
+    uri = base_url + emu_table + '?filter=' + str(json) + '&limit=10&cursorType=server'  # '%7B%7D'
+
+    print(f'header = {headers}')
+    print(f'json = {json}')
+    print(f'uri = {uri}')
+
+
+    r = requests.get(url=uri, headers=headers)  # json=json, 
+
+    if r.status_code == 201:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {r.text}')
