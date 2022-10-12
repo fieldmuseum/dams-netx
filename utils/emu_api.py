@@ -65,9 +65,9 @@ def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
 
     if emu_api_token is not None:
         # print(f'emu_api_token = {emu_api_token}')
-        token_prepped = re.sub(r'.*/tokens/', '', emu_api_token)  # ['id'])
+        # token_prepped = re.sub(r'.*/tokens/', '', emu_api_token)  # ['id'])
         # print(f'token = {token_prepped}')
-        headers['Authorization'] = 'Bearer ' + str(token_prepped)  # str(emu_api_token['id'])
+        headers['Authorization'] = emu_api_token  # str(emu_api_token['id'])
 
     return headers
 
@@ -165,7 +165,7 @@ def emu_api_query_general(
 
     r = requests.get(url=uri, headers=headers)  # json=json, 
 
-    if r.status_code == 201:
+    if r.status_code < 300:
         return r.json()
     else:
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json)}')
