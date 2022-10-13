@@ -55,19 +55,12 @@ def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
 
     # Set up default headers
     headers = {
-        # 'Authorization': 'apiToken ' + emu_api_token,
         'Content-Type': 'application/json',
         'Prefer': 'representation=minimal'
-        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-        # 'jsonrpc': '2.0', # 'X-Api-Version': '3',
-        # 'id': '1234567890'
     }
 
     if emu_api_token is not None:
-        # print(f'emu_api_token = {emu_api_token}')
-        # token_prepped = re.sub(r'.*/tokens/', '', emu_api_token)  # ['id'])
-        # print(f'token = {token_prepped}')
-        headers['Authorization'] = emu_api_token  # str(emu_api_token['id'])
+        headers['Authorization'] = emu_api_token
 
     return headers
 
@@ -76,7 +69,6 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
     '''Performs initial checks on a request. Returns the config, base url, and headers.'''
 
     # Load the config
-    # config = dotenv_values(".env")
     if config is None:  
         config = setup.get_config_dams_netx()
         
@@ -84,7 +76,6 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
             raise Exception("No .env config file found")
 
     # Get API base URL + token for selected NetX env
-    # netx_env = config["NETX_ENV"]
     if emu_env is None:
         emu_env == "TEST"
 
@@ -99,19 +90,19 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
     # Set default HTTP headers
     headers = emu_api_setup_headers(headers=headers, emu_api_token=emu_api_token)
 
-    return {'config': config, 'base_url':base_uri, 'headers': headers, 'token': emu_api_token}
+    return {'config': config, 'base_url':base_uri, 'headers': headers}
 
 
 def emu_api_get_resources(emu_env:str=None):
-    '''Get a list of current resources available on the API'''
+    '''
+    Returns a nested dict where dict['matches'] is the current resources (EMu tables) available on the API
+    '''
 
     if emu_env is None:
         emu_env = "TEST"
 
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
-    # config = emu_api_setup['config']
-    # token = emu_api_setup['token']
     base_url = emu_api_setup['base_url']
     headers = emu_api_setup['headers']
 
@@ -122,21 +113,34 @@ def emu_api_get_resources(emu_env:str=None):
 
     r = requests.get(url=uri, headers=headers)
 
-    if r.status_code == 201:
+    if r.status_code < 300:
         return r.json()
     else:
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {r.text}')
 
 
 def emu_api_query_general(
-    emu_table:str='eparties',
+    emu_table:str=None, # 'eparties',
     search_field:str=None, # 'irn',
     operator:str='contains',
-    search_value:str=None,
+    search_value:str=None, # 1,
     emu_env:str=None
     ) -> dict:
-    '''Queries texp for search field/value, and returns a dict of results'''
-    '''TODO - Try search_field/value as list instead of str'''
+    '''
+    Queries texcdp for search field/value, and returns a nested dict where dict['matches'] is the list of matching records
+    TODO - Try search_field/value as list instead of str
+    '''
+
+    resource_tables = []
+    check_resources = emu_api_get_resources(emu_env=emu_env)
+    if 'matches' in check_resources.keys():
+        if len(check_resources['matches']) > 0:
+            for resource in check_resources['matches']:
+                resource_table = re.sub(r'(.+/)*', '', resource['id'])
+                resource_tables.append(resource_table)
+    
+    if emu_table not in resource_tables:
+        raise Exception(f'Check emu_table {emu_table} -- not in list of texcdp resources {resource_tables}')
     
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
@@ -156,14 +160,14 @@ def emu_api_query_general(
     
     print(f'json = {json}')
 
-    uri = base_url + emu_table + '?filter=' + str(json) # + '&limit=10&cursorType=file'
+    uri = base_url + emu_table + '?filter=' + str(json)
 
     print(f'header = {headers}')
     print(f'json = {json}')
     print(f'uri = {uri}')
 
 
-    r = requests.get(url=uri, headers=headers)  # json=json, 
+    r = requests.get(url=uri, headers=headers)
 
     if r.status_code < 300:
         return r.json()
