@@ -4,8 +4,8 @@ Functions for using texcdp (the EMu API)
 - Reminder: set 'EMU' variables in your .env (see '.env.example')
 '''
 
-import datetime, re, requests
-from urllib.parse import urlencode
+import datetime, json, re, requests, urllib.parse
+import urllib.parse
 import utils.setup as setup
 
 
@@ -108,8 +108,8 @@ def emu_api_get_resources(emu_env:str=None):
 
     uri = base_url + 'resources'
 
-    print(f'header = {headers}')
-    print(f'uri = {uri}')
+    # print(f'header = {headers}')
+    # print(f'uri = {uri}')
 
     r = requests.get(url=uri, headers=headers)
 
@@ -122,7 +122,7 @@ def emu_api_get_resources(emu_env:str=None):
 def emu_api_query_general(
     emu_table:str=None, # 'eparties',
     search_field:str=None, # 'irn',
-    operator:str='contains',
+    operator:str='exact',  # contains
     search_value:str=None, # 1,
     emu_env:str=None
     ) -> dict:
@@ -149,27 +149,43 @@ def emu_api_query_general(
 
     if search_field is not None and search_value is not None:
 
-        json = {
-            "OR": [
-                {f'data.{search_field}': { operator: {'value': search_value }}}
-            ]
-        }
+        json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value }}}]}
+
+        # # NOTE - Would prefer to use urlencode() (not u.p.quote + re.sub), but can't get this to work:
+        # json_prep = urlencode({k: json.dumps(v) for k, v in json_raw.items()}) 
+
+        json_prep = urllib.parse.quote(str(json_raw))  
+        json_prep = re.sub('%27', '%22', json_prep)  # NOTE - This is messed up, but it works.
 
     else:
-        json = {}
-    
-    print(f'json = {json}')
+        json_prep = {}
 
-    uri = base_url + emu_table + '?filter=' + str(json)
+    uri = base_url + emu_table + '?filter=' + json_prep
 
-    print(f'header = {headers}')
-    print(f'json = {json}')
-    print(f'uri = {uri}')
-
-
-    r = requests.get(url=uri, headers=headers)
+    r = requests.get(url=uri, headers=headers)  # , data=json_prep)
 
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json)}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+
+
+def emu_api_get_record_by_irn():
+    '''Retrieve specific EMu record by irn -- and only return fields specified, if any (default = all fields)'''
+
+
+
+    return
+
+def emu_api_get_records_by_date_last_mod():
+    '''Retrieve specific EMu records by date last mod'''
+    return
+
+def emu_api_add_record():
+    '''Add new EMu record'''
+    return
+
+def emu_api_update_record():
+    '''Update EMu record (specified by table + irn)'''
+    return
+
