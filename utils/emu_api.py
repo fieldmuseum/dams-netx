@@ -218,13 +218,39 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
         return r.json()
     else:
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
-        
 
-def emu_api_update_record():
+
+def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=None, emu_env:str=None):
     '''Update EMu record (specified by table + irn)'''
-    return
+
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+
+    uri = base_url + emu_table + '/' + str(emu_irn)
+
+    json_prep_list = []
+    for k,v in emu_record.items():
+        # TODO - reference field in schema to get correct path/value structure for atom/table/tec
+        json_prep = {
+            "op": "replace", "path":f'/{k}', "value": v
+        }
+        json_prep_list.append(json_prep)
+
+    r = requests.patch(url=uri, headers=headers, json=json_prep_list)
+
+    if r.status_code < 300:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
 
 
 def emu_api_get_records_by_date_last_mod():
     '''Retrieve specific EMu records by date last mod'''
+    return
+
+
+def emu_api_delete_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
+    '''Delete specific EMu record'''
     return
