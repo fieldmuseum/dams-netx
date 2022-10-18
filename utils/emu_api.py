@@ -116,20 +116,11 @@ def emu_api_get_resources(emu_env:str=None):
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {r.text}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
 
 
-def emu_api_query_general(
-    emu_table:str=None, # 'eparties',
-    search_field:str=None, # 'irn',
-    operator:str='exact',  # contains
-    search_value:str=None, # 1,
-    emu_env:str=None
-    ) -> dict:
-    '''
-    Queries texcdp for search field/value, and returns a nested dict where dict['matches'] is the list of matching records
-    TODO - Try search_field/value as list instead of str
-    '''
+def emu_api_validate_resource(emu_table:str=None, emu_env:str=None):
+    '''Returns True if an input resource exists on the API'''
 
     resource_tables = []
     check_resources = emu_api_get_resources(emu_env=emu_env)
@@ -141,6 +132,26 @@ def emu_api_query_general(
     
     if emu_table not in resource_tables:
         raise Exception(f'Check emu_table {emu_table} -- not in list of texcdp resources {resource_tables}')
+    
+    else: return True
+
+
+def emu_api_query_text(
+    emu_table:str=None, # 'eparties',
+    search_field:str=None, # 'irn',
+    operator:str='contains',  # exact
+    search_value:str=None, # 1,
+    emu_env:str=None
+    ) -> dict:
+    '''
+    Queries texcdp for search field/value, and returns a nested dict where dict['matches'] is the list of matching records
+    TODO - Try search_field/value as list instead of str
+    '''
+
+    check_resource = emu_api_validate_resource(emu_table, emu_env)
+
+    if check_resource == True:
+        print(f'querying {emu_table}')
     
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
@@ -170,22 +181,50 @@ def emu_api_query_general(
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
 
 
-def emu_api_get_record_by_irn():
-    '''Retrieve specific EMu record by irn -- and only return fields specified, if any (default = all fields)'''
+def emu_api_query_numeric(
+    emu_table:str=None, # 'eparties',
+    search_field:str=None, # 'irn',
+    operator:str='exact',  # contains
+    search_value:str=None, # '1',
+    emu_env:str=None
+    ) -> dict:
+    '''
+    Queries texcdp for numeric search field/value, and returns a nested dict 
+    where dict['matches'] is the list of matching records
+    TODO - Try search_field/value as list instead of str
+    '''
+
+    allowed_ops = ['exact', 'exists', 'range']
+
+    if operator not in allowed_ops:
+        raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
+    
+    return emu_api_query_text(emu_table, search_field, operator, search_value, emu_env)
 
 
+def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
+    '''Add a new EMu record, given a json dict of EMu fields:values for the given EMu table'''
 
-    return
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
-def emu_api_get_records_by_date_last_mod():
-    '''Retrieve specific EMu records by date last mod'''
-    return
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
 
-def emu_api_add_record():
-    '''Add new EMu record'''
-    return
+    uri = base_url + emu_table
+
+    r = requests.post(url=uri, headers=headers, json=new_emu_record)
+
+    if r.status_code < 300:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        
 
 def emu_api_update_record():
     '''Update EMu record (specified by table + irn)'''
     return
 
+
+def emu_api_get_records_by_date_last_mod():
+    '''Retrieve specific EMu records by date last mod'''
+    return
