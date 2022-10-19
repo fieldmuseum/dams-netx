@@ -148,7 +148,11 @@ def emu_api_query_text(
     TODO - Try search_field/value as list instead of str
     '''
 
+    # print(str(datetime.datetime.now()) + ' - starting check_resource')
+
     check_resource = emu_api_validate_resource(emu_table, emu_env)
+
+    # print(str(datetime.datetime.now()) + ' - finishing check_resource')
 
     if check_resource == True:
         print(f'querying {emu_table}')
@@ -162,18 +166,20 @@ def emu_api_query_text(
 
         json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value }}}]}
 
-        # # NOTE - Would prefer to use urlencode() (not u.p.quote + re.sub), but can't get this to work:
-        # json_prep = urlencode({k: json.dumps(v) for k, v in json_raw.items()}) 
-
-        json_prep = urllib.parse.quote(str(json_raw))  
-        json_prep = re.sub('%27', '%22', json_prep)  # NOTE - This is messed up, but it works.
-
     else:
-        json_prep = {}
+        json_raw = {}
+
+    # # NOTE - Would prefer to use urlencode() (not u.p.quote + re.sub), but can't get this to work:
+    # json_prep = urlencode({k: json.dumps(v) for k, v in json_raw.items()}) 
+
+    json_prep = urllib.parse.quote(str(json_raw))  
+    json_prep = re.sub('%27', '%22', json_prep)  # NOTE - This is messed up, but it works.
 
     uri = base_url + emu_table + '?filter=' + json_prep
 
-    r = requests.get(url=uri, headers=headers)  # , data=json_prep)
+    r = requests.get(url=uri, headers=headers)  # , data=json_prep) # params=f'?filter={json_raw}',
+
+    # print(str(datetime.datetime.now()) + ' - finishing GET')
 
     if r.status_code < 300:
         return r.json()
@@ -205,6 +211,8 @@ def emu_api_query_numeric(
 def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
     '''Add a new EMu record, given a json dict of EMu fields:values for the given EMu table'''
 
+    # print(str(datetime.datetime.now()) + ' - starting setup')
+
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
     base_url = emu_api_setup['base_url']
@@ -212,7 +220,11 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
 
     uri = base_url + emu_table
 
+    # print(str(datetime.datetime.now()) + ' - starting post')
+
     r = requests.post(url=uri, headers=headers, json=new_emu_record)
+
+    # print(str(datetime.datetime.now()) + ' - finishing post')
 
     if r.status_code < 300:
         return r.json()
@@ -222,6 +234,8 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
 
 def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=None, emu_env:str=None):
     '''Update EMu record (specified by table + irn)'''
+
+    # print(str(datetime.datetime.now()) + ' - starting setup')
 
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
@@ -237,8 +251,12 @@ def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=
             "op": "replace", "path":f'/{k}', "value": v
         }
         json_prep_list.append(json_prep)
+    
+    # print(str(datetime.datetime.now()) + ' - starting patch')
 
     r = requests.patch(url=uri, headers=headers, json=json_prep_list)
+
+    # print(str(datetime.datetime.now()) + ' - finishing patch')
 
     if r.status_code < 300:
         return r.json()
@@ -246,8 +264,56 @@ def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
 
 
-def emu_api_get_records_by_date_last_mod():
+
+def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
+    '''Retrieve specific (main) media file'''
+
+    print(str(datetime.datetime.now()) + ' - starting setup')
+
+    allowed_categories = ['media', 'resolution', 'supplementary']
+
+    if category not in allowed_categories:
+        raise Exception(f'Check category "{category}" - Must be one of {allowed_categories}')
+    
+    media_record = emu_api_query_numeric("emultimedia", "irn", "exact", mm_irn, emu_env)
+
+    mime_type = media_record['matches'][0]['data']['MulMimeType']
+    mime_format = media_record['matches'][0]['data']['MulMimeFormat']
+    mulIdentifier = media_record['matches'][0]['data']['MulIdentifier']
+
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+    config = emu_api_setup['config']
+
+    uri = base_url + f'media/{mm_irn}:{category}:{mime_type}:{mime_format}:{mulIdentifier}'
+
+    r = requests.get(url=uri, headers=headers)
+
+    print(str(datetime.datetime.now()) + ' - finishing call')
+    
+    if r.status_code < 300:
+        
+        file_path = config['TEST_EMU_FILE_OUT'] + mulIdentifier
+        file = open(file_path, "wb")
+        file.write(r.content)
+        file.close()
+
+        return # r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+
+
+def emu_api_get_records_by_date_last_mod(
+    emu_table:str=None, # 'eparties',
+    search_field:str=None, # 'irn',
+    operator:str='contains',  # exact
+    search_value:str=None, # 1,
+    emu_env:str=None
+    ) -> dict:
     '''Retrieve specific EMu records by date last mod'''
+
     return
 
 
