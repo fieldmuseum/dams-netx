@@ -119,7 +119,7 @@ def emu_api_get_resources(emu_env:str=None):
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
 
 
-def emu_api_validate_resource(emu_table:str=None, emu_env:str=None):
+def emu_api_check_resource(emu_table:str=None, emu_env:str=None):
     '''Returns True if an input resource exists on the API'''
 
     resource_tables = []
@@ -136,21 +136,47 @@ def emu_api_validate_resource(emu_table:str=None, emu_env:str=None):
     else: return True
 
 
+# def emu_api_check_field_type(
+#     emu_table:str=None, # 'eparties',
+#     search_field:str=None, # 'AdmDateLastModified',
+#     emu_env:str=None
+#     ) -> dict:
+#     '''
+#     Returns data-type for a given table & column
+#     '''
+
+#     # # TODO need to ref schema / EMu field type
+#     # search_field_type = type(search_field)  
+
+#     # mode = search_field_type  # should be one of ["date", "time", "latitude", "longitude"]
+
+#     # allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+
+#     # if search_field_type not in allowed_field_types:
+#     #     raise Exception(f'Check search_field "{search_field}" (type "{search_field_type}") - Must be one of {allowed_field_types}')
+
+#     return
+
+
 def emu_api_query_text(
     emu_table:str=None, # 'eparties',
     search_field:str=None, # 'irn',
     operator:str='contains',  # exact
-    search_value:str=None, # 1,
+    search_value_single:str=None, # 1,
+    search_value_range:list=None,
     emu_env:str=None
     ) -> dict:
     '''
-    Queries texcdp for search field/value, and returns a nested dict where dict['matches'] is the list of matching records
-    TODO - Try search_field/value as list instead of str
+    Queries texcdp for search field/value, and returns a nested dict where dict['matches'] is the list of matching records.
+    For search_value_range, format input as [min,max]. 
+    - For "greater than" ranges, use [min,None]; 
+    - For "less than" ranges, use [None,max]
+    - For date-ranges, format as "YYYY-MM-DD"
     '''
 
     # print(str(datetime.datetime.now()) + ' - starting check_resource')
 
-    check_resource = emu_api_validate_resource(emu_table, emu_env)
+    check_resource = emu_api_check_resource(emu_table, emu_env)
 
     # print(str(datetime.datetime.now()) + ' - finishing check_resource')
 
@@ -162,12 +188,56 @@ def emu_api_query_text(
     base_url = emu_api_setup['base_url']
     headers = emu_api_setup['headers']
 
-    if search_field is not None and search_value is not None:
 
-        json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value }}}]}
+    if search_field is not None and search_value_range is not None:
 
-    else:
-        json_raw = {}
+        # search_field_type = emu_api_check_field_type(emu_table, search_field)
+
+        # allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+
+        # for value in search_value_range:
+        #     if value is not None:
+        #         if type(value) != search_field_type or value_type_2 != search_field_type:
+        #             raise Exception(f'Check range values in {search_value_range} - They should be {search_field_type} for field {search_field}')
+
+
+        # if search_field_type in allowed_field_types:
+        #     print(f'getting {search_field_type} range')
+
+        if type(search_value_range) is not list:
+            raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
+        
+        range = {}
+        if search_value_range[1] is None:
+            if search_value_range[0] is None:
+                raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
+            range["gte"] = search_value_range[0]
+
+        elif search_value_range[0] is None:
+            range["lte"] = search_value_range[1]
+
+        else:
+            range["gte"] = search_value_range[0]
+            range["lte"] = search_value_range[1]
+        
+        # Add optional mode property
+        if search_value_range[0] is not None:
+            check_mode = search_value_range[0]
+        else: 
+            check_mode = search_value_range[1]
+        if re.match(r'\d{4}\-\d{2}\-\d{2}', check_mode) is not None:
+            range["mode"] = "date"
+
+        print(range)
+        json_raw = {"AND":[{f"data.{search_field}":{"range":range}}]}
+
+
+    elif search_field is not None and search_value_single is not None:
+
+        json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value_single }}}]}
+
+
+    else:  json_raw = {}
 
     # # NOTE - Would prefer to use urlencode() (not u.p.quote + re.sub), but can't get this to work:
     # json_prep = urlencode({k: json.dumps(v) for k, v in json_raw.items()}) 
@@ -176,6 +246,8 @@ def emu_api_query_text(
     json_prep = re.sub('%27', '%22', json_prep)  # NOTE - This is messed up, but it works.
 
     uri = base_url + emu_table + '?filter=' + json_prep
+
+    print(f'uri = {uri}')
 
     r = requests.get(url=uri, headers=headers)  # , data=json_prep) # params=f'?filter={json_raw}',
 
@@ -191,7 +263,8 @@ def emu_api_query_numeric(
     emu_table:str=None, # 'eparties',
     search_field:str=None, # 'irn',
     operator:str='exact',  # contains
-    search_value:str=None, # '1',
+    search_value_single:str=None, # '1',
+    search_value_range:str=None,
     emu_env:str=None
     ) -> dict:
     '''
@@ -205,7 +278,13 @@ def emu_api_query_numeric(
     if operator not in allowed_ops:
         raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
     
-    return emu_api_query_text(emu_table, search_field, operator, search_value, emu_env)
+    return emu_api_query_text(
+        emu_table=emu_table, 
+        search_field=search_field, 
+        operator=operator, 
+        search_value_single=search_value_single,
+        search_value_range=search_value_range,
+        emu_env=emu_env)
 
 
 def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
@@ -303,18 +382,6 @@ def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
         return # r.json()
     else:
         raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
-
-
-def emu_api_get_records_by_date_last_mod(
-    emu_table:str=None, # 'eparties',
-    search_field:str=None, # 'irn',
-    operator:str='contains',  # exact
-    search_value:str=None, # 1,
-    emu_env:str=None
-    ) -> dict:
-    '''Retrieve specific EMu records by date last mod'''
-
-    return
 
 
 def emu_api_delete_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
