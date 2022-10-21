@@ -185,18 +185,13 @@ def emu_api_check_field_type(
         full_field_list = table_schema['data']['properties'].keys()
         group_field_dict = {}
         for field in full_field_list:
-            print(field)
             if field.find('_grp') > 0:
-                print(f'group field: {field}')
                 subgroup_fields = list(table_schema['data']['properties'][field]['items']['properties'].keys())
                 for subgroup_field in subgroup_fields:
-                    print(f'subgroup_field = {subgroup_field}')
                     group_field_dict[subgroup_field] = field
-                print(subgroup_fields)
 
     # Check EMu table schema for field
-    # search_field_type = type(search_field)  
-    if emu_field in full_field_list:  # table_schema['data']['properties']:
+    if emu_field in full_field_list:
         table_field_props = table_schema['data']['properties'][emu_field]
     
     # Also check grouped fields if no match initially found
