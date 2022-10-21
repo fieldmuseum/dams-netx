@@ -387,6 +387,37 @@ def netx_get_asset_by_range(
     return netx_api_make_request(method=method, params=params, netx_env=netx_test)
 
 
+def netx_update_asset(asset_id:int, data_to_update:dict, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, Update an asset via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#updateasset
+    '''
+
+    if data_to_update is None or type(data_to_update) != dict:
+        raise Exception(f'Check data_to_update {data_to_update} -- Input should be dict of NetX fields:updated-values')
+    
+    if 'id' not in data_to_update.keys():
+        raise Exception(f'Check data_to_update {data_to_update} -- Its first key/value should be "id":"[netx-asset-id]"')
+
+    if data_to_get is None or len(data_to_get) < 1:
+        data_to_get = [
+            "asset.id",
+            "asset.base",
+            "asset.file",
+            "asset.folders"
+            ]
+
+    method = 'updateAsset'
+
+    params = [
+        data_to_update, 
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
 
 def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
     '''
