@@ -79,9 +79,6 @@ def main():
     # for row in path_add_rows:
     #     add_to_folder(row, folder_id_list, live_or_test)
 
-
-
-
     setup.stop_log_dams_netx()
 
 
