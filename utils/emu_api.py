@@ -178,15 +178,21 @@ def emu_api_check_field_type(
 
     table_schema = emu_api_get_schema(emu_table=emu_table, emu_env=emu_env)
 
+    emu_field = re.sub(r'_tab$|0$', '', emu_field)
+
     # Setup list of grouped fields
     if 'properties' in table_schema['data']:
-        full_field_list = list(table_schema['data']['properties'].keys())
-        group_field_list = []
+        full_field_list = table_schema['data']['properties'].keys()
+        group_field_dict = {}
         for field in full_field_list:
-            if re.match(r'_grp$', field) is not None:
+            print(field)
+            if field.find('_grp') > 0:
+                print(f'group field: {field}')
                 subgroup_fields = list(table_schema['data']['properties'][field]['items']['properties'].keys())
                 for subgroup_field in subgroup_fields:
-                    group_field_list.append({subgroup_field:field})
+                    print(f'subgroup_field = {subgroup_field}')
+                    group_field_dict[subgroup_field] = field
+                print(subgroup_fields)
 
     # Check EMu table schema for field
     # search_field_type = type(search_field)  
@@ -194,13 +200,12 @@ def emu_api_check_field_type(
         table_field_props = table_schema['data']['properties'][emu_field]
     
     # Also check grouped fields if no match initially found
-    elif emu_field in group_field_list.keys():
-        emu_field = re.sub(r'_tab$|0$', '', emu_field)
-        group = group_field_list['emu_field']
+    elif emu_field in group_field_dict.keys():
+        group = group_field_dict[emu_field]
         table_field_props = table_schema['data']['properties'][group]['items']['properties'][emu_field]
 
     else:
-        raise Exception(f'Check EMu field {emu_field} & table {emu_table} - field not found in table or groups {group_field_list.values()}.')
+        raise Exception(f'Check EMu field {emu_field} & table {emu_table} - field not found in table or groups {group_field_dict.values()}.')
 
     field_type = table_field_props['type']
     if 'format' in table_field_props.keys():
@@ -239,63 +244,65 @@ def emu_api_query_text(
 
     # print(str(datetime.datetime.now()) + ' - finishing check_resource')
 
-    if check_resource == True:
-        print(f'querying {emu_table}')
+    # if check_resource == True:
+    #     print(f'querying {emu_table}')
     
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
     base_url = emu_api_setup['base_url']
     headers = emu_api_setup['headers']
 
-
-    if search_field is not None and search_value_range is not None:
-
-        if type(search_value_range) is not list:
-            raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
-
+    if search_field is not None:
         search_field_type = emu_api_check_field_type(emu_table=emu_table, emu_field=search_field)
 
-        allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+        if search_value_range is not None:
 
-        # for value in search_value_range:
-        #     if value is not None:
-        #         if type(value) != search_field_type:
-        #             raise Exception(f'Check range values in {search_value_range} - They should be {search_field_type} for field {search_field}')
-
-        if search_field_type not in allowed_field_types:
-            raise Exception(f'Check search_field {search_field} - for range-search, type {search_field_type} is not in allowed types {allowed_field_types}')
-        else:
-            print(f'getting {search_field_type} range for {search_value_range} in {search_field}')
-
-        
-        range = {}
-        if search_value_range[1] is None:
-            if search_value_range[0] is None:
+            if type(search_value_range) is not list:
                 raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
-            range["gte"] = search_value_range[0]
 
-        elif search_value_range[0] is None:
-            range["lte"] = search_value_range[1]
+            allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
 
-        else:
-            range["gte"] = search_value_range[0]
-            range["lte"] = search_value_range[1]
-        
-        # Add optional mode property
-        if search_value_range[0] is not None:
-            check_mode = search_value_range[0]
-        else: 
-            check_mode = search_value_range[1]
-        if re.match(r'\d{4}\-\d{2}\-\d{2}', check_mode) is not None:
-            range["mode"] = "date"
+            # for value in search_value_range:
+            #     if value is not None:
+            #         if type(value) != search_field_type:
+            #             raise Exception(f'Check range values in {search_value_range} - They should be {search_field_type} for field {search_field}')
 
-        print(range)
-        json_raw = {"AND":[{f"data.{search_field}":{"range":range}}]}
+            if search_field_type not in allowed_field_types:
+                raise Exception(f'Check search_field {search_field} - for range-search, type {search_field_type} is not in allowed types {allowed_field_types}')
+            else:
+                print(f'getting {search_field_type} range for {search_value_range} in {emu_table}.{search_field}')
+
+            
+            range = {}
+            if search_value_range[1] is None:
+                if search_value_range[0] is None:
+                    raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
+                range["gte"] = search_value_range[0]
+
+            elif search_value_range[0] is None:
+                range["lte"] = search_value_range[1]
+
+            else:
+                range["gte"] = search_value_range[0]
+                range["lte"] = search_value_range[1]
+            
+            # Add optional mode property
+            if search_value_range[0] is not None:
+                check_mode = search_value_range[0]
+            else: 
+                check_mode = search_value_range[1]
+            if re.match(r'\d{4}\-\d{2}\-\d{2}', check_mode) is not None:
+                range["mode"] = "date"
+
+            # print(range)
+            json_raw = {"AND":[{f"data.{search_field}":{"range":range}}]}
 
 
-    elif search_field is not None and search_value_single is not None:
+        elif search_value_single is not None:
 
-        json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value_single }}}]}
+            print(f'getting {search_field_type} {search_value_single} in {emu_table}.{search_field}')
+
+            json_raw = {"AND":[{f"data.{search_field}":{operator:{"value": search_value_single }}}]}
 
 
     else:  json_raw = {}
@@ -308,7 +315,7 @@ def emu_api_query_text(
 
     uri = base_url + emu_table + '?filter=' + json_prep
 
-    print(f'uri = {uri}')
+    # print(f'uri = {uri}')
 
     r = requests.get(url=uri, headers=headers)  # , data=json_prep) # params=f'?filter={json_raw}',
 
