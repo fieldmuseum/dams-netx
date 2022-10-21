@@ -95,7 +95,7 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
 
 def emu_api_get_resources(emu_env:str=None):
     '''
-    Returns a nested dict where dict['matches'] is the current resources (EMu tables) available on the API
+    Returns a nested dict where dict['matches'] lists the current resources (EMu tables) available on the API
     '''
 
     if emu_env is None:
@@ -122,6 +122,9 @@ def emu_api_get_resources(emu_env:str=None):
 def emu_api_check_resource(emu_table:str=None, emu_env:str=None):
     '''Returns True if an input resource exists on the API'''
 
+    if emu_table is None:
+        raise Exception(f'Check emu_table -- it should be a string (e.g. "ecatalogue"), not None')
+
     resource_tables = []
     check_resources = emu_api_get_resources(emu_env=emu_env)
     if 'matches' in check_resources.keys():
@@ -136,26 +139,82 @@ def emu_api_check_resource(emu_table:str=None, emu_env:str=None):
     else: return True
 
 
-# def emu_api_check_field_type(
-#     emu_table:str=None, # 'eparties',
-#     search_field:str=None, # 'AdmDateLastModified',
-#     emu_env:str=None
-#     ) -> dict:
-#     '''
-#     Returns data-type for a given table & column
-#     '''
+def emu_api_get_schema(emu_table:str=None, emu_env:str=None):
+    '''
+    Returns a nested dict with the schema and field-types for a given EMu table.
+    '''
 
-#     # # TODO need to ref schema / EMu field type
-#     # search_field_type = type(search_field)  
+    if emu_table is None or len(emu_table) < 1:
+        raise Exception(f'Check emu_table -- it should be a valid table-name as a string (e.g. "ecatalogue"), not None or ""')
 
-#     # mode = search_field_type  # should be one of ["date", "time", "latitude", "longitude"]
+    if emu_env is None:
+        emu_env = "TEST"
 
-#     # allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
-#     # if search_field_type not in allowed_field_types:
-#     #     raise Exception(f'Check search_field "{search_field}" (type "{search_field_type}") - Must be one of {allowed_field_types}')
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
 
-#     return
+    uri = base_url + 'resources/' + emu_table
+
+    # print(f'header = {headers}')
+    # print(f'uri = {uri}')
+
+    r = requests.get(url=uri, headers=headers)
+
+    if r.status_code < 300:
+        return r.json()
+    else:
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+
+def emu_api_check_field_type(
+    emu_table:str=None, # 'eparties',
+    emu_field:str=None, # 'AdmDateLastModified',
+    emu_env:str=None
+    ) -> dict:
+    '''
+    Returns data-type (e.g. 'string' or 'array') and data-foramt (e.g. 'integer' or 'partial-date') for a given table & column
+    '''
+
+    table_schema = emu_api_get_schema(emu_table=emu_table, emu_env=emu_env)
+
+    # Setup list of grouped fields
+    if 'properties' in table_schema['data']:
+        full_field_list = list(table_schema['data']['properties'].keys())
+        group_field_list = []
+        for field in full_field_list:
+            if re.match(r'_grp$', field) is not None:
+                subgroup_fields = list(table_schema['data']['properties'][field]['items']['properties'].keys())
+                for subgroup_field in subgroup_fields:
+                    group_field_list.append({subgroup_field:field})
+
+    # Check EMu table schema for field
+    # search_field_type = type(search_field)  
+    if emu_field in full_field_list:  # table_schema['data']['properties']:
+        table_field_props = table_schema['data']['properties'][emu_field]
+    
+    # Also check grouped fields if no match initially found
+    elif emu_field in group_field_list.keys():
+        emu_field = re.sub(r'_tab$|0$', '', emu_field)
+        group = group_field_list['emu_field']
+        table_field_props = table_schema['data']['properties'][group]['items']['properties'][emu_field]
+
+    else:
+        raise Exception(f'Check EMu field {emu_field} & table {emu_table} - field not found in table or groups {group_field_list.values()}.')
+
+    field_type = table_field_props['type']
+    if 'format' in table_field_props.keys():
+        field_type = re.sub(r'^partial\-', '', table_field_props['format'])
+        field_type = re.sub(r'^uri$', 'integer', field_type)
+
+    # mode = search_field_type  # should be one of ["date", "time", "latitude", "longitude"]
+
+    # allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+
+    # if search_field_type not in allowed_field_types:
+    #     raise Exception(f'Check search_field "{search_field}" (type "{search_field_type}") - Must be one of {allowed_field_types}')
+
+    return field_type
 
 
 def emu_api_query_text(
@@ -191,21 +250,23 @@ def emu_api_query_text(
 
     if search_field is not None and search_value_range is not None:
 
-        # search_field_type = emu_api_check_field_type(emu_table, search_field)
+        if type(search_value_range) is not list:
+            raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
 
-        # allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
+        search_field_type = emu_api_check_field_type(emu_table=emu_table, emu_field=search_field)
+
+        allowed_field_types = ['date', 'time', 'integer', 'float', 'latitude', 'longitude']
 
         # for value in search_value_range:
         #     if value is not None:
-        #         if type(value) != search_field_type or value_type_2 != search_field_type:
+        #         if type(value) != search_field_type:
         #             raise Exception(f'Check range values in {search_value_range} - They should be {search_field_type} for field {search_field}')
 
+        if search_field_type not in allowed_field_types:
+            raise Exception(f'Check search_field {search_field} - for range-search, type {search_field_type} is not in allowed types {allowed_field_types}')
+        else:
+            print(f'getting {search_field_type} range for {search_value_range} in {search_field}')
 
-        # if search_field_type in allowed_field_types:
-        #     print(f'getting {search_field_type} range')
-
-        if type(search_value_range) is not list:
-            raise Exception(f'Check search_value_range {search_value_range} - It should be a list like so: [min, max]')
         
         range = {}
         if search_value_range[1] is None:
