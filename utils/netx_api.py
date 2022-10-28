@@ -16,7 +16,7 @@ def netx_api_setup_headers(headers:dict=None, netx_api_token:str=None) -> dict:
     # Set up default headers
     headers = {
         'Authorization': 'apiToken ' + netx_api_token,
-        'Content-Type': 'application/json'
+        # 'Content-Type': 'application/json'
         # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
         # 'jsonrpc': '2.0', # 'X-Api-Version': '3',
         # 'id': '1234567890'
@@ -31,8 +31,8 @@ def netx_api_setup_request_body(method:str=None, params:list=None) -> dict:
     # # Check that method is defined (not required for 'import' methods)
     # if not method: raise Exception("No NetX API method has been provided")
 
-    # Check that we have json record data
-    if params is None: raise Exception("No NetX API parameter data has been provided")
+    # # Check that we have json record data
+    # if params is None: raise Exception("No NetX API parameter data has been provided")
 
     # Setup request-object
     request_object = {
@@ -77,14 +77,15 @@ def netx_api_setup_request(config:dict=None, headers:dict=None, netx_env:str=Non
     return {'config': config, 'base_url':netx_base_url, 'headers': headers}
 
 
-def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None, uri_suffix:str=None, request:str=None, file=None) -> dict:
+def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None, uri_suffix:str=None, request:str=None, body:dict=None, file=None) -> dict:
     '''Makes a request to the NetX API'''
 
-    json = netx_api_setup_request_body(method=method, params=params)
-    # print(json)
-    if file is not None:
-        json = json['params'][0]
-        json['file'] = file
+    if params is not None:
+        json = netx_api_setup_request_body(method=method, params=params)
+    # # print(json)
+    # elif file is not None:
+    #     json = json['params'][0]
+    #     json['file'] = file
 
     netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
     # print(netx_request)
@@ -98,8 +99,8 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_
         method = ''
 
     headers = netx_request['headers']
-    if file is not None:
-        headers['Content-Type'] = 'multipart/form-data'
+    # if file is not None:
+    #     headers['Content-Type'] = 'multipart/form-data'
 
     if request is None:
         netx_call = requests.post
@@ -107,10 +108,11 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_
         netx_call = requests.put
 
 #     try:
-    if file is None:
+    if file is None and body is None:
         r = netx_call(uri, json=json, headers=headers)
     else:
-        r = netx_call(uri, data=json, headers=headers)
+        files = {'file': open(file, 'rb')}
+        r = netx_call(uri, data=body, files=files, headers=headers)
     
     r.raise_for_status()
     if r.status_code == 200:
@@ -491,39 +493,29 @@ def convert_date_for_netx(date_string_raw:str) -> str:
 
 def netx_import_asset(folder_id:int, filepath:str, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
     '''
-    In NetX, Imports a new asset via the NetX API
+    In NetX, Imports a new asset via the NetX API, and returns its NetX asset ID if succesful.
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#import-asset
     '''
 
     uri_suffix = f'import/asset'
 
+        # # Add file to request
+    # files = {'file': open(filepath+filename, 'rb')}
+    # r = requests.post(url, files=files, data={'folderId':folder_id, 'fileName':filename}, headers={'Authorization': 'apiToken {sTuffNjunk}') 
+
     method = None  # 'addAssetToFolder'
 
-    file_to_upload = {
+    file_data = {
         # 'file':open(filepath + filename, 'rb'),
         'folderId':folder_id,
         'fileName':filename
     }
 
-    # requests.put(files=)
-
-    # if data_to_get==None:
-    #     data_to_get = [
-    #         "asset.id",
-    #         "asset.base",
-    #         "asset.file",
-    #         "asset.folders"
-    #         ]
-
-    params = [
-        file_to_upload  # ,
-        # {"data": data_to_get}
-        ]
-    # print(params)
+    file_to_upload = filepath+filename
 
     with open(filepath + filename, 'rb') as f:
-        r = netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, file=f)
+        r = netx_api_make_request(method=method, netx_env=netx_env, uri_suffix=uri_suffix, body=file_data, file=file_to_upload)
 
     return r # netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix) 
 
