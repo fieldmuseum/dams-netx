@@ -25,22 +25,24 @@ def netx_api_setup_headers(headers:dict=None, netx_api_token:str=None) -> dict:
     return headers
 
 
-def netx_api_setup_request_body(method:str, params:list) -> dict:
+def netx_api_setup_request_body(method:str=None, params:list=None) -> dict:
     '''Sets up the required request object format for the NetX API.'''
 
-    # Check that we have json record data
-    if not method: raise Exception("No NetX API method has been provided")
+    # # Check that method is defined (not required for 'import' methods)
+    # if not method: raise Exception("No NetX API method has been provided")
 
     # Check that we have json record data
-    if not params: raise Exception("No NetX API parameter data has been provided")
+    if params is None: raise Exception("No NetX API parameter data has been provided")
 
     # Setup request-object
     request_object = {
         'jsonrpc': '2.0', # 'X-Api-Version': '3',
-        'id': '1234',
-        'method': method,  # e.g. "getAssets"
-        'params': params   # list of [record-ids] and {'data' : ['fields']}
-        }
+        'id': '1234'}
+    
+    if method is not None:
+        request_object['method'] = method,  # e.g. "getAssets"
+    
+    request_object['params'] = params   # list of [record-ids] and {'data' : ['fields']}
     
     return request_object
 
@@ -75,29 +77,49 @@ def netx_api_setup_request(config:dict=None, headers:dict=None, netx_env:str=Non
     return {'config': config, 'base_url':netx_base_url, 'headers': headers}
 
 
-def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None) -> dict:
+def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None, uri_suffix:str=None, request:str=None, file=None) -> dict:
     '''Makes a request to the NetX API'''
 
     json = netx_api_setup_request_body(method=method, params=params)
     # print(json)
+    if file is not None:
+        json = json['params'][0]
+        json['file'] = file
 
     netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
     # print(netx_request)
 
-    uri = netx_request['base_url']
+    if uri_suffix is None:
+        uri = netx_request['base_url'] + 'rpc/'
+    else:
+        uri = netx_request['base_url'] + uri_suffix
+    
+    if method is None:
+        method = ''
+
     headers = netx_request['headers']
+    if file is not None:
+        headers['Content-Type'] = 'multipart/form-data'
 
-    try:
-        # NetX json-rpc API only permits POST ?
-        r = requests.post(uri, json=json, headers=headers)
-        r.raise_for_status()
-        if r.status_code == 200:
-            return r.json()
-        else:
-            print(f'Error - {r.status_code}')
+    if request is None:
+        netx_call = requests.post
+    elif request.lower() == 'put':
+        netx_call = requests.put
 
-    except requests.exceptions.HTTPError as http_error:
-        raise requests.exceptions.HTTPError("Could not " + method + " : " + http_error.response.text)
+#     try:
+    if file is None:
+        r = netx_call(uri, json=json, headers=headers)
+    else:
+        r = netx_call(uri, data=json, headers=headers)
+    
+    r.raise_for_status()
+    if r.status_code == 200:
+        return r.json()
+    else:
+        print(f'Error - {r.status_code}')
+
+    # except requests.exceptions.HTTPError as http_error:
+    #     raise requests.exceptions.HTTPError("Could not use method '" + method + "' : " + http_error.response.text)
 
 
 def netx_api_try_request(method:str, params:dict, headers:dict=None, netx_env:str=None) -> dict:
@@ -423,7 +445,7 @@ def netx_delete_asset(asset_id:int, netx_env:str=None) -> dict:
     '''
     CAREFUL: In NetX, Deletes an asset via the NetX API
     - Returns an empty object.
-    - See method help: https://developer.netx.net/#removeassetfromfolder
+    - See method help: https://developer.netx.net/#deleteasset
     '''
 
     method = 'deleteAsset'
@@ -465,3 +487,114 @@ def convert_date_for_netx(date_string_raw:str) -> str:
     print(date_ymd)
 
     return str(int((date_ymd - epoch).total_seconds() * 1000))
+
+
+def netx_import_asset(folder_id:int, filepath:str, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, Imports a new asset via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#import-asset
+    '''
+
+    uri_suffix = f'import/asset'
+
+    method = None  # 'addAssetToFolder'
+
+    file_to_upload = {
+        # 'file':open(filepath + filename, 'rb'),
+        'folderId':folder_id,
+        'fileName':filename
+    }
+
+    # requests.put(files=)
+
+    # if data_to_get==None:
+    #     data_to_get = [
+    #         "asset.id",
+    #         "asset.base",
+    #         "asset.file",
+    #         "asset.folders"
+    #         ]
+
+    params = [
+        file_to_upload  # ,
+        # {"data": data_to_get}
+        ]
+    # print(params)
+
+    with open(filepath + filename, 'rb') as f:
+        r = netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, file=f)
+
+    return r # netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix) 
+
+
+def netx_reimport_asset(asset_id:int, filepath:str, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, Reimports an existing asset via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#reimport-asset
+    '''
+
+    uri_suffix = f'import/asset/{asset_id}'
+
+    method = None  # 'addAssetToFolder'
+
+    file_to_upload = {
+        'file':open(filepath + filename, 'rb'),
+        'fileName':filename
+    }
+
+    # requests.put(files=)
+
+    if data_to_get==None:
+        data_to_get = [
+            "asset.id",
+            "asset.base",
+            "asset.file",
+            "asset.folders"
+            ]
+
+    params = [
+        file_to_upload,
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    # with open(file_to_upload['file'], 'rb') as f:
+    #     r = netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, request='put')
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, request='put')
+
+
+def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, Imports a new version of an existing asset via the NetX API
+    - Also returns the asset's id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#version-asset
+    '''
+
+
+    uri_suffix = f'import/asset/{asset_id}/version'
+
+    method = None  # 'addAssetToFolder'
+
+    file_to_upload = {
+        'fileName':filename
+    }
+
+
+    if data_to_get==None:
+        data_to_get = [
+            "asset.id",
+            "asset.base",
+            "asset.file",
+            "asset.folders"
+            ]
+
+    params = [
+        file_to_upload,
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
