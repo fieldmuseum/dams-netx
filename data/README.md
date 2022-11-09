@@ -13,11 +13,11 @@ Each XML files includes 10 corresponding multimedia records.
 
 
 ## xml_bad_examples
-These include a variety of badly-formed individual files, as well as bad folder-structures missing export-files.
+These include a variety of badly-formed individual files, as well as bad folder-structures and missing export-files.
 
 
 ## config
 This folder includes example setup-files for **dams-netx** scripts, **NetX I/O** and **NetX DSS**.
-- `SecDepartment_hierarchy.csv` - should be referenced by prep-scripts and variables in this repo's `.env`
-- `netxio.properties` example - an example of the proprties-file required for NetX I/O.
-- `syncedMetadata` XML example - an example of the mapping file required for DSS.
+- `SecDepartment_hierarchy.csv` - should be referenced by prep-scripts and variables in this repo's `.env` 
+- `netxio.properties` example - an example of the proprties-file recommended for running NetX I/O via the command line interface (CLI).
+- `syncedMetadata` XML example - an example of the mapping file required for NetX DSS.

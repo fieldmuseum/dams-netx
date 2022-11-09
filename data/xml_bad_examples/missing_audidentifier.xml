@@ -146,15 +146,15 @@
   <!-- Row 1 - this record has no AudIdentifier-->
   <tuple>
     <atom name="AudIdentifier"></atom>
-    <atom name="irn">636911</atom>
-    <atom name="MulTitle">124105 Anatrytone logan d IN</atom>
-    <atom name="MulDescription">124105 Anatrytone logan d IN</atom>
+    <atom name="irn">123456</atom>
+    <atom name="MulTitle">123 d IN</atom>
+    <atom name="MulDescription">123 d IN</atom>
     <table name="DetSubject_tab">
       <tuple>
-        <atom name="DetSubject">Lepidoptera</atom>
+        <atom name="DetSubject">insect</atom>
       </tuple>
       <tuple>
-        <atom name="DetSubject">Hesperiidae</atom>
+        <atom name="DetSubject">family</atom>
       </tuple>
     </table>
     <tuple name="DetMediaRightsRef">
@@ -170,21 +170,15 @@
     </tuple>
     <table name="Creator">
       <tuple>
-        <atom name="SummaryData">Field Museum of Natural History - Department of Zoology - Division of Insects</atom>
+        <atom name="SummaryData">Field Museum of Natural History</atom>
         <atom name="AdmPublishWebNoPassword">Yes</atom>
         <atom name="irn">156724</atom>
         <atom name="MulMultimediaCreatorRole">Creator</atom>
       </tuple>
-      <tuple>
-        <atom name="SummaryData">GDI 2013-2015</atom>
-        <atom name="AdmPublishWebNoPassword">Yes</atom>
-        <atom name="irn">177101</atom>
-        <atom name="MulMultimediaCreatorRole">Funded By</atom>
-      </tuple>
     </table>
     <table name="Supplementary">
       <tuple>
-        <atom name="SupIdentifier">124105_Anatrytone_logan_d_IN.dng</atom>
+        <atom name="SupIdentifier">123_d_IN.dng</atom>
         <table name="SupUsage_nesttab">
         </table>
       </tuple>
@@ -203,7 +197,7 @@
         <atom name="irn"></atom>
         <atom name="SummaryData"></atom>
     </tuple>
-    <atom name="MulIdentifier">124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="MulIdentifier">123_d_IN.jpg</atom>
     <atom name="ChaMd5Sum">c08f1b80e63fa48fdae5e1a8eb20c815</atom>
     <atom name="MulMimeType">image</atom>
     <atom name="MulMimeFormat">jpeg</atom>
@@ -234,7 +228,7 @@
       </tuple>
     </table>
     <atom name="DetResourceType">Image</atom>
-    <atom name="DetCoverage">GDI 2013-2015 Chicagoland Butterflies</atom>
+    <atom name="DetCoverage">insect project</atom>
     <atom name="DetSource">Science and Education, Insect Collection</atom>
     <atom name="ChaMediaForm"></atom>
     <atom name="ChaFileSize">1161747</atom>
@@ -265,27 +259,27 @@
     </table>
     <atom name="AdmDateInserted">2014-04-29</atom>
     <atom name="AdmDateModified">2021-04-23</atom>
-    <atom name="AdmInsertedBy">Allie Stone</atom>
-    <atom name="AdmModifiedBy">Webbink, Kate</atom>
-    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/636/911/124105_Anatrytone_logan_d_IN.jpg</atom>
-    <atom name="AudACDescription">124105 Anatrytone logan d IN</atom>
+    <atom name="AdmInsertedBy">user1</atom>
+    <atom name="AdmModifiedBy">user2</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/123/456/123_d_IN.jpg</atom>
+    <atom name="AudACDescription">123 d IN</atom>
     <atom name="AudAssociatedObservation"></atom>
     <atom name="AudAssociatedSpecimen">3421cca3-6733-4346-8405-174cf3ca9aae</atom>
     <atom name="AudCaptureDevice"></atom>
-    <atom name="AudCitation">Courtesy of: Field Museum of Natural History, GDI 2013-2015. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/25be5308-0a98-4328-b7eb-0201b6a502e9 (accessed on 23 Apr 2021</atom>
+    <atom name="AudCitation">(c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/25be5308-0a98-4328-b7eb-0201b6a502e9 (accessed on 23 Apr 2021</atom>
     <atom name="AudDerivedFrom"></atom>
     <atom name="AudFundingAttribution"></atom>
     <atom name="AudLifeStage">adult unsexed</atom>
-    <atom name="AudNumbers">FMNHINS 0000 124 105</atom>
+    <atom name="AudNumbers">FMNHINS 0000 123</atom>
     <atom name="AudRelatedGeography">United States of America, Illinois, North America</atom>
     <atom name="AudRelatedResourceID"></atom>
     <atom name="AudSex">adult unsexed</atom>
     <atom name="AudSubjectOrientation"></atom>
-    <atom name="AudTaxonCoverage">Anatrytone logan (Edwards, 1863)</atom>
+    <atom name="AudTaxonCoverage">taxon</atom>
     <atom name="AudTemporalCoverage"></atom>
     <atom name="AudVernacularName"></atom>
     <atom name="SecRecordStatus">Active</atom>
-    <atom name="MulIdentifier">124105_Anatrytone_logan_d_IN.jpg</atom>
+    <atom name="MulIdentifier">123_d_IN.jpg</atom>
     <atom name="AdmPublishWebNoPassword">No</atom>
     <atom name="AdmPublishWebPassword">Yes</atom>
   </tuple>
@@ -427,7 +421,7 @@
     <atom name="AdmDateInserted">2016-11-29</atom>
     <atom name="AdmDateModified">2021-04-12</atom>
     <atom name="AdmInsertedBy">Le, Daniel</atom>
-    <atom name="AdmModifiedBy">Webbink, Kate</atom>
+    <atom name="AdmModifiedBy">user2</atom>
     <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1478/303/86219_lat_FMNH_FZ.jpg</atom>
     <atom name="AudACDescription">86219:Notropis atherinoides:30::::Cyprinidae:237:JCB-77-29:North America:U.S.A.</atom>
     <atom name="AudAssociatedObservation"></atom>
