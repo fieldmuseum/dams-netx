@@ -1,6 +1,8 @@
 # DAMS-NetX
 
-A repo for documentation and scripts for migrating and maintaining media and workflows related to NetX.
+Scripts for migrating media-files and corresponding data between a museum's Collections Management System (EMu) and DAMS (NetX). 
+
+See [data/README.md](https://github.com/fieldmuseum/dams-netx/tree/main/data) for examples of how to setup NetX-EMu mappings and properties config files.
 
 ## NetX Folder structures
 
