@@ -17,11 +17,6 @@ def emu_netx_atoms() -> dict:
             'AudAssociatedSpecimen':'AudAssociatedSpecimen',
             'AudAccessURI':'AudAccessURI',
             'AudCitation':'AudCitation',
-            # 'DetMediaRightsRef_irn',
-            # 'DetMediaRightsRef_Summary',
-            # 'DetMediaRightsRef_RigType',
-            # 'DetMediaRightsRef_RigOwner_Summary',
-            # 'DetMediaRightsRef_RigOtherNumber',
             'SecRecordStatus':'SecRecordStatus',
             'AdmPublishWebNoPassword':'AdmPublishWebNoPassword',
             'AdmPublishWebPassword':'AdmPublishWebPassword',
@@ -44,7 +39,6 @@ def emu_netx_atoms() -> dict:
             'RelNotes':'RelNotes',
             'MulIdentifier':'MulIdentifier',
             'DetSource':'DetSource'
-            # 'RelParentMediaRef_SummaryData'
     }
 
     return emu_netx_atoms
@@ -62,21 +56,6 @@ def emu_netx_tables() -> dict:
         'AudSubjectOrientation_tab':'AudSubjectOrientation_tab',
         'AudSubjectPart_tab':'AudSubjectPart_tab',
         'ChaRepository_tab':'ChaRepository_tab'
-        # 'DetMediaRightsRef_irn':['DetMediaRightsRef', 'irn'],
-        # 'DetMediaRightsRef_Summary':['DetMediaRightsRef', 'SummaryData'],
-        # 'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
-        # 'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnerRef','SummaryData'],
-        # 'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
-        # 'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
-        # 'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier'],
-        # 'MulMultimediaCreatorRef_tab_SummaryData':['Creator','tuple','SummaryData'],
-        # 'MulMultimediaCreatorRef_tab_irn':['Creator','tuple','irn'],
-        # 'MulMultimediaCreatorRole_tab':['Creator','tuple','MulMultimediaCreatorRole'],
-        # 'EveEventsRef_tab_irn':None,
-        # 'EveEventsRef_tab_GUID':None,
-        # 'EveEventsRef_tab_SummaryData':None,
-        # 'RelRelatedMediaRef_tab_SummaryData':None,
-        # 'RelRelationship_tab':'RelRelationship_tab'
     }
 
     return emu_netx_tables
