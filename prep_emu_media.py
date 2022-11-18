@@ -5,13 +5,18 @@ CSV parsing and writing:
 https://realpython.com/python-csv/
 """
 
-import csv, glob, logging, os, re, sys
+import csv
+import glob
+import logging
+import os
+import re
+import sys
 # from decouple import config
+import xml.etree.ElementTree as ET
 from exiftool import ExifToolHelper
 from fabric import Connection
-import xml.etree.ElementTree as ET
-import utils.emu_netx_map as emu_netx
-import utils.setup as setup
+from utils import emu_netx_map as emu_netx
+from utils import setup
 
 
 def main():
@@ -34,32 +39,44 @@ def main():
     config = setup.get_config_dams_netx(live_or_test)
 
     dept_csv = config['DEPARTMENT_CSV']
-    
+
     # Check if test or live paths should be used
-    full_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_MEDIA'], config['TEST_ORIGIN_PATH_MEDIA'])
-    full_xml_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_XML'], config['TEST_ORIGIN_PATH_XML'])
-    dest_prefix = setup.get_path_from_env(live_or_test, config['DESTIN_PATH_MEDIA'], config['TEST_DESTIN_PATH_MEDIA'])
+    full_prefix = setup.get_path_from_env(
+        live_or_test,
+        config['ORIGIN_PATH_MEDIA'],
+        config['TEST_ORIGIN_PATH_MEDIA']
+        )
+    full_xml_prefix = setup.get_path_from_env(
+        live_or_test,
+        config['ORIGIN_PATH_XML'],
+        config['TEST_ORIGIN_PATH_XML']
+        )
+    dest_prefix = setup.get_path_from_env(
+        live_or_test,
+        config['DESTIN_PATH_MEDIA'],
+        config['TEST_DESTIN_PATH_MEDIA']
+        )
 
     # if live_or_test == "LIVE":
     #     full_prefix = config('ORIGIN_PATH_MEDIA')
     #     full_xml_prefix = config('ORIGIN_PATH_XML')
     #     dest_prefix = config('DESTIN_PATH_MEDIA')
-    # else: 
+    # else:
     #     full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
     #     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
     #     dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
-    
+
     main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     print(main_xml_input)
 
-    tree = ET.parse(glob.glob(main_xml_input)[0])    # TODO - test/try to account for empty input-dir
+    # TODO - test/try to account for empty input-dir
+    tree = ET.parse(glob.glob(main_xml_input)[0])
     input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
     print(input_file_log)
     logging.info(input_file_log)
 
     root = tree.getroot()
     records = []
-    path_add_running_list = []
 
     for xml_tuple in root:
         # New record
@@ -71,7 +88,7 @@ def main():
 
             # Need to grab SecDepartment as well (start with the first value)
             if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
-                                
+
                 sec_dept_raw = elem.findall('tuple/atom')
                 sec_dept_all = []
                 for dept in sec_dept_raw:
@@ -87,60 +104,60 @@ def main():
                 #     record['PathAddDepts'] = sec_dept_all
                 # else:
                 #     record['PathAddDepts'] = None
-                
+
         records.append(record)
-    
+
     # Validate our current record set before we proceed
     invalid_records = validate_records(records)
-    if invalid_records: output_error_log(invalid_records)
+    if invalid_records:
+        output_error_log(invalid_records)
 
-    # Set up prep_file values    
-    path_add_running_list = []    
+    # Set up prep_file values
     records_prep_file = []
 
     for record in records:
         print(record['irn'])
-        r = {}
-        r['irn'] = record['irn']
-        r['MulIdentifier'] = record['MulIdentifier']
-        r['AudIdentifier'] = record['AudIdentifier']
-        r['prep_file'] = prep_file(record)
-        r['pathMove'] = pathmove(record, dept_csv)
-        records_prep_file.append(r)
+        record_prep = {}
+        record_prep['irn'] = record['irn']
+        record_prep['MulIdentifier'] = record['MulIdentifier']
+        record_prep['AudIdentifier'] = record['AudIdentifier']
+        record_prep['prep_file'] = prep_file(record)
+        record_prep['pathMove'] = pathmove(record, dept_csv)
+        records_prep_file.append(record_prep)
 
-        # if record['PathAddDepts'] is not None: 
+        # if record['PathAddDepts'] is not None:
         #     path_add_rows = pathadd(record)
         #     for row in path_add_rows:
         #         path_add_running_list.append(row)
-        
 
-    # # SKIP FIRST 21.1k records 
+
+    # # SKIP FIRST 21.1k records
     # records_prep_file = records_prep_file[21100:]
 
 
     # Copy all files to correct location, this should happen before we create
     # the CSV to confirm that the files are actually there.
     # If this step fails, raise an exception so the CSV isn't created.
-    # copy_files(records_prep_file, full_prefix, dest_prefix, c)
+    # copy_files(records_prep_file, full_prefix, dest_prefix, connxn)
 
-    with Connection(host=config['ORIGIN_IP'], user=config['ORIGIN_USER']) as c:
-    
-        c.run('hostname')
+    with Connection(host=config['ORIGIN_IP'], user=config['ORIGIN_USER']) as connxn:
+
+        connxn.run('hostname')
 
         # Copy source-files to staging area & Rename them
 
-        for r in records_prep_file:
-            dirs = irn_dir(r['irn'])
+        for prep_record in records_prep_file:
+            dirs = irn_dir(prep_record['irn'])
 
-            full_path = full_prefix + dirs + r['MulIdentifier']
-            dest_path = dest_prefix + r['pathMove'] + r['prep_file']
+            full_path = full_prefix + dirs + prep_record['MulIdentifier']
+            dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
             # Copy file to the new location for prep_file
             if not os.path.exists(dest_path):
-                os.makedirs(os.path.dirname(dest_path), exist_ok=True)        
-            
+                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
             try:
-                c.get(remote=full_path, local=dest_path, preserve_mode=False)
+                connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
                 log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
                 print(log_message)
                 logging.info(log_message)
@@ -149,18 +166,18 @@ def main():
                 if os.path.isfile(dest_path):
                     if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
                         with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
-                            
+
                             dest_format = exif.get_tags(dest_path, tags='Format')
                             if len(dest_format) > 0:
                                 if ('XMP:Format','image/tiff') in dest_format[0].items():
-                                    format_warn = f"WARNING - {dest_path} - possible TIFF File - needs check/fix in EMu"
+                                    format_warn = f"WARNING - {dest_path} - possible TIFF - check"
                                     print(format_warn)
                                     logging.warning(format_warn)
 
                                 else:
                                     exif.set_tags(
                                         dest_path,
-                                        tags = {'Identifier':r['AudIdentifier']},
+                                        tags = {'Identifier':prep_record['AudIdentifier']},
                                         params=["-P", "-overwrite_original"]
                                     )
 
@@ -173,64 +190,31 @@ def main():
         # Set up fields for CSV
         csv_records = []
         for record in records_prep_file:
-            r = {}
-            # r['AudIdentifier'] = record['AudIdentifier']
-            r['file'] = record['prep_file']
-            r['pathMove'] = record['pathMove']
-            r['Identifier'] = record['AudIdentifier']
-            csv_records.append(r)
+            csv_r = {}
+            # csv_r['AudIdentifier'] = record['AudIdentifier']
+            csv_r['file'] = record['prep_file']
+            csv_r['pathMove'] = record['pathMove']
+            csv_r['Identifier'] = record['AudIdentifier']
+            csv_records.append(csv_r)
 
         # Validate that the copied files actually exist where we say they
         # do in the prep_file value for the CSV file.
         validate_files_copied(csv_records, dest_prefix)
-        
+
 
     # Stop logging
     setup.stop_log_dams_netx()
-
-
-# def get_folder_hierarchy(department_raw):
-#     '''
-#     Get the appropriate parent-folder value for a given SecDepartment value
-#     '''
-#     dept_csv = config('DEPARTMENT_CSV')
-#     dept_folders = []
-#     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
-#         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-#         for r in reader: dept_folders.append(r)
-
-#     # make lists of level_1 & level_2 values
-#     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
-#     dept_emu = []
-#     for row in dept_folders: dept_emu.append(row['emu'])
-
-#     dept_level_1 = []
-#     for row in dept_folders: dept_level_1.append(row['netx_level_1'])
-
-#     dept_level_2 = []
-#     for row in dept_folders: dept_level_2.append(row['netx_level_2'])
-
-#     department = department_raw.strip()
-
-#     if department in dept_level_2:
-#         # lookup level_1 value at same index for level_2 key/value
-#         parent = dept_level_1[dept_level_2.index(department)]
-#         return parent + '/' + department + '/'
-    
-#     else: 
-#         # return department + '/'
-#         return dept_level_1[dept_emu.index(department)] + '/'
 
 
 def validate_files_copied(csv_records, dest_prefix):
     """
     Verify that prep_file values are valid, i.e. a file exists at the path.
     """
-    for r in csv_records:
-        if 'pathAdd' in r.keys():
-            path = dest_prefix + r['pathAdd'] + r['file']
+    for csv_r in csv_records:
+        if 'pathAdd' in csv_r.keys():
+            path = dest_prefix + csv_r['pathAdd'] + csv_r['file']
         else:    #    if 'pathMove' in r.keys():
-            path = dest_prefix + r['pathMove'] + r['file']
+            path = dest_prefix + csv_r['pathMove'] + csv_r['file']
         if not os.path.exists(path):
             raise Exception(f'prep_file: {path} does not exist')
 
@@ -249,9 +233,9 @@ def irn_dir(irn):
         del digits[-3:]
         last_dir = ''.join(end)
         first_dir = ''.join(digits)
-    
+
     # If irn <= 3 digits, dir format is:    0/001 or 0/012 or 0/123
-    else: 
+    else:
         first_dir = "0"
         zero_count = 3 - len(digits)
         last_dir = zero_count * '0' + ''.join(digits)
@@ -270,9 +254,9 @@ def prep_file(record):
 
     filename = record['AudIdentifier']
     file_ext = re.sub(r'(.*)(\..*)', r'\g<2>', record['MulIdentifier'])
-    prep_file = f'{filename}{file_ext}'
-    return prep_file
-    
+    prep_file_name = f'{filename}{file_ext}'
+    return prep_file_name
+
 
 def pathmove(record, dept_csv):
     """
@@ -282,15 +266,15 @@ def pathmove(record, dept_csv):
     :param record: dict of the record data
     :return: returns a string of the pathMove value
     """
-    
+
     department_orig_raw = record['SecDepartment']
     department_orig = department_orig_raw.title()
     if re.match('Amphibian', department_orig) is not None:
         department_orig = "Amphibians and Reptiles"
     department = emu_netx.get_folder_hierarchy(department_orig, dept_csv)
 
-    pathmove = f'{department}'
-    return pathmove
+    pathmove_value = f'{department}'
+    return pathmove_value
 
 
 def validate_records(records):
@@ -301,11 +285,12 @@ def validate_records(records):
     Returns ALL invalid records.
     """
     invalid_records = []
-    fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecDepartment']  # 'SecRecordStatus'
+    fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecDepartment']
 
     for record in records:
         for field in fields_to_validate:
-            if field not in record: invalid_records.append(record)
+            if field not in record:
+                invalid_records.append(record)
 
     return invalid_records
 
@@ -321,12 +306,13 @@ def output_error_log(invalid_records):
     # iterate through all of the records, adding any missing fields
     # to the field_names
     field_names = []
-    for r in invalid_records:
-        keys = r.keys()
+    for record in invalid_records:
+        keys = record.keys()
         for key in keys:
-            if key not in field_names: field_names.append(key)
+            if key not in field_names:
+                field_names.append(key)
 
-    with open('data/errors/prep_file_prep_errors.csv', mode='w') as csv_file:
+    with open('data/errors/prep_file_prep_errors.csv', mode='w', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=field_names)
         writer.writeheader()
         writer.writerows(invalid_records)
