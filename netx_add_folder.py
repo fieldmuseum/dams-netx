@@ -99,14 +99,6 @@ def get_unique_folder_id_list(path_add_rows:list, live_or_test:str):
                 print(err_message)
                 logging.error(err_message)
 
-            # if 'result' not in folder_data:
-            #     print(f'ERROR - {folder_data}')
-            #     logging.error(folder_data)
-            #     return
-
-            # folder_id = folder_data['result']['id']
-            # folder_id_list[folder_name] = folder_id
-
     return folder_id_list
 
 
