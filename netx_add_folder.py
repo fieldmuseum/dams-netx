@@ -1,9 +1,10 @@
 '''Add ingested assets to secondary folders via NetX API'''
 
-import logging, time
-import utils.netx_api as un
-import utils.csv_tools as uc
-import utils.setup as setup
+import logging
+import time
+from utils import netx_api as un
+from utils import csv_tools as uc
+from utils import setup
 # from dotenv import dotenv_values
 
 
@@ -13,18 +14,20 @@ def add_to_folder(row:dict, folder_id_list:dict, live_or_test:str):
     # In case API needs rate-limiting
     time.sleep(0.1)
 
-    # Given Identifier/Filename, Get Asset ID 
-    asset_data = un.netx_get_asset_by_filename(row['file'], data_to_get=['asset.id','asset.folders'], netx_env=live_or_test)
-
-    # print(f'asset_data = {asset_data}')
+    # Given Identifier/Filename, Get Asset ID
+    asset_data = un.netx_get_asset_by_filename(
+        row['file'],
+        data_to_get=['asset.id','asset.folders'],
+        netx_env=live_or_test
+        )
 
     if 'result' not in asset_data or len(asset_data['result']['results']) < 1:
         logging.error(asset_data)
         return
 
-    else:
-        asset_id = asset_data['result']['results'][0]['id']
-        asset_orig_folder_ids = [folder['id'] for folder in asset_data['result']['results'][0]['folders']]
+    asset_id = asset_data['result']['results'][0]['id']
+    asset_folders = asset_data['result']['results'][0]['folders']
+    asset_orig_folder_ids = [folder['id'] for folder in asset_folders]
 
     # Get Asset's Secondary Department-folders
     folder_name = row['pathAdd']
@@ -37,8 +40,9 @@ def add_to_folder(row:dict, folder_id_list:dict, live_or_test:str):
             logging.info(log_message)
             return
 
-    else: 
-        logging.error(f'Missing Folder {folder_name}')
+    else:
+        log_error = f'Missing Folder {folder_name}'
+        logging.error(log_error)
         return
 
 
@@ -57,7 +61,7 @@ def add_to_folder(row:dict, folder_id_list:dict, live_or_test:str):
         print(f'ERROR - {folder_data}')
         # row['status'] = folder_data
         logging.error(folder_data)
-    
+
     return
 
 
@@ -73,23 +77,35 @@ def get_unique_folder_id_list(path_add_rows:list, live_or_test:str):
 
         if row['pathAdd'] not in unique_folders:
             unique_folders.append(row['pathAdd'])
-    
+
     folder_id_list = {}
-    
+
     if len(unique_folders) > 0:
         for folder_name in unique_folders:
 
             # Get Asset's Secondary Departments
-            folder_data = un.netx_get_folder_by_path(folder_path=folder_name, data_to_get=None, netx_env=live_or_test)
+            folder_data = un.netx_get_folder_by_path(
+                folder_path=folder_name,
+                data_to_get=None,
+                netx_env=live_or_test
+                )
 
-            if 'result' not in folder_data:
-                print(f'ERROR - {folder_data}')
-                logging.error(folder_data)
-                return
-
-            else:
+            try:
                 folder_id = folder_data['result']['id']
                 folder_id_list[folder_name] = folder_id
+
+            except KeyError as err:
+                err_message = f'ERROR - {folder_data}: {err}'
+                print(err_message)
+                logging.error(err_message)
+
+            # if 'result' not in folder_data:
+            #     print(f'ERROR - {folder_data}')
+            #     logging.error(folder_data)
+            #     return
+
+            # folder_id = folder_data['result']['id']
+            # folder_id_list[folder_name] = folder_id
 
     return folder_id_list
 
@@ -118,4 +134,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+    main()
