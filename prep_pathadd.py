@@ -2,12 +2,15 @@
 Setup the NetX pathAdd CSV
 """
 
-import csv, glob, logging, re, sys
-from decouple import config
+import glob
+import logging
+import re
+import sys
+# from decouple import config
 import xml.etree.ElementTree as ET
-import utils.csv_tools as uc
-import utils.setup as setup
-import utils.emu_netx_map as emu_netx
+from utils import csv_tools as uc
+from utils import setup
+from utils import emu_netx_map as emu_netx
 
 
 def main():
@@ -28,18 +31,20 @@ def main():
 
     config = setup.get_config_dams_netx(live_or_test)
 
-    # input_date = sys.argv[1]    # match this to prep_emu_xml?: xml_input_file_path = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
-    # live_or_test = sys.argv[2]
     csv_output_file_path = config['PATHADD_CSV_FILE']
     dept_csv = config['DEPARTMENT_CSV']
-    
+
     # Check if test or live paths should be used
     # if live_or_test == "LIVE":
     #     full_xml_prefix = config['ORIGIN_PATH_XML']
-    # else: 
+    # else:
     #     full_xml_prefix = config['TEST_ORIGIN_PATH_XML']
-    full_xml_prefix = setup.get_path_from_env(live_or_test, config['ORIGIN_PATH_XML'], config['TEST_ORIGIN_PATH_XML'])
-    
+    full_xml_prefix = setup.get_path_from_env(
+        live_or_test,
+        config['ORIGIN_PATH_XML'],
+        config['TEST_ORIGIN_PATH_XML']
+        )
+
     main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     input_path_log = f'Input XML full path = {main_xml_input}'
     print(input_path_log)
@@ -50,12 +55,12 @@ def main():
     logging.info(input_file_log)
 
 
-    tree = ET.parse(glob.glob(main_xml_input)[0])    # TODO - test/try to account for empty input-dir
+    # TODO - test/try to account for empty input-dir
+    tree = ET.parse(glob.glob(main_xml_input)[0])
 
     root = tree.getroot()
     records = []
     path_add_running_list = []
-    count_loops = 0
 
     for xml_tuple in root:
 
@@ -68,7 +73,7 @@ def main():
 
             # Need to grab SecDepartment as well (start with the first value)
             if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
-                                
+
                 sec_dept_raw = elem.findall('tuple/atom')
                 sec_dept_all = []
                 for dept in sec_dept_raw:
@@ -84,26 +89,27 @@ def main():
                     record['PathAddDepts'] = sec_dept_all
                 else:
                     record['PathAddDepts'] = None
-                
+
         records.append(record)
-    
+
     # Validate our current record set before we proceed
     invalid_records = validate_records(records)
-    if invalid_records: output_error_log(invalid_records)
+    if invalid_records:
+        output_error_log(invalid_records)
 
     # Set up prep_file values
-    
-    path_add_running_list = []    
+
+    path_add_running_list = []
     records_prep_file = []
 
     for record in records:
-        r = {}
-        r['irn'] = record['irn']
-        r['MulIdentifier'] = record['MulIdentifier']
-        r['AudIdentifier'] = record['AudIdentifier']
-        r['prep_file'] = prep_file(record)
-        r['pathMove'] = pathmove(record, dept_csv)
-        records_prep_file.append(r)
+        record_prep = {}
+        record_prep['irn'] = record['irn']
+        record_prep['MulIdentifier'] = record['MulIdentifier']
+        record_prep['AudIdentifier'] = record['AudIdentifier']
+        record_prep['prep_file'] = prep_file(record)
+        record_prep['pathMove'] = pathmove(record, dept_csv)
+        records_prep_file.append(record_prep)
 
         if record['PathAddDepts'] is not None:    # len(sec_dept_others) > 1:
             path_add_rows = pathadd(record, dept_csv)
@@ -120,8 +126,8 @@ def main():
         field_names = path_add_running_list[0].keys()
 
         uc.write_list_of_dict_to_csv(path_add_running_list, field_names, csv_output_file_path)
-    
-    else: 
+
+    else:
         no_pathadd = 'No pathAdd required -- All assets in single folders.'
         print(no_pathadd)
         logging.info(no_pathadd)
@@ -157,8 +163,8 @@ def main():
 #         # lookup level_1 value at same index for level_2 key/value
 #         parent = dept_level_1[dept_level_2.index(department)]
 #         return parent + '/' + department + '/'
-    
-#     else: 
+
+#     else:
 #         # return department + '/'
 #         return dept_level_1[dept_emu.index(department)]
 
@@ -177,7 +183,7 @@ def irn_dir(irn):
         del digits[-3:]
         last_dir = ''.join(end)
         first_dir = ''.join(digits)
-    
+
     # If irn <= 3 digits, dir format is:    0/001 or 0/012 or 0/123
     else:    # elif len(digits) <= 3:
         first_dir = "0"
@@ -198,9 +204,9 @@ def prep_file(record):
 
     filename = record['AudIdentifier']
     file_ext = re.sub(r'(.*)(\..*)', r'\g<2>', record['MulIdentifier'])
-    prep_file = f'{filename}{file_ext}'
-    return prep_file
-    
+    prep_file_name = f'{filename}{file_ext}'
+    return prep_file_name
+
 
 def pathmove(record:dict, dept_csv:str):
     """
@@ -210,21 +216,21 @@ def pathmove(record:dict, dept_csv:str):
     :param record: dict of the record data
     :return: returns a string of the pathMove value
     """
-    
+
     department_orig_raw = record['SecDepartment']
     department_orig = department_orig_raw.title()
     if re.match('Amphibian', department_orig) is not None:
         department_orig = "Amphibians and Reptiles"
     department = emu_netx.get_folder_hierarchy(department_orig, dept_csv)
 
-    pathmove = f'{department}'
-    return pathmove
+    pathmove_value = f'{department}'
+    return pathmove_value
 
 
 def pathadd(record:dict, dept_csv:str):
     """
     Creates the pathAdd value(s) for a record (folder path without filename)
-    e.g. 
+    e.g.
     [
         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
         {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
@@ -234,7 +240,7 @@ def pathadd(record:dict, dept_csv:str):
     :return: returns a list of dicts with an asset's pathAdd rows
     """
     path_add_list = []
-    
+
     filename = prep_file(record)
 
     for dept_raw in record['PathAddDepts']:
@@ -242,9 +248,9 @@ def pathadd(record:dict, dept_csv:str):
             dept = dept_raw.title()
             if re.match('Amphibian', dept) is not None:
                 dept = "Amphibians and Reptiles"
-            dept_folder = emu_netx.get_folder_hierarchy(dept, dept_csv) 
-            pathadd = f'{dept_folder}'
-            path_add_row = {'file':filename, 'pathAdd':pathadd}
+            dept_folder = emu_netx.get_folder_hierarchy(dept, dept_csv)
+            pathadd_folder = f'{dept_folder}'
+            path_add_row = {'file':filename, 'pathAdd':pathadd_folder}
 
             if path_add_row not in path_add_list:
                 path_add_list.append(path_add_row)
@@ -261,11 +267,18 @@ def validate_records(records):
     Returns ALL invalid records.
     """
     invalid_records = []
-    fields_to_validate = ['AudIdentifier', 'irn', 'MulIdentifier', 'SecRecordStatus', 'SecDepartment']
+    fields_to_validate = [
+        'AudIdentifier',
+        'irn',
+        'MulIdentifier',
+        'SecRecordStatus',
+        'SecDepartment'
+        ]
 
     for record in records:
         for field in fields_to_validate:
-            if field not in record: invalid_records.append(record)
+            if field not in record:
+                invalid_records.append(record)
 
     return invalid_records
 
@@ -281,10 +294,11 @@ def output_error_log(invalid_records):
     # iterate through all of the records, adding any missing fields
     # to the field_names
     field_names = []
-    for r in invalid_records:
-        keys = r.keys()
+    for record in invalid_records:
+        keys = record.keys()
         for key in keys:
-            if key not in field_names: field_names.append(key)
+            if key not in field_names:
+                field_names.append(key)
 
     filename = 'data/errors/prep_file_prep_errors.csv'
 
