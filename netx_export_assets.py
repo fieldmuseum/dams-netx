@@ -2,9 +2,9 @@
 
 from datetime import datetime, timedelta
 # import logging, time
-import utils.netx_api as un
-import utils.csv_tools as uc
-import utils.setup as setup
+from utils import netx_api as un
+from utils import csv_tools as uc
+from utils import setup
 # from dotenv import dotenv_values
 
 def main():
@@ -25,13 +25,13 @@ def main():
         data_to_get = ['asset.id', 'asset.attributes'],
         netx_test = live_or_test
         )
-    
+
     netx_assets_to_update = []
 
     if netx_assets['result'] is not None:
         if len(netx_assets['result']['results']) > 0:
             netx_assets_to_update = netx_assets['result']['results']
-    
+
     print(netx_assets)
 
 
@@ -41,16 +41,17 @@ def main():
     for asset in netx_assets_to_update:
 
         print(asset)
-        
+
         emu_record = {}
-        
-        # # TODO: use syncedMetadata.xml map (or other schema) to get each EMu field for corresponding NetX attribute
+
+        # # TODO: use syncedMetadata.xml map (or other schema) to get
+        #         each EMu field for corresponding NetX attribute
         if len(asset['attributes']['IRN']) > 0:
             emu_record['irn'] = asset['attributes']['IRN'][0]
-        
+
         if len(asset['attributes']['Title']) > 0:
             emu_record['MulTitle'] = asset['attributes']['Title'][0]
-        
+
         if len(asset['attributes']['Description']) > 0:
             emu_record['MulDescription'] = asset['attributes']['Description'][0]
 
@@ -59,13 +60,13 @@ def main():
     # Output EMu-import CSV
 
     print(prepped_emu_records)
-    
+
     # get field names
     field_names = prepped_emu_records[0].keys()
 
     # setup output filepath + name
     output_path = config['LOG_OUTPUT']
-    today = datetime.now()
+    # today = datetime.now()
     emu_csv_file = f'{output_path}emu_import_.csv'
 
 
@@ -83,4 +84,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+    main()
