@@ -3,11 +3,11 @@
 import logging
 from datetime import datetime, timedelta
 from xml.etree import ElementTree as ET
-import utils.csv_tools as uc
-import utils.emu_api as ue
-import utils.netx_api as un
-import utils.emu_netx_map as emu_netx
-import utils.setup as setup
+from utils import csv_tools as uc
+from utils import emu_api as ue
+from utils import netx_api as un
+from utils import emu_netx_map as emu_netx
+from utils import setup
 # from dotenv import dotenv_values
 
 
@@ -29,13 +29,13 @@ def main():
         data_to_get = ['asset.id', 'asset.attributes'],
         netx_test = live_or_test
         )
-    
+
     netx_assets_to_update = []
 
     if netx_assets['result'] is not None:
         if len(netx_assets['result']['results']) > 0:
             netx_assets_to_update = netx_assets['result']['results']
-    
+
     print(netx_assets)
 
 
@@ -49,7 +49,7 @@ def main():
         print(asset)
 
         # 1 - Get corresponding EMu record
-        
+
         if len(asset['attributes']['IRN']) > 0:
             emu_irn = asset['attributes']['IRN'][0]
 
@@ -59,10 +59,10 @@ def main():
                 search_value_single=emu_irn,
                 emu_env=live_or_test
                 )
-            
+
             if 'matches' not in emu_record.keys():
                 raise Exception("No matching EMu ")
-        
+
         else:
             # TODO - if record is new / no EMu irn, import it to EMu
             # For now - log warning & output list of no-EMu-irn exceptions
@@ -71,7 +71,7 @@ def main():
             log_message_no_irn = f'Check NetX asset ID {asset["id"]} -- no EMu IRN in NetX record.'
             print(log_message_no_irn)
             logging.warning(log_message_no_irn)
-        
+
 
         # 2 - Compare NetX / EMu fields
         # # Use netx/emu map (syncedMetadata.xml) to get corresponding EMu / NetX fields
@@ -82,12 +82,12 @@ def main():
         #   [# Map updated NetX-fields to EMu-fields]
             for emu_field, netx_field in netx_emu_map.items():
                 if asset_field == netx_field:
-                    # TODO - Transform asset_value structure for EMu data-types (Ref, MV-tables, etc)
+                    # TODO - Transform asset_value structure for EMu data-types Ref, MVtable, etc
                     # if 'array' == ue.emu_api_check_field_type(emu_table, emu_field):
                     #     ...
-                    
+
                     # TODO - Only update fields with non-matching values
-                    emu_updates_from_netx[emu_field] = asset_value        
+                    emu_updates_from_netx[emu_field] = asset_value
 
         # Update corresponding EMu records
         emu_update_log = ue.emu_api_update_record(
@@ -96,13 +96,13 @@ def main():
             emu_record=emu_updates_from_netx,
             emu_env=live_or_test
             )
-        
+
         logging.info(emu_update_log)
 
         prepped_emu_records.append(emu_updates_from_netx)
 
     # Output EMu-import CSV
-    
+
     # get field names
     field_names = prepped_emu_records[0].keys()
 
@@ -118,5 +118,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
-
+    main()
