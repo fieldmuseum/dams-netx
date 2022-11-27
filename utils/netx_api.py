@@ -590,3 +590,51 @@ def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_e
     # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
+
+
+def netx_get_groups_by_user(user_id:str, paging:list=[0,30], netx_env:str=None) -> dict:
+    '''
+    For a given user ID, returns a list of NetX group IDs and names.
+    The 'paging' argument should be a list of start-number, and results per page
+    e.g. [0,30] starts for the first (0) result, and includes 30 results per page.
+    Paging can also be set -- see https://developer.netx.net/#getgroupsbyuser 
+    '''
+    
+    method = 'getGroupsByUser'
+
+    params = [
+        user_id,
+        {
+            "page": {
+                "startIndex": paging[0],
+                "size": paging[1]
+            }
+        }
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_users_by_group(group_id:str, paging:list=[0,70], netx_env:str=None) -> dict:
+    '''
+    For a given group ID, returns a list of NetX user IDs, levels, and names.
+    The 'paging' argument should be a list of start-number, and results per page
+    e.g. [0,30] starts for the first (0) result, and includes 70 results per page.
+    Paging can also be set -- see https://developer.netx.net/#getusersbygroup 
+    '''
+    
+    method = 'getUsersByGroup'
+
+    params = [
+        group_id,
+        {
+            "page": {
+                "startIndex": paging[0],
+                "size": paging[1]
+            }
+        }
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
