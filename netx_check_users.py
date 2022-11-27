@@ -9,7 +9,7 @@ from utils import setup
 # from dotenv import dotenv_values
 
 
-def check_user_groups(group_id:int, live_or_test:str):
+def check_group_users(group_id:int, live_or_test:str):
     '''For users in a given group, check that each user is only in 1 group & return user-list'''
 
     # In case API needs rate-limiting
@@ -23,35 +23,7 @@ def check_user_groups(group_id:int, live_or_test:str):
 
         for member in group_members['result']['results']:
 
-            user_id = member['userId']
-
-            user_groups = un.netx_get_groups_by_user(user_id=user_id, netx_env=live_or_test)
-
-            user_groups_list = user_groups['result']['results']
-
-            if len(user_groups_list) > 0:
-                warn_msg = f"WARNING - user ID {user_id} is in multiple groups"
-                print(warn_msg)
-                logging.warning(warn_msg)
-
-            else:
-                log_message = f'{user_id} - in single group {user_groups_list}'
-                logging.info(log_message)
-
-            user_group_names = []
-            user_group_ids = []
-            for group in user_groups_list:
-                group_name = group['name']
-                group_id = str(group['groupId'])
-                user_group_names.append(group_name)
-                user_group_ids.append(group_id)
-
-            user_row = {
-                'user_id':user_id,
-                'group_count': len(user_groups_list),
-                'user_group_name': ' | '.join(user_group_names),
-                'user_group_id': ' | '.join(user_group_ids)
-            }
+            user_row = get_user_group_ids(group_member=member, netx_env=live_or_test)
 
             group_user_list.append(user_row)
 
@@ -61,7 +33,42 @@ def check_user_groups(group_id:int, live_or_test:str):
         log_err = f'ERROR - {err}'
         print(log_err)
         logging.error(log_err)
+        return err
 
+def get_user_group_ids(group_member:dict, netx_env:str) -> dict:
+    '''for a given member in a group, return dict of a user's group-name/s and group-id/s'''
+
+    user_id = group_member['userId']
+
+    user_groups = un.netx_get_groups_by_user(user_id=user_id, netx_env=netx_env)
+
+    user_groups_list = user_groups['result']['results']
+
+    if len(user_groups_list) > 0:
+        warn_msg = f"WARNING - user ID {user_id} is in multiple groups"
+        print(warn_msg)
+        logging.warning(warn_msg)
+
+    else:
+        log_message = f'{user_id} - in single group {user_groups_list}'
+        logging.info(log_message)
+
+    user_group_names = []
+    user_group_ids = []
+    for group in user_groups_list:
+        group_name = group['name']
+        group_id = str(group['groupId'])
+        user_group_names.append(group_name)
+        user_group_ids.append(group_id)
+
+    user_row = {
+        'user_id':user_id,
+        'group_count': len(user_groups_list),
+        'user_group_name': ' | '.join(user_group_names),
+        'user_group_id': ' | '.join(user_group_ids)
+    }
+
+    return user_row
 
 def main():
     '''main function'''
@@ -82,13 +89,13 @@ def main():
     for group_id in group_list:
         print(f'group ids {group_id}')
 
-        group_members = check_user_groups(group_id=group_id, live_or_test=live_or_test)
+        group_members = check_group_users(group_id=group_id, live_or_test=live_or_test)
 
         if group_members is not None and len(group_members) > 0:
             for row in group_members:
                 if row not in user_checklist:
                     user_checklist.append(row)
-    
+
     if len(user_checklist) > 0:
         field_names = []
         for row in user_checklist:
