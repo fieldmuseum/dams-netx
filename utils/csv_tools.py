@@ -14,7 +14,7 @@ def rows(file: str) -> list:
 def write_list_of_dict_to_csv(input_records:list, field_names:list, output_csv_file_name:str):
     '''Outputs a CSV file for a list of dictionaries, with given field-names'''
 
-    with open(output_csv_file_name, mode='w') as csv_file:
+    with open(output_csv_file_name, mode='w', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, extrasaction='ignore', fieldnames=field_names)
         writer.writeheader()
         writer.writerows(input_records)
