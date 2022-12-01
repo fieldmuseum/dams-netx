@@ -104,8 +104,8 @@ def main():
                 #     record['PathAddDepts'] = sec_dept_all
                 # else:
                 #     record['PathAddDepts'] = None
-        print(record)
-        if record['ChaMd5Sum'] is not None:
+
+        if 'ChaMd5Sum' in record.keys():
             records.append(record)
         else:
             log_warn_nofile = f'Skipping {record["AudIdentifier"]} -- No MD5 sum (ChaMd5Sum) / no file'
