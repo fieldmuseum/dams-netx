@@ -104,7 +104,7 @@ def main():
                 #     record['PathAddDepts'] = sec_dept_all
                 # else:
                 #     record['PathAddDepts'] = None
-
+        print(record)
         if record['ChaMd5Sum'] is not None:
             records.append(record)
         else:
