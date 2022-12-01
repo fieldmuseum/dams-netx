@@ -105,7 +105,12 @@ def main():
                 # else:
                 #     record['PathAddDepts'] = None
 
-        records.append(record)
+        if record['ChaMd5Sum'] is not None:
+            records.append(record)
+        else:
+            log_warn_nofile = f'Skipping {record["AudIdentifier"]} -- No MD5 sum (ChaMd5Sum) / no file'
+            print(log_warn_nofile)
+            logging.warning(log_warn_nofile)
 
     # Validate our current record set before we proceed
     invalid_records = validate_records(records)
