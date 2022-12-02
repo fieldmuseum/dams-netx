@@ -205,10 +205,16 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
         # loop thru dss schema fields & populate from EMu xml
-        prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
+        if emu_record.find('ChaMd5Sum').text is not None:
+            prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
 
-        if prepped_record is not None:
-            dss_records.append(prepped_record)
+            if prepped_record is not None:
+                dss_records.append(prepped_record)
+        
+        else:
+            log_warn_nofile = f'Skipping {emu_record.find("AudIdentifier").text} -- No MD5 sum (ChaMd5Sum) / no file'
+            print(log_warn_nofile)
+            logging.warning(log_warn_nofile)
 
 
     # Output Prepped DSS-XML
