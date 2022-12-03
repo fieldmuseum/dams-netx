@@ -152,49 +152,73 @@ def main():
         # Copy source-files to staging area & Rename them
 
         for prep_record in records_prep_file:
-            dirs = irn_dir(prep_record['irn'])
-
-            full_path = full_prefix + dirs + prep_record['MulIdentifier']
-
-            # In case EMu filename cleaner ran between EMu export / NetX import:
-            if not os.path.isfile(full_path):
-                full_path = full_prefix + dirs + emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
 
             dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
-            # Copy file to the new location for prep_file
-            if not os.path.exists(dest_path):
-                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+            copy_file_to_staging(
+                connxn=connxn,
+                prep_record=prep_record,
+                filename=prep_record['MulIdentifier'],
+                from_prefix=full_prefix,
+                to_prefix=dest_path
+                )
+            
+            if os.path.isfile(dest_path):
+                if os.path.getsize(dest_path) < 1:
 
-            try:
-                connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
-                log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
-                print(log_message)
-                logging.info(log_message)
+                    file_name = emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
 
-                # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
-                if os.path.isfile(dest_path):
-                    if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-                        with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
+                    copy_file_to_staging(
+                        connxn=connxn,
+                        prep_record=prep_record,
+                        filename=file_name,
+                        from_prefix=full_prefix,
+                        to_prefix=dest_path
+                    )
 
-                            dest_format = exif.get_tags(dest_path, tags='Format')
-                            if len(dest_format) > 0:
-                                if ('XMP:Format','image/tiff') in dest_format[0].items():
-                                    format_warn = f"WARNING - {dest_path} - possible TIFF - check"
-                                    print(format_warn)
-                                    logging.warning(format_warn)
+            # dirs = irn_dir(prep_record['irn'])
 
-                                else:
-                                    exif.set_tags(
-                                        dest_path,
-                                        tags = {'Identifier':prep_record['AudIdentifier']},
-                                        params=["-P", "-overwrite_original"]
-                                    )
+            # full_path = full_prefix + dirs + prep_record['MulIdentifier']
 
-            except Exception as err:
-                err_message = f'An error occurred trying to copy media from {full_path}: {err}'
-                print(err_message)
-                logging.error(err_message)
+            # # In case EMu filename cleaner ran between EMu export / NetX import:
+            # if not os.path.isfile(full_path):
+            #     full_path = full_prefix + dirs + emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
+
+            # dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
+
+            # # Copy file to the new location for prep_file
+            # if not os.path.exists(dest_path):
+            #     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+            # try:
+            #     connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
+            #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
+            #     print(log_message)
+            #     logging.info(log_message)
+
+            #     # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
+            #     if os.path.isfile(dest_path):
+            #         if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
+            #             with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
+
+            #                 dest_format = exif.get_tags(dest_path, tags='Format')
+            #                 if len(dest_format) > 0:
+            #                     if ('XMP:Format','image/tiff') in dest_format[0].items():
+            #                         format_warn = f"WARNING - {dest_path} - possible TIFF - check"
+            #                         print(format_warn)
+            #                         logging.warning(format_warn)
+
+            #                     else:
+            #                         exif.set_tags(
+            #                             dest_path,
+            #                             tags = {'Identifier':prep_record['AudIdentifier']},
+            #                             params=["-P", "-overwrite_original"]
+            #                         )
+
+            # except Exception as err:
+            #     err_message = f'An error occurred trying to copy media from {full_path}: {err}'
+            #     print(err_message)
+            #     logging.error(err_message)
 
 
         # Set up fields for CSV
@@ -214,6 +238,89 @@ def main():
 
     # Stop logging
     setup.stop_log_dams_netx()
+
+
+def copy_file_to_staging(
+    connxn,
+    prep_record:dict,
+    filename:str,
+    from_prefix:str,
+    to_prefix:str
+    ):
+    '''copy file from remote server to staging location'''
+    dirs = irn_dir(prep_record['irn'])
+
+    full_path = from_prefix + dirs + filename
+
+    dest_path = to_prefix + prep_record['pathMove'] + prep_record['prep_file']
+
+    # Copy file to the new location for prep_file
+    if not os.path.exists(dest_path):
+        os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+
+    try:
+        connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
+        log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
+        print(log_message)
+        logging.info(log_message)
+
+        # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
+        if os.path.isfile(dest_path):
+            if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
+                with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
+
+                    dest_format = exif.get_tags(dest_path, tags='Format')
+                    if len(dest_format) > 0:
+                        if ('XMP:Format','image/tiff') in dest_format[0].items():
+                            format_warn = f"WARNING - {dest_path} - possible TIFF - check"
+                            print(format_warn)
+                            logging.warning(format_warn)
+
+                        else:
+                            exif.set_tags(
+                                dest_path,
+                                tags = {'Identifier':prep_record['AudIdentifier']},
+                                params=["-P", "-overwrite_original"]
+                            )
+
+    except Exception as err:
+        err_message = f'An error occurred trying to copy media from {full_path}: {err}'
+        print(err_message)
+        logging.error(err_message)
+
+    # try:
+    #     connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
+    #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
+    #     print(log_message)
+    #     logging.info(log_message)
+
+    #     # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
+    #     if os.path.isfile(dest_path):
+    #         if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
+    #             with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
+
+    #                 dest_format = exif.get_tags(dest_path, tags='Format')
+    #                 if len(dest_format) > 0:
+    #                     if ('XMP:Format','image/tiff') in dest_format[0].items():
+    #                         format_warn = f"WARNING - {dest_path} - possible TIFF - check"
+    #                         print(format_warn)
+    #                         logging.warning(format_warn)
+
+    #                     else:
+    #                         exif.set_tags(
+    #                             dest_path,
+    #                             tags = {'Identifier':prep_record['AudIdentifier']},
+    #                             params=["-P", "-overwrite_original"]
+    #                         )
+
+    # except FileNotFoundError as no_file_err:
+    #     no_file_msg = no_file_err
+    #     alt_path = ''
+    #     connxn.get(remote=alt_path, local=dest_path, preserve_mode=False)
+    #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
+    #     print(log_message)
+    #     logging.info(log_message)
+
 
 
 def validate_files_copied(csv_records, dest_prefix):
