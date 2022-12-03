@@ -90,10 +90,10 @@ def main():
                 else:
                     record['PathAddDepts'] = None
 
-        if 'ChaMd5Sum' in record.keys():
+        if record['MulIdentifier'] is not None:
             records.append(record)
         else:
-            log_warn_nofile = f"Skipping {record['AudIdentifier']} -- No MD5 sum (ChaMd5Sum) / no file"
+            log_warn_nofile = f"Skipping {record['AudIdentifier']} -- No file"
             print(log_warn_nofile)
             logging.warning(log_warn_nofile)
 
