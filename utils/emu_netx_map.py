@@ -1,6 +1,7 @@
 '''Mapping EMu and NetX fields'''
 
 import csv
+import re
 from xml.etree import ElementTree as ET
 
 def emu_netx_atoms() -> dict:
@@ -183,3 +184,15 @@ def get_dss_xml(config:dict) -> dict:
                 netx_emu_map[emu_field_name] = netx_field_name
 
     return netx_emu_map
+
+
+def clean_emu_filename(emu_filename:str) -> str:
+    '''Given an EMu filename, return cleaned EMu filename without spaces/special characters'''
+
+    clean_ext = re.sub(r'(.+)(\..+$)', r'\g<2>', emu_filename)
+
+    clean_name = re.sub(r'[\'!@#\$%\^\*\?<>%"\{\}/\\&\.,\:;\s+\(\)\[\]\-]', '_', emu_filename)
+    clean_name = re.sub(r'_+', '_', clean_name)
+    clean_name = re.sub(r'(.+)(_.+$)', r'\g<1>' + clean_ext, clean_name) # (.+(_.+)*)(_)(.+$)', r'\g<1>.\g<3>', clean_name)
+
+    return clean_name

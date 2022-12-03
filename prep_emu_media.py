@@ -155,6 +155,11 @@ def main():
             dirs = irn_dir(prep_record['irn'])
 
             full_path = full_prefix + dirs + prep_record['MulIdentifier']
+
+            # In case EMu filename cleaner ran between EMu export / NetX import:
+            if not os.path.isfile(full_path):
+                full_path = full_prefix + dirs + emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
+
             dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
             # Copy file to the new location for prep_file
