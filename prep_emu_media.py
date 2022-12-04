@@ -160,7 +160,7 @@ def main():
                 prep_record=prep_record,
                 filename=prep_record['MulIdentifier'],
                 from_prefix=full_prefix,
-                to_prefix=dest_path
+                dest_path=dest_path
                 )
             
             if os.path.isfile(dest_path):
@@ -173,7 +173,7 @@ def main():
                         prep_record=prep_record,
                         filename=file_name,
                         from_prefix=full_prefix,
-                        to_prefix=dest_path
+                        dest_path=dest_path
                     )
 
             # dirs = irn_dir(prep_record['irn'])
@@ -245,14 +245,14 @@ def copy_file_to_staging(
     prep_record:dict,
     filename:str,
     from_prefix:str,
-    to_prefix:str
+    dest_path:str
     ):
     '''copy file from remote server to staging location'''
     dirs = irn_dir(prep_record['irn'])
 
     full_path = from_prefix + dirs + filename
 
-    dest_path = to_prefix + prep_record['pathMove'] + prep_record['prep_file']
+    # to_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
     # Copy file to the new location for prep_file
     if not os.path.exists(dest_path):
