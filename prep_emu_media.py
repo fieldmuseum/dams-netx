@@ -90,7 +90,7 @@ def main():
 
                     record['SecDepartment'] = sec_dept_all[0]
 
-            if 'ChaMd5Sum' in record:
+            if 'ChaMd5Sum' in record and 'SecDepartment' in record:
                 records.append(record)
             else:
                 log_warn_nofile = f'Skipping {record["AudIdentifier"]} -- No ChaMd5Sum or file'
