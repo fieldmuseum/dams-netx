@@ -57,184 +57,128 @@ def main():
         config['TEST_DESTIN_PATH_MEDIA']
         )
 
-    # if live_or_test == "LIVE":
-    #     full_prefix = config('ORIGIN_PATH_MEDIA')
-    #     full_xml_prefix = config('ORIGIN_PATH_XML')
-    #     dest_prefix = config('DESTIN_PATH_MEDIA')
-    # else:
-    #     full_prefix = config('TEST_ORIGIN_PATH_MEDIA')
-    #     full_xml_prefix = config('TEST_ORIGIN_PATH_XML')
-    #     dest_prefix = config('TEST_DESTIN_PATH_MEDIA')
-
     main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     print(main_xml_input)
 
-    # TODO - test/try to account for empty input-dir
-    tree = ET.parse(glob.glob(main_xml_input)[0])
-    input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
-    print(input_file_log)
-    logging.info(input_file_log)
+    try:
+        tree = ET.parse(glob.glob(main_xml_input)[0])
+        input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
+        print(input_file_log)
+        logging.info(input_file_log)
 
-    root = tree.getroot()
-    records = []
+        root = tree.getroot()
+        records = []
 
-    for xml_tuple in root:
-        # New record
-        record = {}
-        for elem in xml_tuple:
-            if elem.tag == 'atom' and elem.text:
-                attrib = elem.attrib['name']
-                record[attrib] = elem.text
+        for xml_tuple in root:
+            # New record
+            record = {}
+            for elem in xml_tuple:
+                if elem.tag == 'atom' and elem.text:
+                    attrib = elem.attrib['name']
+                    record[attrib] = elem.text
 
-            # Need to grab SecDepartment as well (start with the first value)
-            if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
+                # Need to grab SecDepartment as well (start with the first value)
+                if elem.tag == 'table' and elem.attrib['name'] == 'SecDepartment_tab':
 
-                sec_dept_raw = elem.findall('tuple/atom')
-                sec_dept_all = []
-                for dept in sec_dept_raw:
-                    if dept.text is not None:
-                        if len(dept.text) > 0 and dept.text not in sec_dept_all:
-                            if dept.text != " ":
-                                sec_dept_all.append(dept.text)
+                    sec_dept_raw = elem.findall('tuple/atom')
+                    sec_dept_all = []
+                    for dept in sec_dept_raw:
+                        if dept.text is not None:
+                            if len(dept.text) > 0 and dept.text not in sec_dept_all:
+                                if dept.text != " ":
+                                    sec_dept_all.append(dept.text)
 
-                record['SecDepartment'] = sec_dept_all[0]
+                    record['SecDepartment'] = sec_dept_all[0]
 
-                # # Get secondary SecDepartment values for pathAdd
-                # if len(sec_dept_all) > 1:
-                #     record['PathAddDepts'] = sec_dept_all
-                # else:
-                #     record['PathAddDepts'] = None
+            if 'ChaMd5Sum' in record:
+                records.append(record)
+            else:
+                log_warn_nofile = f'Skipping {record["AudIdentifier"]} -- No ChaMd5Sum or file'
+                print(log_warn_nofile)
+                logging.warning(log_warn_nofile)
 
-        if 'ChaMd5Sum' in record.keys():
-            records.append(record)
-        else:
-            log_warn_nofile = f'Skipping {record["AudIdentifier"]} -- No MD5 sum (ChaMd5Sum) / no file'
-            print(log_warn_nofile)
-            logging.warning(log_warn_nofile)
+        # Validate our current record set before we proceed
+        invalid_records = validate_records(records)
+        if invalid_records:
+            output_error_log(invalid_records)
 
-    # Validate our current record set before we proceed
-    invalid_records = validate_records(records)
-    if invalid_records:
-        output_error_log(invalid_records)
+        # Set up prep_file values
+        records_prep_file = []
 
-    # Set up prep_file values
-    records_prep_file = []
+        for record in records:
+            print(record['irn'])
+            record_prep = {}
+            record_prep['irn'] = record['irn']
+            record_prep['MulIdentifier'] = record['MulIdentifier']
+            record_prep['AudIdentifier'] = record['AudIdentifier']
+            record_prep['prep_file'] = prep_file(record)
+            record_prep['pathMove'] = pathmove(record, dept_csv)
+            records_prep_file.append(record_prep)
 
-    for record in records:
-        print(record['irn'])
-        record_prep = {}
-        record_prep['irn'] = record['irn']
-        record_prep['MulIdentifier'] = record['MulIdentifier']
-        record_prep['AudIdentifier'] = record['AudIdentifier']
-        record_prep['prep_file'] = prep_file(record)
-        record_prep['pathMove'] = pathmove(record, dept_csv)
-        records_prep_file.append(record_prep)
-
-        # if record['PathAddDepts'] is not None:
-        #     path_add_rows = pathadd(record)
-        #     for row in path_add_rows:
-        #         path_add_running_list.append(row)
+        # # SKIP FIRST 21.1k records
+        # records_prep_file = records_prep_file[21100:]
 
 
-    # # SKIP FIRST 21.1k records
-    # records_prep_file = records_prep_file[21100:]
+        # Copy all files to correct location, this should happen before we create
+        # the CSV to confirm that the files are actually there.
+        # If this step fails, raise an exception so the CSV isn't created.
+        # copy_files(records_prep_file, full_prefix, dest_prefix, connxn)
+        with Connection(host=config['ORIGIN_IP'], user=config['ORIGIN_USER']) as connxn:
 
+            connxn.run('hostname')
 
-    # Copy all files to correct location, this should happen before we create
-    # the CSV to confirm that the files are actually there.
-    # If this step fails, raise an exception so the CSV isn't created.
-    # copy_files(records_prep_file, full_prefix, dest_prefix, connxn)
+            # Copy source-files to staging area & Rename them
 
-    with Connection(host=config['ORIGIN_IP'], user=config['ORIGIN_USER']) as connxn:
+            for prep_record in records_prep_file:
 
-        connxn.run('hostname')
+                dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
-        # Copy source-files to staging area & Rename them
-
-        for prep_record in records_prep_file:
-
-            dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
-
-            copy_file_to_staging(
-                connxn=connxn,
-                prep_record=prep_record,
-                filename=prep_record['MulIdentifier'],
-                from_prefix=full_prefix,
-                dest_path=dest_path
-                )
-            
-            if os.path.isfile(dest_path):
-                if os.path.getsize(dest_path) < 1:
-
-                    file_name = emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
-
-                    copy_file_to_staging(
-                        connxn=connxn,
-                        prep_record=prep_record,
-                        filename=file_name,
-                        from_prefix=full_prefix,
-                        dest_path=dest_path
+                copy_file_to_staging(
+                    connxn=connxn,
+                    prep_record=prep_record,
+                    filename=prep_record['MulIdentifier'],
+                    from_prefix=full_prefix,
+                    dest_path=dest_path
                     )
 
-            # dirs = irn_dir(prep_record['irn'])
+                if os.path.isfile(dest_path):
+                    if os.path.getsize(dest_path) < 1:
 
-            # full_path = full_prefix + dirs + prep_record['MulIdentifier']
+                        file_name = emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
 
-            # # In case EMu filename cleaner ran between EMu export / NetX import:
-            # if not os.path.isfile(full_path):
-            #     full_path = full_prefix + dirs + emu_netx.clean_emu_filename(prep_record['MulIdentifier'])
+                        copy_file_to_staging(
+                            connxn=connxn,
+                            prep_record=prep_record,
+                            filename=file_name,
+                            from_prefix=full_prefix,
+                            dest_path=dest_path
+                        )
 
-            # dest_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
+            # Set up fields for CSV
+            csv_records = []
+            for record in records_prep_file:
+                csv_r = {}
+                # csv_r['AudIdentifier'] = record['AudIdentifier']
+                csv_r['file'] = record['prep_file']
+                csv_r['pathMove'] = record['pathMove']
+                csv_r['Identifier'] = record['AudIdentifier']
+                csv_records.append(csv_r)
 
-            # # Copy file to the new location for prep_file
-            # if not os.path.exists(dest_path):
-            #     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+            # Validate that the copied files actually exist where we say they
+            # do in the prep_file value for the CSV file.
+            validate_files_copied(csv_records, dest_prefix)
 
-            # try:
-            #     connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
-            #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
-            #     print(log_message)
-            #     logging.info(log_message)
+    except IndexError as idx_err:
+        # Account for empty input-dir
+        # if len(glob.glob(main_xml_input)) < 1:
+        idx_err_msg = f'Error, possible empty input-dir at "{main_xml_input}": {idx_err}'
+        print(idx_err_msg)
+        logging.error(idx_err_msg)
 
-            #     # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
-            #     if os.path.isfile(dest_path):
-            #         if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-            #             with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
-
-            #                 dest_format = exif.get_tags(dest_path, tags='Format')
-            #                 if len(dest_format) > 0:
-            #                     if ('XMP:Format','image/tiff') in dest_format[0].items():
-            #                         format_warn = f"WARNING - {dest_path} - possible TIFF - check"
-            #                         print(format_warn)
-            #                         logging.warning(format_warn)
-
-            #                     else:
-            #                         exif.set_tags(
-            #                             dest_path,
-            #                             tags = {'Identifier':prep_record['AudIdentifier']},
-            #                             params=["-P", "-overwrite_original"]
-            #                         )
-
-            # except Exception as err:
-            #     err_message = f'An error occurred trying to copy media from {full_path}: {err}'
-            #     print(err_message)
-            #     logging.error(err_message)
-
-
-        # Set up fields for CSV
-        csv_records = []
-        for record in records_prep_file:
-            csv_r = {}
-            # csv_r['AudIdentifier'] = record['AudIdentifier']
-            csv_r['file'] = record['prep_file']
-            csv_r['pathMove'] = record['pathMove']
-            csv_r['Identifier'] = record['AudIdentifier']
-            csv_records.append(csv_r)
-
-        # Validate that the copied files actually exist where we say they
-        # do in the prep_file value for the CSV file.
-        validate_files_copied(csv_records, dest_prefix)
-
+    # except Exception as err:
+    #     err_message = f'An error occurred: {err}'
+    #     print(err_message)
+    #     logging.error(err_message)
 
     # Stop logging
     setup.stop_log_dams_netx()
@@ -247,12 +191,13 @@ def copy_file_to_staging(
     from_prefix:str,
     dest_path:str
     ):
-    '''copy file from remote server to staging location'''
+    '''
+    Copy file from remote server to staging location
+    '''
+
     dirs = irn_dir(prep_record['irn'])
 
     full_path = from_prefix + dirs + filename
-
-    # to_path = dest_prefix + prep_record['pathMove'] + prep_record['prep_file']
 
     # Copy file to the new location for prep_file
     if not os.path.exists(dest_path):
@@ -283,44 +228,15 @@ def copy_file_to_staging(
                                 params=["-P", "-overwrite_original"]
                             )
 
-    except Exception as err:
-        err_message = f'An error occurred trying to copy media from {full_path}: {err}'
-        print(err_message)
-        logging.error(err_message)
+    except FileNotFoundError as file_err:
+        file_err_msg = f'A file-error occurred trying to copy media from {full_path}: {file_err}'
+        print(file_err_msg)
+        logging.error(file_err_msg)
 
-    # try:
-    #     connxn.get(remote=full_path, local=dest_path, preserve_mode=False)
-    #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
-    #     print(log_message)
-    #     logging.info(log_message)
-
-    #     # # Embed dc:identifier in file's XMP (for images/XMP-embeddable formats)
-    #     if os.path.isfile(dest_path):
-    #         if len(re.findall(r'(dng|jpg|jpeg|tif|tiff)+$', dest_path)) > 0:
-    #             with ExifToolHelper() as exif:    # exif.get_tags(dest_path, tags)
-
-    #                 dest_format = exif.get_tags(dest_path, tags='Format')
-    #                 if len(dest_format) > 0:
-    #                     if ('XMP:Format','image/tiff') in dest_format[0].items():
-    #                         format_warn = f"WARNING - {dest_path} - possible TIFF - check"
-    #                         print(format_warn)
-    #                         logging.warning(format_warn)
-
-    #                     else:
-    #                         exif.set_tags(
-    #                             dest_path,
-    #                             tags = {'Identifier':prep_record['AudIdentifier']},
-    #                             params=["-P", "-overwrite_original"]
-    #                         )
-
-    # except FileNotFoundError as no_file_err:
-    #     no_file_msg = no_file_err
-    #     alt_path = ''
-    #     connxn.get(remote=alt_path, local=dest_path, preserve_mode=False)
-    #     log_message = f'Full origin path = {full_path} | Destination path = {dest_path}'
-    #     print(log_message)
-    #     logging.info(log_message)
-
+    # except Exception as err:
+    #     err_message = f'An error occurred trying to copy media from {full_path}: {err}'
+    #     print(err_message)
+    #     logging.error(err_message)
 
 
 def validate_files_copied(csv_records, dest_prefix):
@@ -351,7 +267,7 @@ def irn_dir(irn):
         last_dir = ''.join(end)
         first_dir = ''.join(digits)
 
-    # If irn <= 3 digits, dir format is:    0/001 or 0/012 or 0/123
+    # If irn <= 3 digits, dir format is:  0/001 or 0/012 or 0/123
     else:
         first_dir = "0"
         zero_count = 3 - len(digits)
