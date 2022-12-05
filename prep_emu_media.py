@@ -13,7 +13,7 @@ import re
 import sys
 # from decouple import config
 import xml.etree.ElementTree as ET
-from exiftool import ExifToolHelper
+from exiftool import ExifToolHelper, exceptions
 from fabric import Connection
 from utils import emu_netx_map as emu_netx
 from utils import setup
@@ -225,18 +225,23 @@ def copy_file_to_staging(
                             exif.set_tags(
                                 dest_path,
                                 tags = {'Identifier':prep_record['AudIdentifier']},
-                                params=["-P", "-overwrite_original"]
+                                params=["-m", "-P", "-overwrite_original"]
                             )
 
     except FileNotFoundError as file_err:
-        file_err_msg = f'A file-error occurred trying to copy media from {full_path}: {file_err}'
+        file_err_msg = f'A file-error occurred trying to copy {full_path}: {file_err}'
         print(file_err_msg)
         logging.error(file_err_msg)
 
-    # except Exception as err:
-    #     err_message = f'An error occurred trying to copy media from {full_path}: {err}'
-    #     print(err_message)
-    #     logging.error(err_message)
+    except exceptions.ExifToolExecuteError as exif_err:
+        exif_err_msg = f'An exif-error occurred for {full_path}: {exif_err}'
+        print(exif_err_msg)
+        logging.error(exif_err_msg)
+
+    except Exception as err:
+        err_message = f'An error occurred trying to copy {full_path}: {err}'
+        print(err_message)
+        logging.error(err_message)
 
 
 def validate_files_copied(csv_records, dest_prefix):
