@@ -115,8 +115,8 @@ def main():
             record_prep['pathMove'] = pathmove(record, dept_csv)
             records_prep_file.append(record_prep)
 
-        # SKIP FIRST 21.1k records
-        records_prep_file = records_prep_file[42700:]
+        # # SKIP FIRST 21.1k records
+        # records_prep_file = records_prep_file[42700:]
 
 
         # Copy all files to correct location, this should happen before we create
