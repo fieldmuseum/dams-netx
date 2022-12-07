@@ -205,7 +205,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
         # loop thru dss schema fields & populate from EMu xml
-        if emu_record.find('ChaMd5Sum').text is not None:
+        if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
             prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
 
             if prepped_record is not None:
