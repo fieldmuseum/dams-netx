@@ -90,8 +90,9 @@ def main():
                 else:
                     record['PathAddDepts'] = None
 
-        if 'MulIdentifier' in record.keys() and record['MulIdentifier'] is not None:
-            records.append(record)
+        if 'MulIdentifier' in record and record['MulIdentifier'] is not None:
+            if 'SecDepartment' in record and record['SecDepartment'] is not None:
+                records.append(record)
         else:
             log_warn_nofile = f"Skipping {record['AudIdentifier']} -- No file"
             print(log_warn_nofile)
