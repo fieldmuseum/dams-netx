@@ -39,7 +39,8 @@ def emu_netx_atoms() -> dict:
             'AdmModifiedBy':'AdmModifiedBy',
             'RelNotes':'RelNotes',
             'MulIdentifier':'MulIdentifier',
-            'DetSource':'DetSource'
+            'DetSource':'DetSource',
+            'ChaMediaForm':'ChaMediaForm'
     }
 
     return emu_netx_atoms
@@ -56,7 +57,9 @@ def emu_netx_tables() -> dict:
         'SecDepartment_tab':'SecDepartment_tab',
         'AudSubjectOrientation_tab':'AudSubjectOrientation_tab',
         'AudSubjectPart_tab':'AudSubjectPart_tab',
-        'ChaRepository_tab':'ChaRepository_tab'
+        'ChaRepository_tab':'ChaRepository_tab',
+        'DetResourceDetailsDate0':'DetResourceDetailsDate0',
+        'DetResourceDetailsDescription_tab':'DetResourceDetailsDescription_tab'
     }
 
     return emu_netx_tables
@@ -156,7 +159,7 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
 def get_dss_xml(config:dict) -> dict:
     '''Convert syncedMetadata.xml DSS config to dict of {emu_field:netx_field}'''
 
-    netx_emu_tree = ET.parse(config['DSS_XML'])
+    netx_emu_tree = ET.parse(config('DSS_XML'))
     netx_emu_root = netx_emu_tree.getroot()
 
     for child in netx_emu_root:

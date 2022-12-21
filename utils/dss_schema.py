@@ -59,6 +59,9 @@ def media_schema_xml() -> ET.Element:
             <MulOtherNumberSource_tab/>
             <ChaRepository_tab/>
             <DetSource/>
+            <ChaMediaForm/>
+            <DetResourceDetailsDate0/>
+            <DetResourceDetailsDescription_tab/>
         </data>
         '''
         )
@@ -132,7 +135,10 @@ def media_schema_json():
             'MulOtherNumber_tab':None,
             'MulOtherNumberSource_tab':None,
             'ChaRepository_tab':None,
-            'DetSource':None
+            'DetSource':None,
+            'ChaMediaForm':None,
+            'DetResourceDetailsDate0':None,
+            'DetResourceDetailsDescription_tab':None
         }
     }
 

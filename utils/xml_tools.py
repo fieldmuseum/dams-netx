@@ -32,7 +32,7 @@ def convert_linebreaks_to_commas(emu_records: ET.Element) -> ET.Element:
     '''Convert an EMu table field to comma-delimited quoted values'''
     for table_as_text in emu_records.findall('.//*'):
         if table_as_text.tag is not None:
-            if table_as_text.tag.find("_tab") > 0:  # and table_as_text.text.find("\n") > 0:
+            if table_as_text.tag.find("_tab") > 0 or len(re.findall(r'0$', table_as_text.tag)) > 0:  # and table_as_text.text.find("\n") > 0:
                 row_list = []
                 for tuple in table_as_text:
                     for row in tuple:
