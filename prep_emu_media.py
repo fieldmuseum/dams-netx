@@ -90,7 +90,7 @@ def main():
 
                     record['SecDepartment'] = sec_dept_all[0]
 
-            if set(['ChaMd5Sum', 'SecDepartment', 'MulIdentifier', 'AudIdentifier']).issubset(record) or record['AudIdentifier'] is not None:
+            if set(['ChaMd5Sum', 'SecDepartment', 'MulIdentifier', 'AudIdentifier']).issubset(record): # or record['AudIdentifier'] is not None:
                 records.append(record)
             else:
                 log_warn_nofile = f'Skipping MM irn {record["irn"]} -- No ChaMd5Sum or file'
