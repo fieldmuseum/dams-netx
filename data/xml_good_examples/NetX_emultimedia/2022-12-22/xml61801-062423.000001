@@ -207,6 +207,10 @@
         <atom name="DetResourceDetailsDate">1896</atom>
         <atom name="DetResourceDetailsDescription">Circa</atom>
       </tuple>
+      <tuple>
+        <atom name="DetResourceDetailsDate">1896-01-01</atom>
+        <atom name="DetResourceDetailsDescription">Test-2nd-Date</atom>
+      </tuple>
     </table>
     <atom name="DetResourceType">StillImage</atom>
     <atom name="DetCoverage"></atom>

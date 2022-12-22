@@ -57,9 +57,7 @@ def emu_netx_tables() -> dict:
         'SecDepartment_tab':'SecDepartment_tab',
         'AudSubjectOrientation_tab':'AudSubjectOrientation_tab',
         'AudSubjectPart_tab':'AudSubjectPart_tab',
-        'ChaRepository_tab':'ChaRepository_tab',
-        'DetResourceDetailsDate0':'DetResourceDetailsDate0',
-        'DetResourceDetailsDescription_tab':'DetResourceDetailsDescription_tab'
+        'ChaRepository_tab':'ChaRepository_tab'
     }
 
     return emu_netx_tables
@@ -103,7 +101,9 @@ def emu_netx_groups_or_reftabs() -> dict:
         'RelRelatedMediaRef_tab_SummaryData':['RelatedMedia','SummaryData'],
         'RelRelationship_tab':['RelatedMedia','RelRelationship'],
         'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
-        'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'] # make unique list
+        'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'], # make unique list
+        'DetResourceDetailsDate0': ['Dates', 'DetResourceDetailsDate'],
+        'DetResourceDetailsDescription_tab': ['Dates', 'DetResourceDetailsDescription']
     }
 
     return emu_netx_groups_or_reftabs
@@ -132,7 +132,7 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for r in reader: dept_folders.append(r)
-
+    
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
     dept_emu = []
