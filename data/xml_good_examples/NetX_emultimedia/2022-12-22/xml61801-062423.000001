@@ -1,0 +1,1520 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    integer         irn
+    text long       MulTitle
+    text long       MulDescription
+    table           DetSubject_tab
+      text short      DetSubject
+    end
+    tuple           DetMediaRightsRef
+      integer         irn
+      text long       SummaryData
+      text short      RigType
+      text short      RigOtherNumber
+      table           RigOwnershipRef_tab
+        text long       SummaryData
+      end
+    end
+    table           Creator
+      text long       SummaryData
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text short      MulMultimediaCreatorRole
+    end
+    table           Supplementary
+      text short      SupIdentifier
+      table           SupUsage_nesttab
+        text short      SupUsage
+      end
+    end
+    table           SecDepartment_tab
+      text short      SecDepartment
+    end
+    tuple           RelParentMediaRef
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text long       SummaryData
+    end
+    text long       MulIdentifier
+    text short      ChaMd5Sum
+    text short      MulMimeType
+    text short      MulMimeFormat
+    text short      MulDocumentType
+    tuple           DetPublisherRef
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           Contributor
+      text short      DetContributorRole
+      text long       SummaryData
+      text short      AdmPublishWebNoPassword
+      integer         irn
+    end
+    table           Dates
+      date            DetResourceDetailsDate
+      text long       DetResourceDetailsDescription
+    end
+    text long       DetResourceType
+    text long       DetCoverage
+    text long       DetSource
+    text long       ChaMediaForm
+    integer         ChaFileSize
+    text short      ChaImageResolution
+    text short      ChaImageHeight
+    text short      ChaImageWidth
+    text short      ChaImageColorDepth
+    text short      ChaVideoFilmLength
+    table           SupMimeType_tab
+      text short      SupMimeType
+    end
+    table           SupMimeFormat_tab
+      text short      SupMimeFormat
+    end
+    table           SupFileSize_tab
+      integer         SupFileSize
+    end
+    table           SupMD5Checksum_tab
+      text short      SupMD5Checksum
+    end
+    table           RelatedMedia
+      text short      AudIdentifier
+      text short      AdmPublishWebNoPassword
+      integer         irn
+      text long       SummaryData
+      text short      RelRelationship
+    end
+    date            AdmDateInserted
+    date            AdmDateModified
+    text short      AdmInsertedBy
+    text short      AdmModifiedBy
+    text short      AudAccessURI
+    text long       AudACDescription
+    text short      AudAssociatedObservation
+    text short      AudAssociatedSpecimen
+    text short      AudCaptureDevice
+    text short      AudCitation
+    text short      AudDerivedFrom
+    text short      AudFundingAttribution
+    text short      AudLifeStage
+    text long       AudNumbers
+    text long       AudRelatedGeography
+    text long       AudRelatedResourceID
+    text short      AudSex
+    text short      AudSubjectOrientation
+    table           AudSubjectPart_tab
+      text short      AudSubjectPart
+    end
+    text long       AudTaxonCoverage
+    text long       AudTemporalCoverage
+    text long       AudVernacularName
+    text short      SecRecordStatus
+    text long       MulIdentifier
+    text short      AdmPublishWebNoPassword
+    text short      AdmPublishWebPassword
+    text long       DetSource
+    table           ChaRepository_tab
+      text short      ChaRepository
+    end
+    table           OtherNumbers
+      text short      MulOtherNumber
+      text short      MulOtherNumberSource
+    end
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="AudIdentifier">5eab6a0f-21be-405f-b8a6-812145083938</atom>
+    <atom name="irn">1320900</atom>
+    <atom name="MulTitle">Wisconsin State Building</atom>
+    <atom name="MulDescription">Wisconsin State Building. World's Columbian Exposition</atom>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">W.B. Conkey Company</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">187288</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">GN90799d_CON_167w.dng</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">GN90799d_CON_167w.jpg</atom>
+    <atom name="ChaMd5Sum">546a40eab78770e39e2fd3a292da767a</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1896</atom>
+        <atom name="DetResourceDetailsDescription">Circa</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm"></atom>
+    <atom name="ChaFileSize">2956037</atom>
+    <atom name="ChaImageResolution">240</atom>
+    <atom name="ChaImageHeight">1478</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">24</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">dng</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">17707926</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">9eb5d95ef85cc062f0880ca4aed4d5f1</atom>
+      </tuple>
+    </table>
+    <table name="RelatedMedia">
+      <tuple>
+        <atom name="AudIdentifier">7f927b5f-501c-406b-a883-154ad7e7a7e2</atom>
+        <atom name="AdmPublishWebNoPassword">No</atom>
+        <atom name="irn">2429251</atom>
+        <atom name="SummaryData">GN90799d_CON_167w - Media Agreement with Lynda Drews, [3.009 MB], (application/pdf)</atom>
+        <atom name="RelRelationship">Media Agreement</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2016-03-08</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">Anna Schoen</atom>
+    <atom name="AdmModifiedBy">Rebecca Wilke</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1320/900/GN90799d_CON_167w.jpg</atom>
+    <atom name="AudACDescription">Wisconsin State Building. World's Columbian Exposition</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: W.B. Conkey Company. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/5eab6a0f-21be-405f-b8a6-812145083938 (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">GN90799d_CON_167w.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">GN90799d_CON_167w</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="AudIdentifier">b56c687b-50f9-4b89-9542-6ee9203b865d</atom>
+    <atom name="irn">1716824</atom>
+    <atom name="MulTitle">Wild Ass on camel</atom>
+    <atom name="MulDescription">Somali Wild Ass [specimen carcass being carried] on camel. With four men, one holding a rifle</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Elliot_book</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Carl E. Akeley</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">129903</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSZ5990.dng</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSZ5990.jpg</atom>
+    <atom name="ChaMd5Sum">21b1b2a37cb5bed35b4e88d82c1b4621</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1896-05-</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">4x5 in. b/w Interpositive</atom>
+    <atom name="ChaFileSize">1855706</atom>
+    <atom name="ChaImageResolution">1200</atom>
+    <atom name="ChaImageHeight">1337</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">image</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">dng</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">97653190</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">2d017b2fd496d90777bab2a22650ab15</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2018-05-13</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">Cummings, Nina</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1716/824/CSZ5990.jpg</atom>
+    <atom name="AudACDescription">Somali Wild Ass [specimen carcass being carried] on camel. With four men, one holding a rifle</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. E. Akeley. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/b56c687b-50f9-4b89-9542-6ee9203b865d (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSZ5990.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSZ5990</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="AudIdentifier">bd8c0c1b-7f30-4924-b6bd-b27101917b9b</atom>
+    <atom name="irn">1222676</atom>
+    <atom name="MulTitle">Man</atom>
+    <atom name="MulDescription">Man same man as 47. Man wearing a dark shirt and several strands of shell beads.</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA48_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA48.jpg</atom>
+    <atom name="ChaMd5Sum">6f90a75c3b17f51fa959f764aba5ce3a</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">1253342</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">2000</atom>
+    <atom name="ChaImageWidth">1590</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-zip-compressed</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">91163562</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">11283ea34faa3d615118b7a65df01fa3</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/676/CSA48.jpg</atom>
+    <atom name="AudACDescription">Man same man as 47. Man wearing a dark shirt and several strands of shell beads.</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/bd8c0c1b-7f30-4924-b6bd-b27101917b9b (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA48.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA48</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="AudIdentifier">2b08673a-602c-4a07-85c5-14618373f83e</atom>
+    <atom name="irn">1222380</atom>
+    <atom name="MulTitle">Flute</atom>
+    <atom name="MulDescription">Men and Flute ceremony</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA157_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA157.jpg</atom>
+    <atom name="ChaMd5Sum">8744f4a7032b7be2120f731f9c2beafe</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w glass negative</atom>
+    <atom name="ChaFileSize">1192170</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1545</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-zip-compressed</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">99356310</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">774b6ac425311b0732dd4cad9c1894c5</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/380/CSA157.jpg</atom>
+    <atom name="AudACDescription">Men and Flute ceremony</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/2b08673a-602c-4a07-85c5-14618373f83e (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA157.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA157</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="AudIdentifier">dcc0f93d-cacf-46b2-a8fb-2f167841c363</atom>
+    <atom name="irn">1222733</atom>
+    <atom name="MulTitle">Montezuma's castle</atom>
+    <atom name="MulDescription">Montezuma's castle or wall, carved into cliff or rock with wooden ladder visible [Ancient Cliff Dwelling].</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA717_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA717.jpg</atom>
+    <atom name="ChaMd5Sum">575fcbb3100e5a074727b1b811b5eb1d</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">2000462</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1571</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-zip-compressed</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">121470132</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">6a1da2467e89ca049f1350c8c043fe3f</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMD5Checksum">6a1da2467e89ca049f1350c8c043fe3f</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/733/CSA717.jpg</atom>
+    <atom name="AudACDescription">Montezuma's castle or wall, carved into cliff or rock with wooden ladder visible [Ancient Cliff Dwelling].</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/dcc0f93d-cacf-46b2-a8fb-2f167841c363 (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA717.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA717</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="AudIdentifier">b2bfd6aa-5ee6-4ed8-8d4d-dc68ceb1ec38</atom>
+    <atom name="irn">1222734</atom>
+    <atom name="MulTitle">Montezuma's Well</atom>
+    <atom name="MulDescription">Montezuma's Well</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA718_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA718.jpg</atom>
+    <atom name="ChaMd5Sum">a4c27adafb5273603bce60cc0ec8b659</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">1432405</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1571</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-unknown</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">129452836</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">a5b0738faf54ed514fab2f9e30833972</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/734/CSA718.jpg</atom>
+    <atom name="AudACDescription">Montezuma's Well</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/b2bfd6aa-5ee6-4ed8-8d4d-dc68ceb1ec38 (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA718.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA718</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="AudIdentifier">6e473282-5e95-4fc0-87ab-3042537d92f1</atom>
+    <atom name="irn">1222735</atom>
+    <atom name="MulTitle">Cliff Dwelling</atom>
+    <atom name="MulDescription">Cliff Dwelling, man sitting in</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA719_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA719.jpg</atom>
+    <atom name="ChaMd5Sum">8c32b02c11b5f3a7792f423efa1dc827</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">1653291</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1571</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-unknown</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">109624332</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">2d309137a13765d6d926143b60a9cf14</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/735/CSA719.jpg</atom>
+    <atom name="AudACDescription">Cliff Dwelling, man sitting in</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/6e473282-5e95-4fc0-87ab-3042537d92f1 (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA719.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA719</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="AudIdentifier">80739daf-7672-4433-8265-31088a12ada4</atom>
+    <atom name="irn">1222737</atom>
+    <atom name="MulTitle">Hopi man portrait profile, against a slatted wood wall</atom>
+    <atom name="MulDescription">Hopi man portrait profile, against a slatted wood wall</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA727_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA727.jpg</atom>
+    <atom name="ChaMd5Sum">db613005eacbc39a2b7a0187240e0181</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">1530062</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">2000</atom>
+    <atom name="ChaImageWidth">1571</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-zip-compressed</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">94887092</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">d77ee59064fe55de989654ed11ef251a</atom>
+      </tuple>
+      <tuple>
+        <atom name="SupMD5Checksum">d77ee59064fe55de989654ed11ef251a</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/737/CSA727.jpg</atom>
+    <atom name="AudACDescription">Hopi man portrait profile, against a slatted wood wall</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/80739daf-7672-4433-8265-31088a12ada4 (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA727.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA727</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="AudIdentifier">958883a0-d3d0-48c9-a7af-5eadeaf813ac</atom>
+    <atom name="irn">1222739</atom>
+    <atom name="MulTitle">Test MM record</atom>
+    <atom name="MulDescription">Test MM record ceremony</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">36</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber"></atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA730_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+      <tuple>
+        <atom name="SecDepartment">Library</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier">test-parent-guid</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">12345</atom>
+        <atom name="SummaryData">Test Parent Media summary</atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA730.jpg</atom>
+    <atom name="ChaMd5Sum">d7b4b2092d6c9320fd4e303a6a5cbbc3</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+      <atom name="AdmPublishWebNoPassword">Yes</atom>
+      <atom name="irn">156723</atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage"></atom>
+    <atom name="DetSource"></atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">1218862</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">2000</atom>
+    <atom name="ChaImageWidth">1571</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-unknown</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">87552000</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">51ef674cfb5e76dde157c2979c4cbe6a</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/739/CSA730.jpg</atom>
+    <atom name="AudACDescription">Test MM record ceremony</atom>
+    <atom name="AudAssociatedObservation">Test-Assoc.-Observ.-GUID</atom>
+    <atom name="AudAssociatedSpecimen">Test-Associated-Specimen-GUID</atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/958883a0-d3d0-48c9-a7af-5eadeaf813ac (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom">Test-Parent-GUID</atom>
+    <atom name="AudFundingAttribution">Test-Funding-Attrib</atom>
+    <atom name="AudLifeStage">Test-Adult</atom>
+    <atom name="AudNumbers">Test #1234</atom>
+    <atom name="AudRelatedGeography">Test-Related-Geog</atom>
+    <atom name="AudRelatedResourceID">Test-Related-ID</atom>
+    <atom name="AudSex">Test-Female</atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage">Test-Taxon</atom>
+    <atom name="AudTemporalCoverage">Test-Era</atom>
+    <atom name="AudVernacularName">Test-Common-Name</atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA730.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource">test source</atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA730</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="AudIdentifier">a1da8686-2f4f-481c-9a8f-307c1d7f27ed</atom>
+    <atom name="irn">1222740</atom>
+    <atom name="MulTitle">Katchina dancers in full costume</atom>
+    <atom name="MulDescription">Katchina dancers in full costume</atom>
+    <table name="DetSubject_tab">
+      <tuple>
+        <atom name="DetSubject">NHPRC2004</atom>
+      </tuple>
+      <tuple>
+        <atom name="DetSubject">Great Lakes TCN</atom>
+      </tuple>
+    </table>
+    <tuple name="DetMediaRightsRef">
+      <atom name="irn">46</atom>
+      <atom name="SummaryData">(c) Field Museum of Natural History - CC BY-NC 4.0</atom>
+      <atom name="RigType">Copyright</atom>
+      <atom name="RigOtherNumber">CC BY-NC 4.0</atom>
+      <table name="RigOwnershipRef_tab">
+        <tuple>
+          <atom name="SummaryData">Field Museum of Natural History</atom>
+        </tuple>
+      </table>
+    </tuple>
+    <table name="Creator">
+      <tuple>
+        <atom name="SummaryData">Charles H. Carpenter</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">402632</atom>
+        <atom name="MulMultimediaCreatorRole">Photographer</atom>
+      </tuple>
+      <tuple>
+        <atom name="SummaryData">FMNH</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">12345</atom>
+        <atom name="MulMultimediaCreatorRole">Creator</atom>
+      </tuple>
+    </table>
+    <table name="Contributor">
+      <tuple>
+        <atom name="SummaryData">Ms. Contributor</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">45667</atom>
+        <atom name="DetContributorRole">Funder</atom>
+      </tuple>
+      <tuple>
+        <atom name="SummaryData">FMNH Department</atom>
+        <atom name="AdmPublishWebNoPassword">Yes</atom>
+        <atom name="irn">23456</atom>
+        <atom name="DetContributorRole">Contributor</atom>
+      </tuple>
+    </table>
+    <table name="Supplementary">
+      <tuple>
+        <atom name="SupIdentifier">CSA734_dng.zip</atom>
+        <table name="SupUsage_nesttab">
+          <tuple>
+            <atom name="SupUsage">Research</atom>
+          </tuple>
+          <tuple>
+            <atom name="SupUsage">Archival</atom>
+          </tuple>
+        </table>
+      </tuple>
+    </table>
+    <table name="SecDepartment_tab">
+      <tuple>
+        <atom name="SecDepartment">Photo Archives</atom>
+      </tuple>
+    </table>
+    <tuple name="RelParentMediaRef">
+        <atom name="AudIdentifier"></atom>
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+        <atom name="SummaryData"></atom>
+    </tuple>
+    <atom name="MulIdentifier">CSA734.jpg</atom>
+    <atom name="ChaMd5Sum">fd02e1ca00a615f0405efaaf5d158aea</atom>
+    <atom name="MulMimeType">image</atom>
+    <atom name="MulMimeFormat">jpeg</atom>
+    <atom name="MulDocumentType">M</atom>
+    <tuple name="DetPublisherRef">
+        <atom name="AdmPublishWebNoPassword"></atom>
+        <atom name="irn"></atom>
+    </tuple>
+    <table name="Dates">
+      <tuple>
+        <atom name="DetResourceDetailsDate">1901-08-01</atom>
+        <atom name="DetResourceDetailsDescription">Created</atom>
+      </tuple>
+    </table>
+    <atom name="DetResourceType">StillImage</atom>
+    <atom name="DetCoverage">test coverage</atom>
+    <atom name="DetSource">test source</atom>
+    <atom name="ChaMediaForm">6 1/2 x 8 1/2 in. b/w interpositive</atom>
+    <atom name="ChaFileSize">995008</atom>
+    <atom name="ChaImageResolution">300</atom>
+    <atom name="ChaImageHeight">1571</atom>
+    <atom name="ChaImageWidth">2000</atom>
+    <atom name="ChaImageColorDepth">8</atom>
+    <atom name="ChaVideoFilmLength"></atom>
+    <table name="SupMimeType_tab">
+      <tuple>
+        <atom name="SupMimeType">application</atom>
+      </tuple>
+    </table>
+    <table name="SupMimeFormat_tab">
+      <tuple>
+        <atom name="SupMimeFormat">x-unknown</atom>
+      </tuple>
+    </table>
+    <table name="SupFileSize_tab">
+      <tuple>
+        <atom name="SupFileSize">85554812</atom>
+      </tuple>
+    </table>
+    <table name="SupMD5Checksum_tab">
+      <tuple>
+        <atom name="SupMD5Checksum">6c31067889bee2211e995941aa825dbb</atom>
+      </tuple>
+    </table>
+    <atom name="AdmDateInserted">2015-10-28</atom>
+    <atom name="AdmDateModified">2022-12-21</atom>
+    <atom name="AdmInsertedBy">kwebbink</atom>
+    <atom name="AdmModifiedBy">Cummings, Nina</atom>
+    <atom name="AudAccessURI">http://fm-digital-assets.fieldmuseum.org/1222/740/CSA734.jpg</atom>
+    <atom name="AudACDescription">Katchina dancers in full costume</atom>
+    <atom name="AudAssociatedObservation"></atom>
+    <atom name="AudAssociatedSpecimen"></atom>
+    <atom name="AudCaptureDevice"></atom>
+    <atom name="AudCitation">Courtesy of: C. H. Carpenter. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/a1da8686-2f4f-481c-9a8f-307c1d7f27ed (accessed on 21 Dec 2022)</atom>
+    <atom name="AudDerivedFrom"></atom>
+    <atom name="AudFundingAttribution"></atom>
+    <atom name="AudLifeStage"></atom>
+    <atom name="AudNumbers"></atom>
+    <atom name="AudRelatedGeography"></atom>
+    <atom name="AudRelatedResourceID"></atom>
+    <atom name="AudSex"></atom>
+    <atom name="AudSubjectOrientation"></atom>
+    <atom name="AudTaxonCoverage"></atom>
+    <atom name="AudTemporalCoverage"></atom>
+    <atom name="AudVernacularName"></atom>
+    <atom name="SecRecordStatus">Active</atom>
+    <atom name="MulIdentifier">CSA734.jpg</atom>
+    <atom name="AdmPublishWebNoPassword">Yes</atom>
+    <atom name="AdmPublishWebPassword">Yes</atom>
+    <atom name="DetSource"></atom>
+    <table name="ChaRepository_tab">
+      <tuple>
+        <atom name="ChaRepository">KE EMu Repository</atom>
+      </tuple>
+    </table>
+    <table name="OtherNumbers">
+      <tuple>
+        <atom name="MulOtherNumber">CSA734</atom>
+        <atom name="MulOtherNumberSource">Photo Archives ID No.</atom>
+      </tuple>
+    </table>
+  </tuple>
+</table>

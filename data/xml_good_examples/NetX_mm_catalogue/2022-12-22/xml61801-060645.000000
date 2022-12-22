@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           emultimedia
+    text short      AudIdentifier
+    text long       MulIdentifier
+    integer         irn
+    table           MulMultiMediaRef_tab
+      text short      CatDepartment
+      text short      CatCatalog
+    end
+  end
+?>
+<!-- Data -->
+<table name="emultimedia">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="AudIdentifier">5eab6a0f-21be-405f-b8a6-812145083938</atom>
+    <atom name="MulIdentifier">GN90799d_CON_167w.jpg</atom>
+    <atom name="irn">1320900</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 2 -->
+  <tuple>
+    <atom name="AudIdentifier">b56c687b-50f9-4b89-9542-6ee9203b865d</atom>
+    <atom name="MulIdentifier">CSZ5990.jpg</atom>
+    <atom name="irn">1716824</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Botany</atom>
+        <atom name="CatCatalog">Botany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 3 -->
+  <tuple>
+    <atom name="AudIdentifier">bd8c0c1b-7f30-4924-b6bd-b27101917b9b</atom>
+    <atom name="MulIdentifier">CSA48.jpg</atom>
+    <atom name="irn">1222676</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+      <tuple>
+        <atom name="CatDepartment">Anthropology</atom>
+        <atom name="CatCatalog">Anthropology</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 4 -->
+  <tuple>
+    <atom name="AudIdentifier">2b08673a-602c-4a07-85c5-14618373f83e</atom>
+    <atom name="MulIdentifier">CSA157.jpg</atom>
+    <atom name="irn">1222380</atom>
+  </tuple>
+
+  <!-- Row 5 -->
+  <tuple>
+    <atom name="AudIdentifier">dcc0f93d-cacf-46b2-a8fb-2f167841c363</atom>
+    <atom name="MulIdentifier">CSA717.jpg</atom>
+    <atom name="irn">1222733</atom>
+    <table name="MulMultiMediaRef_tab">
+      <tuple>
+        <atom name="CatDepartment">Geology</atom>
+        <atom name="CatCatalog">Paleobotany</atom>
+      </tuple>
+    </table>
+  </tuple>
+
+  <!-- Row 6 -->
+  <tuple>
+    <atom name="AudIdentifier">b2bfd6aa-5ee6-4ed8-8d4d-dc68ceb1ec38</atom>
+    <atom name="MulIdentifier">CSA718.jpg</atom>
+    <atom name="irn">1222734</atom>
+  </tuple>
+
+  <!-- Row 7 -->
+  <tuple>
+    <atom name="AudIdentifier">6e473282-5e95-4fc0-87ab-3042537d92f1</atom>
+    <atom name="MulIdentifier">CSA719.jpg</atom>
+    <atom name="irn">1222735</atom>
+  </tuple>
+
+  <!-- Row 8 -->
+  <tuple>
+    <atom name="AudIdentifier">80739daf-7672-4433-8265-31088a12ada4</atom>
+    <atom name="MulIdentifier">CSA727.jpg</atom>
+    <atom name="irn">1222737</atom>
+  </tuple>
+
+  <!-- Row 9 -->
+  <tuple>
+    <atom name="AudIdentifier">958883a0-d3d0-48c9-a7af-5eadeaf813ac</atom>
+    <atom name="MulIdentifier">CSA730.jpg</atom>
+    <atom name="irn">1222739</atom>
+  </tuple>
+
+  <!-- Row 10 -->
+  <tuple>
+    <atom name="AudIdentifier">a1da8686-2f4f-481c-9a8f-307c1d7f27ed</atom>
+    <atom name="MulIdentifier">CSA734.jpg</atom>
+    <atom name="irn">1222740</atom>
+  </tuple>
+</table>
