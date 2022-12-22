@@ -101,7 +101,7 @@ def main():
     # Validate our current record set before we proceed
     invalid_records = validate_records(records)
     if invalid_records:
-        output_error_log(invalid_records)
+        output_error_log(config, invalid_records)
 
     # Set up prep_file values
 
@@ -289,7 +289,7 @@ def validate_records(records):
     return invalid_records
 
 
-def output_error_log(invalid_records):
+def output_error_log(config, invalid_records):
     """
     Outputs a CSV of the records that were invalid during XML parsing.
 
@@ -306,7 +306,7 @@ def output_error_log(invalid_records):
             if key not in field_names:
                 field_names.append(key)
 
-    filename = 'data/errors/prep_file_prep_errors.csv'
+    filename = config['LOG_OUTPUT'] + 'prep_file_prep_errors.csv'
 
     uc.write_list_of_dict_to_csv(invalid_records, field_names, filename)
 
