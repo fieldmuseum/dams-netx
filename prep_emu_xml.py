@@ -193,28 +193,30 @@ def main():  # main_xml_input, event_xml, catalog_xml):
         mm_event = None
         mm_catalog = None
 
-        for event_record in eve_records_raw2:
-            if event_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
-                if event_record.findall('AdmGUIDValue') is not None:
-                    mm_event = event_record
-                    # print("event = " + str(mm_event.findall('./')))
-
-        for cat_record in cat_records_raw2:
-            if cat_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
-                mm_catalog = cat_record
-
-
-        # loop thru dss schema fields & populate from EMu xml
-        if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
-            prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
-
-            if prepped_record is not None:
-                dss_records.append(prepped_record)
-        
-        else:
+        if None in [emu_record.find('AudIdentifier').text, emu_record.find('MulIdentifier').text, emu_record.find('ChaMd5Sum').text]:
             log_warn_nofile = f'Skipping {emu_record.find("AudIdentifier").text} -- No MD5 sum (ChaMd5Sum) / no file'
             print(log_warn_nofile)
             logging.warning(log_warn_nofile)
+
+        else:
+
+            for event_record in eve_records_raw2:
+                if event_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                    if event_record.findall('AdmGUIDValue') is not None:
+                        mm_event = event_record
+                        # print("event = " + str(mm_event.findall('./')))
+
+            for cat_record in cat_records_raw2:
+                if cat_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                    mm_catalog = cat_record
+
+
+            # loop thru dss schema fields & populate from EMu xml
+            if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
+                prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
+
+                if prepped_record is not None:
+                    dss_records.append(prepped_record)
 
 
     # Output Prepped DSS-XML
