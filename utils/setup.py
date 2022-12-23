@@ -46,11 +46,10 @@ def get_path_from_env(live_or_test, live_path, test_path):
     
     # main_xml_input = full_xml_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     input_path_log = f'Input path = {path_from_env}'
-    print(input_path_log)
+    # print(input_path_log)
     logging.info(input_path_log)
     
     return path_from_env
-
 
 
 def start_log_dams_netx(config:dict=None, log_level=logging.INFO, cmd_args:list=sys.argv):
