@@ -36,7 +36,7 @@ def main():
 
     config = setup.get_config_dams_netx(live_or_test)
 
-    if config['NETX_ENV'] == 'LIVE':
+    if live_or_test == 'LIVE':
         netxio_source_dir = config['NETXIO_LOCAL_SOURCE_DIR']
         netxio_lost_dir = config['NETXIO_LOSTANDFOUND']
 
@@ -66,7 +66,7 @@ def main():
         asset_data_md5 = netx_api.netx_get_asset_by_field(
             search_field="fileChecksum",
             search_value=file_md5,
-            netx_test=config['NETX_ENV']
+            netx_test=live_or_test
             )
 
         # Get NetX Asset ID by md5
@@ -88,7 +88,7 @@ def main():
             # - by filename
             asset_data = netx_api.netx_get_asset_by_filename(
                 file_name=file_name,
-                netx_env=config['NETX_ENV']
+                netx_env=live_or_test
                 )
 
             if 'result' in asset_data and len(asset_data['result']['results']) > 0:
