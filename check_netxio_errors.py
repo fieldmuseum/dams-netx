@@ -32,7 +32,9 @@ def main():
 
     setup.start_log_dams_netx()
 
-    config = setup.get_config_dams_netx()
+    live_or_test = setup.get_sys_argv()
+
+    config = setup.get_config_dams_netx(live_or_test)
 
     if config['NETX_ENV'] == 'LIVE':
         netxio_source_dir = config['NETXIO_LOCAL_SOURCE_DIR']
