@@ -141,7 +141,7 @@
 				<map field="field_50" attribute="Media Form" skip_null="true"/>
 				<!-- map field="field_51" attribute="Date Created" skip_null="true"/ -->
 				<map field="field_52" attribute="Other Dates" skip_null="true"/>
-				<map field="field_53" attribute="Other Date Descriptions" skip_null="true"/>
+				<map field="field_53" attribute="Other Date Types" skip_null="true"/>
 
 				<!--map field="field_!!" attribute="Data Source" skip_null="true"/-->
 				<!--map field="field_!!" attribute="" skip_null="true"/-->
