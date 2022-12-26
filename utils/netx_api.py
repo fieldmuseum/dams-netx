@@ -282,7 +282,7 @@ def netx_get_asset_by_field(
     field_or_attribute = "field"
 
     if search_field not in netx_api_fields:
-        print(f'WARNING - check search field-name {search_field}')
+        # print(f'WARNING - check search field-name {search_field}')
         field_or_attribute = "attribute"
     
     elif re.match(r".*Date$", search_field) is not None:
@@ -291,11 +291,8 @@ def netx_get_asset_by_field(
     netx_api_criteria = [
         "exact", "contains"  # , "range", "folder", "subquery"
         ]
-    
-    if criteria is None:
-        criteria = "exact"  # must be one of: 'exact', 'contains', 'range', 'folder', 'subquery'
 
-    elif criteria not in netx_api_criteria:
+    if criteria not in netx_api_criteria:
         print(f'WARNING - check search criteria {criteria}')
 
     operator = "and"  # must be one of: "and", "or", "not"

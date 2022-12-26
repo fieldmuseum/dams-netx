@@ -32,14 +32,14 @@
   <!-- Row 1 -->
   <tuple>
     <atom name="irn">545347671</atom>
-    <atom name="AudKey">2382390</atom>
+    <atom name="AudKey">9999999996</atom>
     <atom name="AdmDateInserted">2022-08-04</atom>
   </tuple>
 
   <!-- Row 2 -->
   <tuple>
     <atom name="irn">545362790</atom>
-    <atom name="AudKey">2381515</atom>
+    <atom name="AudKey">9999999995</atom>
     <atom name="AdmDateInserted">2022-08-08</atom>
   </tuple>
 
@@ -61,41 +61,6 @@
   <tuple>
     <atom name="irn">545363377</atom>
     <atom name="AudKey">2378508</atom>
-    <atom name="AdmDateInserted">2022-08-08</atom>
-  </tuple>
-
-  <!-- Row 6 -->
-  <tuple>
-    <atom name="irn">545363395</atom>
-    <atom name="AudKey">2378509</atom>
-    <atom name="AdmDateInserted">2022-08-08</atom>
-  </tuple>
-
-  <!-- Row 7 -->
-  <tuple>
-    <atom name="irn">545363410</atom>
-    <atom name="AudKey">2378510</atom>
-    <atom name="AdmDateInserted">2022-08-08</atom>
-  </tuple>
-
-  <!-- Row 8 -->
-  <tuple>
-    <atom name="irn">545363440</atom>
-    <atom name="AudKey">2378513</atom>
-    <atom name="AdmDateInserted">2022-08-08</atom>
-  </tuple>
-
-  <!-- Row 9 -->
-  <tuple>
-    <atom name="irn">545363455</atom>
-    <atom name="AudKey">2378514</atom>
-    <atom name="AdmDateInserted">2022-08-08</atom>
-  </tuple>
-
-  <!-- Row 10 -->
-  <tuple>
-    <atom name="irn">545363484</atom>
-    <atom name="AudKey">2378527</atom>
     <atom name="AdmDateInserted">2022-08-08</atom>
   </tuple>
 </table>
