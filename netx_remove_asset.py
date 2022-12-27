@@ -57,7 +57,6 @@ def remove_from_netx(row:dict, remove_folder:int, live_or_test:str):
                 print(log_no_result)
                 logging.error(log_no_result)
 
-            print(f'orig folders: {asset_orig_folder_ids}')
 
             for folder_id in asset_orig_folder_ids:
                 
