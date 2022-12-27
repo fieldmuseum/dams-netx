@@ -48,7 +48,7 @@ def remove_from_netx(row:dict, remove_folder:int, live_or_test:str):
 
 
             if 'result' in remove_folder_log:
-                log_message = f'NetX Asset {asset_id} added to "Remove_from_NetX" folder (id {remove_folder})'
+                log_message = f'NetX Asset {asset_id} moved to "Remove_from_NetX" folder (id {remove_folder}) | orig folders: {asset_orig_folder_ids}'
                 print(log_message)
                 logging.info(log_message)
 
@@ -71,7 +71,7 @@ def remove_from_netx(row:dict, remove_folder:int, live_or_test:str):
                         )
 
                     log_message = f'Asset {asset_id} removed from folder {folder_id}'
-                    print(log_message)
+                    # print(log_message)
                     logging.info(log_message)
 
 
