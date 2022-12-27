@@ -183,7 +183,7 @@ def main():
 
         records_to_remove = unpub_records_to_remove + delete_records_to_remove
 
-        print(f'records to remove:  {records_to_remove}')
+        # print(f'records to remove:  {records_to_remove}')
 
         # Add assets to folders
         for row in records_to_remove:
