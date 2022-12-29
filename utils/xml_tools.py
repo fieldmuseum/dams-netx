@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 def fix_emu_xml_tags(emu_records: ET.Element) -> ET.Element:
     '''Move EMu column names from nested "name" attribute to XML tag'''
 
-    if isinstance(emu_records, list):
+    if isinstance(emu_records, ET.Element):
 
         # Replace top-level "tuple" with "data" 
         for thing in emu_records:
