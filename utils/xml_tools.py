@@ -11,21 +11,23 @@ import xml.etree.ElementTree as ET
 def fix_emu_xml_tags(emu_records: ET.Element) -> ET.Element:
     '''Move EMu column names from nested "name" attribute to XML tag'''
 
-    # Replace top-level "tuple" with "data" 
-    for thing in emu_records:
+    if isinstance(emu_records, list):
 
-        if thing.get('name') is None:
-            if thing.tag == "tuple":
-                thing.tag = "data"
-            thing.set('name', thing.tag)
+        # Replace top-level "tuple" with "data" 
+        for thing in emu_records:
 
-    # Turn EMu col-names into XML-tags instead of attributes:
-    for child in emu_records.findall('.//*'):
+            if thing.get('name') is None:
+                if thing.tag == "tuple":
+                    thing.tag = "data"
+                thing.set('name', thing.tag)
 
-        if child.tag == "tuple" and child.get('name') is None:
-            child.set('name', 'tuple')
-        child.tag = child.get('name')
-        child.attrib = {}
+        # Turn EMu col-names into XML-tags instead of attributes:
+        for child in emu_records.findall('.//*'):
+
+            if child.tag == "tuple" and child.get('name') is None:
+                child.set('name', 'tuple')
+            child.tag = child.get('name')
+            child.attrib = {}
 
     return emu_records
 
