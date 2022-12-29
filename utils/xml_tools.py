@@ -157,7 +157,7 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
 def get_input_xml(input_path:list, input_date:str) -> ET.ElementTree:
     '''Given a filepath, read in an XML file and output an ET.ElementTree'''
 
-    input_xml = ET.ElementTree()
+    input_xml = ET.ElementTree('xml')
 
     if len(glob.glob(input_path)) > 0:
         input_file_log = f'Input XML file = {glob.glob(input_path)[0]}'
