@@ -115,7 +115,7 @@ def parse_emu_to_dss(
                     prepped_record.find(key).text = concat_values
 
             elif key == 'EveEventURLs':
-                if len(mm_event.findall('.//' + value[1])) > 0:
+                if mm_event is not None and len(mm_event.findall('.//' + value[1])) > 0:
                     pj_guid = mm_event.find('.//' + value[1]).text
                     prepped_record.find(key).text = f'https://pj.fieldmuseum.org/event/{pj_guid}'
 
