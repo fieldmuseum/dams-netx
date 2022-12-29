@@ -101,7 +101,7 @@ def parse_emu_to_dss(
 
         if isinstance(value, list):
             if isinstance(value[1], list):
-                if len(mm_event.findall('.//' + value[1][0])) > 0:
+                if mm_event is not None and len(mm_event.findall('.//' + value[1][0])) > 0:
                     concat_values_raw = []
 
                     for field_name in value[1]:
