@@ -2,6 +2,8 @@
 Tools for prepping/reshaping XML
 '''
 
+import glob
+import logging
 import re
 import xml.etree.ElementTree as ET
 
@@ -150,3 +152,24 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
         netx_attr = convert_pipe_to_unique_commas(netx_attr_raw)
     
     return netx_attr
+
+
+def get_input_xml(input_path:list, input_date:str) -> ET.ElementTree:
+    '''Given a filepath, read in an XML file and output an ET.ElementTree'''
+
+    input_xml = ET.ElementTree()
+
+    if len(glob.glob(input_path)) > 0:
+        input_file_log = f'Input XML file = {glob.glob(input_path)[0]}'
+        print(input_file_log)
+        logging.info(input_file_log)
+
+        # Import Event & Catalog exports too
+        input_xml = ET.ElementTree().parse(glob.glob(input_path)[0])
+    
+    else:
+        log_no_unpub = f'No input XML on {input_date}'
+        print(log_no_unpub)
+        logging.info(log_no_unpub)
+
+    return input_xml

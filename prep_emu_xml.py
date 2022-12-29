@@ -173,8 +173,10 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
 
     # Import Event & Catalog exports too
-    eve_raw1 = ET.ElementTree().parse(glob.glob(event_xml)[0])
-    cat_raw1 = ET.ElementTree().parse(glob.glob(catalog_xml)[0])
+    eve_raw1 = xml_tools.get_input_xml(event_xml)
+    cat_raw1 = xml_tools.get_input_xml(catalog_xml)
+    # eve_raw1 = ET.ElementTree().parse(glob.glob(event_xml)[0])
+    # cat_raw1 = ET.ElementTree().parse(glob.glob(catalog_xml)[0])
 
     eve_records_raw2 = xml_tools.fix_emu_xml_tags(eve_raw1)
     cat_records_raw2 = xml_tools.fix_emu_xml_tags(cat_raw1)
