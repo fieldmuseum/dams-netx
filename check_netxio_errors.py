@@ -32,7 +32,7 @@ def main():
 
     setup.start_log_dams_netx()
 
-    live_or_test = setup.get_sys_argv()
+    live_or_test = setup.get_sys_argv(number_of_args=1)
 
     config = setup.get_config_dams_netx(live_or_test)
 
