@@ -9,15 +9,15 @@
   },
   "items": [
     {
-      "id": "https://mm.fieldmuseum.org/guid/path-to-canvas",
+      "id": "https://uv-v4.netlify.app/#?manifest=https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json&c=&m=&cv=",
       "type": "Canvas",
       "items": [
         {
-          "id": "https://mm.fieldmuseum.org/guid/path-to-canvas/page",
+          "id": "https://uv-v4.netlify.app/#?manifest=https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json&c=&m=&cv=/page",
           "type": "AnnotationPage",
           "items": [
             {
-              "id": "https://mm.fieldmuseum.org/guid/path-to-canvas/page/annotation",
+              "id": "https://uv-v4.netlify.app/#?manifest=https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json&c=&m=&cv=/page/annotation",
               "type": "Annotation",
               "motivation": "painting",
               "body": {
@@ -25,7 +25,7 @@
                 "type": "Model",
                 "format": "model/gltf+json"
               },
-              "target": "https://mm.fieldmuseum.org/guid/path-to-canvas"
+              "target": "https://uv-v4.netlify.app/#?manifest=https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json&c=&m=&cv="
             }
           ]
         }
