@@ -1,0 +1,41 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://iiif.io/api/cookbook/recipe/0002-mvm-audio/manifest.json",
+  "type": "Manifest",
+  "label": {
+    "en": [
+      "Simplest 3D Model Example 1"
+    ]
+  },
+  "items": [
+    {
+      "id": "https://mm.fieldmuseum.org/guid/path-to-canvas",
+      "type": "Canvas",
+      "items": [
+        {
+          "id": "https://mm.fieldmuseum.org/guid/path-to-canvas/page",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://mm.fieldmuseum.org/guid/path-to-canvas/page/annotation",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
+                "type": "Model",
+                "format": "model/gltf+json"
+              },
+              "target": "https://mm.fieldmuseum.org/guid/path-to-canvas"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+        "label": "Description",
+        "value": "3D scan of gold armband | Dunavecsei arany karpánt"
+    }
+  ]
+}
