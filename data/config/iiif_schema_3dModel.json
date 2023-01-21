@@ -1,6 +1,6 @@
 {
   "@context": "http://iiif.io/api/presentation/3/context.json",
-  "id": "https://iiif.io/api/cookbook/recipe/0002-mvm-audio/manifest.json",
+  "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json",
   "type": "Manifest",
   "label": {
     "en": [
