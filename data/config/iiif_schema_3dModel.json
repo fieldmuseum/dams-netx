@@ -7,6 +7,11 @@
       "Simplest 3D Model Example 1"
     ]
   },
+  "summary": {
+    "en": [
+        "test summary"
+    ]
+  },
   "items": [
     {
       "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas",
@@ -34,8 +39,12 @@
   ],
   "metadata": [
     {
-        "label": "Description",
-        "value": "3D scan of gold armband | Dunavecsei arany karpánt"
+        "label": {"en": ["Description"]},
+        "value": {"en": ["3D scan of gold armband | Dunavecsei arany karpánt"]}
     }
-  ]
+  ],
+  "requiredStatement": {
+      "label": { "en": [ "Attribution" ] },
+      "value": { "en": [ "Provided courtesy of Hungarian National Museum" ] }
+  }
 }
