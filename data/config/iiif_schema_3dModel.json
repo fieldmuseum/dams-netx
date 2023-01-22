@@ -32,9 +32,9 @@
                             "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas/annotation_page/annotation",
                             "motivation": "painting",
                             "body": {
-                                "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
+                                "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/sample_media_files/karpan_test_gltf_from_glb.gltf",
                                 "type": "Model",
-                                "format": "model/gltf-binary"
+                                "format": "model/gltf+json"
                             },
                             "target": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas"
                         }
