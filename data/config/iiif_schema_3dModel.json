@@ -12,14 +12,7 @@
             "test summary"
         ]
     },
-    "rendering": [
-        {
-            "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
-            "type": "Text",
-            "label": { "en": [ "Download as GLB" ] },
-            "format": "model/gltf-binary"
-        }
-    ],
+    "rendering": [],
     "items": [
         {
             "type": "Canvas",
@@ -41,16 +34,13 @@
                             "body": {
                                 "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
                                 "type": "Model",
-                                "format": "model/gltf-binary"
+                                "format": "model/gltf+binary"
                             },
                             "target": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas"
                         }
                     ]
                 }
-            ],
-            "width": 400,
-            "height": 400,
-            "duration": 400
+            ]
         }
     ],
     "metadata": [
