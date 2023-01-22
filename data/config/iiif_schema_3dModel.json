@@ -1,50 +1,74 @@
 {
-  "@context": "http://iiif.io/api/presentation/3/context.json",
-  "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json",
-  "type": "Manifest",
-  "label": {
-    "en": [
-      "Simplest 3D Model Example 1"
-    ]
-  },
-  "summary": {
-    "en": [
-        "test summary"
-    ]
-  },
-  "items": [
-    {
-      "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas",
-      "type": "Canvas",
-      "items": [
+    "@context": "http://iiif.io/api/presentation/3/context.json",
+    "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/iiif_schema_3dModel.json",
+    "type": "Manifest",
+    "label": {
+        "en": [
+            "Simplest 3D Model Example 1"
+        ]
+    },
+    "summary": {
+        "en": [
+            "test summary"
+        ]
+    },
+    "rendering": [],
+    "items": [
         {
-          "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas/page",
-          "type": "AnnotationPage",
-          "items": [
-            {
-              "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas/page/annotation",
-              "type": "Annotation",
-              "motivation": "painting",
-              "body": {
-                "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
-                "type": "Model",
-                "format": "model/gltf+json"
-              },
-              "target": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas"
-            }
-          ]
+            "type": "Canvas",
+            "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas",
+            "label": {
+                "en": [
+                    "Simplest 3D Model Example 1 [Canvas]"
+                ]
+            },
+            "items": [
+                {
+                    "type": "AnnotationPage",
+                    "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas/annotation_page",
+                    "items": [
+                        {
+                            "type": "Annotation",
+                            "motivation": "painting",
+                            "body": {
+                                "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
+                                "type": "Model",
+                                "format": "model/gltf+json"
+                            },
+                            "target": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/config/canvas"
+                        }
+                    ]
+                }
+            ],
+            "width": null,
+            "height": null,
+            "duration": null
         }
-      ]
+    ],
+    "metadata": [
+        {
+            "label": {
+                "en": [
+                    "Description"
+                ]
+            },
+            "value": {
+                "en": [
+                    "3D scan of gold armband | Dunavecsei arany karpánt"
+                ]
+            }
+        }
+    ],
+    "requiredStatement": {
+        "label": {
+            "en": [
+                "Attribution"
+            ]
+        },
+        "value": {
+            "en": [
+                "Provided courtesy of Hungarian National Museum"
+            ]
+        }
     }
-  ],
-  "metadata": [
-    {
-        "label": {"en": ["Description"]},
-        "value": {"en": ["3D scan of gold armband | Dunavecsei arany karpánt"]}
-    }
-  ],
-  "requiredStatement": {
-      "label": { "en": [ "Attribution" ] },
-      "value": { "en": [ "Provided courtesy of Hungarian National Museum" ] }
-  }
 }
