@@ -63,6 +63,27 @@ The DSS XML input-file `dss_prepped.xml` is stored at the `DESTIN_PATH_XML` loca
 For NetX, ingest this to the NetX front-end synced-metadata folder for the DSS autotask to pick up on its next run.
 
 
+## IIIF manifest generation with mongo_to_IIIF.py
+If EMu Multimedia records are indexed in a MongoDB database, this script can generate a IIIF manifest for a given EMu IRN.
+The IIIF manifest outputs as a JSON file as well as to the console.  For more info about IIIF setup, see [iiif.io](https://iiif.io/get-started/how-iiif-works/)
+
+### How to Prep
+1. In the `env` file, define the following 5 MongoDB and IIIF variables:
+
+  - **MONGO DB INFO**
+    - `MONGO_DB` - add user credentials and login string to log into your MongoDB setup
+
+  - **IIIF INFO** - default values in `.env.example` can work if you're testing locally within this repo
+    - `IIIF_SCHEMA` - path to a IIIF schema json file *(e.g. "data/config/iiif_schema.json" within this repo)*
+    - `IIIF_OUT_HOST` - path to the domain where an output IIIF manifest JSON file will be hosted *(e.g. while testing, could use the path to raw content in your GitHub repo: "https://raw.githubusercontent.com/[your_gh_id]/dams-netx/main")*
+    - `IIIF_OUT_PATH` - writeable path to a sub-directory on that domain &/or in this repo *(e.g. "data/iiif")*
+    - `IIIF_OUT_FILE` - name of the output manifest JSON file *(e.g. "manifest.json")*
+
+2. Run the script for a given EMu irn present in MongoDB: `python3 mongo_to_IIIF.py [EMu IRN]`
+  - e.g.:  `python3 mongo_to_IIIF.py 2441464`
+
+3. Output IIIF Manifest JSON will be displayed in the console, and output to the path & file defined in your `.env`
+
 
 ## Related Repo's
 
