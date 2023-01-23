@@ -12,25 +12,25 @@
     "items": [
         {
             "type": "Canvas",
-            "id": "iiif_host.com/canvas",
+            "id": "iiif_host.com/manifest_path/config/canvas",
             "label": {
                 "en": []
             },
             "items": [
                 {
                     "type": "AnnotationPage",
-                    "id": "https://iiif_host.com/canvas/annotation_page",
+                    "id": "https://iiif_host.com/manifest_path/config/canvas/annotation_page",
                     "items": [
                         {
                             "type": "Annotation",
-                            "id": "https://iiif_host.com/canvas/annotation_page/annotation",
+                            "id": "https://iiif_host.com/manifest_path/config/canvas/annotation_page/annotation",
                             "motivation": "painting",
                             "body": {
                                 "id": null,
                                 "type": null,
                                 "format": null
                             },
-                            "target": "https://iiif_host.com/canvas"
+                            "target": "https://iiif_host.com/manifest_path/config/canvas"
                         }
                     ]
                 }

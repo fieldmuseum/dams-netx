@@ -73,14 +73,14 @@ def get_iiif_ids(
     iiif_manifest['id'] = f"{manifest_out_host}/{manifest_out_path}/{manifest_out_file}"
 
     # Add Canvas ID
-    iiif_manifest['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas"
+    iiif_manifest['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/config/canvas"
 
     # Add AnnotationPage ID
-    iiif_manifest['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas/annotation_page"
+    iiif_manifest['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/config/canvas/annotation_page"
 
     # Add AnnotationPage ID & target
-    iiif_manifest['items'][0]['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas/annotation_page/annotation"
-    iiif_manifest['items'][0]['items'][0]['items'][0]['target'] = f"{manifest_out_host}/{manifest_out_path}/canvas"
+    iiif_manifest['items'][0]['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/config/canvas/annotation_page/annotation"
+    iiif_manifest['items'][0]['items'][0]['items'][0]['target'] = f"{manifest_out_host}/{manifest_out_path}/config/canvas"
 
 
     return iiif_manifest
@@ -92,6 +92,7 @@ def add_iiif_metadata(emu_record:dict, iiif_manifest:dict) -> dict:
     iiif_manifest['label']['en'] = [emu_record['MulTitle']]
     iiif_manifest['summary']['en'] = [emu_record['MulDescription']]
     iiif_manifest['requiredStatement']['value']['en'] = [emu_record['RightsSummaryDataLocal']]
+    iiif_manifest['items'][0]['label']['en'] = [emu_record['MulTitle']]
 
     # Setup emu_prep as metadata
     field_list = emu_netx_map.emu_iiif_metadata_labels()
