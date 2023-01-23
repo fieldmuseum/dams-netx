@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
 
 def emu_netx_atoms() -> dict:
     '''
-    Returns a list of dicts where keys = corresponding NetX fields
+    Returns a dict where keys = corresponding NetX fields
     and values = EMu fields
     '''
 
@@ -15,7 +15,6 @@ def emu_netx_atoms() -> dict:
             'irn':'irn',
             'MulTitle':'MulTitle',
             'MulDescription':'MulDescription',
-            'AudAssociatedSpecimen':'AudAssociatedSpecimen',
             'AudAccessURI':'AudAccessURI',
             'AudCitation':'AudCitation',
             'SecRecordStatus':'SecRecordStatus',
@@ -32,7 +31,6 @@ def emu_netx_atoms() -> dict:
             'AudLifeStage':'AudLifeStage',
             'AudCaptureDevice':'AudCaptureDevice',
             'AudFundingAttribution':'AudFundingAttribution',
-            'AudAccessURI':'AudAccessURI',
             'AdmDateInserted':'AdmDateInserted',
             'AdmDateModified':'AdmDateModified',
             'AdmInsertedBy':'AdmInsertedBy',
@@ -48,7 +46,7 @@ def emu_netx_atoms() -> dict:
 
 def emu_netx_tables() -> dict:
     '''
-    Returns a list of dicts where keys = correspinding NetX fields
+    Returns a dict where keys = correspinding NetX fields
     and values = EMu table-field column names (e.g. DetSubject_Tab)
     '''
 
@@ -65,7 +63,7 @@ def emu_netx_tables() -> dict:
 
 def emu_netx_refs() -> dict:
     '''
-    Returns a list of dicts where keys = corresponding NetX fields
+    Returns a dict where keys = corresponding NetX fields
     and values = list of EMu "Ref" attachment fields and pull-thru fields
     If a double-nested field is included, '.'-delimit as [link column].[pull-through] in a single string
     e.g. - For DetMediaRightsRef:  RigOwnershipRef_tab.SummaryData
@@ -86,8 +84,8 @@ def emu_netx_refs() -> dict:
 
 def emu_netx_groups_or_reftabs() -> dict:
     '''
-    Returns a list of dicts where keys = corresponding NetX fields
-    and values = lists of Group names and nested EMu fields  
+    Returns a dict where keys = corresponding NetX fields
+    and values = lists of EMu XML Group names and nested EMu fields  
     If groups includes attachment-fields, only the pull-through fields are listed.
     (e.g. only "SummaryData", not "MulMultimediaCreatorRef_tab.SummaryData")
     '''
@@ -108,6 +106,25 @@ def emu_netx_groups_or_reftabs() -> dict:
 
     return emu_netx_groups_or_reftabs
 
+
+
+def emu_netx_conditional_groups() -> dict:
+    '''
+    Returns a list of dicts that define if/then conditions:
+    If a given EMu XML group or table field's value meets defined "if" criteria,
+    then the given NetX "then_field" will be set to the defined then_value.
+
+    Either "then_value_dynamic" (to set NetX to the value in another EMu field)
+    or "then_value_static" (to set NetX to a static value in the dictionary)
+    should be used for a given field's condition -- not both.
+    '''
+
+    emu_netx_conditional_groups = {
+        'DetResourceDetailsDate0': ['Dates', 'DetResourceDetailsDate'],
+        'DetResourceDetailDate_Created': ['Dates', 'DetResourceDetailsDescription']
+        }
+
+    return emu_netx_conditional_groups
 
 def emu_netx_ref_concatenate() -> dict:
     '''
@@ -199,3 +216,39 @@ def clean_emu_filename(emu_filename:str) -> str:
     clean_name = re.sub(r'(.+)(_.+$)', r'\g<1>' + clean_ext, clean_name) # (.+(_.+)*)(_)(.+$)', r'\g<1>.\g<3>', clean_name)
 
     return clean_name
+
+
+def emu_iiif_metadata_labels() -> dict:
+    '''
+    Returns a dict where keys = EMu columns
+    and values = corresponding IIIF Metadata Labels
+    '''
+
+    metadata_labels = {
+            'AudIdentifier':'Identifier',
+            'irn':'EMu irn',
+            'MulTitle':'Title',
+            'MulDescription':'Description',
+            'AudAccessURI':'Access URI',
+            'AudCitation':'Citation',
+            'AudTaxonCoverage':'Taxon Coverage',
+            'AudRelatedGeography':'Related Geography',
+            'AudAssociatedSpecimen':'Associated Specimen',
+            'AudAssociatedObservations':'Associated Observations',
+            'AudNumbers':'Catalog Numbers',
+            'AudVernacularName':'Vernacular Name',
+            'AudSex':'Sex',
+            'AudLifeStage':'Life Stage',
+            'AudCaptureDevice':'Capture-Device',
+            'AudFundingAttribution':'Funding Attribution',
+            'AdmDateInserted':'Date Inserted',
+            'AdmDateModified':'Date Modified',
+            'RelNotes':'Notes',
+            'MulIdentifier':'Filename',
+            'DetSource':'Source',
+            'ChaMediaForm':'Media Form',
+            'DetResourceType':'Resource Type',
+            'DetResourceSubtype':'Resource Subtype'
+    }
+
+    return metadata_labels
