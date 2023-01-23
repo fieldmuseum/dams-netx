@@ -1,5 +1,6 @@
 '''Return a IIIF manifest JSON file for an EMu irn in MongoDB'''
 
+import logging
 import json
 import os
 import re
@@ -140,43 +141,52 @@ def main():
     # get collection [table/module]
     emultimedia = db.emultimedia
 
-    # get document [record]
-    mm_document = emultimedia.find_one({"irn":emu_irn})
-    # test_document = emultimedia.find_one({"irn":"2429133"})
-    print(mm_document)
+    try:
+        # get document [record]
+        mm_document = emultimedia.find_one({"irn":emu_irn})
+        # test_document = emultimedia.find_one({"irn":"2429133"})
+        print(mm_document)
 
-    if len(mm_document) < 1:
-        raise Exception("Check input EMu IRN -- no matching irn found in MongoDB")
+        # if mm_document is None:
+        #     raise Exception("Check input EMu IRN -- no matching irn found in MongoDB")
 
-    # Setup manifest with schema appropriate for media-type
-    iiif_schema = get_iiif_schema(config, mm_document)
+        # Setup manifest with schema appropriate for media-type
+        iiif_schema = get_iiif_schema(config, mm_document)
 
-    # Add ID's to manifest
-    iiif_manifest = get_iiif_ids(
-        iiif_schema,
-        manifest_out_host,
-        manifest_out_path,
-        manifest_out_file
-        )
+        # Add ID's to manifest
+        iiif_manifest = get_iiif_ids(
+            iiif_schema,
+            manifest_out_host,
+            manifest_out_path,
+            manifest_out_file
+            )
 
-    # Add title, description & info from EMu record
-    iiif_manifest_json = add_iiif_metadata(
-        emu_record=mm_document,
-        iiif_manifest=iiif_manifest
-        )
-
-
-    # If better to write output to console:
-    print(iiif_manifest_json)
+        # Add title, description & info from EMu record
+        iiif_manifest_json = add_iiif_metadata(
+            emu_record=mm_document,
+            iiif_manifest=iiif_manifest
+            )
 
 
-    # Check if output path exists
-    if not os.path.exists(manifest_out_path):
-        os.makedirs(manifest_out_path)
-        
-    f = open(f'{manifest_out_path}/{manifest_out_file}', 'w', encoding='utf-8')
-    f.write(json.dumps(iiif_manifest_json, indent=True, ensure_ascii=False))
-    f.close()
+        # If better to write output to console:
+        print(iiif_manifest_json)
+
+
+        # Check if output path exists
+        if not os.path.exists(manifest_out_path):
+            os.makedirs(manifest_out_path)
+            
+        f = open(f'{manifest_out_path}/{manifest_out_file}', 'w', encoding='utf-8')
+        f.write(json.dumps(iiif_manifest_json, indent=True, ensure_ascii=False))
+        f.close()
+
+
+    except TypeError as err_type:
+        log_err = f'ERROR - Check input EMu IRN; no matching irn found for {emu_irn} in MongoDB. TypeError: {err_type}'
+        print(log_err)
+        logging.error(log_err)
+        return err_type
+
 
     setup.stop_log_dams_netx()
 
