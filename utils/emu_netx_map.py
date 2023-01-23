@@ -225,11 +225,8 @@ def emu_iiif_metadata_labels() -> dict:
     '''
 
     metadata_labels = {
-            'AudIdentifier':'Identifier',
-            'irn':'EMu irn',
             'MulTitle':'Title',
             'MulDescription':'Description',
-            'AudAccessURI':'Access URI',
             'AudCitation':'Citation',
             'AudTaxonCoverage':'Taxon Coverage',
             'AudRelatedGeography':'Related Geography',
@@ -241,14 +238,17 @@ def emu_iiif_metadata_labels() -> dict:
             'AudLifeStage':'Life Stage',
             'AudCaptureDevice':'Capture-Device',
             'AudFundingAttribution':'Funding Attribution',
-            'AdmDateInserted':'Date Inserted',
-            'AdmDateModified':'Date Modified',
+            # 'AdmDateInserted':'Date Inserted',
+            # 'AdmDateModified':'Date Modified',
             'RelNotes':'Notes',
             'MulIdentifier':'Filename',
             'DetSource':'Source',
             'ChaMediaForm':'Media Form',
-            'DetResourceType':'Resource Type',
-            'DetResourceSubtype':'Resource Subtype'
+            # 'DetResourceType':'Resource Type',
+            # 'DetResourceSubtype':'Resource Subtype',
+            'AudIdentifier':'Identifier',
+            'AudAccessURI':'Access URI'
+            # 'irn':'FMNH EMu irn'
     }
 
     return metadata_labels
