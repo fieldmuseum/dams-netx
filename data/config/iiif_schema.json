@@ -1,0 +1,60 @@
+{
+    "@context": "http://iiif.io/api/presentation/3/context.json",
+    "id": null,
+    "type": "Manifest",
+    "label": {
+        "en": []
+    },
+    "summary": {
+        "en": []
+    },
+    "rendering": [],
+    "items": [
+        {
+            "type": "Canvas",
+            "id": "https://fm-digital-assets.fieldmuseum.org/canvas",
+            "label": {
+                "en": []
+            },
+            "items": [
+                {
+                    "type": "AnnotationPage",
+                    "id": "https://fm-digital-assets.fieldmuseum.org/canvas/annotation_page",
+                    "items": [
+                        {
+                            "type": "Annotation",
+                            "id": "/annotation_page/annotation",
+                            "motivation": "painting",
+                            "body": {
+                                "id": null,
+                                "type": null,
+                                "format": null
+                            },
+                            "target": "https://fm-digital-assets.fieldmuseum.org/canvas"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "label": {
+                "en": []
+            },
+            "value": {
+                "en": []
+            }
+        }
+    ],
+    "requiredStatement": {
+        "label": {
+            "en": [
+                "Attribution"
+            ]
+        },
+        "value": {
+            "en": []
+        }
+    }
+}

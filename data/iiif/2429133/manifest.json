@@ -1,0 +1,142 @@
+{
+ "@context": "http://iiif.io/api/presentation/3/context.json",
+ "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2429133/manifest.json",
+ "type": "Manifest",
+ "label": {
+  "en": [
+   "3D scan of gold armband (GLB test)"
+  ]
+ },
+ "summary": {
+  "en": [
+   "3D scan of gold armband (GLB test)  | Dunavecsei arany karpánt"
+  ]
+ },
+ "rendering": [],
+ "items": [
+  {
+   "type": "Canvas",
+   "id": "https://fm-digital-assets.fieldmuseum.org/canvas",
+   "label": {
+    "en": []
+   },
+   "items": [
+    {
+     "type": "AnnotationPage",
+     "id": "https://fm-digital-assets.fieldmuseum.org/canvas/annotation_page",
+     "items": [
+      {
+       "type": "Annotation",
+       "id": "/annotation_page/annotation",
+       "motivation": "painting",
+       "body": {
+        "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
+        "type": "Model",
+        "format": "model/gltf+json"
+       },
+       "target": "https://fm-digital-assets.fieldmuseum.org/canvas"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "metadata": [
+  {
+   "label": {
+    "en": [
+     "Title"
+    ]
+   },
+   "value": {
+    "en": [
+     "3D scan of gold armband (GLB test)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Description"
+    ]
+   },
+   "value": {
+    "en": [
+     "3D scan of gold armband (GLB test)  | Dunavecsei arany karpánt"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Citation"
+    ]
+   },
+   "value": {
+    "en": [
+     "Courtesy of: Hungarian National Museum. (c) Hungarian National Museum. https://mm.fieldmuseum.org/98ab170c-bc46-40b0-a905-507891b4fceb (accessed on 16 Jan 2023)"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Catalog Numbers"
+    ]
+   },
+   "value": {
+    "en": [
+     "EX-2021.2 119"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Filename"
+    ]
+   },
+   "value": {
+    "en": [
+     "karpan_test_glb.glb"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Identifier"
+    ]
+   },
+   "value": {
+    "en": [
+     "98ab170c-bc46-40b0-a905-507891b4fceb"
+    ]
+   }
+  },
+  {
+   "label": {
+    "en": [
+     "Access URI"
+    ]
+   },
+   "value": {
+    "en": [
+     "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb"
+    ]
+   }
+  }
+ ],
+ "requiredStatement": {
+  "label": {
+   "en": [
+    "Attribution"
+   ]
+  },
+  "value": {
+   "en": [
+    "(c) Hungarian National Museum  (2022)"
+   ]
+  }
+ }
+}
