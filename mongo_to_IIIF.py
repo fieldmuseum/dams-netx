@@ -14,8 +14,13 @@ def get_iiif_schema(config:dict, emu_record:dict) -> dict:
 
     iiif_schema = json.load(open(config['IIIF_SCHEMA'], 'r', encoding='utf-8'))
 
+    if re.findall(r'^http\://', emu_record['AudAccessURI']):
+        iiif_file_id = re.sub(r'^http', 'https', emu_record['AudAccessURI'])
+    else:
+        iiif_file_id = emu_record['AudAccessURI']
+
     main_body = {
-            "id": emu_record['AudAccessURI'],
+            "id": iiif_file_id,
             "type": None,
             "format": None
         }

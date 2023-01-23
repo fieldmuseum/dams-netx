@@ -32,7 +32,7 @@
        "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2441464/config/canvas/annotation_page/annotation",
        "motivation": "painting",
        "body": {
-        "id": "http://fm-digital-assets.fieldmuseum.org/2441/464/karpant.gltf",
+        "id": "https://fm-digital-assets.fieldmuseum.org/2441/464/karpant.gltf",
         "type": "Model",
         "format": "model/gltf+json"
        },
