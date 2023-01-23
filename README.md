@@ -83,6 +83,7 @@ The IIIF manifest outputs as a JSON file as well as to the console.  For more in
   - e.g.:  `python3 mongo_to_IIIF.py 2441464`
 
 3. Output IIIF Manifest JSON will be displayed in the console, and output to the path & file defined in your `.env`
+  - e.g., see example output manifests in [data/iiif](data/iiif/)
 
 
 ## Related Repo's
