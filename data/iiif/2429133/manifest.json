@@ -16,25 +16,25 @@
  "items": [
   {
    "type": "Canvas",
-   "id": "https://fm-digital-assets.fieldmuseum.org/canvas",
+   "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2429133/canvas",
    "label": {
     "en": []
    },
    "items": [
     {
      "type": "AnnotationPage",
-     "id": "https://fm-digital-assets.fieldmuseum.org/canvas/annotation_page",
+     "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2429133/canvas/annotation_page",
      "items": [
       {
        "type": "Annotation",
-       "id": "/annotation_page/annotation",
+       "id": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2429133/canvas/annotation_page/annotation",
        "motivation": "painting",
        "body": {
         "id": "http://fm-digital-assets.fieldmuseum.org/2429/133/karpan_test_glb.glb",
         "type": "Model",
         "format": "model/gltf+json"
        },
-       "target": "https://fm-digital-assets.fieldmuseum.org/canvas"
+       "target": "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/2429133/canvas"
       }
      ]
     }

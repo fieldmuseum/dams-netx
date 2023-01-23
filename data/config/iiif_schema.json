@@ -12,25 +12,25 @@
     "items": [
         {
             "type": "Canvas",
-            "id": "https://fm-digital-assets.fieldmuseum.org/canvas",
+            "id": "iiif_host.com/canvas",
             "label": {
                 "en": []
             },
             "items": [
                 {
                     "type": "AnnotationPage",
-                    "id": "https://fm-digital-assets.fieldmuseum.org/canvas/annotation_page",
+                    "id": "https://iiif_host.com/canvas/annotation_page",
                     "items": [
                         {
                             "type": "Annotation",
-                            "id": "/annotation_page/annotation",
+                            "id": "https://iiif_host.com/canvas/annotation_page/annotation",
                             "motivation": "painting",
                             "body": {
                                 "id": null,
                                 "type": null,
                                 "format": null
                             },
-                            "target": "https://fm-digital-assets.fieldmuseum.org/canvas"
+                            "target": "https://iiif_host.com/canvas"
                         }
                     ]
                 }

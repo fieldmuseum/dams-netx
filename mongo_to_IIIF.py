@@ -64,10 +64,24 @@ def get_iiif_ids(
     manifest_out_path,
     manifest_out_file
     ) -> dict:
-    '''populate iiif "id" fields with appropriate values for an asset'''
+    '''
+    Populate iiif "id" fields with appropriate values for an asset.
+    The HTTP domain-prefix for 'id' in the Canvas, Annotation & other objects
+    needs to match the manifest's main 'id'
+    '''
 
-    # Generate json-output filename
     iiif_manifest['id'] = f"{manifest_out_host}/{manifest_out_path}/{manifest_out_file}"
+
+    # Add Canvas ID
+    iiif_manifest['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas"
+
+    # Add AnnotationPage ID
+    iiif_manifest['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas/annotation_page"
+
+    # Add AnnotationPage ID & target
+    iiif_manifest['items'][0]['items'][0]['items'][0]['id'] = f"{manifest_out_host}/{manifest_out_path}/canvas/annotation_page/annotation"
+    iiif_manifest['items'][0]['items'][0]['items'][0]['target'] = f"{manifest_out_host}/{manifest_out_path}/canvas"
+
 
     return iiif_manifest
 
@@ -145,7 +159,10 @@ def main():
         iiif_manifest=iiif_manifest
         )
 
-    # print(iiif_manifest_json)
+
+    # If better to write output to console:
+    print(iiif_manifest_json)
+
 
     # Check if output path exists
     if not os.path.exists(manifest_out_path):
