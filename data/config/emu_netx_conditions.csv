@@ -1,2 +1,2 @@
 if_field1,if_logic1,if_value1,then_field,then_logic,then_value,then_container
-DetResourceDetailsDescription,EQUALS,Created,Date Created,MAP,DetResourceDetailsDate,
+DetResourceDetailsDescription,EQUALS,Created,DetResourceDetailDate_Created,MAP,DetResourceDetailsDate,
