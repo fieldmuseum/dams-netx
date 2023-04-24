@@ -31,7 +31,7 @@ def main():
 
     config = setup.get_config_dams_netx(live_or_test)
 
-    csv_output_file_path = config['PATHADD_CSV_FILE']
+    csv_output_file_path = config['PATHADD_CSV']
     dept_csv = config['DEPARTMENT_CSV']
 
     # Check if test or live paths should be used

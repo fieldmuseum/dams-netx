@@ -112,7 +112,7 @@ def main():
 
     config = setup.get_config_dams_netx(live_or_test)  # dotenv_values(".env")
 
-    input_csv = config['PATHADD_CSV_FILE']
+    input_csv = config['PATHADD_CSV']
     path_add_rows = uc.rows(input_csv)
 
     # Get id's for unique list of folders may be quicker
