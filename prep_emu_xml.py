@@ -19,7 +19,8 @@ from utils import setup
 def parse_emu_to_dss(
     emu_record: ET.Element,
     mm_event: ET.Element,
-    mm_catalog: ET.Element) -> ET.Element:
+    mm_catalog: ET.Element,
+    conditions:list) -> ET.Element:
     '''Parse exported EMu records to DSS-schema records'''
 
     print(emu_record.find('irn').text)
@@ -42,6 +43,33 @@ def parse_emu_to_dss(
             if key == "AudAssociatedSpecimen" and prepped_record.find(key).text is not None:
                 guid = prepped_record.find(key).text
                 prepped_record.find(key).text = f'https://db.fieldmuseum.org/{guid}'
+
+
+    # Populate DSS fields with conditional values
+    for condition in conditions:
+
+        # handle fields conditionally MAPPED to another field
+        if condition['then_logic'] == 'MAP':
+            emu_condition_value = xml_tools.get_conditional_group_value(
+                emu_record=emu_record,
+                group_tag=condition['if_group1'],
+                child_if_tag=condition['if_field1'],
+                child_if_logic=condition['if_logic1'],
+                child_if_value=condition['if_value1'],
+                child_then_field=condition['then_field'],
+                child_then_value=condition['then_value']
+            )
+
+            print(condition['then_field'])
+            print(f'prepped_record == {prepped_record}')
+            print(prepped_record.findall(condition['then_field']))
+
+            prepped_record.find(condition['then_field']).text = emu_condition_value
+        
+        # handle fields with conditional STATIC values
+        elif condition['then_logic'] == 'STATIC':
+            prepped_record.find(condition['then_field']).text = condition['then_value']
+            
 
 
     # Populate table-fields
@@ -158,6 +186,9 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
     catalog_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
 
+    conditions = emu_netx.get_emu_netx_conditions(config['CONDITIONS_CSV'])
+    # conditional_fields = emu_netx.get_condition_field_list(conditions)
+
     input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
     print(input_file_log)
     logging.info(input_file_log)
@@ -215,7 +246,12 @@ def main():  # main_xml_input, event_xml, catalog_xml):
 
             # loop thru dss schema fields & populate from EMu xml
             if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
-                prepped_record = parse_emu_to_dss(emu_record, mm_event, mm_catalog)
+                prepped_record = parse_emu_to_dss(
+                    emu_record,
+                    mm_event,
+                    mm_catalog,
+                    conditions
+                    )
 
                 if prepped_record is not None:
                     dss_records.append(prepped_record)

@@ -156,6 +156,47 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
     return netx_attr
 
 
+def get_conditional_group_value(
+    emu_record: ET.Element,
+    group_tag: ET.Element,
+    child_if_tag: str,
+    child_if_logic: str,
+    child_if_value: str,
+    child_then_field: str,
+    child_then_value: str
+    ) -> str:
+    '''
+    Given an EMu xml group-label, conditional "if"-field and value for multi-value table-fields, 
+    return the first corresponding "then"-value of a nested or child field to populate a netx text-field
+    '''
+
+    # child_list = []
+    netx_attr_value = None
+
+    if emu_record.find(group_tag) is not None:
+        for tuple in emu_record.find(group_tag): 
+            for child_if_field in tuple:
+                if str(child_if_field.tag) == child_if_tag:
+
+                    if child_if_logic == 'EQUALS':
+                        if child_if_field.text == child_if_value:
+                            # child_list.append(str(child_then_tag.text))
+                            netx_attr = tuple.find(child_then_value)
+                            netx_attr_value = netx_attr.text
+
+    # # TODO: Check Date-field format-preference
+    # if len(re.findall('Date', child_then_field)) > 0:
+    #     if netx_attr_value is None or len(netx_attr_value) != 10:
+    #         netx_attr_value = None # or set to "01" for missing day/month
+
+    # if len(child_list) > 0:
+    #     netx_attr = " | ".join(child_list)
+
+    # else: netx_attr = None
+    
+    return netx_attr_value
+
+
 def get_input_xml(input_path:list, input_date:str) -> ET.ElementTree:
     '''Given a filepath, read in an XML file and output an ET.ElementTree'''
 

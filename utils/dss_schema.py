@@ -60,6 +60,7 @@ def media_schema_xml() -> ET.Element:
             <ChaRepository_tab/>
             <DetSource/>
             <ChaMediaForm/>
+            <DetResourceDetailDate_Created/>
             <DetResourceDetailsDate0/>
             <DetResourceDetailsDescription_tab/>
         </data>
@@ -137,6 +138,7 @@ def media_schema_json():
             'ChaRepository_tab':None,
             'DetSource':None,
             'ChaMediaForm':None,
+            'DetResourceDetailDate_Created':None,
             'DetResourceDetailsDate0':None,
             'DetResourceDetailsDescription_tab':None
         }

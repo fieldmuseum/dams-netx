@@ -108,23 +108,23 @@ def emu_netx_groups_or_reftabs() -> dict:
 
 
 
-def emu_netx_conditional_groups() -> dict:
-    '''
-    Returns a list of dicts that define if/then conditions:
-    If a given EMu XML group or table field's value meets defined "if" criteria,
-    then the given NetX "then_field" will be set to the defined then_value.
+# def emu_netx_conditional_groups() -> dict:
+#     '''
+#     Returns a list of dicts that define if/then conditions:
+#     If a given EMu XML group or table field's value meets defined "if" criteria,
+#     then the given NetX "then_field" will be set to the defined then_value.
 
-    Either "then_value_dynamic" (to set NetX to the value in another EMu field)
-    or "then_value_static" (to set NetX to a static value in the dictionary)
-    should be used for a given field's condition -- not both.
-    '''
+#     Either "then_value_dynamic" (to set NetX to the value in another EMu field)
+#     or "then_value_static" (to set NetX to a static value in the dictionary)
+#     should be used for a given field's condition -- not both.
+#     '''
 
-    emu_netx_conditional_groups = {
-        'DetResourceDetailsDate0': ['Dates', 'DetResourceDetailsDate'],
-        'DetResourceDetailDate_Created': ['Dates', 'DetResourceDetailsDescription']
-        }
+#     emu_netx_conditional_groups = {
+#         'DetResourceDetailsDate0': ['Dates', 'DetResourceDetailsDate'],
+#         'DetResourceDetailDate_Created': ['Dates', 'DetResourceDetailsDescription']
+#         }
 
-    return emu_netx_conditional_groups
+#     return emu_netx_conditional_groups
 
 def emu_netx_ref_concatenate() -> dict:
     '''
@@ -171,6 +171,37 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
     else: 
         # return department + '/'
         return dept_level_1[dept_emu.index(department)] + '/'
+
+
+def get_emu_netx_conditions(conditions_csv:str) -> str:
+    '''
+    Returns a list of conditions for conditionally mapped EMu/NetX fields.
+    '''
+    # dept_csv = config('CONDITIONS_CSV')
+    conditions = []
+    with open(conditions_csv, encoding='utf-8', mode = 'r') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        for r in reader: 
+            if r not in conditions:
+                conditions.append(r)
+    
+    # dept_emu = []
+    # for row in dept_folders: dept_emu.append(row['emu'])
+
+    return conditions
+
+
+def get_condition_field_list(conditions:list):
+    '''Returns a list of 'then_field's where output DSS field is conditionally mapped.'''
+
+    then_field_list = []
+
+    gen = (item['then_field'] for item in conditions)
+    for field in gen:
+        if field not in then_field_list:
+            then_field_list.append(field)
+
+    return then_field_list
 
 
 def get_dss_xml(config:dict) -> dict:
