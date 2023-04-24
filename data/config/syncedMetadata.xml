@@ -71,7 +71,7 @@
 				<field name="field_48" column="ChaRepository_tab"/>
 				<field name="field_49" column="DetSource"/>
 				<field name="field_50" column="ChaMediaForm"/>
-				<!-- field name="field_51" column="DetResourceDetailDate_Created"/ -->
+				<field name="field_51" column="DetResourceDetailDate_Created"/>
 				<field name="field_52" column="DetResourceDetailsDate0"/>
 				<field name="field_53" column="DetResourceDetailsDescription_tab"/>
 				<!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
@@ -139,7 +139,7 @@
 				<map field="field_48" attribute="Repository" skip_null="true"/>
 				<map field="field_49" attribute="Source" skip_null="true"/>
 				<map field="field_50" attribute="Media Form" skip_null="true"/>
-				<!-- map field="field_51" attribute="Date Created" skip_null="true"/ -->
+				<map field="field_51" attribute="Date Created" skip_null="true"/>
 				<map field="field_52" attribute="Other Dates" skip_null="true"/>
 				<map field="field_53" attribute="Other Date Types" skip_null="true"/>
 
@@ -165,8 +165,8 @@
 
 	<sync type="scalar" log="debug" name="XML Metadata export" include_in_default="false">
 		<!-- The period string may contain spaces between components, so either of the following is valid: "2d10h30m" or "2d 10h 30m" -->
-		<!--  try category_id="710" vs mod_date_period="1d" attribute in source tag / in next line -->
- 		<source type="DAM" name="netx dam" objectType="asset" category_id="508">
+		<!--  try category_id="508" vs mod_date_period="1d" attribute in source tag / in next line -->
+ 		<source type="DAM" name="netx dam" objectType="asset" modDatePeriod="1d">
 			<field name="field_identifier" column="Identifier"/>
 			<field name="field_title" column="Title"/>
 			<field name="field_description" column="Description"/>
