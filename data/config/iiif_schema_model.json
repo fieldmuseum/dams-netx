@@ -1,0 +1,66 @@
+{
+    "@context": "http://iiif.io/api/presentation/3/context.json",
+    "id": null,
+    "type": "Manifest",
+    "label": {
+        "en": []
+    },
+    "summary": {
+        "en": []
+    },
+    "rendering": [],
+    "items": [
+        {
+            "type": "Canvas",
+            "id": "https://fm-digital-assets.fieldmuseum.org/canvas",
+            "label": {
+                "en": []
+            },
+            "items": [
+                {
+                    "type": "AnnotationPage",
+                    "id": "https://fm-digital-assets.fieldmuseum.org/canvas/annotation_page",
+                    "items": [
+                        {
+                            "type": "Annotation",
+                            "id": "/annotation_page/annotation",
+                            "motivation": "painting",
+                            "body": {
+                                "id": "https://fm-digital-assets.fieldmuseum.org/2441/464/karpant.gltf",
+                                "type": "Model",
+                                "format": "model/gltf+json"
+                            },
+                            "target": "https://fm-digital-assets.fieldmuseum.org/canvas"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": [
+        {
+            "label": {
+                "en": [
+                    "Description"
+                ]
+            },
+            "value": {
+                "en": [
+                    "3D scan of gold armband | Dunavecsei arany karpánt"
+                ]
+            }
+        }
+    ],
+    "requiredStatement": {
+        "label": {
+            "en": [
+                "Attribution"
+            ]
+        },
+        "value": {
+            "en": [
+                "Provided courtesy of Hungarian National Museum"
+            ]
+        }
+    }
+}

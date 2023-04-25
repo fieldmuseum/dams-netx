@@ -60,9 +60,9 @@ def parse_emu_to_dss(
                 child_then_value=condition['then_value']
             )
 
-            print(condition['then_field'])
-            print(f'prepped_record == {prepped_record}')
-            print(prepped_record.findall(condition['then_field']))
+            # print(condition['then_field'])
+            # print(f'prepped_record == {prepped_record}')
+            # print(prepped_record.findall(condition['then_field']))
 
             prepped_record.find(condition['then_field']).text = emu_condition_value
         
