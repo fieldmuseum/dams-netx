@@ -182,7 +182,7 @@ def get_conditional_group_value(
                         if child_if_field.text == child_if_value:
                             # child_list.append(str(child_then_tag.text))
                             netx_attr = tuple.find(child_then_value)
-                            if netx_attr is not None and len(netx_attr) > 0:
+                            if netx_attr is not None and len(netx_attr.text) > 0:
                                 netx_attr_value = netx_attr.text
 
     # # TODO: Check Date-field format-preference
