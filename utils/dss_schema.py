@@ -63,6 +63,10 @@ def media_schema_xml() -> ET.Element:
             <DetResourceDetailDate_Created/>
             <DetResourceDetailsDate0/>
             <DetResourceDetailsDescription_tab/>
+            <SupIdentifier/>
+            <SupHeight/>
+            <SupWidth/>
+            <SupFileSize/>
         </data>
         '''
         )
@@ -140,7 +144,11 @@ def media_schema_json():
             'ChaMediaForm':None,
             'DetResourceDetailDate_Created':None,
             'DetResourceDetailsDate0':None,
-            'DetResourceDetailsDescription_tab':None
+            'DetResourceDetailsDescription_tab':None,
+            'SupIdentifier':None,
+            'SupHeight':None,
+            'SupWidth':None,
+            'SupFileSize':None
         }
     }
 

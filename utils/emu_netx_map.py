@@ -101,7 +101,11 @@ def emu_netx_groups_or_reftabs() -> dict:
         'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
         'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'], # make unique list
         'DetResourceDetailsDate0': ['Dates', 'DetResourceDetailsDate'],
-        'DetResourceDetailsDescription_tab': ['Dates', 'DetResourceDetailsDescription']
+        'DetResourceDetailsDescription_tab': ['Dates', 'DetResourceDetailsDescription'],
+        'SupIdentifier': ['Supplementary', 'SupIdentifier'],
+        'SupHeight': ['Supplementary', 'SupHeight'],
+        'SupWidth': ['Supplementary', 'SupWidth'],
+        'SupFileSize': ['Supplementary', 'SupFileSize']
     }
 
     return emu_netx_groups_or_reftabs
