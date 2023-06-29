@@ -6,7 +6,7 @@
       "height" : 2500,
       "images" : [ {
         "motivation" : "sc:painting",
-        "on" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/canvas/canvas-0",
+        "on" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/canvas/canvas-0",
         "resource" : {
           "height" : 2500,
           "width" : 1753,
@@ -23,11 +23,11 @@
       "label" : "p-0",
       "width" : 1753,
       "@type" : "sc:Canvas",
-      "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/canvas/canvas-0"
+      "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/canvas/canvas-0"
     } ],
     "label" : "Current page order",
     "@type" : "sc:Sequence",
-    "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/sequence/normal"
+    "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/sequence/normal"
   } ],
   "@type" : "sc:Manifest",
   "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json",
