@@ -1,0 +1,232 @@
+{
+  "logo" : "https://fm-digital-assets.fieldmuseum.org/img/logo.png",
+  "description" : "Peggy McGann with the Louis Paul Jonas collection of miniature models of elephants",
+  "label" : "28e0d63d-f5a5-4420-871e-05194ac2adab",
+  "sequences" : [ {
+    "canvases" : [ {
+      "height" : 2500,
+      "images" : [ {
+        "motivation" : "sc:painting",
+        "on" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/canvas/canvas-0",
+        "resource" : {
+          "height" : 2500,
+          "width" : 1753,
+          "service" : {
+            "profile" : "http://iiif.io/api/image/2/level1.json",
+            "@context" : "http://iiif.io/api/image/2/context.json",
+            "@id" : "https://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg"
+          },
+          "@id" : "https://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg",
+          "@type" : "dctypes:Image"
+        },
+        "@type" : "oa:Annotation"
+      } ],
+      "label" : "p-0",
+      "width" : 1753,
+      "@type" : "sc:Canvas",
+      "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/canvas/canvas-0"
+    } ],
+    "label" : "Current page order",
+    "@type" : "sc:Sequence",
+    "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/sequence/normal"
+  } ],
+  "@type" : "sc:Manifest",
+  "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979",
+  "@context" : "http://iiif.io/api/presentation/2/context.json",
+  "metadata" : [ {
+    "label" : "Taxon Coverage",
+    "value" : ""
+  }, {
+    "label" : "Description",
+    "value" : "Peggy McGann with the Louis Paul Jonas collection of miniature models of elephants"
+  }, {
+    "label" : "Related Geography",
+    "value" : ""
+  }, {
+    "label" : "Record Status",
+    "value" : "Active"
+  }, {
+    "label" : "Data Source",
+    "value" : ""
+  }, {
+    "label" : "Publish on Internet",
+    "value" : "Yes"
+  }, {
+    "label" : "Catalog Numbers",
+    "value" : ""
+  }, {
+    "label" : "xGUID",
+    "value" : ""
+  }, {
+    "label" : "Common Name",
+    "value" : ""
+  }, {
+    "label" : "Sex",
+    "value" : ""
+  }, {
+    "label" : "Life Stage",
+    "value" : ""
+  }, {
+    "label" : "Other Number",
+    "value" : "GN78532"
+  }, {
+    "label" : "Subject Orientation",
+    "value" : ""
+  }, {
+    "label" : "Other Number Source",
+    "value" : "Photo Archives ID No."
+  }, {
+    "label" : "Subject Part",
+    "value" : ""
+  }, {
+    "label" : "Capture Device",
+    "value" : ""
+  }, {
+    "label" : "Funding Attribution",
+    "value" : ""
+  }, {
+    "label" : "Access URI",
+    "value" : "http://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg"
+  }, {
+    "label" : "Rights Type",
+    "value" : "Copyright"
+  }, {
+    "label" : "Rights License",
+    "value" : ""
+  }, {
+    "label" : "Date Inserted in EMu",
+    "value" : "02/13/2020"
+  }, {
+    "label" : "Date Modified in EMu",
+    "value" : "01/29/2023"
+  }, {
+    "label" : "Inserted By",
+    "value" : "Cummings, Nina"
+  }, {
+    "label" : "Modified By",
+    "value" : "Cummings, Nina"
+  }, {
+    "label" : "Embargoed Date",
+    "value" : ""
+  }, {
+    "label" : "Related Media Notes",
+    "value" : ""
+  }, {
+    "label" : "Parent Media Summary",
+    "value" : ""
+  }, {
+    "label" : "Related Media Summary",
+    "value" : ""
+  }, {
+    "label" : "Media Relationship Type",
+    "value" : ""
+  }, {
+    "label" : "Creator IRN",
+    "value" : ""
+  }, {
+    "label" : "Workflow",
+    "value" : ""
+  }, {
+    "label" : "Parent Link Field",
+    "value" : "GN78532"
+  }, {
+    "label" : "Subjects",
+    "value" : "ISL2021"
+  }, {
+    "label" : "Date Created",
+    "value" : ""
+  }, {
+    "label" : "Other Dates",
+    "value" : "1945-03-21"
+  }, {
+    "label" : "Other Date Types",
+    "value" : "Created"
+  }, {
+    "label" : "Media Form",
+    "value" : ""
+  }, {
+    "label" : "xCollection Catalogue",
+    "value" : ""
+  }, {
+    "label" : "Related Object Departments",
+    "value" : ""
+  }, {
+    "label" : "Related Events",
+    "value" : "EX-1945.1 | Exhibit - Travelling | Animals in Miniature"
+  }, {
+    "label" : "Related Event URLs",
+    "value" : "https://pj.fieldmuseum.org/event/439ba6a6-c1ea-4083-8ec6-6f86f1701cb6"
+  }, {
+    "label" : "Creator Role",
+    "value" : ""
+  }, {
+    "label" : "Identifier",
+    "value" : "28e0d63d-f5a5-4420-871e-05194ac2adab"
+  }, {
+    "label" : "Title",
+    "value" : "Peggy McGann"
+  }, {
+    "label" : "Associated Specimens",
+    "value" : ""
+  }, {
+    "label" : "Repository",
+    "value" : "KE EMu Repository"
+  }, {
+    "label" : "Source",
+    "value" : ""
+  }, {
+    "label" : "Related Object Catalogs",
+    "value" : ""
+  }, {
+    "label" : "Associated Observations",
+    "value" : ""
+  }, {
+    "label" : "EMu Filename",
+    "value" : "GN78532.jpg"
+  }, {
+    "label" : "Security Department",
+    "value" : "\"Library\",\"Photo Archives\""
+  }, {
+    "label" : "Parent Media Identifier",
+    "value" : ""
+  }, {
+    "label" : "Test Dataset",
+    "value" : ""
+  }, {
+    "label" : "Justification required to download",
+    "value" : ""
+  }, {
+    "label" : "IRN",
+    "value" : "2097968"
+  }, {
+    "label" : "Creator",
+    "value" : ""
+  }, {
+    "label" : "Supplementary File Name",
+    "value" : ""
+  }, {
+    "label" : "Rights Summary",
+    "value" : "(c) Field Museum of Natural History"
+  }, {
+    "label" : "Supp Height",
+    "value" : ""
+  }, {
+    "label" : "Rights record IRN",
+    "value" : "36"
+  }, {
+    "label" : "Supp Width",
+    "value" : ""
+  }, {
+    "label" : "Rights record Owner",
+    "value" : "Field Museum of Natural History"
+  }, {
+    "label" : "Supp File Size",
+    "value" : ""
+  }, {
+    "label" : "Citation",
+    "value" : "(c) Field Museum of Natural History. https://mm.fieldmuseum.org/28e0d63d-f5a5-4420-871e-05194ac2adab (accessed on 29 Jan 2023)"
+  }, {
+    "label" : "Publish on Intranet",
+    "value" : "Yes"
+  } ]
+}
