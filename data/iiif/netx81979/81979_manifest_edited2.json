@@ -1,5 +1,4 @@
 {
-  "logo" : "https://fm-digital-assets.fieldmuseum.org/img/logo.png",
   "description" : "Peggy McGann with the Louis Paul Jonas collection of miniature models of elephants",
   "label" : "28e0d63d-f5a5-4420-871e-05194ac2adab",
   "sequences" : [ {
@@ -7,7 +6,7 @@
       "height" : 2500,
       "images" : [ {
         "motivation" : "sc:painting",
-        "on" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/canvas/canvas-0",
+        "on" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/canvas/canvas-0",
         "resource" : {
           "height" : 2500,
           "width" : 1753,
@@ -24,14 +23,14 @@
       "label" : "p-0",
       "width" : 1753,
       "@type" : "sc:Canvas",
-      "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/canvas/canvas-0"
+      "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/canvas/canvas-0"
     } ],
     "label" : "Current page order",
     "@type" : "sc:Sequence",
-    "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979/sequence/normal"
+    "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json/sequence/normal"
   } ],
   "@type" : "sc:Manifest",
-  "@id" : "https://fm-digital-assets.fieldmuseum.org/iiif/manifest/asset/81979",
+  "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json",
   "@context" : "http://iiif.io/api/presentation/2/context.json",
   "metadata" : [ {
     "label" : "Taxon Coverage",
