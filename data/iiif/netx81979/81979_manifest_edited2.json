@@ -1,4 +1,5 @@
 {
+  "logo" : "https://dams-test.fieldmuseum.tech/img/logo.png",
   "description" : "Peggy McGann with the Louis Paul Jonas collection of miniature models of elephants",
   "label" : "28e0d63d-f5a5-4420-871e-05194ac2adab",
   "sequences" : [ {
@@ -10,10 +11,6 @@
         "resource" : {
           "height" : 2500,
           "width" : 1753,
-          "service" : {
-            "profile" : "http://iiif.io/api/image/2/level1.json",
-            "@context" : "http://iiif.io/api/image/2/context.json"
-          },
           "@id" : "https://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg",
           "@type" : "dctypes:Image"
         },
