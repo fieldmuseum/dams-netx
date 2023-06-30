@@ -13,7 +13,7 @@
           "service" : {
             "profile" : "http://iiif.io/api/image/2/level1.json",
             "@context" : "http://iiif.io/api/image/2/context.json",
-            "@id" : "https://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg"
+            "@id" : "https://raw.githubusercontent.com/fieldmuseum/dams-netx/main/data/iiif/netx81979/81979_manifest_edited2.json"
           },
           "@id" : "https://fm-digital-assets.fieldmuseum.org/2097/968/GN78532.jpg",
           "@type" : "dctypes:Image"
