@@ -256,11 +256,12 @@ def pathadd(record:dict, dept_csv:str):
             if re.match('Amphibian', dept) is not None:
                 dept = "Amphibians and Reptiles"
             dept_folder = emu_netx.get_folder_hierarchy(dept, dept_csv)
-            pathadd_folder = f'{dept_folder}'
-            path_add_row = {'file':filename, 'pathAdd':pathadd_folder}
+            if pathadd_folder is not None:
+                pathadd_folder = f'{dept_folder}'
+                path_add_row = {'file':filename, 'pathAdd':pathadd_folder}
 
-            if path_add_row not in path_add_list:
-                path_add_list.append(path_add_row)
+                if path_add_row not in path_add_list:
+                    path_add_list.append(path_add_row)
 
     if len(path_add_list) > 0:
         return path_add_list

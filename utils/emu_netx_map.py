@@ -172,9 +172,13 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
         parent = dept_level_1[dept_level_2.index(department)]
         return parent + '/' + department + '/'
     
-    else: 
+    elif department in dept_level_1: 
         # return department + '/'
         return dept_level_1[dept_emu.index(department)] + '/'
+    
+    else:
+        print(f"No matching folder hierarchy value for {department}")
+        return None
 
 
 def get_emu_netx_conditions(conditions_csv:str) -> str:
