@@ -1,6 +1,6 @@
 '''
 Functions for using texcdp (the EMu API)
-- texcdp docs - https://nexus.melbourne.axiell.com/texcdp/latest
+- texrestapi docs - https://nexus.melbourne.axiell.com/texrestapi/latest/ 
 - Reminder: set 'EMU' variables in your .env (see '.env.example')
 '''
 
