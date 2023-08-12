@@ -88,6 +88,8 @@ def emu_netx_groups_or_reftabs() -> dict:
     and values = lists of EMu XML Group names and nested EMu fields  
     If groups includes attachment-fields, only the pull-through fields are listed.
     (e.g. only "SummaryData", not "MulMultimediaCreatorRef_tab.SummaryData")
+    If a double-nested field is included, '.'-delimit as [link column].[pull-through] in a single string
+    e.g. - For ExOb_Event (StaEventRef):  StaEventRef.SummaryData
     '''
 
     emu_netx_groups_or_reftabs = {
@@ -105,7 +107,13 @@ def emu_netx_groups_or_reftabs() -> dict:
         'SupIdentifier': ['Supplementary', 'SupIdentifier'],
         'SupHeight': ['Supplementary', 'SupHeight'],
         'SupWidth': ['Supplementary', 'SupWidth'],
-        'SupFileSize': ['Supplementary', 'SupFileSize']
+        'SupFileSize': ['Supplementary', 'SupFileSize'],
+        'ExOb_Mul_InvNo':['MulMultiMediaRef_tab','StaEventCatalogueNumber'],
+        'ExOb_Event':['MulMultiMediaRef_tab','StaEventRef.SummaryData'],  # Double-nested reverse-attachment...
+        'ExOb_Depth':['MulMultiMediaRef_tab','MeaConfirmedDepth'],
+        'ExOb_Width':['MulMultiMediaRef_tab','MeaConfirmedWidth'],
+        'ExOb_Height':['MulMultiMediaRef_tab','MeaConfirmedHeight'],
+        'ExOb_Weight':['MulMultiMediaRef_tab','MeaConfirmedWeight'],
     }
 
     return emu_netx_groups_or_reftabs

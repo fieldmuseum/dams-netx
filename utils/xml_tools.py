@@ -145,7 +145,7 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
         for tuple in emu_record.find(group_tag): 
             for child_field in tuple:
                 if str(child_field.tag) == child_tag:
-                    if str(child_field.text) not in child_list:
+                    if str(child_field.text) not in child_list and child_field.text is not None:
                         child_list.append(str(child_field.text))
 
     if len(child_list) > 0:

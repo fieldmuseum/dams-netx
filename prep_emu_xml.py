@@ -20,6 +20,7 @@ def parse_emu_to_dss(
     emu_record: ET.Element,
     mm_event: ET.Element,
     mm_catalog: ET.Element,
+    mm_exob_mul: ET.Element,
     conditions:list) -> ET.Element:
     '''Parse exported EMu records to DSS-schema records'''
 
@@ -108,6 +109,16 @@ def parse_emu_to_dss(
                 grouped_value = xml_tools.get_unique_group_value(mm_catalog, value[0], value[1])
                 # if grouped_value_raw is not None:
                 #     grouped_value = grouped_value_raw.split(" | ")
+            
+            elif key.find('ExOb_') > -1 and mm_exob_mul is not None:
+                if value[1].find('.') > 0:
+                    ref_values = xml_tools.get_ref_value(mm_exob_mul, value[0], value[1])
+                    if ref_values is not None: # and re.match(r'^\s+$', ref_values) is None:
+                        prepped_record.find(key).text = ref_values
+                    else:
+                        prepped_record.find(key).text = ''
+                else:
+                    grouped_value = xml_tools.get_unique_group_value(mm_exob_mul, value[0], value[1])    
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
@@ -184,6 +195,8 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     main_xml_input = full_prefix + 'NetX_emultimedia/' + input_date + '/xml*'
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
     catalog_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
+    exobj_mul_xml = full_prefix + 'NetX_mm_exhobj_mm/' + input_date + '/xml*'
+    # exobj_ins_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
 
     conditions = emu_netx.get_emu_netx_conditions(config['CONDITIONS_CSV'])
     # conditional_fields = emu_netx.get_condition_field_list(conditions)
@@ -202,14 +215,16 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     emu_records = xml_tools.convert_linebreaks_to_commas(emu_records_raw2)
 
 
-    # Import Event & Catalog exports too
+    # Import attachmen exports too: Events, Catalog, Exh.Objects (Mul & Ins tabs)
     eve_raw1 = xml_tools.get_input_xml(event_xml, input_date)
     cat_raw1 = xml_tools.get_input_xml(catalog_xml, input_date)
-    # eve_raw1 = ET.ElementTree().parse(glob.glob(event_xml)[0])
-    # cat_raw1 = ET.ElementTree().parse(glob.glob(catalog_xml)[0])
+    exobj_mul_raw1 = xml_tools.get_input_xml(exobj_mul_xml, input_date)
+    # exobj_ins_raw1 = xml_tools.get_input_xml(exobj_ins_xml, input_date)
 
     eve_records_raw2 = xml_tools.fix_emu_xml_tags(eve_raw1)
     cat_records_raw2 = xml_tools.fix_emu_xml_tags(cat_raw1)
+    exobj_mul_records_raw2 = xml_tools.fix_emu_xml_tags(exobj_mul_raw1)
+    # exobj_ins_records_raw2 = xml_tools.fix_emu_xml_tags(exobj_ins_raw1)
 
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
@@ -224,6 +239,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
         # grab corresponding Event & Catalog, if any:
         mm_event = None
         mm_catalog = None
+        mm_exob_mul = None
 
         if None in [emu_record.find('AudIdentifier').text, emu_record.find('MulIdentifier').text, emu_record.find('ChaMd5Sum').text]:
             log_warn_nofile = f'Skipping {emu_record.find("AudIdentifier").text} -- No MD5 sum (ChaMd5Sum) / no file'
@@ -241,6 +257,10 @@ def main():  # main_xml_input, event_xml, catalog_xml):
             for cat_record in cat_records_raw2:
                 if cat_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
                     mm_catalog = cat_record
+            
+            for exob_mul_record in exobj_mul_records_raw2:
+                if exob_mul_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                    mm_exob_mul = exob_mul_record
 
 
             # loop thru dss schema fields & populate from EMu xml
@@ -249,6 +269,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
                     emu_record,
                     mm_event,
                     mm_catalog,
+                    mm_exob_mul,
                     conditions
                     )
 

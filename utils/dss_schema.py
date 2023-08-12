@@ -67,6 +67,12 @@ def media_schema_xml() -> ET.Element:
             <SupHeight/>
             <SupWidth/>
             <SupFileSize/>
+            <ExOb_Mul_InvNo/>
+            <ExOb_Event/>
+            <ExOb_Depth/>
+            <ExOb_Width/>
+            <ExOb_Height/>
+            <ExOb_Weight/>
         </data>
         '''
         )
@@ -148,7 +154,13 @@ def media_schema_json():
             'SupIdentifier':None,
             'SupHeight':None,
             'SupWidth':None,
-            'SupFileSize':None
+            'SupFileSize':None,
+            'ExOb_Mul_InvNo':None,
+            'ExOb_Event':None,
+            'ExOb_Depth':None,
+            'ExOb_Width':None,
+            'ExOb_Height':None,
+            'ExOb_Weight':None,
         }
     }
 
