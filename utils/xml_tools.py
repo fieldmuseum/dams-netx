@@ -155,6 +155,42 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
     
     return netx_attr
 
+def get_unique_group_ref_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: str) -> str:
+    '''
+    Given an EMu xml group-label for multi-value table-fields, 
+    return the unique values of a nested or child REF field to populate a netx tag-field
+    e.g. - for StaEventRef.SummaryData
+    '''
+
+    netx_attr = None
+    child_list = []
+
+    if child_tag.find('.') > 0:
+        nested_tag = child_tag.split(".")
+        child_tag = nested_tag[0]
+        nested_child_tag = nested_tag[1]
+
+    if emu_record.find(group_tag) is not None:
+        for tuple in emu_record.find(group_tag): 
+            for child_field in tuple:
+                if str(child_field.tag) == child_tag:
+
+                    if nested_child_tag is not None:
+                        # for tuple in child_field:
+                        for nested_child_field in child_field:
+                            if nested_child_field.tag == nested_child_tag:
+                                if nested_child_field.text is not None:  # and re.match(r'^\s+$', nested_child_field.text) is None:
+                                    child_list.append(nested_child_field.text)
+
+                    elif child_field.text is not None and str(child_field.text) not in child_list:
+                        child_list.append(str(child_field.text))
+
+    if len(child_list) > 0:
+        netx_attr_raw = " | ".join(child_list)
+
+        netx_attr = convert_pipe_to_unique_commas(netx_attr_raw)
+    
+    return netx_attr
 
 def get_conditional_group_value(
     emu_record: ET.Element,

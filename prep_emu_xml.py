@@ -61,9 +61,6 @@ def parse_emu_to_dss(
                 child_then_value=condition['then_value']
             )
 
-            # print(f'prepped_record == {prepped_record}')
-            # print(prepped_record.findall(condition['then_field']))
-
             prepped_record.find(condition['then_field']).text = emu_condition_value
         
         # handle fields with conditional STATIC values
@@ -112,11 +109,9 @@ def parse_emu_to_dss(
             
             elif key.find('ExOb_') > -1 and mm_exob_mul is not None:
                 if value[1].find('.') > 0:
-                    ref_values = xml_tools.get_ref_value(mm_exob_mul, value[0], value[1])
-                    if ref_values is not None: # and re.match(r'^\s+$', ref_values) is None:
-                        prepped_record.find(key).text = ref_values
-                    else:
-                        prepped_record.find(key).text = ''
+                    grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0], value[1])
+                    # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
+
                 else:
                     grouped_value = xml_tools.get_unique_group_value(mm_exob_mul, value[0], value[1])    
 
@@ -199,7 +194,6 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     # exobj_ins_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
 
     conditions = emu_netx.get_emu_netx_conditions(config['CONDITIONS_CSV'])
-    # conditional_fields = emu_netx.get_condition_field_list(conditions)
 
     input_file_log = f'Input XML file = {glob.glob(main_xml_input)[0]}'
     print(input_file_log)
