@@ -113,7 +113,7 @@ def parse_emu_to_dss(
                     # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
 
                 else:
-                    grouped_value = xml_tools.get_unique_group_value(mm_exob_mul, value[0], value[1])    
+                    grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])    
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
