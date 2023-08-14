@@ -21,6 +21,7 @@ def parse_emu_to_dss(
     mm_event: ET.Element,
     mm_catalog: ET.Element,
     mm_exob_mul: ET.Element,
+    mm_exob_ins: ET.Element,
     conditions:list) -> ET.Element:
     '''Parse exported EMu records to DSS-schema records'''
 
@@ -106,15 +107,30 @@ def parse_emu_to_dss(
                 grouped_value = xml_tools.get_unique_group_value(mm_catalog, value[0], value[1])
                 # if grouped_value_raw is not None:
                 #     grouped_value = grouped_value_raw.split(" | ")
-            
-            elif key.find('ExOb_') > -1 and mm_exob_mul is not None:
+
+
+            elif key.find('ExOb_') > -1 and mm_exob_ins is not None:
                 if value[1].find('.') > 0:
-                    grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0], value[1])
+                    grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0], value[1])
                     # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
 
                 else:
-                    grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])    
+                    grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])               
 
+
+            elif key.find('ExOb_') > -1 and mm_exob_mul is not None:
+
+                # Only use ExOb main MM tab if MM is only attached on main MM
+                if mm_exob_ins is None:
+
+                    if value[1].find('.') > 0:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0], value[1])
+                        # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
+
+                    else:
+                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])   
+
+ 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
 
