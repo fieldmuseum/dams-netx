@@ -86,10 +86,16 @@ def emu_netx_groups_or_reftabs() -> dict:
     '''
     Returns a dict where keys = corresponding NetX fields
     and values = lists of EMu XML Group names and nested EMu fields  
+    
     If groups includes attachment-fields, only the pull-through fields are listed.
     (e.g. only "SummaryData", not "MulMultimediaCreatorRef_tab.SummaryData")
+    
     If a double-nested field is included, '.'-delimit as [link column].[pull-through] in a single string
     e.g. - For ExOb_Event (StaEventRef):  StaEventRef.SummaryData
+    
+    If a NetX field may pull from multiple EMu groups, list the group-names in order of priority.
+    e.g. - For ExOb_Event, the Ex.Ob's Install-tab media ('InsMultimediaRef_tab') 
+    takes priority over main 'Multimedia-tab' media ('MulMultiMediaRef_tab')
     '''
 
     emu_netx_groups_or_reftabs = {
@@ -108,12 +114,12 @@ def emu_netx_groups_or_reftabs() -> dict:
         'SupHeight': ['Supplementary', 'SupHeight'],
         'SupWidth': ['Supplementary', 'SupWidth'],
         'SupFileSize': ['Supplementary', 'SupFileSize'],
-        'ExOb_Mul_InvNo':['MulMultiMediaRef_tab','StaEventCatalogueNumber'],
-        'ExOb_Event':['MulMultiMediaRef_tab','StaEventRef.SummaryData'],  # Double-nested reverse-attachment...
-        'ExOb_Depth':['MulMultiMediaRef_tab','MeaConfirmedDepth'],
-        'ExOb_Width':['MulMultiMediaRef_tab','MeaConfirmedWidth'],
-        'ExOb_Height':['MulMultiMediaRef_tab','MeaConfirmedHeight'],
-        'ExOb_Weight':['MulMultiMediaRef_tab','MeaConfirmedWeight'],
+        'ExOb_Mul_InvNo':[['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],'StaEventCatalogueNumber'],
+        'ExOb_Event':[['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],'StaEventRef.SummaryData'],  # Double-nested reverse-attachment...
+        'ExOb_Depth':['InsMultimediaRef_tab','MeaConfirmedDepth'],
+        'ExOb_Width':['InsMultimediaRef_tab','MeaConfirmedWidth'],
+        'ExOb_Height':['InsMultimediaRef_tab','MeaConfirmedHeight'],
+        'ExOb_Weight':['InsMultimediaRef_tab','MeaConfirmedWeight']
     }
 
     return emu_netx_groups_or_reftabs
@@ -160,8 +166,9 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
     dept_folders = []
     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for r in reader: dept_folders.append(r)
-    
+        for r in reader: 
+            dept_folders.append(r)
+        
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
     dept_emu = []

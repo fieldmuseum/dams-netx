@@ -105,32 +105,32 @@ def parse_emu_to_dss(
 
             if key in ['CatDepartment', 'CatCatalog'] and mm_catalog is not None:
                 grouped_value = xml_tools.get_unique_group_value(mm_catalog, value[0], value[1])
-                # if grouped_value_raw is not None:
-                #     grouped_value = grouped_value_raw.split(" | ")
 
+            elif key.find('ExOb_') > -1:
 
-            elif key.find('ExOb_') > -1 and mm_exob_ins is not None:
-                if value[1].find('.') > 0:
-                    grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0], value[1])
-                    # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
+                # Loop through prioritized group first (e.g. 'Install' tab vs main 'MM' tab):
+                if mm_exob_ins is not None:
+                    if value[1].find('.') > -1:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][0], value[1])
 
-                else:
-                    grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])               
-
-
-            elif key.find('ExOb_') > -1 and mm_exob_mul is not None:
-
-                # Only use ExOb main MM tab if MM is only attached on main MM
-                if mm_exob_ins is None:
-
-                    if value[1].find('.') > 0:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0], value[1])
-                        # print(f'Found "." in {value[1]} | group_values = {grouped_value}')
+                    elif type(value[0]) is list:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][0], value[1], False)
 
                     else:
-                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])   
+                        grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])
 
- 
+                # Only use ExOb main MM tab if MM is only attached on main MM
+                if grouped_value is None or grouped_value == '':
+
+                    if value[1].find('.') > -1:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][1], value[1])
+
+                    elif type(value[0]) is list:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
+
+                    else:
+                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
+
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
 
@@ -207,7 +207,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     event_xml = full_prefix + 'NetX_mm_events/' + input_date + '/xml*'
     catalog_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
     exobj_mul_xml = full_prefix + 'NetX_mm_exhobj_mm/' + input_date + '/xml*'
-    # exobj_ins_xml = full_prefix + 'NetX_mm_catalogue/' + input_date + '/xml*'
+    exobj_ins_xml = full_prefix + 'NetX_mm_exhobj_install/' + input_date + '/xml*'
 
     conditions = emu_netx.get_emu_netx_conditions(config['CONDITIONS_CSV'])
 
@@ -229,18 +229,18 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     eve_raw1 = xml_tools.get_input_xml(event_xml, input_date)
     cat_raw1 = xml_tools.get_input_xml(catalog_xml, input_date)
     exobj_mul_raw1 = xml_tools.get_input_xml(exobj_mul_xml, input_date)
-    # exobj_ins_raw1 = xml_tools.get_input_xml(exobj_ins_xml, input_date)
+    exobj_ins_raw1 = xml_tools.get_input_xml(exobj_ins_xml, input_date)
 
     eve_records_raw2 = xml_tools.fix_emu_xml_tags(eve_raw1)
     cat_records_raw2 = xml_tools.fix_emu_xml_tags(cat_raw1)
     exobj_mul_records_raw2 = xml_tools.fix_emu_xml_tags(exobj_mul_raw1)
-    # exobj_ins_records_raw2 = xml_tools.fix_emu_xml_tags(exobj_ins_raw1)
+    exobj_ins_records_raw2 = xml_tools.fix_emu_xml_tags(exobj_ins_raw1)
 
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
     # # smaller test-set
-    # emu_records = emu_records[:10]
+    emu_records = emu_records[:10]
 
 
     # loop through & prep EMu records
@@ -250,6 +250,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
         mm_event = None
         mm_catalog = None
         mm_exob_mul = None
+        mm_exob_ins = None
 
         if None in [emu_record.find('AudIdentifier').text, emu_record.find('MulIdentifier').text, emu_record.find('ChaMd5Sum').text]:
             log_warn_nofile = f'Skipping {emu_record.find("AudIdentifier").text} -- No MD5 sum (ChaMd5Sum) / no file'
@@ -272,6 +273,10 @@ def main():  # main_xml_input, event_xml, catalog_xml):
                 if exob_mul_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
                     mm_exob_mul = exob_mul_record
 
+            for exob_ins_record in exobj_ins_records_raw2:
+                if exob_ins_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                    mm_exob_ins = exob_ins_record
+
 
             # loop thru dss schema fields & populate from EMu xml
             if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
@@ -280,6 +285,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
                     mm_event,
                     mm_catalog,
                     mm_exob_mul,
+                    mm_exob_ins,
                     conditions
                     )
 

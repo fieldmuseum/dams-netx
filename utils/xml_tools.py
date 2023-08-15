@@ -51,7 +51,7 @@ def convert_linebreaks_to_commas(emu_records: ET.Element) -> ET.Element:
     return emu_records
 
 
-def convert_pipe_to_unique_commas(pipe_delim_string:str) -> str:
+def convert_pipe_to_unique_commas(pipe_delim_string:str, quote:bool=True) -> str:
     '''Convert a pipe-delimited string to comma-delimited quoted values'''
 
     # if re.match(r'\s*\|\s*', pipe_delim_string) is None:
@@ -70,8 +70,11 @@ def convert_pipe_to_unique_commas(pipe_delim_string:str) -> str:
             comma_list.append(list_item)
 
     if len(comma_list) > 0:
-        comma_text = '","'.join(comma_list)
-        comma_text = '"' + comma_text + '"'
+        if quote == True:
+            comma_text = '","'.join(comma_list)
+            comma_text = '"' + comma_text + '"'
+        else:
+            comma_text = ','.join(comma_list)
 
     return comma_text
 
@@ -155,7 +158,7 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
     
     return netx_attr
 
-def get_unique_group_ref_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: str) -> str:
+def get_unique_group_ref_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: str, quote: bool=True) -> str:
     '''
     Given an EMu xml group-label for multi-value table-fields, 
     return the unique values of a nested or child REF field to populate a netx tag-field
@@ -164,6 +167,7 @@ def get_unique_group_ref_value(emu_record: ET.Element, group_tag: ET.Element, ch
 
     netx_attr = None
     child_list = []
+    nested_child_tag = None
 
     if child_tag.find('.') > 0:
         nested_tag = child_tag.split(".")
@@ -188,7 +192,10 @@ def get_unique_group_ref_value(emu_record: ET.Element, group_tag: ET.Element, ch
     if len(child_list) > 0:
         netx_attr_raw = " | ".join(child_list)
 
-        netx_attr = convert_pipe_to_unique_commas(netx_attr_raw)
+        if quote == True:
+            netx_attr = convert_pipe_to_unique_commas(netx_attr_raw, True)
+        else:
+            netx_attr = convert_pipe_to_unique_commas(netx_attr_raw, False)
     
     return netx_attr
 
