@@ -74,7 +74,7 @@ def convert_pipe_to_unique_commas(pipe_delim_string:str, quote:bool=True) -> str
             comma_text = '","'.join(comma_list)
             comma_text = '"' + comma_text + '"'
         else:
-            comma_text = ','.join(comma_list)
+            comma_text = ' | '.join(comma_list)
 
     return comma_text
 
@@ -125,6 +125,8 @@ def get_group_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: st
         for tuple in emu_record.find(group_tag): 
             for child_field in tuple:
                 if str(child_field.tag) == child_tag:
+                    if child_field.text is None:
+                        child_field.text = ''
                     child_list.append(str(child_field.text))
 
     if len(child_list) > 0:

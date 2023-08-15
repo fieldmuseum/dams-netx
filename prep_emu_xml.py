@@ -31,7 +31,7 @@ def parse_emu_to_dss(
     prepped_record = dss_schema.media_schema_xml()
 
     # Add NetxFilename field as key / remap AudIdentifier
-    file_ext = re.sub(r'(.*)(\..{2,4}$)', r'\g<2>', emu_record.find('MulIdentifier').text)
+    # file_ext = re.sub(r'(.*)(\..{2,4}$)', r'\g<2>', emu_record.find('MulIdentifier').text)
     prepped_record.find('NetxFilename').text = emu_record.find('AudIdentifier').text + file_ext
 
 
@@ -239,7 +239,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     # Prep DSS output as ET Element -- appendable, similar to a [list]
     dss_records = ET.Element('emultimedia')
 
-    # # # smaller test-set
+    # # smaller test-set
     # emu_records = emu_records[:10]
 
 
