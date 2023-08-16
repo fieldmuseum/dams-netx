@@ -221,6 +221,32 @@ def netx_get_folder_by_path(folder_path:str, data_to_get:list=None, netx_env:str
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
+def netx_create_collection(collection_title:str, asset_id_list:list, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, create a collection of listed assets via the NetX API
+    - Also returns the collections's id, name, and number of assets.
+    - See method help: https://developer.netx.net/#createcollection
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "collection.id",
+            "collection.base",
+            "collection.permissions"
+            ]
+
+    method = 'createCollection'
+
+    params = [
+        {"title": collection_title}, 
+        asset_id_list,
+        {"data": data_to_get}
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
 def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], netx_env:str=None) -> dict:
     '''
     For a given filename, returns a dict that includes NetX asset.id (default).
