@@ -19,8 +19,7 @@ def main():
     # Point the .env 'GROUP_ADD_CSV' variable at the CSV file with the list of assets 
     input_csv = config['GROUP_ADD_CSV']
     group_add_rows = uc.rows(input_csv)
-    asset_id_list = [int(row['assetId']) for row in group_add_rows]
-    print(f'asset_id_list = {asset_id_list}')
+    asset_id_list = [int(row['assetId']) for row in group_add_rows if len(re.findall(r'\D', row['assetId'])) == 0]
 
     collection_time = re.sub(r'\s|\:', '-', str(datetime.now())[:16])
     collection_title = f'API Collection {collection_time}'
