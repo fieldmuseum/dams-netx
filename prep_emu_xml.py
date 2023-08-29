@@ -123,7 +123,7 @@ def parse_emu_to_dss(
                 if grouped_value is None or grouped_value == '':
 
                     if value[1].find('.') > -1:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][1], value[1])
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
 
                     elif type(value[0]) is list:
                         grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
