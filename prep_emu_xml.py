@@ -120,16 +120,17 @@ def parse_emu_to_dss(
                         grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])
 
                 # Only use ExOb main MM tab if MM is only attached on main MM
-                if grouped_value is None or grouped_value == '':
+                elif mm_exob_mul is not None:
+                    if grouped_value is None or grouped_value == '':
 
-                    if value[1].find('.') > -1:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
+                        if value[1].find('.') > -1:
+                            grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
 
-                    elif type(value[0]) is list:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
+                        elif type(value[0]) is list:
+                            grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
 
-                    else:
-                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
+                        else:
+                            grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
