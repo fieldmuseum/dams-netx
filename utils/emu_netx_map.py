@@ -1,6 +1,7 @@
 '''Mapping EMu and NetX fields'''
 
 import csv
+import os
 import re
 from xml.etree import ElementTree as ET
 
@@ -202,12 +203,16 @@ def get_emu_netx_conditions(conditions_csv:str) -> str:
     '''
     # dept_csv = config('CONDITIONS_CSV')
     conditions = []
-    with open(conditions_csv, encoding='utf-8', mode = 'r') as csvfile:
-        reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for r in reader: 
-            if r not in conditions:
-                conditions.append(r)
+    if os.path.isfile(conditions_csv):
+        with open(conditions_csv, encoding='utf-8', mode = 'r') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+            for r in reader: 
+                if r not in conditions:
+                    conditions.append(r)
     
+    else:
+        print(f'No conditions_csv found for CONDITIONS_CSV value: {conditions_csv}')
+        
     # dept_emu = []
     # for row in dept_folders: dept_emu.append(row['emu'])
 
