@@ -26,6 +26,7 @@ def main():
     # Read in NetX XML
     xml_date = datetime.strftime(datetime.now(), '%Y-%-m-%-d')
     netx_assets_to_update = ux.get_input_xml(netx_xml, xml_date)
+    print(f'{netx_assets_to_update.findall("rows")}')
 
 
     # Reformat each asset as an EMu-import CSV row [for now]
@@ -33,53 +34,79 @@ def main():
     prepped_emu_records = []
     # netx_emu_map = emu_netx.get_dss_xml(config)
 
-    for asset_raw in netx_assets_to_update:
+    for dataset in netx_assets_to_update.findall('rows'):
 
-        # TODO - refactor / setup function for loop below
-        # emu_prepped = convert_netx_to_emu(asset_raw)
+        print(f'{dataset} - length = {len(dataset.findall("row"))}')
 
-        asset = asset_raw[0]
+        for asset_raw in dataset.findall('row'):
 
-        emu_prepped = {}
-        print(str(asset.tag))
+            # TODO - refactor / setup function for loop below
+            # emu_prepped = convert_netx_to_emu(asset_raw)
 
-        for asset_attrib in asset:
-            print(asset_attrib.tag)
-            emu_prepped[str(asset_attrib.tag)] = str(asset_attrib.text)
+            asset = asset_raw # [0]
 
-            print(f'{asset_attrib.tag} = {asset_attrib.text}')
-            print(emu_prepped)
+            emu_prepped = {}
+            # print(str(asset.tag))
 
-            if asset_attrib.tag == "DetSubjects" and asset_attrib.text is not None:
-                asset_subjects = asset_attrib.text.split(',')
+            for asset_attrib in asset:
+                # print(asset_attrib.tag)
+                emu_prepped[str(asset_attrib.tag)] = str(asset_attrib.text)
 
-                for subject in asset_subjects:
-                    subject_row = f'DetSubject_tab({asset_subjects.index(subject) + 1})'
-                    emu_prepped[subject_row] = subject
-                
-                emu_prepped.pop('DetSubjects')
+                # print(f'{asset_attrib.tag} = {asset_attrib.text}')
+                print(emu_prepped)
 
-        # 1 - Handle NetX asset without corresponding EMu MM separately
-        if emu_prepped['MulOtherNumber'] is None:
-            netx_no_emu_irn.append(emu_prepped)
-        
-        else:
-            emu_irn = {'irn': emu_prepped['MulOtherNumber']}
-            emu_prepped.pop('MulOtherNumber')
+                # # # # # # # # # # # # # # # # # # # #
+                # TODO - split out function to prep fields by data-type (atomic, table, ref)
+                #      - dynamically reference emu_netx 
+                # # # # # # # # # # # # # # # # # # # #
 
-            print(f'emu_irn type = {type(emu_irn)}')
-            print(f'emu_prepped type = {type(emu_prepped)}')
+                if asset_attrib.tag == "DetSubjects" and asset_attrib.text is not None:
+                    asset_subjects = asset_attrib.text.split(',')
 
-            emu_prepped_ordered = emu_irn | emu_prepped  # {**emu_irn, **emu_prepped}  # 
-            prepped_emu_records.append(emu_prepped_ordered)
+                    for subject in asset_subjects:
+                        subject_row = f'DetSubject_tab({asset_subjects.index(subject) + 1})'
+                        emu_prepped[subject_row] = subject
+                    
+                    emu_prepped.pop('DetSubjects')
 
-            print(emu_prepped_ordered)
+            # 1 - Handle NetX asset without corresponding EMu MM separately
+            if asset_raw.find('MulOtherNumber').text is None:
+                netx_no_emu_irn.append(emu_prepped)
+            
+            else:
 
-        # 2 - Compare NetX / EMu fields
-        # # Use netx/emu map (syncedMetadata.xml) to get corresponding EMu / NetX fields
+                # # # # # # # # # # # # # # # # # # # #
+                # TODO - split out function to distinguish record inserts vs updates:
+                # # # # # # # # # # # # # # # # # # # #
+
+                emu_irn = {'irn': asset_raw.find('MulOtherNumber').text}
+                if 'MulOtherNumber' in emu_prepped:
+                    emu_prepped.pop('MulOtherNumber')
+
+                print(f'emu_irn type = {type(emu_irn)}')
+                print(f'emu_prepped = {emu_prepped}')
+
+                emu_prepped_ordered = emu_irn | emu_prepped  # {**emu_irn, **emu_prepped}  # 
+                prepped_emu_records.append(emu_prepped_ordered)
+
+                print(emu_prepped_ordered)
+
+            # 2 - Compare NetX / EMu fields
+            # # Use netx/emu map (syncedMetadata.xml) to get corresponding EMu / NetX fields
 
 
     # Output EMu-import CSV
+
+    if len(prepped_emu_records) > 0:
+        uc.write_list_of_dict_to_csv(input_records=prepped_emu_records, 
+                                    field_names=prepped_emu_records[0].keys(),
+                                    output_csv_file_name="testing/netx_to_emu_updates.csv")
+
+    if len(netx_no_emu_irn) > 0:
+        uc.write_list_of_dict_to_csv(input_records=netx_no_emu_irn, 
+                                    field_names=netx_no_emu_irn[0].keys(),
+                                    output_csv_file_name="testing/netx_to_emu_new.csv")
+
 
     # get field names
     if len(prepped_emu_records) > 0:
