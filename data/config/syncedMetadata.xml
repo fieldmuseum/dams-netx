@@ -2,30 +2,29 @@
 <metadatasync>
 
 
-        <!-- ===================== -->
-        <!-- XML Sync Task Example -->
-        <!-- ===================== -->
+		<!-- ===================== -->
+		<!-- XML Sync Task Example -->
+		<!-- ===================== -->
 
-        <sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="false">
-                <!-- example using a NetX Folder to identify the XML -->
-            <source name="XML Source" type="xml"
-            category_id="203"
-            container_type="elements"
-            row_xpath="//data"
-            delete_data_file="false"
-            file_to_process="newest">
+		<sync type="scalar" log="debug" name="XML Metadata sync" include_in_default="false">
+				<!-- example using a NetX Folder to identify the XML -->
+			<source name="XML Source" type="xml"
+			category_id="203"
+			container_type="elements"
+			row_xpath="//data"
+			delete_data_file="false"
+			file_to_process="newest">
 
-                <!-- example using a local filesystem folder to identify the XML
-                <source name="XML Source" type="xml" filepath="/opt/netx/xml/teams.xml" row_xpath="//row" container_type="attributes" delete_data_file="false" file_to_process="newest">
-                -->
+				<!-- example using a local filesystem folder to identify the XML
+				<source name="XML Source" type="xml" filepath="/opt/netx/xml/teams.xml" row_xpath="//row" container_type="attributes" delete_data_file="false" file_to_process="newest">
+				-->
 
-                <field name="key_field" column="NetxFilename"/>
-
-                <field name="field_01" column="MulTitle"/>
-                <field name="field_02" column="DetSubject_tab"/>
+				<field name="key_field" column="NetxFilename"/>
+				<field name="field_01" column="MulTitle"/>
+				<field name="field_02" column="DetSubject_tab"/>
 				<field name="field_03" column="AudAssociatedSpecimen"/>
-                <field name="field_04" column="AudAccessURI"/>
-                <field name="field_05" column="irn"/>
+				<field name="field_04" column="AudAccessURI"/>
+				<field name="field_05" column="irn"/>
 				<field name="field_06" column="MulDescription"/>
 				<field name="field_07" column="DetMediaRightsRef_irn"/>
 				<field name="field_08" column="DetMediaRightsRef_Summary"/>
@@ -74,92 +73,104 @@
 				<field name="field_51" column="DetResourceDetailDate_Created"/>
 				<field name="field_52" column="DetResourceDetailsDate0"/>
 				<field name="field_53" column="DetResourceDetailsDescription_tab"/>
+				<field name="field_54" column="SupIdentifier"/>
+				<field name="field_55" column="SupHeight"/>
+				<field name="field_56" column="SupWidth"/>
+				<field name="field_57" column="SupFileSize"/>
+				<field name="field_58" column="ExOb_Mul_InvNo"/>
+				<field name="field_59" column="ExOb_Event"/>
+				<field name="field_60" column="ExOb_Height"/>
+				<field name="field_61" column="ExOb_Width"/>
+				<field name="field_62" column="ExOb_Depth"/>
+				<field name="field_63" column="ExOb_Weight"/>
 				<!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
 
-				<!--
-				<field name="field_!!" column=""/>
-				EveEventsRef_tab_irn
-				EveEventsRef_tab_GUID
-				EveEventsRef_tab_SummaryData
-				-->
+		</source>
 
-        </source>
-
-            <destination type="DAM">
-            <records name="NetX Update" type="asset">
+			<destination type="DAM">
+			<records name="NetX Update" type="asset">
 			
-		    <link field="key_field" attribute="file" />
-				<map field="field_01" attribute="Title" skip_null="true"/>
-                <map field="field_02" attribute="Subjects" skip_null="true"/>
-				<map field="field_03" attribute="Associated Specimens" skip_null="true"/>
-                <map field="field_04" attribute="Access URI" skip_null="true"/>
-				<map field="field_05" attribute="IRN" skip_null="true"/>
-				<map field="field_06" attribute="Description" skip_null="true"/>
-				<map field="field_07" attribute="Rights record IRN" skip_null="true"/>
-				<map field="field_08" attribute="Rights Summary" skip_null="true"/>
-				<map field="field_09" attribute="Creator" skip_null="true"/>
-				<map field="field_10" attribute="Creator IRN" skip_null="true"/>
-				<map field="field_11" attribute="Creator Role" skip_null="true"/>
-				<map field="field_12" attribute="Citation" skip_null="true"/>
-				<map field="field_13" attribute="Record Status" skip_null="true"/>
-				<map field="field_14" attribute="Security Department" skip_null="true"/>
-				<map field="field_15" attribute="Publish on Internet" skip_null="true"/>
-				<map field="field_16" attribute="Publish on Intranet" skip_null="true"/>
-				<map field="field_17" attribute="EMu Filename" skip_null="true"/>
-				<map field="field_18" attribute="Taxon Coverage" skip_null="true"/>
-				<map field="field_19" attribute="Related Geography" skip_null="true"/>
-				<map field="field_20" attribute="Associated Observations" skip_null="true"/>
-				<map field="field_21" attribute="Catalog Numbers" skip_null="true"/>
-				<map field="field_22" attribute="Common Name" skip_null="true"/>
-				<map field="field_23" attribute="Sex" skip_null="true"/>
-				<map field="field_24" attribute="Life Stage" skip_null="true"/>
-				<map field="field_25" attribute="Subject Orientation" skip_null="true"/>
-				<map field="field_26" attribute="Subject Part" skip_null="true"/>
-				<map field="field_27" attribute="Capture Device" skip_null="true"/>
-				<map field="field_28" attribute="Funding Attribution" skip_null="true"/>
-				<map field="field_29" attribute="Date Inserted in EMu" skip_null="true"/>
-				<map field="field_30" attribute="Date Modified in EMu" skip_null="true"/>
-				<map field="field_31" attribute="Inserted By" skip_null="true"/>
-				<map field="field_32" attribute="Modified By" skip_null="true"/>
-				<map field="field_33" attribute="Related Media Notes" skip_null="true"/>
-				<map field="field_34" attribute="Parent Media Summary" skip_null="true"/>
-				<map field="field_35" attribute="Related Media Summary" skip_null="true"/>
-				<map field="field_36" attribute="Media Relationship Type" skip_null="true"/>
-				<map field="field_37" attribute="Rights record Owner" skip_null="true"/>
-				<map field="field_38" attribute="Rights License" skip_null="true"/>
-				<map field="field_39" attribute="Rights Type" skip_null="true"/>
-				<map field="field_40" attribute="Parent Media Identifier" skip_null="true"/>
-				<map field="field_41" attribute="Identifier" skip_null="true"/>
-				<map field="field_42" attribute="Related Object Catalogs" skip_null="true"/>
-				<map field="field_43" attribute="Related Object Departments" skip_null="true"/>
-				<map field="field_44" attribute="Related Events" skip_null="true"/>
-				<map field="field_45" attribute="Related Event URLs" skip_null="true"/>
-				<map field="field_46" attribute="Other Number" skip_null="true"/>
-				<map field="field_47" attribute="Other Number Source" skip_null="true"/>
-				<map field="field_48" attribute="Repository" skip_null="true"/>
-				<map field="field_49" attribute="Source" skip_null="true"/>
-				<map field="field_50" attribute="Media Form" skip_null="true"/>
-				<map field="field_51" attribute="Date Created" skip_null="true"/>
-				<map field="field_52" attribute="Other Dates" skip_null="true"/>
-				<map field="field_53" attribute="Other Date Types" skip_null="true"/>
+			<link field="key_field" attribute="file" />
+				<map field="field_01" attribute="Title" skip_null="false"/>
+				<map field="field_02" attribute="Subjects" skip_null="false"/>
+				<map field="field_03" attribute="Associated Specimens" skip_null="false"/>
+				<map field="field_04" attribute="Access URI" skip_null="false"/>
+				<map field="field_05" attribute="IRN" skip_null="false"/>
+				<map field="field_06" attribute="Description" skip_null="false"/>
+				<map field="field_07" attribute="Rights record IRN" skip_null="false"/>
+				<map field="field_08" attribute="Rights Summary" skip_null="false"/>
+				<map field="field_09" attribute="Creator" skip_null="false"/>
+				<map field="field_10" attribute="Creator IRN" skip_null="false"/>
+				<map field="field_11" attribute="Creator Role" skip_null="false"/>
+				<map field="field_12" attribute="Citation" skip_null="false"/>
+				<map field="field_13" attribute="Record Status" skip_null="false"/>
+				<map field="field_14" attribute="Security Department" skip_null="false"/>
+				<map field="field_15" attribute="Publish on Internet" skip_null="false"/>
+				<map field="field_16" attribute="Publish on Intranet" skip_null="false"/>
+				<map field="field_17" attribute="EMu Filename" skip_null="false"/>
+				<map field="field_18" attribute="Taxon Coverage" skip_null="false"/>
+				<map field="field_19" attribute="Related Geography" skip_null="false"/>
+				<map field="field_20" attribute="Associated Observations" skip_null="false"/>
+				<map field="field_21" attribute="Catalog Numbers" skip_null="false"/>
+				<map field="field_22" attribute="Common Name" skip_null="false"/>
+				<map field="field_23" attribute="Sex" skip_null="false"/>
+				<map field="field_24" attribute="Life Stage" skip_null="false"/>
+				<map field="field_25" attribute="Subject Orientation" skip_null="false"/>
+				<map field="field_26" attribute="Subject Part" skip_null="false"/>
+				<map field="field_27" attribute="Capture Device" skip_null="false"/>
+				<map field="field_28" attribute="Funding Attribution" skip_null="false"/>
+				<map field="field_29" attribute="Date Inserted in EMu" skip_null="false"/>
+				<map field="field_30" attribute="Date Modified in EMu" skip_null="false"/>
+				<map field="field_31" attribute="Inserted By" skip_null="false"/>
+				<map field="field_32" attribute="Modified By" skip_null="false"/>
+				<map field="field_33" attribute="Related Media Notes" skip_null="false"/>
+				<map field="field_34" attribute="Parent Media Summary" skip_null="false"/>
+				<map field="field_35" attribute="Related Media Summary" skip_null="false"/>
+				<map field="field_36" attribute="Media Relationship Type" skip_null="false"/>
+				<map field="field_37" attribute="Rights record Owner" skip_null="false"/>
+				<map field="field_38" attribute="Rights License" skip_null="false"/>
+				<map field="field_39" attribute="Rights Type" skip_null="false"/>
+				<map field="field_40" attribute="Parent Media Identifier" skip_null="false"/>
+				<map field="field_41" attribute="Identifier" skip_null="false"/>
+				<map field="field_42" attribute="Related Object Catalogs" skip_null="false"/>
+				<map field="field_43" attribute="Related Object Departments" skip_null="false"/>
+				<map field="field_44" attribute="Related Events" skip_null="false"/>
+				<map field="field_45" attribute="Related Event URLs" skip_null="false"/>
+				<map field="field_46" attribute="Other Number" skip_null="false"/>
+				<map field="field_47" attribute="Other Number Source" skip_null="false"/>
+				<map field="field_48" attribute="Repository" skip_null="false"/>
+				<map field="field_49" attribute="Source" skip_null="false"/>
+				<map field="field_50" attribute="Media Form" skip_null="false"/>
+				<map field="field_51" attribute="Date Created" skip_null="false"/>
+				<map field="field_52" attribute="Other Dates" skip_null="false"/>
+				<map field="field_53" attribute="Other Date Types" skip_null="false"/>
+				<map field="field_54" attribute="Supplementary File Name" skip_null="false"/>
+				<map field="field_55" attribute="Supp Height" skip_null="false"/>
+				<map field="field_56" attribute="Supp Width" skip_null="false"/>
+				<map field="field_57" attribute="Supp File Size" skip_null="false"/>
+				<map field="field_58" attribute="Related Exhibit Object" skip_null="false"/>
+				<map field="field_59" attribute="Related Exhibit Event" skip_null="false"/>
+				<map field="field_60" attribute="Exhibit Object Height" skip_null="false"/>
+				<map field="field_61" attribute="Exhibit Object Width" skip_null="false"/>
+				<map field="field_62" attribute="Exhibit Object Depth" skip_null="false"/>
+				<map field="field_63" attribute="Exhibit Object Weight" skip_null="false"/>
 
-				<!--map field="field_!!" attribute="Data Source" skip_null="true"/-->
-				<!--map field="field_!!" attribute="" skip_null="true"/-->
+				<!--map field="field_!!" attribute="Data Source" skip_null="false"/-->
 
-            </records>
-            </destination>
+			</records>
+			</destination>
 
-        </sync>
+		</sync>
 
 
 <!-- AutoTask
 
-    <task name="XML metadata sync">
-        <matchCriteria type="and">
-            <criteria type="periodic" interval="daily" hour="22" minute="00"/>
-        </matchCriteria>
-        <customJob className="com.netxposure.products.imageportal.module.metadata.sync.job.MetadataSyncJob" syncTaskNames="XML Metadata Sync"/>
-    </task>
+	<task name="XML metadata sync">
+		<matchCriteria type="and">
+			<criteria type="periodic" interval="daily" hour="22" minute="00"/>
+		</matchCriteria>
+		<customJob className="com.netxposure.products.imageportal.module.metadata.sync.job.MetadataSyncJob" syncTaskNames="XML Metadata Sync"/>
+	</task>
 
 -->
 
@@ -167,37 +178,65 @@
 		<!-- The period string may contain spaces between components, so either of the following is valid: "2d10h30m" or "2d 10h 30m" -->
 		<!--  try category_id="508" vs mod_date_period="1d" attribute in source tag / in next line -->
  		<source type="DAM" name="netx dam" objectType="asset" modDatePeriod="1d">
+			<field name="field_irn" column="IRN"/>
 			<field name="field_identifier" column="Identifier"/>
+			<field name="field_netxid" column="assetId"/>
 			<field name="field_title" column="Title"/>
 			<field name="field_description" column="Description"/>
+			<field name="field_rightsirn" column="Rights IRN"/>
 			<field name="field_rights" column="Rights Summary"/>
 			<field name="field_subjects" column="Subjects"/>
-			<field name="field_assetId" column="assetId"/>
-			<!-- field name="field_netxid" column="assetId"/>
-			<field name="field_othernumber" column="Other Number"/>
-			<field name="field_othernumbersource" column="Other Number Source"/>
-			<field name="field_modified" column="modified"/>
-			<field name="field_checksum" column="checksum"/ -->
+			<field name="field_othnum" column="Other Number"/>
+			<field name="field_othnumsource" column="Other Number Source"/>
+			<field name="field_creatorirn" column="Creator IRN"/>
+			<field name="field_creator" column="Creator"/>
+			<field name="field_creatorrole" column="Creator Role"/>
+			<field name="field_depts" column="Security Department"/>
+			<field name="field_public" column="Publish on Internet"/>
+            <field name="field_recstatus" column="Record Status"/>
+			<field name="field_subjorient" column="Subject Orientation"/>
+			<field name="field_subjpart" column="Subject Part"/>
+			<field name="field_capdevice" column="Capture Device"/>
+			<field name="field_source" column="Source"/>
+			<field name="field_datecreated" column="Date Created"/>
+			<field name="field_date" column="Other Dates"/>
+			<field name="field_datedescrip" column="Other Date Types"/>
+			<field name="field_mediaform" column="Media Form"/>
+			<field name="field_repository" column="Repository"/>
 		</source>
 		<destination type="xml">
 			<!-- NOTE: Each records block would result in its own XML file -->
 			<!-- NOTE: Use $TIMESTAMP in the filename to include date/time in YYYYMMDDHHSS format -->
 			<!-- Alternative output filepath="/home/fmit/xml/netx_to_emu_$TIMESTAMP.xml" -->
 			<records name="EMu_Multimedia" container_type="elements" filepath="/opt/netx/xml/netx_to_emu_$TIMESTAMP.xml">
-			<!-- NOTE: See metadata sync docs in confluence for discussion of container_type (attributes vs. elements) -->
+				<!-- NOTE: See metadata sync docs in confluence for discussion of container_type (attributes vs. elements) -->
 				<!-- NOTE: There is no link element, we're just dumping records -->
 				<!-- NOTE: In this context attribute is the name of the data field in the XML (either the XML element or the XML attribute, depending on what is specified in the container_type setting -->
-				<map field="field_identifier" attribute="AudIdentifier"/>
+				<map field="field_irn" attribute="irn"/>
+				<map field="field_identifier" attribute="AdmGUIDValue"/>
+				<map field="field_netxid" attribute="MulOtherNumber_NetX"/>
 				<map field="field_title" attribute="MulTitle"/>
-				<map field="field_rights" attribute="DetMediaRightsRef_Summary"/>
 				<map field="field_description" attribute="MulDescription"/>
-				<map field="field_subjects" attribute="DetSubjects"/>
-				<map field="field_assetId" attribute="MulOtherNumber"/>
-				<!-- map field="field_netxid" attribute="MulOtherNumber_tab_1"/>
-				<map field="field_othernumber" attribute="MulOtherNumber_tab_n"/>
-				<map field="field_othernumbersource" attribute="MulOtherNumberSource_tab_n"/>
-				<map field="field_modified" attribute="DetResourceDetailsDate0"/>
-				<map field="field_checksum" attribute="ChaMd5Sum"/ -->
+				<map field="field_rightsirn" attribute="DetMediaRightsRef_irn"/>
+				<map field="field_rights" attribute="DetMediaRightsRef_Summary"/>
+				<map field="field_subjects" attribute="DetSubject_tab"/>
+				<map field="field_othnum" attribute="MulOtherNumber"/>
+				<map field="field_othnumsource" attribute="MulOtherNumberSource"/>
+				<map field="field_creatorirn" attribute="MulMultimediaCreatorRef_tab_irn"/>
+				<map field="field_creator" attribute="MulMultimediaCreatorRef_tab_Summary"/>
+				<map field="field_creatorrole" attribute="MulMultimediaCreatorRole_tab"/>
+				<map field="field_depts" attribute="SecDepartment"/>
+				<map field="field_public" attribute="AdmPublishOnWebNoPassword"/>
+				<map field="field_recstatus" attribute="SecRecordStatus"/>
+				<map field="field_subjorient" attribute="AudSubjectOrientation_tab"/>
+				<map field="field_subjpart" attribute="AudSubjectPart_tab"/>
+				<map field="field_capdevice" attribute="AudCaptureDevice"/>
+				<map field="field_source" attribute="DetSource"/>
+				<map field="field_datecreated" attribute="DetResourceDetailDate_Created"/>
+				<map field="field_date" attribute="DetResourceDetailsDate0"/>
+				<map field="field_datedescrip" attribute="DetResourceDetailsDescription_tab"/>
+				<map field="field_mediaform" attribute="ChaMediaForm"/>
+				<map field="field_repository" attribute="ChaRepository_tab"/>
 			</records>
 		</destination>
 
