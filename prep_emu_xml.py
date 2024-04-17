@@ -110,6 +110,7 @@ def parse_emu_to_dss(
 
                 # Loop through prioritized group first (e.g. 'Install' tab vs main 'MM' tab):
                 if mm_exob_ins is not None:
+                    
                     if value[1].find('.') > -1:
                         grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][0], value[1])
 
@@ -119,18 +120,18 @@ def parse_emu_to_dss(
                     else:
                         grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])
 
-                # Only use ExOb main MM tab if MM is only attached on main MM
-                elif mm_exob_mul is not None:
-                    if grouped_value is None or grouped_value == '':
+                # Only use ExOb main MM tab if MM is only attached on main MM 
+                #   (i.e. if grouped_value is still NONE after looping thru install MM fields)
 
-                        if value[1].find('.') > -1:
-                            grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
+                if grouped_value is None or grouped_value == '':
+                    if value[1].find('.') > -1:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
 
-                        elif type(value[0]) is list:
-                            grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
+                    elif type(value[0]) is list:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
 
-                        else:
-                            grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
+                    else:
+                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
