@@ -178,3 +178,4 @@ testing/
 *.xml
 !data/*.xml
 !data/*/*.xml
+!data/*/*/*/*.xml
