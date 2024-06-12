@@ -242,7 +242,87 @@ def netx_create_collection(collection_title:str, asset_id_list:list, data_to_get
         asset_id_list,
         {"data": data_to_get}
         ]
-    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_collection(collection_id:str=None, data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, create a collection of listed assets via the NetX API
+    - Also returns the collections's id, name, and number of assets.
+    - See method help: https://developer.netx.net/#createcollection
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "collection.id",
+            "collection.base",
+            "collection.permissions"
+            ]
+
+    method = 'getCollection'
+
+    params = [ 
+        collection_id,
+        {"data": data_to_get}
+        ]
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_collections(data_to_get:list=None, netx_env:str=None) -> dict:
+    '''
+    In NetX, get user's readable collections via the NetX API
+    - Also returns the collections's id, name, and number of assets.
+    - See method help: https://developer.netx.net/#getcollections
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "collection.id",
+            "collection.base",
+            # "collection.permissions"
+            ]
+
+    method = 'getCollections'
+
+    params = [
+        {"data": data_to_get}
+        ]
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_update_collection(
+        collection_id:int,
+        collection_title:str,
+        asset_id_list:list,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    In NetX, update a collection via the NetX API
+    - Also returns the collections's id, name, and number of assets.
+    - See method help: https://developer.netx.net/#updatecollection
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "collection.id",
+            "collection.base",
+            # "collection.permissions"
+            ]
+
+    method = 'updateCollection'
+
+    params = [
+        {
+            "id": collection_id,
+            "title": collection_title
+        }, 
+        asset_id_list,
+        {"data": data_to_get}
+        ]
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
@@ -426,9 +506,9 @@ def netx_get_asset_by_range(
     if check is not None:
         if 'result' in check.keys():
             param_size = check['result']['size']
-            if param_size > 200:
+            if param_size > 1000:
                 print(f'adjusting orig param_size to 200; full results size is {param_size}')
-                param_size = 200
+                param_size = 1000
             params[1]['page']['size'] = param_size
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_test)
@@ -613,6 +693,38 @@ def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_e
     # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
+
+
+def netx_import_view(asset_id:int,
+                     filepath:str,
+                     filename:str,
+                     viewname:str=None, 
+                     description:str=None, 
+                     netx_env:str=None) -> dict:
+    '''
+    In NetX, Imports a new view and adds it to an existing asset via the NetX API.
+    Returns its NetX asset ID if succesful.(?)
+    - Also returns the view's asset-id, name, filename, and folders.
+    - See method help: https://developer.netx.net/#import-view
+    '''
+
+    uri_suffix = f'import/asset/{asset_id}/view'
+
+    method = None  # 'addAssetToFolder'
+
+    file_data = {
+        # 'file':open(filepath + filename, 'rb'),
+        'fileName':filename,
+        'viewName':viewname,
+        'description':description
+    }
+
+    file_to_upload = filepath+filename
+
+    with open(filepath + filename, 'rb') as f:
+        r = netx_api_make_request(method=method, netx_env=netx_env, uri_suffix=uri_suffix, body=file_data, file=file_to_upload)
+
+    return r # netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix) 
 
 
 def netx_get_groups_by_user(user_id:str, paging:list=[0,30], netx_env:str=None) -> dict:
