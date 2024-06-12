@@ -1,6 +1,5 @@
 '''Remove assets via NetX API if they were unpublished/deleted in EMu'''
 
-import glob
 import logging
 import time
 import xml.etree.ElementTree as ET
@@ -134,42 +133,15 @@ def main():
         logging.info(delete_input_path)
 
 
+        # Prep input-XML for unpub'ed & deleted IRNs
         unpub_xml = ux.get_input_xml(unpub_input, input_date)
         unpub_records_to_remove = get_irns_to_remove(unpub_xml)
 
         delete_xml = ux.get_input_xml(delete_input, input_date)
         delete_records_to_remove = get_irns_to_remove(delete_xml)
 
-        # if len(glob.glob(unpub_input)) > 0:
-        #     unpub_file_log = f'Input unpublished-MM XML file = {glob.glob(unpub_input)[0]}'
-        #     print(unpub_file_log)
-        #     logging.info(unpub_file_log)
 
-        #     # Import Event & Catalog exports too
-        #     unpub_xml = ET.ElementTree().parse(glob.glob(unpub_input)[0])
-        #     unpub_records_to_remove = get_irns_to_remove(unpub_xml)
-        
-        # else:
-        #     log_no_unpub = f'No input XML for NetX_audit_unpublished_MM on {input_date}'
-        #     print(log_no_unpub)
-        #     logging.info(log_no_unpub)
-
-
-        # if len(glob.glob(delete_input)) > 0:
-        #     delete_file_log = f'Input deleted-MM XML file = {glob.glob(delete_input)[0]}'
-        #     print(delete_file_log)
-        #     logging.info(delete_file_log)
-
-        #     # Import Event & Catalog exports too
-        #     delete_xml = ET.ElementTree().parse(glob.glob(delete_input)[0])
-        #     delete_records_to_remove = get_irns_to_remove(delete_xml)
-
-        # else:
-        #     log_no_delete = f'No input XML for NetX_audit_deleted_MM on {input_date}'
-        #     print(log_no_delete)
-        #     logging.info(log_no_delete)
-
-
+        # Get existing NetX 'Remove_from_NetX' folder ID
         remove_folder_data = un.netx_get_folder_by_path(
             folder_path="Remove_from_NetX",
             data_to_get=['folder.id'],
