@@ -248,9 +248,9 @@ def netx_create_collection(collection_title:str, asset_id_list:list, data_to_get
 
 def netx_get_collection(collection_id:str=None, data_to_get:list=None, netx_env:str=None) -> dict:
     '''
-    In NetX, create a collection of listed assets via the NetX API
+    In NetX, get ONE collection by its ID via the NetX API
     - Also returns the collections's id, name, and number of assets.
-    - See method help: https://developer.netx.net/#createcollection
+    - See method help: https://developer.netx.net/#getcollection
     '''
 
     if data_to_get==None:
@@ -272,7 +272,7 @@ def netx_get_collection(collection_id:str=None, data_to_get:list=None, netx_env:
 
 def netx_get_collections(data_to_get:list=None, netx_env:str=None) -> dict:
     '''
-    In NetX, get user's readable collections via the NetX API
+    In NetX, get ALL of a user's readable collections via the NetX API
     - Also returns the collections's id, name, and number of assets.
     - See method help: https://developer.netx.net/#getcollections
     '''
@@ -321,6 +321,32 @@ def netx_update_collection(
             "title": collection_title
         }, 
         asset_id_list,
+        {"data": data_to_get}
+        ]
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_assets_by_collection(
+        collection_id:int,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    In NetX, update a collection via the NetX API
+    - Also returns the collections's id, name, and number of assets.
+    - See method help: https://developer.netx.net/#getassetsbycollection
+    '''
+
+    if data_to_get==None:
+        data_to_get = [
+            "asset.id"
+            ]
+
+    method = 'getAssetsByCollection'
+
+    params = [
+        {"collectionId": collection_id}, 
         {"data": data_to_get}
         ]
 
