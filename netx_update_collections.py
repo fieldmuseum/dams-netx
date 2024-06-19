@@ -41,10 +41,13 @@ def check_asset_in_netx(emu_irn:str, live_or_test:str):
     return asset_id
 
 
-def get_groups_to_update(xml_element:ET.ElementTree) -> list:
+def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
     '''given xml records (as an ElementTree), return a list of Group-records & grouped MM assetIDs'''
 
     groups_to_update = []
+
+    # smaller set
+    xml_element = xml_element[:5]
 
     for record in xml_element:
         # New record
@@ -69,19 +72,28 @@ def get_groups_to_update(xml_element:ET.ElementTree) -> list:
 
                     mm_irn_list = []
                     netx_id_list = []
+
+                    # smaller test-set
+                    elem = elem[:4]
+                    print(f'LEN OF ELEM = {len(elem)}')
                     
                     for row in elem:
-                        if row.attrib['name'] == 'Keys' and row.text:
-                            print(f'MM irn = {row.text}')
-                            mm_irn_list.append(row.text)
+                        # print(f'row = {row}')
+                        # print(f'row text = {row.text}')
+                        if row.tag == 'tuple':
+                            for subrow in row:
+                                if subrow.attrib['name'] == 'Keys' and subrow.text:
+                                    print(f'MM irn = {subrow.text}')
+                                    mm_irn_list.append(subrow.text)
 
-                            # retrieve NetX assetID by 'IRN' attribute
-                            netx_id = check_asset_in_netx(
-                                emu_irn = row.text
-                                )
-                            
-                            if netx_id is not None:
-                                netx_id_list.append(netx_id)
+                                    # retrieve NetX assetID by 'IRN' attribute
+                                    netx_id = check_asset_in_netx(
+                                        emu_irn = subrow.text,
+                                        live_or_test=live_or_test
+                                        )
+                                    
+                                    if netx_id is not None:
+                                        netx_id_list.append(netx_id)
                     
                     prepped_record['mm_irn_list'] = mm_irn_list
                     prepped_record['netx_id_list'] = netx_id_list
@@ -112,10 +124,8 @@ def main():
         config['ORIGIN_PATH_XML'],
         config['TEST_ORIGIN_PATH_XML']
         )
-
-    # setup list of groups to update    
-    groups_to_update = []
     
+
     try:
 
         # Prep input-XML for groups       
@@ -126,44 +136,78 @@ def main():
 
         # Get list of EMu group records
         groups_xml = ux.get_input_xml(groups_input, input_date)
-        groups_to_check_in_netx = get_groups_to_update(groups_xml)
+        groups_to_check_in_netx = get_groups_to_update(groups_xml, live_or_test)
 
         # Get existing NetX collections IDs & titles
         netx_group_data = un.netx_get_collections()
         
         if 'result' not in netx_group_data:
-            print(f'ERROR - {netx_group_data}')
+            print(f'ERROR with netx_get_collections - {netx_group_data}')
             logging.error(netx_group_data)
             return
 
         else:
            netx_group_list = netx_group_data['result']
-           netx_group_title_list = [row['title'] for row in netx_group_list]
+           # netx_group_title_list = [row['title'] for row in netx_group_list]
 
 
-        # # smaller test-set
-        # unpub_xml = unpub_xml[:10]
-        # delete_xml = delete_xml[:10]
+        # smaller test-set
+        groups_to_check_in_netx = groups_to_check_in_netx[:2]
 
         # Add assets to folders
+
         for emu_row in groups_to_check_in_netx:
 
-            for netx_row in netx_group_list:
+            exists_in_netx = False
+
+            for netx_row in netx_group_list['results']:
             
-                if f"EMu - {emu_row['title']}" == netx_row['title']:
+                if f"EMu - {emu_row['title']} - {emu_row['irn']}" == netx_row['title']:
 
-                    un.netx_update_collection(
+                    print(f'emu_row = {emu_row["title"]}')
+                    print(f'netx_row = {netx_row["title"]}')
+
+                    updated_coll = un.netx_update_collection(
                         collection_id = netx_row['id'],
-                        collection_title = f"EMu - {emu_row['title']}",
-                        asset_id_list = emu_row['netx_id_list']
+                        collection_title = f"EMu - {emu_row['title']} - {emu_row['irn']}",
+                        asset_id_list = emu_row['netx_id_list'],
+                        data_to_get = None,
+                        netx_env = live_or_test
                         )
-                
-                else:
+                    
+                    if 'result' not in updated_coll:
+                        print(f'ERROR with netx_update_collection - {updated_coll}')
+                        logging.error(updated_coll)
+                        return
 
-                    un.netx_create_collection(
-                        collection_title = f"EMu - {emu_row['title']}",
-                        asset_id_list = emu_row['netx_id_list']
-                        )
+                    else:
+                        updated_coll_id = updated_coll['result']['id']                  
+                        print(f'Updated existing collection - collId {updated_coll_id}')
+                    
+                    exists_in_netx = True
+
+            if exists_in_netx is False:
+
+                print(f"Adding:  EMu - {emu_row['title']} - {emu_row['irn']}")
+                print(emu_row['netx_id_list'])
+                
+                new_coll = un.netx_create_collection(
+                    collection_title = f"EMu - {emu_row['title']} - {emu_row['irn']}",
+                    asset_id_list = emu_row['netx_id_list'],
+                    data_to_get = None,
+                    netx_env = live_or_test
+                    )
+                
+                if 'result' not in new_coll:
+                    print(f'ERROR with netx_create_collection - {new_coll}')
+                    logging.error(new_coll)
+                    return
+
+                else:
+                    new_coll_id = new_coll['result']['id']                  
+                    print(f'Added new collection - collId {new_coll_id}')
+
+                # print(f'Added new collection -  {new_coll}')
 
         # except KeyError as err:
         #     log_err = f'ERROR - {remove_folder_data} -- {err}'
