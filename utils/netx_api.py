@@ -191,7 +191,6 @@ def netx_add_asset_to_folder(asset_id:int, folder_id:int, data_to_get:list=None,
         folder_id,
         {"data": data_to_get}
         ]
-    # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
@@ -289,6 +288,30 @@ def netx_get_collections(data_to_get:list=None, netx_env:str=None) -> dict:
     params = [
         {"data": data_to_get}
         ]
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_collections_by_user(
+        user_id:int,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    In NetX, get collections to which a user has at least Viewer access
+    - Also returns the collections's id, name, number of assets, permissions.
+    - See method help: https://developer.netx.net/#getcollectionsbyuser
+    '''
+
+    # if data_to_get==None:
+    #     data_to_get = [
+    #         "collection.id",
+    #         "collection.base",
+    #         "collection.permissions"
+    #         ]
+
+    method = 'getCollectionsByUser'
+
+    params = [user_id, None]
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
@@ -797,5 +820,31 @@ def netx_get_users_by_group(group_id:str, paging:list=[0,70], netx_env:str=None)
         }
         ]
     # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_self(netx_env:str=None) -> dict:
+    '''
+    In NetX, gets user id of current api user
+    - See method help: https://developer.netx.net/#getself
+    '''
+
+    # if data_to_get==None:
+    #     data_to_get = [
+    #         "asset.id",
+    #         "asset.base",
+    #         "asset.file",
+    #         "asset.folders"
+    #         ]
+
+    method = 'getSelf'
+
+    params = [
+        None
+        # asset_id, 
+        # folder_id,
+        # {"data": data_to_get}
+        ]
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
