@@ -46,14 +46,18 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
 
     groups_to_update = []
 
-    # smaller set
-    xml_element = xml_element[:5]
+    # # smaller set
+    # xml_element = xml_element[:5]
 
     for record in xml_element:
         # New record
 
         prepped_record = {}
         for elem in record:
+
+            # if elem.attrib['name'] == 'GroupType':
+            #     if elem.text != 'Static':
+            #         continue
 
             # Get the Group IRN and Title
             if elem.tag == 'atom' and elem.text:
@@ -63,49 +67,52 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
                 if elem.attrib['name'] == 'GroupName':
                     prepped_record['title'] = elem.text
 
-                    # TODO - check existing assets in group
-
+                if elem.attrib['name'] == 'GroupType':
+                    prepped_record['type'] = elem.text
+                                        
 
             # Get a list of MM_irns in the group
             if elem.tag == 'table' and elem.text:
-                if elem.attrib['name'] == 'Keys_tab':
+                if prepped_record['type'] == 'Static':
+                    if elem.attrib['name'] == 'Keys_tab':
 
-                    mm_irn_list = []
-                    netx_id_list = []
+                        mm_irn_list = []
+                        netx_id_list = []
 
-                    # smaller test-set
-                    elem = elem[:4]
-                    print(f'LEN OF ELEM = {len(elem)}')
-                    
-                    for row in elem:
-                        # print(f'row = {row}')
-                        # print(f'row text = {row.text}')
-                        if row.tag == 'tuple':
-                            for subrow in row:
-                                if subrow.attrib['name'] == 'Keys' and subrow.text:
-                                    print(f'MM irn = {subrow.text}')
-                                    mm_irn_list.append(subrow.text)
+                        # # smaller test-set
+                        # elem = elem[:6]
+                        print(f'LEN OF ELEM = {len(elem)}')
+                        
+                        for row in elem:
+                            # print(f'row = {row}')
+                            # print(f'row text = {row.text}')
+                            if row.tag == 'tuple':
+                                for subrow in row:
+                                    if subrow.attrib['name'] == 'Keys' and subrow.text:
+                                        print(f'MM irn = {subrow.text}')
+                                        mm_irn_list.append(subrow.text)
 
-                                    # retrieve NetX assetID by 'IRN' attribute
-                                    netx_id = check_asset_in_netx(
-                                        emu_irn = subrow.text,
-                                        live_or_test=live_or_test
-                                        )
-                                    
-                                    if netx_id is not None:
-                                        netx_id_list.append(netx_id)
-                    
-                    prepped_record['mm_irn_list'] = mm_irn_list
-                    prepped_record['netx_id_list'] = netx_id_list
-            
-                    # NOTE - Consider:
-                    #   1 - Checking if all EMu MM irn's are in NetX collection
-                    #   2 - If not all in, merge NetX/EMu lists, update NetX coll.
-                    # 
-                    #   For now, skipping & only controlling group content via EMu
+                                        # retrieve NetX assetID by 'IRN' attribute
+                                        netx_id = check_asset_in_netx(
+                                            emu_irn = subrow.text,
+                                            live_or_test=live_or_test
+                                            )
+                                        
+                                        if netx_id is not None:
+                                            netx_id_list.append(netx_id)
+                        
+                        prepped_record['mm_irn_list'] = mm_irn_list
+                        prepped_record['netx_id_list'] = netx_id_list
+                
+                        # NOTE - Consider:
+                        #   1 - Checking if all EMu MM irn's are in NetX collection
+                        #   2 - If not all in, merge NetX/EMu lists, update NetX coll.
+                        # 
+                        #   For now, skipping & only controlling group content via EMu
 
         if prepped_record not in groups_to_update:
-            groups_to_update.append(prepped_record)
+            if prepped_record['type'] == 'Static':
+                groups_to_update.append(prepped_record)
 
     return groups_to_update
 
@@ -139,7 +146,7 @@ def main():
         groups_to_check_in_netx = get_groups_to_update(groups_xml, live_or_test)
 
         # Get existing NetX collections IDs & titles
-        netx_group_data = un.netx_get_collections()
+        netx_group_data = un.netx_get_collections(netx_env = live_or_test)
         
         if 'result' not in netx_group_data:
             print(f'ERROR with netx_get_collections - {netx_group_data}')
@@ -151,48 +158,62 @@ def main():
            # netx_group_title_list = [row['title'] for row in netx_group_list]
 
 
-        # smaller test-set
-        groups_to_check_in_netx = groups_to_check_in_netx[:2]
+        # # smaller test-set
+        # groups_to_check_in_netx = groups_to_check_in_netx[:2]
 
         # Add assets to folders
 
         for emu_row in groups_to_check_in_netx:
 
-            exists_in_netx = False
+            emu_row_netx_title = f"EMu - {emu_row['title']} - {emu_row['irn']}"
+            print(f"EMu group title in NetX:  {emu_row_netx_title}")
 
-            for netx_row in netx_group_list['results']:
+            netx_match = []
+            # netx_match = [group for group in netx_group_list['results'] if group['title'] == emu_row_netx_title]
+            for group in netx_group_list['results']:
+                # print(f"netx group title = {group['title']}")
+                if group['title'] == emu_row_netx_title:
+                    netx_match.append(group)
+            # print(netx_match)
+
+            if len(netx_match) > 0:
+
+                # Use first matching group in NetX
+                # # TODO - Check for duplicates?
+                print(netx_match[0]['title'])
+
+                netx_match_id = netx_match[0]['id']
             
-                if f"EMu - {emu_row['title']} - {emu_row['irn']}" == netx_row['title']:
+                # if f"EMu - {emu_row['title']} - {emu_row['irn']}" == netx_row['title']:
 
-                    print(f'emu_row = {emu_row["title"]}')
-                    print(f'netx_row = {netx_row["title"]}')
+                # print(f'emu_row = {emu_row["title"]}')
+                # print(f'netx_row = {netx_row["title"]}')
 
-                    updated_coll = un.netx_update_collection(
-                        collection_id = netx_row['id'],
-                        collection_title = f"EMu - {emu_row['title']} - {emu_row['irn']}",
-                        asset_id_list = emu_row['netx_id_list'],
-                        data_to_get = None,
-                        netx_env = live_or_test
-                        )
+                updated_coll = un.netx_update_collection(
+                    collection_id = netx_match_id,
+                    collection_title = emu_row_netx_title,
+                    asset_id_list = emu_row['netx_id_list'],
+                    data_to_get = None,
+                    netx_env = live_or_test
+                    )
+                
+                if 'result' not in updated_coll:
+                    print(f'ERROR with netx_update_collection - {updated_coll}')
+                    logging.error(updated_coll)
+                    return
+
+                else:
+                    updated_coll_id = updated_coll['result']['id']                  
+                    print(f'Updated existing collection - collId {updated_coll_id}')
                     
-                    if 'result' not in updated_coll:
-                        print(f'ERROR with netx_update_collection - {updated_coll}')
-                        logging.error(updated_coll)
-                        return
 
-                    else:
-                        updated_coll_id = updated_coll['result']['id']                  
-                        print(f'Updated existing collection - collId {updated_coll_id}')
-                    
-                    exists_in_netx = True
+            else:
 
-            if exists_in_netx is False:
-
-                print(f"Adding:  EMu - {emu_row['title']} - {emu_row['irn']}")
+                print(f"Adding: {emu_row_netx_title}")
                 print(emu_row['netx_id_list'])
                 
                 new_coll = un.netx_create_collection(
-                    collection_title = f"EMu - {emu_row['title']} - {emu_row['irn']}",
+                    collection_title = emu_row_netx_title,
                     asset_id_list = emu_row['netx_id_list'],
                     data_to_get = None,
                     netx_env = live_or_test
