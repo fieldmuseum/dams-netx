@@ -232,35 +232,43 @@ def get_condition_field_list(conditions:list):
     return then_field_list
 
 
-def get_dss_xml(config:dict) -> dict:
+def get_dss_xml(dss_xml_path:dict) -> dict:
     '''Convert syncedMetadata.xml DSS config to dict of {emu_field:netx_field}'''
 
-    netx_emu_tree = ET.parse(config('DSS_XML'))
-    netx_emu_root = netx_emu_tree.getroot()
+    if os.path.isfile(dss_xml_path):
+        # with open(dss_xml_path, encoding='utf-8', mode = 'r') as xmlfile:
 
-    for child in netx_emu_root:
-        if child.attrib['name'] == 'XML Metadata sync':
-            for grandkid in child:
-                if grandkid.tag == "source":
-                    source = grandkid
-                else: 
-                    for greatgrand in grandkid:
-                        if greatgrand.tag == "records":
-                            destination = greatgrand
+        netx_emu_tree = ET.parse(dss_xml_path)
+        netx_emu_root = netx_emu_tree.getroot()
 
-    for child in destination:
-        if child.tag == 'records':
-            records = child
-    
-    netx_emu_map = {}
+        for child in netx_emu_root:
+            if child.attrib['name'] == 'XML Metadata sync':
+                for grandkid in child:
+                    if grandkid.tag == "source":
+                        source = grandkid
+                    else: 
+                        for greatgrand in grandkid:
+                            if greatgrand.tag == "records":
+                                destination = greatgrand
 
-    for emu_field in source:
-        for netx_field in records:
-            if emu_field.attrib['name'] == netx_field.attrib['field']:
-                emu_field_name = emu_field.attrib['column']
-                netx_field_name = netx_field.attrib['attribute']
-                # emu_field.set('netx', netx_field.attrib['attribute'])
-                netx_emu_map[emu_field_name] = netx_field_name
+        for child in destination:
+            if child.tag == 'records':
+                records = child
+        
+        netx_emu_map = {}
+
+        for emu_field in source:
+            for records in destination:
+                for netx_field in records:
+                    if emu_field.attrib['name'] == netx_field.attrib['field']:
+                        emu_field_name = emu_field.attrib['column']
+                        netx_field_name = netx_field.attrib['attribute']
+                        # emu_field.set('netx', netx_field.attrib['attribute'])
+                        netx_emu_map[emu_field_name] = netx_field_name
+
+    else: print(f'check dss_xml_path -- {dss_xml_path}')
+
+    print(f'netx_emu_map = {netx_emu_map}')
 
     return netx_emu_map
 
