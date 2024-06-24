@@ -14,7 +14,7 @@ def check_asset_in_netx(emu_irn:str, live_or_test:str):
     asset_id = None
 
     # In case API needs rate-limiting
-    time.sleep(0.05)
+    time.sleep(0.5)
 
     # Given Identifier/Filename, Get Asset ID
     asset_data = un.netx_get_asset_by_field(
@@ -47,7 +47,7 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
     groups_to_update = []
 
     # # smaller set
-    # xml_element = xml_element[:5]
+    # xml_element = xml_element[3:6]
 
     for record in xml_element:
         # New record
@@ -55,9 +55,9 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
         prepped_record = {}
         for elem in record:
 
-            # if elem.attrib['name'] == 'GroupType':
-            #     if elem.text != 'Static':
-            #         continue
+            if elem.attrib['name'] == 'GroupType':
+                if elem.text != 'Static':
+                    continue
 
             # Get the Group IRN and Title
             if elem.tag == 'atom' and elem.text:
@@ -146,14 +146,16 @@ def main():
         groups_to_check_in_netx = get_groups_to_update(groups_xml, live_or_test)
 
         # Get existing NetX collections IDs & titles
-        netx_group_data = un.netx_get_collections(netx_env = live_or_test)
+        netx_group_data_raw = un.netx_get_collections(netx_env = live_or_test)
         
-        if 'result' not in netx_group_data:
-            print(f'ERROR with netx_get_collections - {netx_group_data}')
-            logging.error(netx_group_data)
+        if 'result' not in netx_group_data_raw:
+            print(f'ERROR with netx_get_collections - {netx_group_data_raw}')
+            logging.error(netx_group_data_raw)
             return
 
         else:
+           list_size = netx_group_data_raw['result']['size']
+           netx_group_data = un.netx_get_collections(netx_env = live_or_test, size = list_size)
            netx_group_list = netx_group_data['result']
            # netx_group_title_list = [row['title'] for row in netx_group_list]
 

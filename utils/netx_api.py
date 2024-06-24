@@ -292,7 +292,7 @@ def netx_get_collection(collection_id:str=None, data_to_get:list=None, netx_env:
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
-def netx_get_collections(data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_get_collections(data_to_get:list=None, netx_env:str=None, size:int=None) -> dict:
     '''
     In NetX, get ALL of a user's readable collections via the NetX API
     - Also returns the collections's id, name, and number of assets.
@@ -305,11 +305,19 @@ def netx_get_collections(data_to_get:list=None, netx_env:str=None) -> dict:
             "collection.base",
             # "collection.permissions"
             ]
+    
+    if size is None:
+        size = 8
 
     method = 'getCollections'
 
     params = [
-        {"data": data_to_get}
+        {
+            "page": {
+                "startIndex": 0,
+                "size": size
+                },
+            "data": data_to_get}
         ]
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
