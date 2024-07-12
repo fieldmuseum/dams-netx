@@ -1,6 +1,7 @@
 '''Update NetX collections/groups of assets via NetX API if corresponding groups were edited in EMu'''
 
 import logging
+import re
 import time
 import xml.etree.ElementTree as ET
 from utils import netx_api as un
@@ -63,12 +64,23 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
             if elem.tag == 'atom' and elem.text:
                 if elem.attrib['name'] == 'irn':
                     prepped_record['irn'] = elem.text
+                else:
+                    prepped_record['irn'] = ''
 
                 if elem.attrib['name'] == 'GroupName':
                     prepped_record['title'] = elem.text
+                else:
+                    prepped_record['title'] = ''
 
                 if elem.attrib['name'] == 'GroupType':
                     prepped_record['type'] = elem.text
+                else:
+                    prepped_record['type'] = ''
+                
+                if elem.attrib['name'] == 'UserId':
+                    prepped_record['owner'] = elem.text
+                else:
+                    prepped_record['owner'] = ''
                                         
 
             # Get a list of MM_irns in the group
@@ -167,16 +179,17 @@ def main():
 
         for emu_row in groups_to_check_in_netx:
 
-            emu_row_netx_title = f"EMu - {emu_row['title']} - {emu_row['irn']}"
+            emu_row_netx_title_old = f"EMu - {emu_row['title']} - {emu_row['irn']}"
+            emu_row_netx_title = f"EMu - {emu_row['title']} - {emu_row['irn']} - {emu_row['owner']}"
             print(f"EMu group title in NetX:  {emu_row_netx_title}")
 
             netx_match = []
-            # netx_match = [group for group in netx_group_list['results'] if group['title'] == emu_row_netx_title]
             for group in netx_group_list['results']:
-                # print(f"netx group title = {group['title']}")
-                if group['title'] == emu_row_netx_title:
+                if group['title'] == emu_row_netx_title_old:
                     netx_match.append(group)
-            # print(netx_match)
+                elif group['title'] == emu_row_netx_title:
+                    if group not in netx_match:
+                        netx_match.append(group)
 
             if len(netx_match) > 0:
 
