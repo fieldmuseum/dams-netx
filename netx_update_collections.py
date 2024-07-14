@@ -54,33 +54,32 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
         # New record
 
         prepped_record = {}
+
+        # prepped_record['irn'] = ''
+        # prepped_record['title'] = ''
+        # prepped_record['type'] = ''
+        # prepped_record['owner'] = ''
+
         for elem in record:
 
             if elem.attrib['name'] == 'GroupType':
                 if elem.text != 'Static':
                     continue
 
-            # Get the Group IRN and Title
+            # Get the Group IRN, Title, type, UserId
             if elem.tag == 'atom' and elem.text:
                 if elem.attrib['name'] == 'irn':
-                    prepped_record['irn'] = elem.text
-                else:
-                    prepped_record['irn'] = ''
+                    prepped_record['irn'] = elem.text                    
 
                 if elem.attrib['name'] == 'GroupName':
                     prepped_record['title'] = elem.text
-                else:
-                    prepped_record['title'] = ''
-
+                    
                 if elem.attrib['name'] == 'GroupType':
                     prepped_record['type'] = elem.text
-                else:
-                    prepped_record['type'] = ''
-                
+                    
                 if elem.attrib['name'] == 'UserId':
                     prepped_record['owner'] = elem.text
-                else:
-                    prepped_record['owner'] = ''
+                    
                                         
 
             # Get a list of MM_irns in the group
