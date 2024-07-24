@@ -64,7 +64,7 @@ For NetX, ingest this to the NetX front-end synced-metadata folder for the DSS a
 
 
 ## IIIF manifest generation with mongo_to_IIIF.py
-If EMu Multimedia records are indexed in a MongoDB database, this script can generate a IIIF manifest for a given EMu IRN.
+If EMu Multimedia records are indexed in a MongoDB database, this script can generate a IIIF manifest for a given EMu IRN.  Related EMu workflow for 3D media in need of IIIF manifests is [here](https://docs.google.com/document/d/1SEQWVmiwaLvKOyFfYjyjLqULLROAgVXSL5XUJNFpL_A/edit#heading=h.wfvb173c93bw)
 The IIIF manifest outputs as a JSON file as well as to the console.  For more info about IIIF setup, see [iiif.io](https://iiif.io/get-started/how-iiif-works/)
 
 ### How to Setup mongo_to_IIIF.py
