@@ -39,7 +39,8 @@ def emu_netx_atoms() -> dict:
             'RelNotes':'RelNotes',
             'MulIdentifier':'MulIdentifier',
             'DetSource':'DetSource',
-            'ChaMediaForm':'ChaMediaForm'
+            'ChaMediaForm':'ChaMediaForm',
+            'DetResourceType':'DetResourceType',
     }
 
     return emu_netx_atoms
@@ -76,6 +77,7 @@ def emu_netx_refs() -> dict:
         'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
         'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'],  # try RigOwnershipRef_tab/SummaryData ?
         'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
+        'DetMediaRightsRef_Rig1WebLink':['DetMediaRightsRef', 'Rig1WebLink'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
         'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier']
     }

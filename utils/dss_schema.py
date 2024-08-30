@@ -25,6 +25,7 @@ def media_schema_xml() -> ET.Element:
             <DetMediaRightsRef_RigType/>
             <DetMediaRightsRef_RigOwner_Summary/>
             <DetMediaRightsRef_RigOtherNumber/>
+            <DetMediaRightsRef_Rig1WebLink/>
             <SecRecordStatus/>
             <SecDepartment_tab/>
             <AdmPublishWebNoPassword/>
@@ -63,6 +64,7 @@ def media_schema_xml() -> ET.Element:
             <DetResourceDetailDate_Created/>
             <DetResourceDetailsDate0/>
             <DetResourceDetailsDescription_tab/>
+            <DetResourceType/>
             <SupIdentifier/>
             <SupHeight/>
             <SupWidth/>
@@ -107,6 +109,7 @@ def media_schema_json():
             'DetMediaRightsRef_RigType': None,
             'DetMediaRightsRef_RigOwner_Summary': None,
             'DetMediaRightsRef_RigOtherNumber': None,
+            'DetMediaRightsRef_Rig1WebLink': None,
             'SecRecordStatus': None,
             'SecDepartment_tab': None,
             'AdmPublishWebNoPassword': None,
@@ -151,6 +154,7 @@ def media_schema_json():
             'DetResourceDetailDate_Created':None,
             'DetResourceDetailsDate0':None,
             'DetResourceDetailsDescription_tab':None,
+            'DetResourceType':None,
             'SupIdentifier':None,
             'SupHeight':None,
             'SupWidth':None,

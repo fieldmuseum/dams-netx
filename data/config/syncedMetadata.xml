@@ -83,6 +83,8 @@
 				<field name="field_61" column="ExOb_Width"/>
 				<field name="field_62" column="ExOb_Depth"/>
 				<field name="field_63" column="ExOb_Weight"/>
+                <field name="field_64" column="DetResourceType"/>
+                <field name="field_65" column="DetMediaRightsRef_Rig1WebLink"/>
 				<!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
 
 		</source>
@@ -154,6 +156,8 @@
 				<map field="field_61" attribute="Exhibit Object Width" skip_null="false"/>
 				<map field="field_62" attribute="Exhibit Object Depth" skip_null="false"/>
 				<map field="field_63" attribute="Exhibit Object Weight" skip_null="false"/>
+                <map field="field_64" attribute="Resource Type" skip_null="false"/>
+                <map field="field_65" attribute="License URL" skip_null="false"/>
 
 				<!--map field="field_!!" attribute="Data Source" skip_null="false"/-->
 
