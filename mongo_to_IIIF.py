@@ -25,8 +25,10 @@ def get_iiif_schema(config:dict, emu_record:dict) -> dict:
             "type": None,
             "format": None
         }
+    
+    gltf_check = re.findall(r'\.gl(b|tf)$', emu_record['MulIdentifier'])
 
-    if emu_record['DetResourceSubtype'] == '3D Model':
+    if gltf_check is not None or emu_record['DetResourceSubtype'] == '3D Model':
 
         main_body['type'] = 'Model'
 
@@ -177,7 +179,7 @@ def main():
             os.makedirs(manifest_out_path)
             
         f = open(f'{manifest_out_path}/{manifest_out_file}', 'w', encoding='utf-8')
-        f.write(json.dumps(iiif_manifest_json, indent=True, ensure_ascii=False))
+        f.write(json.dumps(iiif_manifest_json, indent=4, ensure_ascii=False))
         f.close()
 
 
