@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE table
+[
+  <!ELEMENT table	(tuple)*>
+  <!ATTLIST table
+            name	CDATA #REQUIRED
+  >
+
+  <!ELEMENT tuple	(table|tuple|atom)*>
+  <!ATTLIST tuple
+            name	CDATA #IMPLIED
+  >
+
+  <!ELEMENT atom	(#PCDATA)*>
+  <!ATTLIST atom
+            name	CDATA #REQUIRED
+            type	CDATA "text"
+            size	CDATA "short"
+  >
+]
+>
+<?schema
+  table           eaudit
+    integer         irn
+    integer         AudKey
+    date            AdmDateInserted
+  end
+?>
+<!-- Data -->
+<table name="eaudit">
+
+  <!-- Row 1 -->
+  <tuple>
+    <atom name="irn">568776591</atom>
+    <atom name="AudKey">2593414</atom>
+    <atom name="AdmDateInserted">2024-06-11</atom>
+  </tuple>
+</table>
