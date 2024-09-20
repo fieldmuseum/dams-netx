@@ -1,0 +1,355 @@
+{
+ "id": "emu:/fmnh/ecatalogue/393606",
+ "version": 1,
+ "data": {
+  "DarFieldNumber": "242",
+  "AdmPublishWebNoPasswordFlag": "Y",
+  "GeoSpecimenNo": "RRC 1864702",
+  "DarRelatedInformation": "GDI 2013-2015 SAPP",
+  "PriTissue": "No",
+  "PriXray": "No",
+  "PriMammalsIndicatorTissue": "No",
+  "DarCollectorNumber": "242",
+  "IdeTaxonRef_tab": [
+   {
+    "id": "emu:/fmnh/etaxonomy/1607",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/etaxonomy/1607"
+     }
+    }
+   }
+  ],
+  "ExtendedData": "393606\n\nAcacia mearnsii De Wild., Brazil, M. B. Gaelzer 242, F",
+  "LocIndependentlyMoveable": "Yes",
+  "PriMammalsIndicatorSuppl": "Yes",
+  "PriRareAndEndangeredIndicator": "No",
+  "DarContinent": "South America",
+  "ObjRepositoryRef": {
+   "id": "emu:/fmnh/eparties/64",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/eparties/64"
+    }
+   }
+  },
+  "IdeClassLocal_tab": [
+   "Dicotyledoneae"
+  ],
+  "DarSpecificEpithet": "mearnsii",
+  "DarPhylum": "Spermatophyta",
+  "DarLatitude": -30.0,
+  "CatCatalogSubset": "Seed Plants",
+  "CatProject_tab": [
+   "GDI 2013-2015 SAPP"
+  ],
+  "DarGeorefMethod": "TGN - Centroid",
+  "IdeHasTypeStatus": "N",
+  "DarDateLastModified": "2023-11-22T11:41:50.000CMT",
+  "DarContinentOcean": "South America",
+  "IdeFamilyLocal_tab": [
+   "Fabaceae"
+  ],
+  "CatMammalsProject_tab": [
+   "Rapid Reference Collection - RRC"
+  ],
+  "DarJulianDay": 258,
+  "DarGenus": "Acacia",
+  "ConConditionPeriodType": "Years",
+  "DarStartJulianDay": 258,
+  "GeoObjectKind": "Herbarium Sheet",
+  "DeaTransferOfTitle": "Unknown",
+  "ObjEcode": "V0359485F",
+  "SummaryData": "Acacia mearnsii De Wild., Brazil, M. B. Gaelzer 242, F",
+  "SecCanDisplay_tab": [
+   "Group Default"
+  ],
+  "SecCanEdit_tab": [
+   "Group Default"
+  ],
+  "PreMammalsPrepType_tab": [
+   "Skin",
+   "Skull",
+   "Skeleton",
+   "Carapace",
+   "Shell",
+   "Head",
+   "Larvae",
+   "Mounted",
+   "Alcohol",
+   "Cleared & Stained",
+   "Slide",
+   "Dried",
+   "Stomach"
+  ],
+  "ColCentroidLongitudeLocal": "054 00  W",
+  "ColCollectionNumber": "242",
+  "CatDepartment": "Botany",
+  "AdmOriginalData": "RRC-ID = 19586\n\nFamily = FABACEAE\n\nGenus = Acacia\n\nSpecies = mearnsii\n\nShow image = 0: Show\n\nNon RRC = \n\nReproductive state = x: Flower\n\nCountry = BRASIL\n\nDept/Prov = Rio Grande Do Sul\n\nSubvar = \n\nDet by = \n\nDet Yr = \n\nCollector = Gaelzer,M.\n\nColl no = 242\n\nSuffix = \n\nColl date = 1979-09-15\n\nInstitution = F\n\nAccession = 1864702\n\nOff Notes = cultivated tree\n\nBioregion = 16: Mata Atlantica-Brasil\n\nHabit = T&S: Trees & Shrubs\n\nURL = FABA-acac-mear-1864702\n\nSynonyms = \n\nDet notes = \n\nAuthor = \n\nRange Includes = BRASIL\n\nSpecial Areas = \n\nDate Renamed = \n\nEdit by = Ute Knoerr\n\nEdit Date = 2015-08-03 14:32:22\n\nEnter By = Ute Knoerr\n\nEnter Date = 2005-04-21 13:18:51\n\nScan By = Ute Knoerr\n\nScan Date = 2005-04-25 11:53:07",
+  "ColSiteLocationLocal": "South America, Brazil, Rio Grande do Sul. [LL]",
+  "IdeFiledAsRef": {
+   "id": "emu:/fmnh/etaxonomy/1607",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/etaxonomy/1607"
+    }
+   }
+  },
+  "DarDecimalLongitude": -54.0,
+  "ColEarliestDateCollected": "1979-09-15",
+  "DarImageURL": "http://fm-digital-assets.fieldmuseum.org/1213/735/V0359485F.jpg|http://fm-digital-assets.fieldmuseum.org/179/358/FABA_acac_mear_1864702.jpg",
+  "ColCollectionEventRef": {
+   "id": "emu:/fmnh/ecollectionevents/1561016",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/ecollectionevents/1561016"
+    }
+   }
+  },
+  "ColMammalsCollectionNo": "242",
+  "DarHigherTaxon": "Plantae Spermatophyta Dicotyledoneae Fabaceae",
+  "IdeTaxonLocal_tab": [
+   "Acacia mearnsii De Wild."
+  ],
+  "ColSiteLocationRef": {
+   "id": "emu:/fmnh/esites/1404",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/esites/1404"
+    }
+   }
+  },
+  "DarStartLatitude": -30.0,
+  "DarGlobalUniqueIdentifier": "ccf058cb-8ff6-4756-8180-de5335929f44",
+  "PriCountryLocal": "Brazil",
+  "ColProvinceStateTerritoryLocal_tab": [
+   "Rio Grande do Sul"
+  ],
+  "DarCatalogNumber": "1864702",
+  "CatRecordType": "Single",
+  "AdmPublishWebPasswordFlag": "Y",
+  "MulHasMultiMedia": "Y",
+  "DarHigherGeography": "South America, Brazil, Rio Grande do Sul. [LL]",
+  "DarCollectionCode": "Botany",
+  "GeoValuation": "No",
+  "ObjRepositoryLocal": "F",
+  "PriMammalsIndicatorNotes": "Yes",
+  "AdmPublishWebPassword": "Yes",
+  "PriCollectingEventNoLocal": "242",
+  "ObjObjectNumber": "1864702",
+  "DarMonthCollected": 9,
+  "DarScientificNameAuthor": "De Wild.",
+  "ColMammalsCollectorRef": {
+   "id": "emu:/fmnh/eparties/53124",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/eparties/53124"
+    }
+   }
+  },
+  "IdeFiledAsFamily": "Fabaceae",
+  "RelIsParent": "No",
+  "ColContinentLocal_tab": [
+   "South America"
+  ],
+  "ColCollectorBriefNameLocal_tab": [
+   "M. B. Gaelzer"
+  ],
+  "ObjCollectionArea": "Searle herbarium",
+  "DarKingdom": "Plantae",
+  "IdeFiledAsPhylum": "Spermatophyta",
+  "TaxTaxonomyRef_tab": [
+   1607
+  ],
+  "PriMultimedia": "Yes",
+  "DarDayCollected": 15,
+  "IdeFiledAsGenus": "Acacia",
+  "ObjKindOfObject": "Dried specimen",
+  "IdeFiledAsClass": "Dicotyledoneae",
+  "irn": {
+   "id": "emu:/fmnh/ecatalogue/393606",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/ecatalogue/393606"
+    }
+   }
+  },
+  "DarFamily": "Fabaceae",
+  "PriSiteCENumberDataLocal": "[242] South America, Brazil, Rio Grande do Sul. [LL]",
+  "CatCatalog": "Botany",
+  "MulMultiMediaRef_tab": [
+   {
+    "id": "emu:/fmnh/emultimedia/1213735",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/1213735"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/179358",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/179358"
+     }
+    }
+   }
+  ],
+  "AdmTimeModified": "11:41:50",
+  "PreTotalCount": 1,
+  "DarCountry": "Brazil",
+  "IdeFamily_tab": [
+   "Fabaceae"
+  ],
+  "CatMuseum": "Field Museum of Natural History",
+  "SecRecordStatus": "Active",
+  "DarDecimalLatitude": -30.0,
+  "PriProvinceLocal": "Rio Grande do Sul",
+  "GeoProcessed": "No",
+  "SecCanDelete_tab": [
+   "Group Default"
+  ],
+  "IdeFiledAsTypeRemarks": "Pl. Bequaert. 3(1): 62 1925.",
+  "AdmGUIDPreferredValue": "ccf058cb-8ff6-4756-8180-de5335929f44",
+  "IdeFiledAsSpecies": "mearnsii",
+  "PriSiteSummary": "South America, Brazil, Rio Grande do Sul. [LL]",
+  "AdmDateModified": "2023-11-22",
+  "DarStartLongitude": -54.0,
+  "GeoHazardous": "No",
+  "IdeGenusLocal_tab": [
+   "Acacia"
+  ],
+  "AdmInsertedBy": "Joanna McCaffrey",
+  "AdmSystemIdentifier": "jmccaffrey-090821-1429",
+  "AdmGUIDPreferredType": "UUID4",
+  "ColCentroidLatitudeLocal": "30 00  S",
+  "CatControlNumber": "RRC2-19586",
+  "IdeSpeciesLocal_tab": [
+   "mearnsii"
+  ],
+  "ColCollectorRef_tab": [
+   {
+    "id": "emu:/fmnh/eparties/53124",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/eparties/53124"
+     }
+    }
+   }
+  ],
+  "PriContinentLocal": "South America",
+  "DarLongitude": -54.0,
+  "ColCountryLocal_tab": [
+   "Brazil"
+  ],
+  "AdmModifiedBy": "emu",
+  "IdeFiledAsQualifiedName": "Acacia mearnsii De Wild.",
+  "DarSpecies": "mearnsii",
+  "DarStateProvince": "Rio Grande do Sul",
+  "DarInstitutionCode": "F",
+  "DarYearCollected": 1979,
+  "ValValuationPeriodType": "Years",
+  "DarTissues": "No",
+  "PriCoordinateIndicator": "Yes",
+  "DarClass": "Dicotyledoneae",
+  "ColMammalsCollectorLocal": "M. B. Gaelzer",
+  "SecDepartment_tab": [
+   "Botany"
+  ],
+  "AdmTimeInserted": "16:19:08",
+  "AdmImportIdentifier": "Botany RRC Add R2",
+  "DarBasisOfRecord": "Specimen",
+  "PriOther": "No",
+  "GeoSeries": "RRC",
+  "PriPrimaryPrepIndicators_tab": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   "multimedia"
+  ],
+  "FMNHCollectorDataLocal": "M. B. Gaelzer",
+  "AdmDateInserted": "2009-08-21",
+  "DarScientificName": "Acacia mearnsii De Wild.",
+  "GeoCatalogNo": 1864702,
+  "DarCollector": "M. B. Gaelzer",
+  "AdmPublishWebNoPassword": "Yes",
+  "EcoFrequency_grp": [
+   {
+    "PheHabit": "T&S",
+    "PreCount": 1,
+    "PrePrepType": "Dried specimen",
+    "PhePrepPartID": "393606_1",
+    "PheCode": "x"
+   }
+  ],
+  "AdmGUIDIsPreferred_grp": [
+   {
+    "AdmGUIDType": "UUID4",
+    "AdmGUIDValue": "ccf058cb-8ff6-4756-8180-de5335929f44",
+    "AdmGUIDIsPreferred": "Yes"
+   }
+  ],
+  "PreOLocation_grp": [
+   {
+    "PreOPrepType": "Skin"
+   },
+   {
+    "PreOPrepType": "Skull"
+   },
+   {
+    "PreOPrepType": "Skeleton"
+   },
+   {
+    "PreOPrepType": "Carapace"
+   },
+   {
+    "PreOPrepType": "Shell"
+   },
+   {
+    "PreOPrepType": "Head"
+   },
+   {
+    "PreOPrepType": "Larvae"
+   },
+   {
+    "PreOPrepType": "Mounted"
+   },
+   {
+    "PreOPrepType": "Alcohol"
+   },
+   {
+    "PreOPrepType": "Cleared & Stained"
+   },
+   {
+    "PreOPrepType": "Slide"
+   },
+   {
+    "PreOPrepType": "Dried"
+   },
+   {
+    "PreOPrepType": "Stomach"
+   }
+  ],
+  "IdeDateIdentified_grp": [
+   {
+    "IdeFiledAs": "Yes",
+    "IdeQualifiedName": "Acacia mearnsii De Wild."
+   }
+  ],
+  "NotDate_grp": [
+   {
+    "NotFisNotes": "Off Notes = cultivated tree",
+    "NotDate": "2015-05-",
+    "NotKind": "Rapid reference collection - off notes"
+   }
+  ]
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/fmnh/ecatalogue/393606"
+  }
+ }
+}

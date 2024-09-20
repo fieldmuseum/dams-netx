@@ -13,23 +13,49 @@ def emu_api_get_token(
     config:dict=None, 
     user_id:str=None, 
     user_pw:str=None, 
-    base_uri:str=None
+    # base_uri:str=None,
+    emu_env:str='TEST'
     ) -> dict:
     '''Retrieves a JWT token from texcdp'''
 
     # Load the config
-    if config is None:  
+    if config is None:
         config = setup.get_config_dams_netx()
         
         if not config:  raise Exception("No .env config file found")
-
-    if user_id is None: 
-        user_id = config["EMU_API_ID"]
-    else:  user_id = user_id
     
-    if user_pw is None: 
-        user_pw = config["EMU_API_PW"]
-    else:  user_pw = user_pw
+    # Get API base URL + token for selected NetX env
+    # if emu_env is None:
+    #     emu_env == "TEST"
+
+    emu_env = config["EMU_ENV"]
+
+    if emu_env=="LIVE":
+        base_uri = config["EMU_API_BASE_URL"]
+
+        if user_id is None: 
+            user_id = config["EMU_API_ID"]
+        else:
+            user_id = user_id
+
+        if user_pw is None: 
+            user_pw = config["EMU_API_PW"]
+        else:
+            user_pw = user_pw
+    
+    else:
+        base_uri = config["TEST_EMU_API_BASE_URL"]
+
+        if user_id is None: 
+            user_id = config["TEST_EMU_API_ID"]
+        else:
+            user_id = user_id
+
+        if user_pw is None: 
+            user_pw = config["TEST_EMU_API_PW"]
+        else:
+            user_pw = user_pw
+
 
     json = {
         "username":user_id,
@@ -49,7 +75,7 @@ def emu_api_get_token(
 
 
 def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
-    '''Sets up the required default headers for using the NetX API. Allows for overriding the headers'''
+    '''Sets up the required default headers for using the texrestapi. Allows for overriding the headers'''
 
     if headers is not None: return headers
 
@@ -60,6 +86,7 @@ def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
     }
 
     if emu_api_token is not None:
+        print(f'adding emu_api_token to header: {emu_api_token}')
         headers['Authorization'] = emu_api_token
 
     return headers
@@ -76,16 +103,14 @@ def emu_api_setup_request(config:dict=None, headers:dict=None, emu_env:str=None)
             raise Exception("No .env config file found")
 
     # Get API base URL + token for selected NetX env
-    if emu_env is None:
-        emu_env == "TEST"
-
     if emu_env=="LIVE":
         base_uri = config["EMU_API_BASE_URL"]
     else:
+        emu_env = "TEST"
         base_uri = config["TEST_EMU_API_BASE_URL"]
 
 
-    emu_api_token = emu_api_get_token(base_uri=base_uri)
+    emu_api_token = emu_api_get_token(emu_env=emu_env)  # base_uri=base_uri, 
 
     # Set default HTTP headers
     headers = emu_api_setup_headers(headers=headers, emu_api_token=emu_api_token)
@@ -116,7 +141,7 @@ def emu_api_get_resources(emu_env:str=None):
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
 
 
 def emu_api_check_resource(emu_table:str=None, emu_env:str=None):
@@ -165,7 +190,7 @@ def emu_api_get_schema(emu_table:str=None, emu_env:str=None):
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')  # .json())}')
 
 def emu_api_check_field_type(
     emu_table:str=None, # 'eparties',
@@ -233,11 +258,11 @@ def emu_api_query_text(
     - For date-ranges, format as "YYYY-MM-DD"
     '''
 
-    # print(str(datetime.datetime.now()) + ' - starting check_resource')
+    print(str(datetime.datetime.now()) + ' - starting check_resource')
 
     check_resource = emu_api_check_resource(emu_table, emu_env)
 
-    # print(str(datetime.datetime.now()) + ' - finishing check_resource')
+    # # print(str(datetime.datetime.now()) + ' - finishing check_resource')
 
     # if check_resource == True:
     #     print(f'querying {emu_table}')
@@ -246,9 +271,11 @@ def emu_api_query_text(
 
     base_url = emu_api_setup['base_url']
     headers = emu_api_setup['headers']
+    # print(f'headers = {headers}')
 
     if search_field is not None:
-        search_field_type = emu_api_check_field_type(emu_table=emu_table, emu_field=search_field)
+        # print(f'checking field type for {emu_table}.{search_field}')
+        search_field_type = emu_api_check_field_type(emu_table=emu_table, emu_field=search_field, emu_env=emu_env)
 
         if search_value_range is not None:
 
@@ -310,16 +337,12 @@ def emu_api_query_text(
 
     uri = base_url + emu_table + '?filter=' + json_prep
 
-    # print(f'uri = {uri}')
-
     r = requests.get(url=uri, headers=headers)  # , data=json_prep) # params=f'?filter={json_raw}',
-
-    # print(str(datetime.datetime.now()) + ' - finishing GET')
 
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')  # .json())}')
 
 
 def emu_api_query_numeric(
@@ -350,6 +373,31 @@ def emu_api_query_numeric(
         emu_env=emu_env)
 
 
+def emu_api_get_record_by_irn(
+    emu_table:str=None, # 'eparties',
+    search_field:str='irn',
+    operator:str='exact',  # contains
+    search_value_single:str=None, # '1',
+    emu_env:str=None
+    ) -> dict:
+    '''
+    Queries texcdp for an irn in a specified table, and returns a nested dict 
+    where dict['matches'] is the list of matching records.
+    '''
+
+    allowed_ops = ['exact', 'exists', 'range']
+
+    if operator not in allowed_ops:
+        raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
+    
+    return emu_api_query_text(
+        emu_table=emu_table, 
+        search_field=search_field, 
+        operator=operator, 
+        search_value_single=search_value_single,
+        emu_env=emu_env)
+
+
 def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
     '''Add a new EMu record, given a json dict of EMu fields:values for the given EMu table'''
 
@@ -371,7 +419,7 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
 
 
 def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=None, emu_env:str=None):
@@ -403,7 +451,7 @@ def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=
     if r.status_code < 300:
         return r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
 
 
 
@@ -444,7 +492,7 @@ def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
 
         return # r.json()
     else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r.json())}')
+        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
 
 
 def emu_api_delete_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):

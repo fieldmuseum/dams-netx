@@ -1,0 +1,417 @@
+{
+ "@namespaces": {
+  "emu": {
+   "name": "http://axiell.com/emu#"
+  }
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia"
+  },
+  "start": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/"
+  },
+  "emu:create": {
+   "method": "POST",
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia",
+   "encoding": "json",
+   "schemaUrl": "http://10.10.10.26:8084/fmnh/resources/emultimedia"
+  },
+  "emu:insert": {
+   "method": "PUT",
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia/{identifier}",
+   "isHrefTemplate": true,
+   "encoding": "json",
+   "schemaUrl": "http://10.10.10.26:8084/fmnh/resources/emultimedia"
+  },
+  "search": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia?filter={filter}&select={select}&sort={sort}&limit={limit}",
+   "isHrefTemplate": true,
+   "schema": {
+    "properties": {
+     "filter": {
+      "type": "string"
+     },
+     "limit": {
+      "type": "integer"
+     },
+     "select": {
+      "type": "string"
+     },
+     "sort": {
+      "type": "string"
+     }
+    }
+   }
+  }
+ },
+ "matches": [
+  {
+   "id": "emu:/fmnh/emultimedia/2019480",
+   "version": 1,
+   "data": {
+    "DocImageType_tab": [
+     "Grayscale",
+     "Grayscale",
+     "Grayscale"
+    ],
+    "AdmPublishWebNoPasswordFlag": "Y",
+    "ChaRepository_tab": [
+     "KE EMu Repository"
+    ],
+    "RightsAcknowledgeLocal": "(c) The Field Museum (DATE)",
+    "MulDescription": "Leon L. Walters, man (FM exhibit preparator staff) with Komodo Dragon lizard model on a rope.",
+    "ChaMd5Sum": "39152350e5b5adb8d666638e6ddf3942",
+    "ExtendedData": "2019480\n\nCSZ73838 - Komodo Dragon Lizard, [3000x1764], (image/jpeg), [Supp]",
+    "ChaFileSize": 3090439,
+    "MulTitle": "Komodo Dragon Lizard",
+    "ChaImageHeight": "1764",
+    "DocQuality_tab": [
+     99,
+     100,
+     85
+    ],
+    "DocNumberPages_tab": [
+     1,
+     1,
+     1
+    ],
+    "MulMimeType": "image",
+    "SummaryData": "CSZ73838 - Komodo Dragon Lizard, [3000x1764], (image/jpeg), [Supp]",
+    "SecCanDisplay_tab": [
+     "Group Default"
+    ],
+    "SecCanEdit_tab": [
+     "Group Default"
+    ],
+    "ChaImageResolution": "1200",
+    "XmpMetadata": "<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?> <x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27        \"> <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"> <rdf:Description rdf:about=\"\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\" xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\" xmlns:stRef=\"http://ns.adobe.com/xap/1.0/sType/ResourceRef#\" xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\" xmp:CreatorTool=\"Adobe Photoshop CS6 (Windows)\" xmp:CreateDate=\"2020-09-09T16:13:34-05:00\" xmp:MetadataDate=\"2022-07-23T10:35:28-05:00\" xmp:ModifyDate=\"2022-07-23T10:35:28-05:00\" dc:format=\"image/jpeg\" xmpMM:InstanceID=\"xmp.iid:C0AF7A149D0AED118B289070BBBC8024\" xmpMM:DocumentID=\"xmp.did:9239ECB2A5F2EA1181E0AECC5EF0A45C\" xmpMM:OriginalDocumentID=\"xmp.did:9239ECB2A5F2EA1181E0AECC5EF0A45C\" photoshop:LegacyIPTCDigest=\"CDCFFA7DA8C7BE09057076AEAF05C34E\" photoshop:ColorMode=\"1\" photoshop:ICCProfile=\"Dot Gain 20%\"> <xmpMM:History> <rdf:Seq> <rdf:li stEvt:action=\"created\" stEvt:instanceID=\"xmp.iid:9239ECB2A5F2EA1181E0AECC5EF0A45C\" stEvt:when=\"2020-09-09T16:13:34-05:00\" stEvt:softwareAgent=\"Adobe Photoshop CS6 (Windows)\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:8c5c508e-9200-354d-82a5-7c6949a2320c\" stEvt:when=\"2020-09-10T10:11:17-05:00\" stEvt:softwareAgent=\"Adobe Photoshop CC 2019 (Windows)\" stEvt:changed=\"/\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:68B3C66D5208ED11B328DDC0CC8D231E\" stEvt:when=\"2022-07-20T12:36:27-05:00\" stEvt:softwareAgent=\"Adobe Photoshop CS6 (Windows)\" stEvt:changed=\"/\"/> <rdf:li stEvt:action=\"converted\" stEvt:parameters=\"from image/tiff to image/jpeg\"/> <rdf:li stEvt:action=\"derived\" stEvt:parameters=\"converted from image/tiff to image/jpeg\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:9EB5887B5208ED11B328DDC0CC8D231E\" stEvt:when=\"2022-07-20T12:36:27-05:00\" stEvt:softwareAgent=\"Adobe Photoshop CS6 (Windows)\" stEvt:changed=\"/\"/> <rdf:li stEvt:action=\"saved\" stEvt:instanceID=\"xmp.iid:C0AF7A149D0AED118B289070BBBC8024\" stEvt:when=\"2022-07-23T10:35:28-05:00\" stEvt:softwareAgent=\"Adobe Photoshop CS6 (Windows)\" stEvt:changed=\"/\"/> </rdf:Seq> </xmpMM:History> <xmpMM:DerivedFrom stRef:instanceID=\"xmp.iid:68B3C66D5208ED11B328DDC0CC8D231E\" stRef:documentID=\"xmp.did:9239ECB2A5F2EA1181E0AECC5EF0A45C\" stRef:originalDocumentID=\"xmp.did:9239ECB2A5F2EA1181E0AECC5EF0A45C\"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end=\"w\"?>",
+    "ChaImageColorDepth": "8",
+    "MulMimeFormat": "jpeg",
+    "AdmPublishWebPasswordFlag": "Y",
+    "ChaMediaForm": "8x10 in. b/w Interpositive",
+    "Multimedia": "2019/480/CSZ73838.jpg",
+    "Supplementary_tab": [
+     "2019/480/supplementary/CSZ73838.dng"
+    ],
+    "DetRights": "(c) Field Museum of Natural History",
+    "AdmPublishWebPassword": "Yes",
+    "RelIsParent": "No",
+    "SupMD5Checksum_tab": [
+     "2c09998135ba6eee1359c986d8402546"
+    ],
+    "AudCitation": "(c) Field Museum of Natural History. https://mm.fieldmuseum.org/e0e197ee-03c7-4d1d-a248-fceec06e8f66 (accessed on 25 Sep 2023)",
+    "DetResourceType": "StillImage",
+    "DocCompression_tab": [
+     "JPEG",
+     "JPEG",
+     "JPEG"
+    ],
+    "DocDocumentRef": {
+     "id": "emu:/fmnh/edocuments/2019480",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/edocuments/2019480"
+      }
+     }
+    },
+    "irn": {
+     "id": "emu:/fmnh/emultimedia/2019480",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/emultimedia/2019480"
+      }
+     }
+    },
+    "AdmTimeModified": "13:58:16",
+    "SecRecordStatus": "Active",
+    "DocMd5Sum_tab": [
+     "39152350e5b5adb8d666638e6ddf3942",
+     "f2411f4e239a4921c2738746a2b4eb56",
+     "e45a35a0cf694fae780dd4df5022bc8d"
+    ],
+    "DocNumberColours_tab": [
+     null,
+     188,
+     254
+    ],
+    "DocColourSpace_tab": [
+     "Gray",
+     "Gray",
+     "Gray"
+    ],
+    "AudACDescription": "Leon L. Walters, man (FM exhibit preparator staff) with Komodo Dragon lizard model on a rope.",
+    "SecCanDelete_tab": [
+     "Group Default"
+    ],
+    "AdmDateModified": "2023-09-25",
+    "MulDocumentType": "M",
+    "AdmGUIDPreferredValue": "e0e197ee-03c7-4d1d-a248-fceec06e8f66",
+    "AdmInsertedBy": "Cummings, Nina",
+    "AdmSystemIdentifier": "ncummings-191201-1811",
+    "AdmGUIDPreferredType": "UUID4",
+    "DetMediaRightsRef": {
+     "id": "emu:/fmnh/erights/36",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/erights/36"
+      }
+     }
+    },
+    "AudIdentifier": "e0e197ee-03c7-4d1d-a248-fceec06e8f66",
+    "AdmModifiedBy": "Cummings, Nina",
+    "ChaAudience_tab": [
+     "ISL2021",
+     "Community Group"
+    ],
+    "DocPlanes_tab": [
+     1,
+     1,
+     1
+    ],
+    "MulIdentifier": "CSZ73838.jpg",
+    "AdmImportIdentifier": "7923CSZ",
+    "ChaImageWidth": "3000",
+    "SecDepartment_tab": [
+     "Library",
+     "Photo Archives",
+     "Zoology"
+    ],
+    "AdmTimeInserted": "18:08:01",
+    "DocResolution_tab": [
+     "1200",
+     "1200",
+     "1200"
+    ],
+    "AdmDateInserted": "2019-12-01",
+    "AdmPublishWebNoPassword": "Yes",
+    "AudAccessURI": "http://fm-digital-assets.fieldmuseum.org/2019/480/CSZ73838.jpg",
+    "SupFileSize_grp": [
+     {
+      "SupIdentifier": "CSZ73838.dng",
+      "SupFileSize": 55521680,
+      "SupWidth": 11222,
+      "SupHeight": 9024,
+      "SupMimeFormat": "DNG",
+      "SupMimeType": "image"
+     }
+    ],
+    "AdmGUIDIsPreferred_grp": [
+     {
+      "AdmGUIDType": "UUID4",
+      "AdmGUIDValue": "e0e197ee-03c7-4d1d-a248-fceec06e8f66",
+      "AdmGUIDIsPreferred": "Yes"
+     }
+    ],
+    "ExiIfd_grp": [
+     {
+      "ExiValue": "11222",
+      "ExiIfd": "Primary",
+      "ExiTag": "256",
+      "ExiName": "ImageWidth"
+     },
+     {
+      "ExiValue": "9024",
+      "ExiIfd": "Primary",
+      "ExiTag": "257",
+      "ExiName": "ImageLength"
+     },
+     {
+      "ExiValue": "8",
+      "ExiIfd": "Primary",
+      "ExiTag": "258",
+      "ExiName": "BitsPerSample"
+     },
+     {
+      "ExiValue": "1",
+      "ExiIfd": "Primary",
+      "ExiTag": "259",
+      "ExiName": "Compression"
+     },
+     {
+      "ExiValue": "1",
+      "ExiIfd": "Primary",
+      "ExiTag": "262",
+      "ExiName": "PhotometricInterpretation"
+     },
+     {
+      "ExiValue": "1",
+      "ExiIfd": "Primary",
+      "ExiTag": "274",
+      "ExiName": "Orientation"
+     },
+     {
+      "ExiValue": "1",
+      "ExiIfd": "Primary",
+      "ExiTag": "277",
+      "ExiName": "SamplesPerPixel"
+     },
+     {
+      "ExiValue": "12000000/10000",
+      "ExiIfd": "Primary",
+      "ExiTag": "282",
+      "ExiName": "XResolution"
+     },
+     {
+      "ExiValue": "12000000/10000",
+      "ExiIfd": "Primary",
+      "ExiTag": "283",
+      "ExiName": "YResolution"
+     },
+     {
+      "ExiValue": "2",
+      "ExiIfd": "Primary",
+      "ExiTag": "296",
+      "ExiName": "ResolutionUnit"
+     },
+     {
+      "ExiValue": "Adobe Photoshop CS6 (Windows)",
+      "ExiIfd": "Primary",
+      "ExiTag": "305",
+      "ExiName": "Software"
+     },
+     {
+      "ExiValue": "2022:07:23 10:35:28",
+      "ExiIfd": "Primary",
+      "ExiTag": "306",
+      "ExiName": "DateTime"
+     },
+     {
+      "ExiValue": "236",
+      "ExiIfd": "Primary",
+      "ExiTag": "34665",
+      "ExiName": "ExifIFD"
+     },
+     {
+      "ExiValue": "48, 50, 50, 49",
+      "ExiIfd": "Exif",
+      "ExiTag": "36864",
+      "ExiName": "ExifVersion"
+     },
+     {
+      "ExiValue": "65535",
+      "ExiIfd": "Exif",
+      "ExiTag": "40961",
+      "ExiName": "ColorSpace"
+     },
+     {
+      "ExiValue": "3000",
+      "ExiIfd": "Exif",
+      "ExiTag": "40962",
+      "ExiName": "PixelXDimension"
+     },
+     {
+      "ExiValue": "1764",
+      "ExiIfd": "Exif",
+      "ExiTag": "40963",
+      "ExiName": "PixelYDimension"
+     },
+     {
+      "ExiValue": "6",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "259",
+      "ExiName": "Compression"
+     },
+     {
+      "ExiValue": "72/1",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "282",
+      "ExiName": "XResolution"
+     },
+     {
+      "ExiValue": "72/1",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "283",
+      "ExiName": "YResolution"
+     },
+     {
+      "ExiValue": "2",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "296",
+      "ExiName": "ResolutionUnit"
+     },
+     {
+      "ExiValue": "386",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "513",
+      "ExiName": "JPEGInterchageFormat"
+     },
+     {
+      "ExiValue": "0",
+      "ExiIfd": "Thumbnail",
+      "ExiTag": "514",
+      "ExiName": "JPEGInterchangeFormatLength"
+     }
+    ],
+    "MulOtherNumberSource_grp": [
+     {
+      "MulOtherNumber": "CSZ73838",
+      "MulOtherNumberSource": "Photo Archives ID No."
+     }
+    ],
+    "DocBitsPerPixel_grp": [
+     {
+      "DocIdentifier": "CSZ73838.jpg",
+      "DocBitsPerPixel": 8,
+      "DocMimeFormat": "jpeg",
+      "DocFileSize": 3090439,
+      "DocHeight": 1764,
+      "DocWidth": 3000,
+      "DocMimeType": "image"
+     },
+     {
+      "DocIdentifier": "CSZ73838.thumb.jpg",
+      "DocBitsPerPixel": 8,
+      "DocMimeFormat": "jpeg",
+      "DocFileSize": 11710,
+      "DocHeight": 53,
+      "DocWidth": 90,
+      "DocMimeType": "image"
+     },
+     {
+      "DocIdentifier": "CSZ73838.600x600.jpg",
+      "DocBitsPerPixel": 8,
+      "DocMimeFormat": "jpeg",
+      "DocFileSize": 34893,
+      "DocHeight": 353,
+      "DocWidth": 600,
+      "DocMimeType": "image"
+     }
+    ],
+    "IptName_grp": [
+     {
+      "IptRecord": "Envelope",
+      "IptTag": "90",
+      "IptName": "CodedCharacterSet",
+      "IptValue": "\u001b%G"
+     },
+     {
+      "IptRecord": "Envelope",
+      "IptTag": "90",
+      "IptName": "CodedCharacterSet",
+      "IptValue": "\u001b%G"
+     },
+     {
+      "IptRecord": "Application",
+      "IptTag": "0",
+      "IptName": "ApplicationRecordVersion",
+      "IptValue": "0"
+     }
+    ],
+    "DetResourceDetailsDate_grp": [
+     {
+      "DetResourceDetailsDate": "1930-06-",
+      "DetResourceDetailsDescription": "Created"
+     }
+    ]
+   },
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/emultimedia/2019480"
+    }
+   }
+  }
+ ]
+}

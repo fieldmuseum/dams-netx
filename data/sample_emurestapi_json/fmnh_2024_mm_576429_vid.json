@@ -1,0 +1,146 @@
+{
+ "id": "emu:/fmnh/emultimedia/576429",
+ "version": 1,
+ "data": {
+  "AdmPublishWebNoPasswordFlag": "Y",
+  "ChaRepository_tab": [
+   "KE EMu Repository"
+  ],
+  "RightsAcknowledgeLocal": "(c) The Field Museum (DATE)",
+  "MulDescription": "The Kipunji is an enigmatic primate from Tanzania that was discovered a few years ago. Join Collections Manager Bill Stanley and check out why this new species is so intriguing!",
+  "ChaMd5Sum": "8cb80343401edb28e0c9b19334a77a33",
+  "ExtendedData": "576429\n\nField Revealed Asset Ep 1.11 MEET KIPUNJI, [43.333 MB], (video/mp4), [Supp]",
+  "ChaFileSize": 43332941,
+  "MulTitle": "Field Revealed Asset Ep 1.11 MEET KIPUNJI",
+  "MulMimeType": "video",
+  "SummaryData": "Field Revealed Asset Ep 1.11 MEET KIPUNJI, [43.333 MB], (video/mp4), [Supp]",
+  "SecCanDisplay_tab": [
+   "Group Default"
+  ],
+  "SecCanEdit_tab": [
+   "Group Default"
+  ],
+  "DetDate0": [
+   "2011-11-11"
+  ],
+  "MulMimeFormat": "mp4",
+  "MulCreator_tab": [
+   "Federico Pardo : Field Museum of Natural History - Technology Department"
+  ],
+  "AdmPublishWebPasswordFlag": "Y",
+  "ChaMediaForm": "mp4/h264 video",
+  "Multimedia": "576/429/meet_kipunji_bill_stanley.mp4",
+  "Supplementary_tab": [
+   "576/429/supplementary/BillStanleyTanzaniaProRes.mov"
+  ],
+  "AdmPublishWebPassword": "Yes",
+  "RelIsParent": "No",
+  "SupMD5Checksum_tab": [
+   "feaf12f2796c4093b7fcf27c19d3c42b"
+  ],
+  "AudCitation": "Courtesy of: F. Pardo. (c) Field Museum of Natural History. https://mm.fieldmuseum.org/a049bcb1-1cd8-4752-9167-6829720964aa (accessed on 08 Sep 2022)",
+  "DetResourceType": "MovingImage",
+  "DocDocumentRef": {
+   "id": "emu:/fmnh/edocuments/576429",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/edocuments/576429"
+    }
+   }
+  },
+  "irn": {
+   "id": "emu:/fmnh/emultimedia/576429",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/emultimedia/576429"
+    }
+   }
+  },
+  "AdmTimeModified": "10:18:23",
+  "SecRecordStatus": "Active",
+  "DocMd5Sum_tab": [
+   "8cb80343401edb28e0c9b19334a77a33"
+  ],
+  "AudACDescription": "The Kipunji is an enigmatic primate from Tanzania that was discovered a few years ago. Join Collections Manager Bill Stanley and check out why this new species is so intriguing!",
+  "SecCanDelete_tab": [
+   "Group Default"
+  ],
+  "AdmDateModified": "2022-09-08",
+  "MulDocumentType": "M",
+  "AdmGUIDPreferredValue": "a049bcb1-1cd8-4752-9167-6829720964aa",
+  "AdmInsertedBy": "Kate Webbink",
+  "AdmGUIDPreferredType": "UUID4",
+  "DetMediaRightsRef": {
+   "id": "emu:/fmnh/erights/36",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/erights/36"
+    }
+   }
+  },
+  "AudIdentifier": "a049bcb1-1cd8-4752-9167-6829720964aa",
+  "AdmModifiedBy": "Webbink, Kate",
+  "DetSubject_tab": [
+   "Field Revealed",
+   "Kipunji",
+   "Bill Stanley",
+   "Rungwecebus kipunji",
+   "mammal"
+  ],
+  "MulIdentifier": "meet_kipunji_bill_stanley.mp4",
+  "SecDepartment_tab": [
+   "Technology"
+  ],
+  "AdmTimeInserted": "17:43:40",
+  "AdmDateInserted": "2014-02-11",
+  "AdmPublishWebNoPassword": "Yes",
+  "AudAccessURI": "http://fm-digital-assets.fieldmuseum.org/576/429/meet_kipunji_bill_stanley.mp4",
+  "SupFileSize_grp": [
+   {
+    "SupIdentifier": "BillStanleyTanzaniaProRes.mov",
+    "SupFileSize": 1941885080,
+    "SupMimeFormat": "quicktime",
+    "SupMimeType": "video"
+   }
+  ],
+  "AdmGUIDIsPreferred_grp": [
+   {
+    "AdmGUIDType": "UUID4",
+    "AdmGUIDValue": "a049bcb1-1cd8-4752-9167-6829720964aa",
+    "AdmGUIDIsPreferred": "Yes"
+   }
+  ],
+  "MulMultimediaCreatorRole_grp": [
+   {
+    "MulMultimediaCreatorRef": {
+     "id": "emu:/fmnh/eparties/173992",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/eparties/173992"
+      }
+     }
+    },
+    "MulMultimediaCreatorRole": "Creator"
+   }
+  ],
+  "DocBitsPerPixel_grp": [
+   {
+    "DocIdentifier": "meet_kipunji_bill_stanley.mp4",
+    "DocMimeFormat": "mp4",
+    "DocFileSize": 43332941,
+    "DocMimeType": "video"
+   }
+  ],
+  "DetResourceDetailsDate_grp": [
+   {
+    "DetResourceDetailsDate": "2011-11-11",
+    "DetResourceDetailsDescription": "Created"
+   }
+  ]
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia/576429"
+  }
+ }
+}

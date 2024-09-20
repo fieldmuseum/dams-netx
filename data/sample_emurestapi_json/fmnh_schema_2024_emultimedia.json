@@ -1,0 +1,1069 @@
+{
+ "id": "emu:/shared/tenants/fmnh",
+ "version": 1,
+ "data": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "emu:/fmnh/resources/emultimedia",
+  "title": "emultimedia",
+  "type": "object",
+  "properties": {
+   "AdmAssetSourceDAMS": {
+    "type": "string"
+   },
+   "AdmDateInserted": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "AdmDateModified": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "AdmGUIDIsPreferred_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AdmGUIDIsPreferred": {
+       "type": "string",
+       "$comment": "AdmGUIDIsPreferred_tab"
+      },
+      "AdmGUIDType": {
+       "type": "string",
+       "$comment": "AdmGUIDType_tab"
+      },
+      "AdmGUIDValue": {
+       "type": "string",
+       "$comment": "AdmGUIDValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "AdmGUIDPreferredType": {
+    "type": "string"
+   },
+   "AdmGUIDPreferredValue": {
+    "type": "string"
+   },
+   "AdmImportIdentifier": {
+    "type": "string"
+   },
+   "AdmInsertedBy": {
+    "type": "string"
+   },
+   "AdmModifiedBy": {
+    "type": "string"
+   },
+   "AdmOriginalData": {
+    "type": "string"
+   },
+   "AdmPublishWebNoPassword": {
+    "type": "string"
+   },
+   "AdmPublishWebNoPasswordFlag": {
+    "type": "string"
+   },
+   "AdmPublishWebPassword": {
+    "type": "string"
+   },
+   "AdmPublishWebPasswordFlag": {
+    "type": "string"
+   },
+   "AdmSystemIdentifier": {
+    "type": "string"
+   },
+   "AdmTimeInserted": {
+    "type": "string",
+    "format": "partial-time"
+   },
+   "AdmTimeModified": {
+    "type": "string",
+    "format": "partial-time"
+   },
+   "AudACDescription": {
+    "type": "string"
+   },
+   "AudAccessURI": {
+    "type": "string"
+   },
+   "AudAltText": {
+    "type": "string"
+   },
+   "AudAssociatedObservation": {
+    "type": "string"
+   },
+   "AudAssociatedSpecimen": {
+    "type": "string"
+   },
+   "AudCaptureDevice": {
+    "type": "string"
+   },
+   "AudCitation": {
+    "type": "string"
+   },
+   "AudCollectionCatalog": {
+    "type": "string"
+   },
+   "AudCollectionDepartment": {
+    "type": "string"
+   },
+   "AudDerivedFrom": {
+    "type": "string"
+   },
+   "AudFundingAttribution": {
+    "type": "string"
+   },
+   "AudIdentifier": {
+    "type": "string"
+   },
+   "AudLifeStage": {
+    "type": "string"
+   },
+   "AudNumbers": {
+    "type": "string"
+   },
+   "AudRelatedGeography": {
+    "type": "string"
+   },
+   "AudRelatedProjectCodes": {
+    "type": "string"
+   },
+   "AudRelatedResourceID": {
+    "type": "string"
+   },
+   "AudSex": {
+    "type": "string"
+   },
+   "AudSubjectOrientation": {
+    "type": "string"
+   },
+   "AudSubjectPart_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "AudTaxonCoverage": {
+    "type": "string"
+   },
+   "AudTemporalCoverage": {
+    "type": "string"
+   },
+   "AudVernacularName": {
+    "type": "string"
+   },
+   "ChaAudience_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ChaAudioBitsPerSample": {
+    "type": "string"
+   },
+   "ChaAudioLength": {
+    "type": "string"
+   },
+   "ChaAudioNumberOfChannels": {
+    "type": "string"
+   },
+   "ChaAudioSamplesPerSec": {
+    "type": "string"
+   },
+   "ChaFileSize": {
+    "type": "integer"
+   },
+   "ChaImageColorDepth": {
+    "type": "string"
+   },
+   "ChaImageHeight": {
+    "type": "string"
+   },
+   "ChaImageResolution": {
+    "type": "string"
+   },
+   "ChaImageWidth": {
+    "type": "string"
+   },
+   "ChaMd5Sum": {
+    "type": "string"
+   },
+   "ChaMediaForm": {
+    "type": "string"
+   },
+   "ChaRepository_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ChaVideoFilmLength": {
+    "type": "string"
+   },
+   "DetContributorRole_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DetContributorRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "DetContributorRef_tab"
+      },
+      "DetContributorRole": {
+       "type": "string",
+       "$comment": "DetContributorRole_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DetContributor_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DetCoverage": {
+    "type": "string"
+   },
+   "DetDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "DetLanguage_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DetMediaRightsRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/erights/[^/]+$"
+   },
+   "DetPublisher": {
+    "type": "string"
+   },
+   "DetPublisherRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "DetRelation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DetResourceDetailsDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DetResourceDetailsDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "DetResourceDetailsDate0, fake"
+      },
+      "DetResourceDetailsDescription": {
+       "type": "string",
+       "$comment": "DetResourceDetailsDescription_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DetResourceSubtype": {
+    "type": "string"
+   },
+   "DetResourceType": {
+    "type": "string"
+   },
+   "DetRights": {
+    "type": "string"
+   },
+   "DetSource": {
+    "type": "string"
+   },
+   "DetSubject_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DocBitsPerPixel_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DocBitsPerPixel": {
+       "type": "integer",
+       "$comment": "DocBitsPerPixel_tab"
+      },
+      "DocFileSize": {
+       "type": "integer",
+       "$comment": "DocFileSize_tab"
+      },
+      "DocHeight": {
+       "type": "integer",
+       "$comment": "DocHeight_tab"
+      },
+      "DocIdentifier": {
+       "type": "string",
+       "$comment": "DocIdentifier_tab"
+      },
+      "DocMimeFormat": {
+       "type": "string",
+       "$comment": "DocMimeFormat_tab"
+      },
+      "DocMimeType": {
+       "type": "string",
+       "$comment": "DocMimeType_tab"
+      },
+      "DocWidth": {
+       "type": "integer",
+       "$comment": "DocWidth_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DocColourSpace_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DocCompression_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DocDocumentRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/edocuments/[^/]+$"
+   },
+   "DocImageType_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DocMd5Sum_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DocMediaRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/media/[^/]+$"
+    }
+   },
+   "DocNumberColours_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "DocNumberPages_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "DocPlanes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "DocQuality_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "DocResolution_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ExiIfd_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ExiIfd": {
+       "type": "string",
+       "$comment": "ExiIfd_tab"
+      },
+      "ExiName": {
+       "type": "string",
+       "$comment": "ExiName_tab"
+      },
+      "ExiTag": {
+       "type": "string",
+       "$comment": "ExiTag_tab"
+      },
+      "ExiValue": {
+       "type": "string",
+       "$comment": "ExiValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ExtendedData": {
+    "type": "string"
+   },
+   "IptName_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "IptName": {
+       "type": "string",
+       "$comment": "IptName_tab"
+      },
+      "IptRecord": {
+       "type": "string",
+       "$comment": "IptRecord_tab"
+      },
+      "IptTag": {
+       "type": "string",
+       "$comment": "IptTag_tab"
+      },
+      "IptValue": {
+       "type": "string",
+       "$comment": "IptValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "MulCreator_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "MulDescription": {
+    "type": "string"
+   },
+   "MulDocumentType": {
+    "type": "string"
+   },
+   "MulIdentifier": {
+    "type": "string"
+   },
+   "MulMediaRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/media/[^/]+$"
+   },
+   "MulMimeFormat": {
+    "type": "string"
+   },
+   "MulMimeType": {
+    "type": "string"
+   },
+   "MulMultimediaCreatorRole_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "MulMultimediaCreatorRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "MulMultimediaCreatorRef_tab"
+      },
+      "MulMultimediaCreatorRole": {
+       "type": "string",
+       "$comment": "MulMultimediaCreatorRole_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "MulOtherNumberSource_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "MulOtherNumber": {
+       "type": "string",
+       "$comment": "MulOtherNumber_tab"
+      },
+      "MulOtherNumberSource": {
+       "type": "string",
+       "$comment": "MulOtherNumberSource_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "MulTitle": {
+    "type": "string"
+   },
+   "Multimedia": {
+    "type": "string"
+   },
+   "NotNotes": {
+    "type": "string"
+   },
+   "NteAttributedToRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "NteBibliographyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+     }
+    }
+   },
+   "NteDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "NteDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "NteDate0, fake"
+      },
+      "NteText": {
+       "type": "string",
+       "$comment": "NteText0, fake"
+      },
+      "NteType": {
+       "type": "string",
+       "$comment": "NteType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RelIsParent": {
+    "type": "string"
+   },
+   "RelNotes": {
+    "type": "string"
+   },
+   "RelParentMediaRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/emultimedia/[^/]+$"
+   },
+   "RelRelatedMedia_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RelRelatedMediaRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/emultimedia/[^/]+$",
+       "$comment": "RelRelatedMediaRef_tab"
+      },
+      "RelRelationship": {
+       "type": "string",
+       "$comment": "RelRelationship_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RightsAcknowledgeLocal": {
+    "type": "string"
+   },
+   "SecCanDelete_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecCanDisplay_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecCanEdit_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecDepartment_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecRecordStatus": {
+    "type": "string"
+   },
+   "SummaryData": {
+    "type": "string"
+   },
+   "SupFileSize_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "SupFileSize": {
+       "type": "integer",
+       "$comment": "SupFileSize_tab"
+      },
+      "SupFileSize_subgrp": {
+       "type": "array",
+       "items": {
+        "type": [
+         "object",
+         "null"
+        ],
+        "properties": {
+         "SupUsage": {
+          "type": "string",
+          "$comment": "SupUsage_nesttab"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "SupHeight": {
+       "type": "integer",
+       "$comment": "SupHeight_tab"
+      },
+      "SupIdentifier": {
+       "type": "string",
+       "$comment": "SupIdentifier_tab"
+      },
+      "SupMimeFormat": {
+       "type": "string",
+       "$comment": "SupMimeFormat_tab"
+      },
+      "SupMimeType": {
+       "type": "string",
+       "$comment": "SupMimeType_tab"
+      },
+      "SupWidth": {
+       "type": "integer",
+       "$comment": "SupWidth_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "SupMD5Checksum_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SupMediaRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/media/[^/]+$"
+    }
+   },
+   "SupNotes0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SupTXTXML_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "Supplementary_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TasCommenceNotifyOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasCommenceNotifyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasCommencementDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "TasCommencementDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "TasCommencementDate0, fake"
+      },
+      "TasCompleted": {
+       "type": "string",
+       "$comment": "TasCompleted_tab"
+      },
+      "TasCompletionDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "TasCompletionDate0, fake"
+      },
+      "TasDescription": {
+       "type": "string",
+       "$comment": "TasDescription_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "TasCompletionNotifyOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasCompletionNotifyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasDependOnCompletionOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasDependOnPosition_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TasDependOnTask_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasEndNotifyDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "TasPersonAssignedToRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasResults_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TasStartNotifyDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "TasTaskAssignerRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "TasTaskDuration_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasTimeTakenOnTask_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   },
+   "XmpMetadata": {
+    "type": "string"
+   },
+   "irn": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/emultimedia/[^/]+$"
+   }
+  },
+  "additionalProperties": false
+ },
+ "@namespaces": {
+  "emu": {
+   "name": "http://axiell.com/emu#"
+  }
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/shared/tenants/fmnh"
+  },
+  "start": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/"
+  },
+  "search": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/shared/tenants"
+  },
+  "emu:update": {
+   "method": "PATCH",
+   "href": "http://10.10.10.26:8084/shared/tenants/fmnh",
+   "encoding": "json",
+   "schemaUrl": "http://json.schemastore.org/json-patch"
+  },
+  "emu:update-all": {
+   "method": "PATCH",
+   "href": "http://10.10.10.26:8084/shared/tenants",
+   "encoding": "json",
+   "schemaUrl": "http://json.schemastore.org/json-patch"
+  }
+ }
+}

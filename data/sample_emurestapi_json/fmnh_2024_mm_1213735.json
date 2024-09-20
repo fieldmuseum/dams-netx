@@ -1,0 +1,406 @@
+{
+ "id": "emu:/fmnh/emultimedia/1213735",
+ "version": 1,
+ "data": {
+  "DocImageType_tab": [
+   "TrueColor",
+   "TrueColor"
+  ],
+  "AdmPublishWebNoPasswordFlag": "Y",
+  "ChaRepository_tab": [
+   "KE EMu Repository"
+  ],
+  "RightsAcknowledgeLocal": "Please cite this as: (c) The Field Museum (DATE) CC-BY-NC",
+  "MulDescription": "Acacia mearnsii De Wild., Brazil, M. Gaelzer 242, F",
+  "ChaMd5Sum": "31327a1a29ac617be33b204ed8d9a08a",
+  "ExtendedData": "1213735\n\nV0359485F, [1500x2335], (image/jpeg), [Supp]",
+  "ChaFileSize": 630667,
+  "MulTitle": "V0359485F",
+  "ChaImageHeight": "2335",
+  "DocQuality_tab": [
+   92,
+   100
+  ],
+  "DocNumberPages_tab": [
+   1,
+   1
+  ],
+  "MulMimeType": "image",
+  "AudAssociatedSpecimen": "ccf058cb-8ff6-4756-8180-de5335929f44",
+  "SummaryData": "V0359485F, [1500x2335], (image/jpeg), [Supp]",
+  "SecCanDisplay_tab": [
+   "Group Default"
+  ],
+  "SecCanEdit_tab": [
+   "Group Default"
+  ],
+  "ChaImageResolution": "72",
+  "XmpMetadata": "<?xpacket begin=\"﻿\" id=\"W5M0MpCehiHzreSzNTczkc9d\"?>&#0010;<x:xmpmeta xmlns:x=\"adobe:ns:meta/\" x:xmptk=\"Adobe XMP Core 5.5-c002 1.148022, 2012/07/15-18:06:45        \">&#0010; <rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">&#0010;  <rdf:Description rdf:about=\"\"&#0010;    xmlns:exif=\"http://ns.adobe.com/exif/1.0/\"&#0010;    xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"&#0010;    xmlns:dc=\"http://purl.org/dc/elements/1.1/\"&#0010;    xmlns:leaf=\"http://www.creo.com/global/products/digital_photography_leaf/default.htm/\"&#0010;    xmlns:photoshop=\"http://ns.adobe.com/photoshop/1.0/\"&#0010;    xmlns:xmpMM=\"http://ns.adobe.com/xap/1.0/mm/\"&#0010;    xmlns:stEvt=\"http://ns.adobe.com/xap/1.0/sType/ResourceEvent#\"&#0010;    xmlns:stRef=\"http://ns.adobe.com/xap/1.0/sType/ResourceRef#\"&#0010;    xmlns:xmpRights=\"http://ns.adobe.com/xap/1.0/rights/\"&#0010;   exif:Software=\"\"&#0010;   xmp:CreatorTool=\"Adobe Photoshop Lightroom 4.4 (Windows)\"&#0010;   xmp:CreateDate=\"2015-10-03T14:09:46Z\"&#0010;   xmp:ModifyDate=\"2015-10-10T12:47:03-05:00\"&#0010;   xmp:MetadataDate=\"2015-10-10T12:47:03-05:00\"&#0010;   dc:format=\"image/jpeg\"&#0010;   leaf:Created=\"\"&#0010;   leaf:Modified=\"\"&#0010;   leaf:FileName=\"\"&#0010;   leaf:ModifiedSize=\"\"&#0010;   leaf:ColorLook=\"LF3 Product 5\"&#0010;   leaf:Resolution=\"300\"&#0010;   leaf:Height=\"9334\"&#0010;   leaf:Saturation=\"No Saturation\"&#0010;   leaf:ICCColor=\"On\"&#0010;   leaf:ColorSpace=\"Adobe RGB\"&#0010;   leaf:Filter=\"Green\"&#0010;   leaf:GrayBalance=\"Custom V0085131F_01.mos\"&#0010;   leaf:Grain=\"Mamiya DM 56 Default Grain\"&#0010;   leaf:Flags=\"---\"&#0010;   leaf:Scale=\"100\"&#0010;   leaf:Width=\"6000\"&#0010;   leaf:Moire=\"No Reduction\"&#0010;   leaf:DevelopCurve=\"Mamiya DM 56 Product\"&#0010;   leaf:Sharp=\"FMNH-KEW\"&#0010;   leaf:Selection=\"No Selection\"&#0010;   photoshop:DateCreated=\"2015-10-03T14:09:46Z\"&#0010;   xmpMM:DocumentID=\"xmp.did:423376c2-0fda-9145-a410-a9b9bb56ab20\"&#0010;   xmpMM:OriginalDocumentID=\"713F649F669D63EDBBBF4CDD486FB854\"&#0010;   xmpMM:InstanceID=\"xmp.iid:423376c2-0fda-9145-a410-a9b9bb56ab20\"&#0010;   xmpRights:Marked=\"True\">&#0010;   <dc:creator>&#0010;    <rdf:Seq>&#0010;     <rdf:li>The Field Museum</rdf:li>&#0010;     <rdf:li>Botany Collection</rdf:li>&#0010;    </rdf:Seq>&#0010;   </dc:creator>&#0010;   <dc:rights>&#0010;    <rdf:Alt>&#0010;     <rdf:li xml:lang=\"x-default\">© 2014 The Field Museum</rdf:li>&#0010;    </rdf:Alt>&#0010;   </dc:rights>&#0010;   <xmpMM:History>&#0010;    <rdf:Seq>&#0010;     <rdf:li&#0010;      stEvt:action=\"derived\"&#0010;      stEvt:parameters=\"converted from image/x-leaf-raw to image/dng, saved to new location\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"saved\"&#0010;      stEvt:instanceID=\"xmp.iid:04014a7e-1eb5-4872-bee9-aae2613ab3b4\"&#0010;      stEvt:when=\"2015-10-03T14:54:34-05:00\"&#0010;      stEvt:softwareAgent=\"Adobe Photoshop Lightroom 4.4 (Macintosh)\"&#0010;      stEvt:changed=\"/\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"derived\"&#0010;      stEvt:parameters=\"converted from image/dng to image/jpeg, saved to new location\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"saved\"&#0010;      stEvt:instanceID=\"xmp.iid:bc504e3e-32b6-ec41-9bcd-e3777566db14\"&#0010;      stEvt:when=\"2015-10-10T12:47:03-05:00\"&#0010;      stEvt:softwareAgent=\"Adobe Photoshop Lightroom 4.4 (Windows)\"&#0010;      stEvt:changed=\"/\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"converted\"&#0010;      stEvt:parameters=\"from image/jpeg to image/dng\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"derived\"&#0010;      stEvt:parameters=\"converted from image/dng to image/jpeg, saved to new location\"/>&#0010;     <rdf:li&#0010;      stEvt:action=\"saved\"&#0010;      stEvt:instanceID=\"xmp.iid:423376c2-0fda-9145-a410-a9b9bb56ab20\"&#0010;      stEvt:when=\"2015-10-10T12:47:03-05:00\"&#0010;      stEvt:softwareAgent=\"Adobe Photoshop Lightroom 4.4 (Windows)\"&#0010;      stEvt:changed=\"/\"/>&#0010;    </rdf:Seq>&#0010;   </xmpMM:History>&#0010;   <xmpMM:DerivedFrom&#0010;    stRef:instanceID=\"xmp.iid:bc504e3e-32b6-ec41-9bcd-e3777566db14\"&#0010; stRef:documentID=\"xmp.did:bc504e3e-32b6-ec41-9bcd-e3777566db14\"&#0010;\nstRef:originalDocumentID=\"713F649F669D63EDBBBF4CDD486FB854\"/>&#0010;  </rdf:Description>&#0010; </rdf:RDF>&#0010;</x:xmpmeta>&#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010;                                                                                                    &#0010; &#0010; &#0010; &#0010; &#0010; &#0010;<?xpacket end=\"w\"?>",
+  "AudTaxonCoverage": "Acacia mearnsii De Wild.",
+  "ChaImageColorDepth": "24",
+  "AudRelatedGeography": "Brazil, Rio Grande do Sul, South America",
+  "MulMimeFormat": "jpeg",
+  "MulCreator_tab": [
+   "Field Museum of Natural History - Botany Department",
+   "GDI 2013-2015"
+  ],
+  "AdmPublishWebPasswordFlag": "Y",
+  "Multimedia": "1213/735/V0359485F.jpg",
+  "Supplementary_tab": [
+   "1213/735/supplementary/V0359485F.dng"
+  ],
+  "DetRights": "(c) Field Museum of Natural History",
+  "AdmPublishWebPassword": "Yes",
+  "DetSource": "Botany Department, Searle herbarium",
+  "RelIsParent": "No",
+  "SupMD5Checksum_tab": [
+   "4f6f9474384a7a7aa0e5b7cda6cf59a6"
+  ],
+  "AudCitation": "Courtesy of: GDI 2013-2015. (c) Field Museum of Natural History. CC BY-NC 4.0. https://mm.fieldmuseum.org/cd382b6e-9045-4727-8581-86b2ad2bdb0b (accessed on 01 Jul 2021)",
+  "DetResourceType": "StillImage",
+  "DocCompression_tab": [
+   "JPEG",
+   "JPEG"
+  ],
+  "DocDocumentRef": {
+   "id": "emu:/fmnh/edocuments/1213735",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/edocuments/1213735"
+    }
+   }
+  },
+  "irn": {
+   "id": "emu:/fmnh/emultimedia/1213735",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/emultimedia/1213735"
+    }
+   }
+  },
+  "AdmTimeModified": "13:41:08",
+  "SecRecordStatus": "Active",
+  "DocMd5Sum_tab": [
+   "31327a1a29ac617be33b204ed8d9a08a",
+   "8f52a6400b360e122339eb28fd50cf2a"
+  ],
+  "DocNumberColours_tab": [
+   118540,
+   2235
+  ],
+  "DocColourSpace_tab": [
+   "sRGB",
+   "sRGB"
+  ],
+  "AudACDescription": "Acacia mearnsii De Wild., Brazil, M. Gaelzer 242, F",
+  "SecCanDelete_tab": [
+   "Group Default"
+  ],
+  "AdmDateModified": "2021-06-02",
+  "MulDocumentType": "M",
+  "AdmGUIDPreferredValue": "cd382b6e-9045-4727-8581-86b2ad2bdb0b",
+  "AdmInsertedBy": "dle",
+  "AdmSystemIdentifier": "dle-151013-1119",
+  "AdmGUIDPreferredType": "UUID4",
+  "AudNumbers": "1864702",
+  "DetMediaRightsRef": {
+   "id": "emu:/fmnh/erights/46",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/erights/46"
+    }
+   }
+  },
+  "AudIdentifier": "cd382b6e-9045-4727-8581-86b2ad2bdb0b",
+  "AdmModifiedBy": "Le, Daniel",
+  "DetSubject_tab": [
+   "Seed Plants",
+   "vascular plant",
+   "Dried specimen",
+   "herbarium sheet"
+  ],
+  "DocPlanes_tab": [
+   1,
+   1
+  ],
+  "MulIdentifier": "V0359485F.jpg",
+  "DetPublisher": "Field Museum of Natural History",
+  "AdmImportIdentifier": "SAPP_mm_10_13_2015",
+  "ChaImageWidth": "1500",
+  "SecDepartment_tab": [
+   "Botany"
+  ],
+  "AdmTimeInserted": "11:43:41",
+  "DocResolution_tab": [
+   "72",
+   "72"
+  ],
+  "AdmDateInserted": "2015-10-13",
+  "AdmPublishWebNoPassword": "Yes",
+  "AudAccessURI": "http://fm-digital-assets.fieldmuseum.org/1213/735/V0359485F.jpg",
+  "SupFileSize_grp": [
+   {
+    "SupIdentifier": "V0359485F.dng",
+    "SupFileSize": 78813402,
+    "SupWidth": 6000,
+    "SupFileSize_subgrp": [
+     {
+      "SupUsage": "Research"
+     },
+     {
+      "SupUsage": "Archival"
+     }
+    ],
+    "SupHeight": 9334,
+    "SupMimeFormat": "AdobeRawDNG",
+    "SupMimeType": "image"
+   }
+  ],
+  "AdmGUIDIsPreferred_grp": [
+   {
+    "AdmGUIDType": "UUID4",
+    "AdmGUIDValue": "cd382b6e-9045-4727-8581-86b2ad2bdb0b",
+    "AdmGUIDIsPreferred": "Yes"
+   }
+  ],
+  "MulMultimediaCreatorRole_grp": [
+   {
+    "MulMultimediaCreatorRef": {
+     "id": "emu:/fmnh/eparties/64",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/eparties/64"
+      }
+     }
+    },
+    "MulMultimediaCreatorRole": "Creator"
+   },
+   {
+    "MulMultimediaCreatorRef": {
+     "id": "emu:/fmnh/eparties/177101",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/eparties/177101"
+      }
+     }
+    },
+    "MulMultimediaCreatorRole": "Funded By"
+   }
+  ],
+  "ExiIfd_grp": [
+   {
+    "ExiValue": "Mamiya",
+    "ExiIfd": "Primary",
+    "ExiTag": "271",
+    "ExiName": "Make"
+   },
+   {
+    "ExiValue": "DM56",
+    "ExiIfd": "Primary",
+    "ExiTag": "272",
+    "ExiName": "Model"
+   },
+   {
+    "ExiValue": "72/1",
+    "ExiIfd": "Primary",
+    "ExiTag": "282",
+    "ExiName": "XResolution"
+   },
+   {
+    "ExiValue": "72/1",
+    "ExiIfd": "Primary",
+    "ExiTag": "283",
+    "ExiName": "YResolution"
+   },
+   {
+    "ExiValue": "2",
+    "ExiIfd": "Primary",
+    "ExiTag": "296",
+    "ExiName": "ResolutionUnit"
+   },
+   {
+    "ExiValue": "Adobe Photoshop Lightroom 4.4 (Windows)",
+    "ExiIfd": "Primary",
+    "ExiTag": "305",
+    "ExiName": "Software"
+   },
+   {
+    "ExiValue": "2015:10:10 12:47:03",
+    "ExiIfd": "Primary",
+    "ExiTag": "306",
+    "ExiName": "DateTime"
+   },
+   {
+    "ExiValue": "The Field Museum; Botany Collection",
+    "ExiIfd": "Primary",
+    "ExiTag": "315",
+    "ExiName": "Artist"
+   },
+   {
+    "ExiValue": "?? 2014 The Field Museum",
+    "ExiIfd": "Primary",
+    "ExiTag": "33432",
+    "ExiName": "Copyright"
+   },
+   {
+    "ExiValue": "286",
+    "ExiIfd": "Primary",
+    "ExiTag": "34665",
+    "ExiName": "ExifIFD"
+   },
+   {
+    "ExiValue": "1/20",
+    "ExiIfd": "Exif",
+    "ExiTag": "33434",
+    "ExiName": "ExposureTime"
+   },
+   {
+    "ExiValue": "50",
+    "ExiIfd": "Exif",
+    "ExiTag": "34855",
+    "ExiName": "ISOSpeedRatings"
+   },
+   {
+    "ExiValue": "48, 50, 51, 48",
+    "ExiIfd": "Exif",
+    "ExiTag": "36864",
+    "ExiName": "ExifVersion"
+   },
+   {
+    "ExiValue": "2015:10:03 14:09:46",
+    "ExiIfd": "Exif",
+    "ExiTag": "36867",
+    "ExiName": "DateTimeOriginal"
+   },
+   {
+    "ExiValue": "2015:10:03 14:09:46",
+    "ExiIfd": "Exif",
+    "ExiTag": "36868",
+    "ExiName": "DateTimeDigitized"
+   },
+   {
+    "ExiValue": "4321928/1000000",
+    "ExiIfd": "Exif",
+    "ExiTag": "37377",
+    "ExiName": "ShutterSpeedValue"
+   },
+   {
+    "ExiValue": "5461333/32768",
+    "ExiIfd": "Exif",
+    "ExiTag": "41486",
+    "ExiName": "FocalPlaneXResolution"
+   },
+   {
+    "ExiValue": "5461333/32768",
+    "ExiIfd": "Exif",
+    "ExiTag": "41487",
+    "ExiName": "FocalPlaneYResolution"
+   },
+   {
+    "ExiValue": "4",
+    "ExiIfd": "Exif",
+    "ExiTag": "41488",
+    "ExiName": "FocalPlaneResolutionUnit"
+   }
+  ],
+  "DocBitsPerPixel_grp": [
+   {
+    "DocIdentifier": "V0359485F.jpg",
+    "DocBitsPerPixel": 24,
+    "DocMimeFormat": "jpeg",
+    "DocFileSize": 630667,
+    "DocHeight": 2335,
+    "DocWidth": 1500,
+    "DocMimeType": "image"
+   },
+   {
+    "DocIdentifier": "V0359485F.thumb.jpg",
+    "DocBitsPerPixel": 24,
+    "DocMimeFormat": "jpeg",
+    "DocFileSize": 20428,
+    "DocHeight": 90,
+    "DocWidth": 58,
+    "DocMimeType": "image"
+   }
+  ],
+  "IptName_grp": [
+   {
+    "IptRecord": "Envelope",
+    "IptTag": "90",
+    "IptName": "CodedCharacterSet",
+    "IptValue": "\u001b%G"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "0",
+    "IptName": "ApplicationRecordVersion",
+    "IptValue": "4"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "55",
+    "IptName": "DateCreated",
+    "IptValue": "20151003"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "60",
+    "IptName": "TimeCreated",
+    "IptValue": "140946+0000"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "62",
+    "IptName": "DigitalCreationTime",
+    "IptValue": "20151003"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "63",
+    "IptName": "DigitalCreationTime",
+    "IptValue": "140946+0000"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "80",
+    "IptName": "By-line",
+    "IptValue": "The Field Museum"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "80",
+    "IptName": "By-line",
+    "IptValue": "Botany Collection"
+   },
+   {
+    "IptRecord": "Application",
+    "IptTag": "116",
+    "IptName": "CopyrightNotice",
+    "IptValue": "© 2014 The Field Museum"
+   }
+  ],
+  "DetResourceDetailsDate_grp": [
+   {
+    "DetResourceDetailsDate": "2015-10-03",
+    "DetResourceDetailsDescription": "Created"
+   }
+  ],
+  "DetContributorRole_grp": [
+   {
+    "DetContributorRef": {
+     "id": "emu:/fmnh/eparties/177710",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/eparties/177710"
+      }
+     }
+    }
+   }
+  ]
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/fmnh/emultimedia/1213735"
+  }
+ }
+}

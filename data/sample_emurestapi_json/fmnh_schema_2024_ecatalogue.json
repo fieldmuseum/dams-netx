@@ -1,0 +1,5653 @@
+{
+ "id": "emu:/shared/tenants/fmnh",
+ "version": 1,
+ "data": {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "emu:/fmnh/resources/ecatalogue",
+  "title": "ecatalogue",
+  "type": "object",
+  "properties": {
+   "AccAccessionLot_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AccAccessionLotRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/efmnhtransactions/[^/]+$",
+       "$comment": "AccAccessionLotRef_tab"
+      },
+      "AccNmnhNumberOfItems": {
+       "type": "integer",
+       "$comment": "AccNmnhNumberOfItems_tab"
+      },
+      "AccNumberSpecimensModifier": {
+       "type": "string",
+       "$comment": "AccNumberSpecimensModifier_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "AdmDateInserted": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "AdmDateModified": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "AdmGUIDIsPreferred_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AdmGUIDIsPreferred": {
+       "type": "string",
+       "$comment": "AdmGUIDIsPreferred_tab"
+      },
+      "AdmGUIDType": {
+       "type": "string",
+       "$comment": "AdmGUIDType_tab"
+      },
+      "AdmGUIDValue": {
+       "type": "string",
+       "$comment": "AdmGUIDValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "AdmGUIDPreferredType": {
+    "type": "string"
+   },
+   "AdmGUIDPreferredValue": {
+    "type": "string"
+   },
+   "AdmImportIdentifier": {
+    "type": "string"
+   },
+   "AdmInsertedBy": {
+    "type": "string"
+   },
+   "AdmModifiedBy": {
+    "type": "string"
+   },
+   "AdmOriginalData": {
+    "type": "string"
+   },
+   "AdmPublishWebNoPassword": {
+    "type": "string"
+   },
+   "AdmPublishWebNoPasswordFlag": {
+    "type": "string"
+   },
+   "AdmPublishWebPassword": {
+    "type": "string"
+   },
+   "AdmPublishWebPasswordFlag": {
+    "type": "string"
+   },
+   "AdmSystemIdentifier": {
+    "type": "string"
+   },
+   "AdmTimeInserted": {
+    "type": "string",
+    "format": "partial-time"
+   },
+   "AdmTimeModified": {
+    "type": "string",
+    "format": "partial-time"
+   },
+   "AdmWebMetadata": {
+    "type": "string"
+   },
+   "AnaAnalysisNo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AnaAnalysisNo": {
+       "type": "string",
+       "$comment": "AnaAnalysisNo_tab"
+      },
+      "AnaEndDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "AnaEndDate0, fake"
+      },
+      "AnaMethod": {
+       "type": "string",
+       "$comment": "AnaMethod_tab"
+      },
+      "AnaStartDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "AnaStartDate0, fake"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "AnaDateWhen0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "AnaInvolvedParties_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AnaInvolvedParties_subgrp": {
+       "type": "array",
+       "items": {
+        "type": [
+         "object",
+         "null"
+        ],
+        "properties": {
+         "AnaInvolvedPartiesRef": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^emu:/fmnh/eparties/[^/]+$",
+          "$comment": "AnaInvolvedPartiesRef_nesttab"
+         },
+         "AnaNotes": {
+          "type": "string",
+          "$comment": "AnaNotes_nesttab"
+         },
+         "AnaRole": {
+          "type": "string",
+          "$comment": "AnaRole_nesttab"
+         }
+        },
+        "additionalProperties": false
+       }
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "AnaMakeResultsAvailable_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "AnaProposalNotesText0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "AnaRelatedLoanLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "AnaRelatedLoanRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eloans/[^/]+$"
+    }
+   },
+   "AnaResults_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "AttBiblio_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "AttBiblioRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ebibliography/[^/]+$",
+       "$comment": "AttBiblioRef_tab"
+      },
+      "AttPeriod": {
+       "type": "string",
+       "$comment": "AttPeriod_tab"
+      },
+      "AttPreferred": {
+       "type": "string",
+       "$comment": "AttPreferred_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "BibBibliographyRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "CatAccessionLotRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eaccessionlots/[^/]+$"
+   },
+   "CatAccessionNumberLocal": {
+    "type": "string"
+   },
+   "CatAccessionYearLocal": {
+    "type": "integer"
+   },
+   "CatAlbumNo": {
+    "type": "string"
+   },
+   "CatAlbumType": {
+    "type": "string"
+   },
+   "CatAnthroBarcode": {
+    "type": "integer"
+   },
+   "CatAnthroBarcodePrinted": {
+    "type": "string"
+   },
+   "CatAnthroCatalogNumber": {
+    "type": "integer"
+   },
+   "CatAutoNo": {
+    "type": "string"
+   },
+   "CatCatalog": {
+    "type": "string"
+   },
+   "CatCatalogNo1": {
+    "type": "string"
+   },
+   "CatCatalogNo1Copy": {
+    "type": "string"
+   },
+   "CatCatalogNo2": {
+    "type": "integer"
+   },
+   "CatCatalogNo2Copy": {
+    "type": "integer"
+   },
+   "CatCatalogNo3": {
+    "type": "string"
+   },
+   "CatCatalogSubset": {
+    "type": "string"
+   },
+   "CatCatalogueNo": {
+    "type": "integer"
+   },
+   "CatCheckedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "CatChildMinNumIndviduals": {
+    "type": "integer"
+   },
+   "CatClassofRecord": {
+    "type": "string"
+   },
+   "CatControlNumber": {
+    "type": "string"
+   },
+   "CatCreditLineLocal": {
+    "type": "string"
+   },
+   "CatDateChecked": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "CatDateRecorded": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "CatDepartment": {
+    "type": "string"
+   },
+   "CatDepartmentCode": {
+    "type": "string"
+   },
+   "CatFrameNo": {
+    "type": "string"
+   },
+   "CatHFMNHNo": {
+    "type": "integer"
+   },
+   "CatImageType": {
+    "type": "string"
+   },
+   "CatItemsCat": {
+    "type": "integer"
+   },
+   "CatItemsCatChild": {
+    "type": "integer"
+   },
+   "CatItemsCatPrep": {
+    "type": "integer"
+   },
+   "CatItemsInv": {
+    "type": "integer"
+   },
+   "CatItemsInvChild": {
+    "type": "integer"
+   },
+   "CatItemsInvPrep": {
+    "type": "integer"
+   },
+   "CatItemsSub": {
+    "type": "integer"
+   },
+   "CatItemsSubChild": {
+    "type": "integer"
+   },
+   "CatItemsSubPrep": {
+    "type": "integer"
+   },
+   "CatLegalStatus": {
+    "type": "string"
+   },
+   "CatMammalsCatalogNo": {
+    "type": "integer"
+   },
+   "CatMammalsOtherNoOwner_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "CatMammalsOtherNo": {
+       "type": "string",
+       "$comment": "CatMammalsOtherNo_tab"
+      },
+      "CatMammalsOtherNoOwnerRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "CatMammalsOtherNoOwnerRef_tab"
+      },
+      "CatMammalsOtherNoSource": {
+       "type": "string",
+       "$comment": "CatMammalsOtherNoSource_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "CatMammalsProject_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "CatMinNumIndviduals": {
+    "type": "integer"
+   },
+   "CatMuseum": {
+    "type": "string"
+   },
+   "CatNegNo": {
+    "type": "integer"
+   },
+   "CatNegativeNumber_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "CatNewRecordClass": {
+    "type": "string"
+   },
+   "CatOReturnedToLocal": {
+    "type": "string"
+   },
+   "CatOReturnedToRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "CatObjectCount": {
+    "type": "integer"
+   },
+   "CatObjectId": {
+    "type": "string"
+   },
+   "CatObjectType": {
+    "type": "string"
+   },
+   "CatOrientation": {
+    "type": "string"
+   },
+   "CatOtherNumbersNotes_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "CatOtherNumbersNotes": {
+       "type": "string",
+       "$comment": "CatOtherNumbersNotes_tab"
+      },
+      "CatOtherNumbersType": {
+       "type": "string",
+       "$comment": "CatOtherNumbersType_tab"
+      },
+      "CatOtherNumbersValue": {
+       "type": "string",
+       "$comment": "CatOtherNumbersValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "CatPhotoCatalogNo": {
+    "type": "string"
+   },
+   "CatProjectInsects_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "CatProjectIz_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "CatProject_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "CatRecordType": {
+    "type": "string"
+   },
+   "CatRecordedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "CatRelatedEventsRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eevents/[^/]+$"
+    }
+   },
+   "CatSightingsEventsRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ecollectionevents/[^/]+$"
+    }
+   },
+   "CatSubNumbers": {
+    "type": "string"
+   },
+   "CatSupplementalKind_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "CatSupplementalKind": {
+       "type": "string",
+       "$comment": "CatSupplementalKind_tab"
+      },
+      "CatSupplementalValue": {
+       "type": "string",
+       "$comment": "CatSupplementalValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "CatTypesPresent": {
+    "type": "string"
+   },
+   "CitTaxonRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+    }
+   },
+   "CitTypeStatus_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ClaCode_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ClaCode": {
+       "type": "string",
+       "$comment": "ClaCode_tab"
+      },
+      "ClaDescription": {
+       "type": "string",
+       "$comment": "ClaDescription0, fake"
+      },
+      "ClaLevel": {
+       "type": "string",
+       "$comment": "ClaLevel_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ColAdditionalLabelData": {
+    "type": "string"
+   },
+   "ColBaySoundLocal": {
+    "type": "string"
+   },
+   "ColBiogeographyRegionLocal": {
+    "type": "string"
+   },
+   "ColCentroidLatitudeLocal": {
+    "type": "string",
+    "format": "latitude"
+   },
+   "ColCentroidLongitudeLocal": {
+    "type": "string",
+    "format": "longitude"
+   },
+   "ColCollectionEventRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ecollectionevents/[^/]+$"
+   },
+   "ColCollectionNotes": {
+    "type": "string"
+   },
+   "ColCollectionNumber": {
+    "type": "string"
+   },
+   "ColCollectorBriefNameLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColCollectorRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "ColContinentLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColCountryLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColDateCollected": {
+    "type": "string"
+   },
+   "ColDistrictCountyShireLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColDrainageBasinLocal": {
+    "type": "string"
+   },
+   "ColEarliestDateCollected": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ColEarliestDateCollectedOrig": {
+    "type": "integer"
+   },
+   "ColExpedition": {
+    "type": "string"
+   },
+   "ColHReceivedFromLocal": {
+    "type": "string"
+   },
+   "ColHReceivedFromRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ColIslandGroupingLocal": {
+    "type": "string"
+   },
+   "ColIslandLocal": {
+    "type": "string"
+   },
+   "ColLatestDateCollected": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ColLatestDateCollectedOrig": {
+    "type": "integer"
+   },
+   "ColMammalsCollectionNo": {
+    "type": "string"
+   },
+   "ColMammalsCollectorInitials": {
+    "type": "string"
+   },
+   "ColMammalsCollectorLocal": {
+    "type": "string"
+   },
+   "ColMammalsCollectorNo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ColMammalsCollectorNo": {
+       "type": "string",
+       "$comment": "ColMammalsCollectorNo_tab"
+      },
+      "ColNotes": {
+       "type": "string",
+       "$comment": "ColNotes_tab"
+      },
+      "ColRole": {
+       "type": "string",
+       "$comment": "ColRole_tab"
+      },
+      "ColZooPersonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "ColZooPersonRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ColMammalsCollectorRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ColMammalsExpedition": {
+    "type": "string"
+   },
+   "ColNearestNamedPlaceLocal": {
+    "type": "string"
+   },
+   "ColOBandNo": {
+    "type": "string"
+   },
+   "ColOBandNotes": {
+    "type": "string"
+   },
+   "ColOCollectionNo": {
+    "type": "string"
+   },
+   "ColOHabitat": {
+    "type": "string"
+   },
+   "ColOReceivedByLocal": {
+    "type": "string"
+   },
+   "ColOReceivedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ColOceanLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColPlotTransect": {
+    "type": "string"
+   },
+   "ColPreciseLocationLocal": {
+    "type": "string"
+   },
+   "ColProvinceStateTerritoryLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ColQuadrat": {
+    "type": "string"
+   },
+   "ColSeaGulfLocal": {
+    "type": "string"
+   },
+   "ColSiteLocationLocal": {
+    "type": "string"
+   },
+   "ColSiteLocationRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/esites/[^/]+$"
+   },
+   "ColSubplot": {
+    "type": "string"
+   },
+   "ColTownshipLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "Con1Assessment": {
+    "type": "string"
+   },
+   "Con1AssessmentByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "Con1TreatmentCode": {
+    "type": "string"
+   },
+   "Con1TreatmentLevel": {
+    "type": "string"
+   },
+   "Con1TreatmentType": {
+    "type": "string"
+   },
+   "ConCheckedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ConConditionDetails": {
+    "type": "string"
+   },
+   "ConConditionPeriod": {
+    "type": "integer"
+   },
+   "ConConditionPeriodType": {
+    "type": "string"
+   },
+   "ConConditionStatus": {
+    "type": "string"
+   },
+   "ConDateChecked": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ConDispApprovedDisplay": {
+    "type": "string"
+   },
+   "ConDispCaseRequirements_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ConDispControlHumidity_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ConDispDetByHumidityRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ConDispDetByLightRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ConDispDetByTemperatureRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ConDispGenHumidity": {
+    "type": "string"
+   },
+   "ConDispGenLight": {
+    "type": "string"
+   },
+   "ConDispGenTemperature": {
+    "type": "string"
+   },
+   "ConDispMaxCelTemperature": {
+    "type": "number"
+   },
+   "ConDispMaxFarTemperature": {
+    "type": "number"
+   },
+   "ConDispMaxHumidity": {
+    "type": "number"
+   },
+   "ConDispMaxLight": {
+    "type": "number"
+   },
+   "ConDispMinCelTemperature": {
+    "type": "number"
+   },
+   "ConDispMinFarTemperature": {
+    "type": "number"
+   },
+   "ConDispMinHumidity": {
+    "type": "number"
+   },
+   "ConDispMinLight": {
+    "type": "number"
+   },
+   "ConDispObjectType": {
+    "type": "string"
+   },
+   "ConDispOtherInstructions": {
+    "type": "string"
+   },
+   "ConHandlingInstructions": {
+    "type": "string"
+   },
+   "ConNextCheck": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ConStorGenHumidity": {
+    "type": "string"
+   },
+   "ConStorGenLight": {
+    "type": "string"
+   },
+   "ConStorGenTemperature": {
+    "type": "string"
+   },
+   "ConStorMaxCelTemperature": {
+    "type": "number"
+   },
+   "ConStorMaxFarTemperature": {
+    "type": "number"
+   },
+   "ConStorMaxHumidity": {
+    "type": "number"
+   },
+   "ConStorMaxLight": {
+    "type": "number"
+   },
+   "ConStorMinCelTemperature": {
+    "type": "number"
+   },
+   "ConStorMinFarTemperature": {
+    "type": "number"
+   },
+   "ConStorMinHumidity": {
+    "type": "number"
+   },
+   "ConStorMinLight": {
+    "type": "number"
+   },
+   "ConStorOtherInstructions": {
+    "type": "string"
+   },
+   "DarAgeClass": {
+    "type": "string"
+   },
+   "DarBasisOfRecord": {
+    "type": "string"
+   },
+   "DarBed": {
+    "type": "string"
+   },
+   "DarBoundingBox": {
+    "type": "string"
+   },
+   "DarCatalogNumber": {
+    "type": "string"
+   },
+   "DarCatalogNumberNumeric": {
+    "type": "integer"
+   },
+   "DarCatalogNumberText": {
+    "type": "string"
+   },
+   "DarCitation": {
+    "type": "string"
+   },
+   "DarClass": {
+    "type": "string"
+   },
+   "DarCollectionCode": {
+    "type": "string"
+   },
+   "DarCollector": {
+    "type": "string"
+   },
+   "DarCollectorNumber": {
+    "type": "string"
+   },
+   "DarContinent": {
+    "type": "string"
+   },
+   "DarContinentOcean": {
+    "type": "string"
+   },
+   "DarCoordinatePrecision": {
+    "type": "number"
+   },
+   "DarCoordinateUncertaintyInMeter": {
+    "type": "number"
+   },
+   "DarCountry": {
+    "type": "string"
+   },
+   "DarCounty": {
+    "type": "string"
+   },
+   "DarDateLastModified": {
+    "type": "string"
+   },
+   "DarDayCollected": {
+    "type": "integer"
+   },
+   "DarDayIdentified": {
+    "type": "integer"
+   },
+   "DarDecimalLatitude": {
+    "type": "number"
+   },
+   "DarDecimalLongitude": {
+    "type": "number"
+   },
+   "DarDepthRange": {
+    "type": "string"
+   },
+   "DarEarliestAge": {
+    "type": "string"
+   },
+   "DarEarliestEon": {
+    "type": "string"
+   },
+   "DarEarliestEpoch": {
+    "type": "string"
+   },
+   "DarEarliestEra": {
+    "type": "string"
+   },
+   "DarEarliestPeriod": {
+    "type": "string"
+   },
+   "DarEndDayCollected": {
+    "type": "integer"
+   },
+   "DarEndJulianDay": {
+    "type": "integer"
+   },
+   "DarEndLatitude": {
+    "type": "number"
+   },
+   "DarEndLongitude": {
+    "type": "number"
+   },
+   "DarEndMonthCollected": {
+    "type": "integer"
+   },
+   "DarEndTimeOfDay": {
+    "type": "number"
+   },
+   "DarEndYearCollected": {
+    "type": "integer"
+   },
+   "DarFamily": {
+    "type": "string"
+   },
+   "DarFieldNotes": {
+    "type": "string"
+   },
+   "DarFieldNumber": {
+    "type": "string"
+   },
+   "DarFormation": {
+    "type": "string"
+   },
+   "DarGMLFeature": {
+    "type": "string"
+   },
+   "DarGenBankNum": {
+    "type": "string"
+   },
+   "DarGenus": {
+    "type": "string"
+   },
+   "DarGeodeticDatum": {
+    "type": "string"
+   },
+   "DarGeorefMethod": {
+    "type": "string"
+   },
+   "DarGlobalUniqueIdentifier": {
+    "type": "string"
+   },
+   "DarGroup": {
+    "type": "string"
+   },
+   "DarHigherGeography": {
+    "type": "string"
+   },
+   "DarHigherTaxon": {
+    "type": "string"
+   },
+   "DarHighestBiostratigraphicZone": {
+    "type": "string"
+   },
+   "DarHorizontalDatum": {
+    "type": "string"
+   },
+   "DarIdentificationModifier": {
+    "type": "string"
+   },
+   "DarIdentificationQualifier": {
+    "type": "string"
+   },
+   "DarIdentifiedBy": {
+    "type": "string"
+   },
+   "DarImageURL": {
+    "type": "string"
+   },
+   "DarIndividualCount": {
+    "type": "integer"
+   },
+   "DarInfraspecificEpithet": {
+    "type": "string"
+   },
+   "DarInfraspecificRank": {
+    "type": "string"
+   },
+   "DarInstitutionCode": {
+    "type": "string"
+   },
+   "DarIsland": {
+    "type": "string"
+   },
+   "DarIslandGroup": {
+    "type": "string"
+   },
+   "DarJulianDay": {
+    "type": "integer"
+   },
+   "DarKingdom": {
+    "type": "string"
+   },
+   "DarLatLongComments": {
+    "type": "string"
+   },
+   "DarLatestAge": {
+    "type": "string"
+   },
+   "DarLatestEon": {
+    "type": "string"
+   },
+   "DarLatestEpoch": {
+    "type": "string"
+   },
+   "DarLatestEra": {
+    "type": "string"
+   },
+   "DarLatestPeriod": {
+    "type": "string"
+   },
+   "DarLatitude": {
+    "type": "number"
+   },
+   "DarLifeStage": {
+    "type": "string"
+   },
+   "DarLithostratTerms": {
+    "type": "string"
+   },
+   "DarLocality": {
+    "type": "string"
+   },
+   "DarLongitude": {
+    "type": "number"
+   },
+   "DarLowestBiostratigraphicZone": {
+    "type": "string"
+   },
+   "DarMaximumDepth": {
+    "type": "number"
+   },
+   "DarMaximumDepthInMeters": {
+    "type": "number"
+   },
+   "DarMaximumElevation": {
+    "type": "number"
+   },
+   "DarMaximumElevationInMeters": {
+    "type": "number"
+   },
+   "DarMember": {
+    "type": "string"
+   },
+   "DarMinimumDepth": {
+    "type": "number"
+   },
+   "DarMinimumDepthInMeters": {
+    "type": "number"
+   },
+   "DarMinimumElevation": {
+    "type": "number"
+   },
+   "DarMinimumElevationInMeters": {
+    "type": "number"
+   },
+   "DarMonthCollected": {
+    "type": "integer"
+   },
+   "DarMonthIdentified": {
+    "type": "integer"
+   },
+   "DarNotes": {
+    "type": "string"
+   },
+   "DarObservedIndividualCount": {
+    "type": "integer"
+   },
+   "DarObservedWeight": {
+    "type": "number"
+   },
+   "DarOrder": {
+    "type": "string"
+   },
+   "DarOriginalCoordinateSystem": {
+    "type": "string"
+   },
+   "DarOtherCatalogNumbers": {
+    "type": "string"
+   },
+   "DarPhylum": {
+    "type": "string"
+   },
+   "DarPreparationType": {
+    "type": "string"
+   },
+   "DarPreparations": {
+    "type": "string"
+   },
+   "DarPreviousCatalogNumber": {
+    "type": "string"
+   },
+   "DarRecordURL": {
+    "type": "string"
+   },
+   "DarRelatedCatalogItem": {
+    "type": "string"
+   },
+   "DarRelatedCatalogItems": {
+    "type": "string"
+   },
+   "DarRelatedInformation": {
+    "type": "string"
+   },
+   "DarRelationshipType": {
+    "type": "string"
+   },
+   "DarRemarks": {
+    "type": "string"
+   },
+   "DarScientificName": {
+    "type": "string"
+   },
+   "DarScientificNameAuthor": {
+    "type": "string"
+   },
+   "DarScientificNameAuthorYear": {
+    "type": "string"
+   },
+   "DarSex": {
+    "type": "string"
+   },
+   "DarSource": {
+    "type": "string"
+   },
+   "DarSpecies": {
+    "type": "string"
+   },
+   "DarSpecificEpithet": {
+    "type": "string"
+   },
+   "DarStartDayCollected": {
+    "type": "integer"
+   },
+   "DarStartJulianDay": {
+    "type": "integer"
+   },
+   "DarStartLatitude": {
+    "type": "number"
+   },
+   "DarStartLongitude": {
+    "type": "number"
+   },
+   "DarStartMonthCollected": {
+    "type": "integer"
+   },
+   "DarStartTimeOfDay": {
+    "type": "number"
+   },
+   "DarStartYearCollected": {
+    "type": "integer"
+   },
+   "DarStart_EndCoordinatePrecision": {
+    "type": "number"
+   },
+   "DarStateProvince": {
+    "type": "string"
+   },
+   "DarSubgenus": {
+    "type": "string"
+   },
+   "DarSubspecies": {
+    "type": "string"
+   },
+   "DarTemperature": {
+    "type": "number"
+   },
+   "DarTimeCollected": {
+    "type": "number"
+   },
+   "DarTimeOfDay": {
+    "type": "number"
+   },
+   "DarTimeZone": {
+    "type": "string"
+   },
+   "DarTissues": {
+    "type": "string"
+   },
+   "DarTypeStatus": {
+    "type": "string"
+   },
+   "DarVerbatimCollectingDate": {
+    "type": "string"
+   },
+   "DarVerbatimDepth": {
+    "type": "string"
+   },
+   "DarVerbatimElevation": {
+    "type": "string"
+   },
+   "DarVerbatimLatitude": {
+    "type": "string"
+   },
+   "DarVerbatimLongitude": {
+    "type": "string"
+   },
+   "DarWaterBody": {
+    "type": "string"
+   },
+   "DarYearCollected": {
+    "type": "integer"
+   },
+   "DarYearIdentified": {
+    "type": "integer"
+   },
+   "DeaAnthroDeaccessionMethod": {
+    "type": "string"
+   },
+   "DeaAuthorisedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "DeaAuthorizationBy_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DeaAuthorizationByLocal": {
+       "type": "string",
+       "$comment": "DeaAuthorizationByLocal_tab"
+      },
+      "DeaAuthorizationByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "DeaAuthorizationByRef_tab"
+      },
+      "DeaAuthorizationDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "DeaAuthorizationDate0, fake"
+      },
+      "DeaAuthorizationRole": {
+       "type": "string",
+       "$comment": "DeaAuthorizationRole_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DeaDateAuthorised": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DeaDeaccessionDate": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DeaDeaccessionMethod": {
+    "type": "string"
+   },
+   "DeaDeaccessionNo": {
+    "type": "string"
+   },
+   "DeaDeaccessionNotes": {
+    "type": "string"
+   },
+   "DeaDestroyed": {
+    "type": "string"
+   },
+   "DeaDispositionDate": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DeaDispositionNotes": {
+    "type": "string"
+   },
+   "DeaMeetingDate": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DeaMeetingTitle": {
+    "type": "string"
+   },
+   "DeaReason": {
+    "type": "string"
+   },
+   "DeaReceivingPartyRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "DeaRelatedEventLocal": {
+    "type": "string"
+   },
+   "DeaRelatedEventRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eevents/[^/]+$"
+   },
+   "DeaTransferDate": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DeaTransferNotes": {
+    "type": "string"
+   },
+   "DeaTransferOfTitle": {
+    "type": "string"
+   },
+   "DeaTransferred": {
+    "type": "string"
+   },
+   "DesAdditionalCaption": {
+    "type": "string"
+   },
+   "DesBarcode": {
+    "type": "string"
+   },
+   "DesBirthDateLocal_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DesBirthDateLocal": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "DesBirthDateLocal0, fake"
+      },
+      "DesCreatorRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "DesCreatorRef_tab"
+      },
+      "DesCreatorRole": {
+       "type": "string",
+       "$comment": "DesCreatorRole_tab"
+      },
+      "DesCreatorSummaryDataLocal": {
+       "type": "string",
+       "$comment": "DesCreatorSummaryDataLocal_tab"
+      },
+      "DesDeathDateLocal": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "DesDeathDateLocal0, fake"
+      },
+      "DesNationalityLocal": {
+       "type": "string",
+       "$comment": "DesNationalityLocal_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DesCaption": {
+    "type": "string"
+   },
+   "DesCreatorRefLocal0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "DesDateCreated": {
+    "type": "string"
+   },
+   "DesDateNotes": {
+    "type": "string"
+   },
+   "DesDescription": {
+    "type": "string"
+   },
+   "DesEarliest": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DesEarliestOrig": {
+    "type": "integer"
+   },
+   "DesEthnicGroupSubgroup_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DesKAttribution_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DesKAttributionRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "DesKAttributionRef_tab"
+      },
+      "DesKDescription": {
+       "type": "string",
+       "$comment": "DesKDescription0, fake"
+      },
+      "DesKPreferred": {
+       "type": "string",
+       "$comment": "DesKPreferred_tab"
+      },
+      "DesKReferenceRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ebibliography/[^/]+$",
+       "$comment": "DesKReferenceRef_tab"
+      },
+      "DesKType": {
+       "type": "string",
+       "$comment": "DesKType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DesKDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "DesLatest": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "DesLatestOrig": {
+    "type": "integer"
+   },
+   "DesMaterials_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DesObjectName_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "DesObjectName": {
+       "type": "string",
+       "$comment": "DesObjectName_tab"
+      },
+      "DesObjectType": {
+       "type": "string",
+       "$comment": "DesObjectType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "DesPeriod": {
+    "type": "string"
+   },
+   "DesSubjectClassification_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "DesSubjectCode": {
+    "type": "string"
+   },
+   "DesTechnicalDescription": {
+    "type": "string"
+   },
+   "DesUseClassification_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "EcbDateAcquiredText": {
+    "type": "string"
+   },
+   "EcbDescription": {
+    "type": "string"
+   },
+   "EcbEconomicBotanyNotes": {
+    "type": "string"
+   },
+   "EcbHasReferences": {
+    "type": "string"
+   },
+   "EcbNameOfCultivar": {
+    "type": "string"
+   },
+   "EcbNameOfObject": {
+    "type": "string"
+   },
+   "EcbOtherNames_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "EcbPartsUsed_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "EcbPreparation": {
+    "type": "string"
+   },
+   "EcbSource": {
+    "type": "string"
+   },
+   "EcbUse": {
+    "type": "string"
+   },
+   "EcoAdditionalHostData": {
+    "type": "string"
+   },
+   "EcoAssociatedTaxaRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+    }
+   },
+   "EcoBodyPartLocation": {
+    "type": "string"
+   },
+   "EcoBreedingSystem": {
+    "type": "string"
+   },
+   "EcoEcologyNotes": {
+    "type": "string"
+   },
+   "EcoEndoEcto": {
+    "type": "string"
+   },
+   "EcoFieldCharacters": {
+    "type": "string"
+   },
+   "EcoFrequency": {
+    "type": "string"
+   },
+   "EcoFrequency_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PheCode": {
+       "type": "string",
+       "$comment": "PheCode_tab"
+      },
+      "PheDateRecorded": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "PheDateRecorded0, fake"
+      },
+      "PheGrowthForm": {
+       "type": "string",
+       "$comment": "PheGrowthForm_tab"
+      },
+      "PheHabit": {
+       "type": "string",
+       "$comment": "PheHabit_tab"
+      },
+      "PhePrepPartID": {
+       "type": "string",
+       "$comment": "PhePrepPartID_tab"
+      },
+      "PheRecordedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "PheRecordedByRef_tab"
+      },
+      "PheReproductiveOrgan": {
+       "type": "string",
+       "$comment": "PheReproductiveOrgan_tab"
+      },
+      "PheSex": {
+       "type": "string",
+       "$comment": "PheSex_tab"
+      },
+      "PheStage": {
+       "type": "string",
+       "$comment": "PheStage_tab"
+      },
+      "PreCount": {
+       "type": "integer",
+       "$comment": "PreCount_tab"
+      },
+      "PreMammalsPrepLocRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/elocations/[^/]+$",
+       "$comment": "PreMammalsPrepLocRef_tab"
+      },
+      "PreNoOfFragments": {
+       "type": "integer",
+       "$comment": "PreNoOfFragments_tab"
+      },
+      "PreOriginalCount": {
+       "type": "integer",
+       "$comment": "PreOriginalCount_tab"
+      },
+      "PrePermanentLocation": {
+       "type": "string",
+       "$comment": "PrePermanentLocation_tab"
+      },
+      "PrePrepRemarks": {
+       "type": "string",
+       "$comment": "PrePrepRemarks_tab"
+      },
+      "PrePrepType": {
+       "type": "string",
+       "$comment": "PrePrepType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "EcoGrowthForm": {
+    "type": "string"
+   },
+   "EcoHabitatMicrohabitat": {
+    "type": "string"
+   },
+   "EcoHostPhorophyteRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+   },
+   "EcoHostTargetTaxonLocal": {
+    "type": "string"
+   },
+   "EcoHostTargetTaxonRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+   },
+   "EcoNature": {
+    "type": "string"
+   },
+   "EcoPhenology": {
+    "type": "string"
+   },
+   "EcoRelationNotes": {
+    "type": "string"
+   },
+   "EcoSubstrate": {
+    "type": "string"
+   },
+   "EcoVerbatimEcology": {
+    "type": "string"
+   },
+   "EggOCatalogNo": {
+    "type": "integer"
+   },
+   "EggOClutchMark_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "EggOClutchMark": {
+       "type": "string",
+       "$comment": "EggOClutchMark_tab"
+      },
+      "EggOCount": {
+       "type": "integer",
+       "$comment": "EggOCount_tab"
+      },
+      "EggOIncubation": {
+       "type": "string",
+       "$comment": "EggOIncubation_tab"
+      },
+      "EggOSetCompTaxonLocal": {
+       "type": "string",
+       "$comment": "EggOSetCompTaxonLocal_tab"
+      },
+      "EggOSetCompTaxonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/etaxonomy/[^/]+$",
+       "$comment": "EggOSetCompTaxonRef_tab"
+      },
+      "EggOType": {
+       "type": "string",
+       "$comment": "EggOType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "EggOClutchSize": {
+    "type": "integer"
+   },
+   "EggOConfidence": {
+    "type": "string"
+   },
+   "EggOExpeditionLocal": {
+    "type": "string"
+   },
+   "EggOExpeditionRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "EggOMaterial": {
+    "type": "string"
+   },
+   "EggOParasitized": {
+    "type": "string"
+   },
+   "EggOPlacement": {
+    "type": "string"
+   },
+   "EleSubjectKeywords_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "EleType_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "EleType": {
+       "type": "string",
+       "$comment": "EleType_tab"
+      },
+      "EleURI": {
+       "type": "string",
+       "$comment": "EleURI_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ExtendedData": {
+    "type": "string"
+   },
+   "FMNHCollectorDataLocal": {
+    "type": "string"
+   },
+   "FMNHIdentifiedByDataLocal": {
+    "type": "string"
+   },
+   "FeaAttribute_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "FeaAttribute": {
+       "type": "string",
+       "$comment": "FeaAttribute_tab"
+      },
+      "FeaDateRecorded": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "FeaDateRecorded0, fake"
+      },
+      "FeaFeatureOf": {
+       "type": "string",
+       "$comment": "FeaFeatureOf_tab"
+      },
+      "FeaKindOfFeature": {
+       "type": "string",
+       "$comment": "FeaKindOfFeature_tab"
+      },
+      "FeaModifier": {
+       "type": "string",
+       "$comment": "FeaModifier_tab"
+      },
+      "FeaRecordedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "FeaRecordedByRef_tab"
+      },
+      "FeaUnit": {
+       "type": "string",
+       "$comment": "FeaUnit_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "FeaFeatureNotes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "FeaFeatureReferenceRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "GenAmplified_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenDateOtherPrepared0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "GenDateSamplePrepared0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "GenDnaUsedUp_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenExtractionMethod_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenGenBankAccnNo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "GenGenBankAccnNo": {
+       "type": "string",
+       "$comment": "GenGenBankAccnNo_tab"
+      },
+      "GenGeneticsRemarks": {
+       "type": "string",
+       "$comment": "GenGeneticsRemarks_tab"
+      },
+      "GenOtherPrepType": {
+       "type": "string",
+       "$comment": "GenOtherPrepType_tab"
+      },
+      "GenTissueNumber": {
+       "type": "string",
+       "$comment": "GenTissueNumber_tab"
+      },
+      "GenWhatExtracted": {
+       "type": "string",
+       "$comment": "GenWhatExtracted_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "GenGene_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenOtherPreparedByDataLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenOtherPreparedByRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "GenOtherTubeNumber_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenOtherUsedUp_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenPreparedByDataLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenPreparedByRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "GenSequenced_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenStorageLocation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GenTubeNumber_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "GeoCatalogNo": {
+    "type": "integer"
+   },
+   "GeoCatalogNoCopy": {
+    "type": "integer"
+   },
+   "GeoHazardous": {
+    "type": "string"
+   },
+   "GeoName": {
+    "type": "string"
+   },
+   "GeoObjectKind": {
+    "type": "string"
+   },
+   "GeoOrientation": {
+    "type": "string"
+   },
+   "GeoPartNo": {
+    "type": "string"
+   },
+   "GeoPhysDescription": {
+    "type": "string"
+   },
+   "GeoProcessed": {
+    "type": "string"
+   },
+   "GeoSEMNo": {
+    "type": "string"
+   },
+   "GeoSampleRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ecatalogue/[^/]+$"
+   },
+   "GeoSeries": {
+    "type": "string"
+   },
+   "GeoSeriesCopy": {
+    "type": "string"
+   },
+   "GeoSpecimenNo": {
+    "type": "string"
+   },
+   "GeoStubDescription": {
+    "type": "string"
+   },
+   "GeoStubNo": {
+    "type": "string"
+   },
+   "GeoValuation": {
+    "type": "string"
+   },
+   "HosCatalogNo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "HosCatalogNo": {
+       "type": "string",
+       "$comment": "HosCatalogNo_tab"
+      },
+      "HosOtherHostTaxonLocal": {
+       "type": "string",
+       "$comment": "HosOtherHostTaxonLocal_tab"
+      },
+      "HosOtherHostTaxonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/etaxonomy/[^/]+$",
+       "$comment": "HosOtherHostTaxonRef_tab"
+      },
+      "HosOtherPrepType": {
+       "type": "string",
+       "$comment": "HosOtherPrepType_tab"
+      },
+      "HosOtherSex": {
+       "type": "string",
+       "$comment": "HosOtherSex_tab"
+      },
+      "HosRepositoryLocal": {
+       "type": "string",
+       "$comment": "HosRepositoryLocal_tab"
+      },
+      "HosRepositoryRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "HosRepositoryRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "HosCatalogedHostTaxon_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "HosCatalogedHostTaxonLocal": {
+       "type": "string",
+       "$comment": "HosCatalogedHostTaxonLocal_tab"
+      },
+      "HosCatalogedHostTaxonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "HosCatalogedHostTaxonRef_tab"
+      },
+      "HosFmnhPrepType": {
+       "type": "string",
+       "$comment": "HosFmnhPrepType_tab"
+      },
+      "HosFmnhSex": {
+       "type": "string",
+       "$comment": "HosFmnhSex_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "HosHostNote": {
+    "type": "string"
+   },
+   "IdeClassLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeConfidence_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeCurrent_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeDateIdentified_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "IdeDateIdentified": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "IdeDateIdentified0, fake"
+      },
+      "IdeDateIdentified_subgrp": {
+       "type": "array",
+       "items": {
+        "type": [
+         "object",
+         "null"
+        ],
+        "properties": {
+         "IdeIdentifiedByRef": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^emu:/fmnh/eparties/[^/]+$",
+          "$comment": "IdeIdentifiedByRef_nesttab"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "IdeFiledAs": {
+       "type": "string",
+       "$comment": "IdeFiledAs_tab"
+      },
+      "IdeIdentificationNotes": {
+       "type": "string",
+       "$comment": "IdeIdentificationNotes_tab"
+      },
+      "IdeIdentificationUpdated": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "IdeIdentificationUpdated0, fake"
+      },
+      "IdeQualifiedName": {
+       "type": "string",
+       "$comment": "IdeQualifiedName_tab"
+      },
+      "IdeTypeStatus": {
+       "type": "string",
+       "$comment": "IdeTypeStatus_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "IdeFamilyLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeFamilyNumberLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeFamilyNumber_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeFamily_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeFiledAsClass": {
+    "type": "string"
+   },
+   "IdeFiledAsConfidence": {
+    "type": "string"
+   },
+   "IdeFiledAsDateIdentified": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "IdeFiledAsFamily": {
+    "type": "string"
+   },
+   "IdeFiledAsFamilyNumber": {
+    "type": "string"
+   },
+   "IdeFiledAsGenus": {
+    "type": "string"
+   },
+   "IdeFiledAsIdentifiedByRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "IdeFiledAsOrder": {
+    "type": "string"
+   },
+   "IdeFiledAsPhylum": {
+    "type": "string"
+   },
+   "IdeFiledAsQualifiedName": {
+    "type": "string"
+   },
+   "IdeFiledAsQualifier": {
+    "type": "string"
+   },
+   "IdeFiledAsQualifierRank": {
+    "type": "string"
+   },
+   "IdeFiledAsRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+   },
+   "IdeFiledAsSpecies": {
+    "type": "string"
+   },
+   "IdeFiledAsSubSpecies": {
+    "type": "string"
+   },
+   "IdeFiledAsSubfamily": {
+    "type": "string"
+   },
+   "IdeFiledAsTribe": {
+    "type": "string"
+   },
+   "IdeFiledAsTypeRemarks": {
+    "type": "string"
+   },
+   "IdeFiledAsTypeStatus": {
+    "type": "string"
+   },
+   "IdeFilingFamilyRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+    }
+   },
+   "IdeGenusLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeHasTypeStatus": {
+    "type": "string"
+   },
+   "IdeLotLabelNotes": {
+    "type": "string"
+   },
+   "IdeMammalsDateOfPublication0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "IdeMammalsDescriptionStartPage_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "IdeMammalsOtherReferenceRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+     }
+    }
+   },
+   "IdeMammalsPrimaryReferenceRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "IdeOrderLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierForma_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierGenus_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierRank_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierSpecies_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierSubgenus_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierSubspecies_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifierVariety_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeQualifier_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeReferenceRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "IdeSpeciesLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeTaxonLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "IdeTaxonRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/etaxonomy/[^/]+$"
+    }
+   },
+   "IdeTextureStructure_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ImgDateCreated_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ImgDateCreated": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "ImgDateCreated0, fake"
+      },
+      "ImgImageRemarks": {
+       "type": "string",
+       "$comment": "ImgImageRemarks_tab"
+      },
+      "ImgLocation": {
+       "type": "string",
+       "$comment": "ImgLocation_tab"
+      },
+      "ImgSizeType": {
+       "type": "string",
+       "$comment": "ImgSizeType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ImgPhotographerRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "InfHallsLocal": {
+    "type": "string"
+   },
+   "InfHallsRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/elocations/[^/]+$"
+   },
+   "InfPeopleRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "InsInsuranceRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/einsurance/[^/]+$"
+   },
+   "LocAcceptedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "LocCurrentLocationRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/elocations/[^/]+$"
+   },
+   "LocDateMoved": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "LocDateRemoved_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LocDateRemoved": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "LocDateRemoved0, fake"
+      },
+      "LocDateReturned": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "LocDateReturned0, fake"
+      },
+      "LocFisCurrentLocation": {
+       "type": "string",
+       "$comment": "LocFisCurrentLocation_tab"
+      },
+      "LocGroupNumber": {
+       "type": "string",
+       "$comment": "LocGroupNumber_tab"
+      },
+      "LocRemovedByDataLocal": {
+       "type": "string",
+       "$comment": "LocRemovedByDataLocal_tab"
+      },
+      "LocRemovedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "LocRemovedByRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LocExhibitLocationRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/elocations/[^/]+$"
+   },
+   "LocFisMovementNotes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "LocFisPermanantLocation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "LocIndependentlyMoveable": {
+    "type": "string"
+   },
+   "LocInvoiceNumberDataLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "LocInvoiceNumberRefLocal0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "LocInvoiceNumberRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/efmnhtransactions/[^/]+$"
+    }
+   },
+   "LocMovementNotes": {
+    "type": "string"
+   },
+   "LocPermanentLocationRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/elocations/[^/]+$"
+   },
+   "LocReleasedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "LocRemovedByRefLocal0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "LocRequestedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "LocTemporaryLocationRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/elocations/[^/]+$"
+   },
+   "LocTimeMoved": {
+    "type": "string",
+    "format": "partial-time"
+   },
+   "LotActionDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotAction": {
+       "type": "string",
+       "$comment": "LotAction_tab"
+      },
+      "LotActionDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "LotActionDate0, fake"
+      },
+      "LotDescription": {
+       "type": "string",
+       "$comment": "LotDescription_tab"
+      },
+      "LotHistoryNotes": {
+       "type": "string",
+       "$comment": "LotHistoryNotes_tab"
+      },
+      "LotMaxBody": {
+       "type": "string",
+       "$comment": "LotMaxBody_tab"
+      },
+      "LotPersonLocal": {
+       "type": "string",
+       "$comment": "LotPersonLocal_tab"
+      },
+      "LotPersonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "LotPersonRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotAggregate": {
+    "type": "string"
+   },
+   "LotAll_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotAll": {
+       "type": "string",
+       "$comment": "LotAll_tab"
+      },
+      "LotDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "LotDate0, fake"
+      },
+      "LotGroupRemoved": {
+       "type": "string",
+       "$comment": "LotGroupRemoved_tab"
+      },
+      "LotRemovedByLocal": {
+       "type": "string",
+       "$comment": "LotRemovedByLocal_tab"
+      },
+      "LotRemovedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "LotRemovedByRef_tab"
+      },
+      "LotSortingNotes": {
+       "type": "string",
+       "$comment": "LotSortingNotes_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotCountDry": {
+    "type": "integer"
+   },
+   "LotCountWet": {
+    "type": "integer"
+   },
+   "LotDistribution": {
+    "type": "string"
+   },
+   "LotDry": {
+    "type": "string"
+   },
+   "LotDryCount_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotDryCount": {
+       "type": "integer",
+       "$comment": "LotDryCount_tab"
+      },
+      "LotLotsEstimate": {
+       "type": "string",
+       "$comment": "LotLotsEstimate_tab"
+      },
+      "LotLotsTypeStatus": {
+       "type": "string",
+       "$comment": "LotLotsTypeStatus_tab"
+      },
+      "LotNotes": {
+       "type": "string",
+       "$comment": "LotNotes_tab"
+      },
+      "LotPinnedCount": {
+       "type": "integer",
+       "$comment": "LotPinnedCount_tab"
+      },
+      "LotSemaphoront": {
+       "type": "string",
+       "$comment": "LotSemaphoront_tab"
+      },
+      "LotSlideCount": {
+       "type": "integer",
+       "$comment": "LotSlideCount_tab"
+      },
+      "LotWetCount": {
+       "type": "integer",
+       "$comment": "LotWetCount_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotEggs": {
+    "type": "string"
+   },
+   "LotEstimate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotEstimate": {
+       "type": "string",
+       "$comment": "LotEstimate_tab"
+      },
+      "LotKindOfContainer": {
+       "type": "string",
+       "$comment": "LotKindOfContainer_tab"
+      },
+      "LotNoOfContainers": {
+       "type": "integer",
+       "$comment": "LotNoOfContainers_tab"
+      },
+      "LotNoOfSpecimens": {
+       "type": "integer",
+       "$comment": "LotNoOfSpecimens_tab"
+      },
+      "LotNoPrimaryTypes": {
+       "type": "integer",
+       "$comment": "LotNoPrimaryTypes_tab"
+      },
+      "LotNoSecondaryTypes": {
+       "type": "integer",
+       "$comment": "LotNoSecondaryTypes_tab"
+      },
+      "LotPrimaryTypes": {
+       "type": "string",
+       "$comment": "LotPrimaryTypes_tab"
+      },
+      "LotRegion": {
+       "type": "string",
+       "$comment": "LotRegion_tab"
+      },
+      "LotRegionNote": {
+       "type": "string",
+       "$comment": "LotRegionNote_tab"
+      },
+      "LotSecondaryTypes": {
+       "type": "string",
+       "$comment": "LotSecondaryTypes_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotInventory": {
+    "type": "string"
+   },
+   "LotKindOfRelationship_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotKindOfRelationship": {
+       "type": "string",
+       "$comment": "LotKindOfRelationship_tab"
+      },
+      "LotRelatedObjectLocal": {
+       "type": "string",
+       "$comment": "LotRelatedObjectLocal_tab"
+      },
+      "LotRelatedObjectNote": {
+       "type": "string",
+       "$comment": "LotRelatedObjectNote_tab"
+      },
+      "LotRelatedObjectRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "LotRelatedObjectRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotNSpecimens": {
+    "type": "string"
+   },
+   "LotNonTypes": {
+    "type": "integer"
+   },
+   "LotNumberOfJars": {
+    "type": "integer"
+   },
+   "LotOtherNo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "LotOtherNo": {
+       "type": "string",
+       "$comment": "LotOtherNo_tab"
+      },
+      "LotOwnerLocal": {
+       "type": "string",
+       "$comment": "LotOwnerLocal_tab"
+      },
+      "LotOwnerRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "LotOwnerRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "LotParatypes": {
+    "type": "integer"
+   },
+   "LotPinned": {
+    "type": "string"
+   },
+   "LotPrimaryType": {
+    "type": "string"
+   },
+   "LotRegionSingleValue": {
+    "type": "string"
+   },
+   "LotRegionSort_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   },
+   "LotSlides": {
+    "type": "string"
+   },
+   "LotSyntypes": {
+    "type": "integer"
+   },
+   "LotTotalContainers": {
+    "type": "integer"
+   },
+   "LotTotalCount": {
+    "type": "integer"
+   },
+   "LotTotalPrimary": {
+    "type": "integer"
+   },
+   "LotTotalSecondary": {
+    "type": "integer"
+   },
+   "LotTotalSpecimens": {
+    "type": "integer"
+   },
+   "LotTypeStatus": {
+    "type": "string"
+   },
+   "LotWet": {
+    "type": "string"
+   },
+   "MeaAnthroMeasurementTaken_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "MeaAnthroMeasurementTaken": {
+       "type": "string",
+       "$comment": "MeaAnthroMeasurementTaken_tab"
+      },
+      "MeaCitationLocal": {
+       "type": "string",
+       "$comment": "MeaCitationLocal_tab"
+      },
+      "MeaCitationRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ebibliography/[^/]+$",
+       "$comment": "MeaCitationRef_tab"
+      },
+      "MeaConfirmed": {
+       "type": "string",
+       "$comment": "MeaConfirmed_tab"
+      },
+      "MeaDateMeasured": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "MeaDateMeasured0, fake"
+      },
+      "MeaDescription": {
+       "type": "string",
+       "$comment": "MeaDescription0, fake"
+      },
+      "MeaEndDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "MeaEndDate0, fake"
+      },
+      "MeaFisRemarks": {
+       "type": "string",
+       "$comment": "MeaFisRemarks_tab"
+      },
+      "MeaMammalsMeasurementTaken": {
+       "type": "string",
+       "$comment": "MeaMammalsMeasurementTaken_tab"
+      },
+      "MeaMeasuredByDataLocal": {
+       "type": "string",
+       "$comment": "MeaMeasuredByDataLocal_tab"
+      },
+      "MeaMeasuredByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "MeaMeasuredByRef_tab"
+      },
+      "MeaMeasurementKind": {
+       "type": "string",
+       "$comment": "MeaMeasurementKind_tab"
+      },
+      "MeaMeasurementNumberValue": {
+       "type": "number",
+       "$comment": "MeaMeasurementNumberValue_tab"
+      },
+      "MeaMeasurementTaken": {
+       "type": "string",
+       "$comment": "MeaMeasurementTaken_tab"
+      },
+      "MeaMeasurementValue": {
+       "type": "string",
+       "$comment": "MeaMeasurementValue_tab"
+      },
+      "MeaModifier": {
+       "type": "string",
+       "$comment": "MeaModifier_tab"
+      },
+      "MeaPrepType": {
+       "type": "string",
+       "$comment": "MeaPrepType_tab"
+      },
+      "MeaRegion": {
+       "type": "string",
+       "$comment": "MeaRegion_tab"
+      },
+      "MeaSpecimensMeasured": {
+       "type": "string",
+       "$comment": "MeaSpecimensMeasured_tab"
+      },
+      "MeaUnit": {
+       "type": "string",
+       "$comment": "MeaUnit_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "MeaReferenceRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "MeaSex_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "MonExternalHeightInches": {
+    "type": "number"
+   },
+   "MonExternalHeightMm": {
+    "type": "number"
+   },
+   "MonExternalHeightOrig": {
+    "type": "integer"
+   },
+   "MonExternalLengthInches": {
+    "type": "number"
+   },
+   "MonExternalLengthMm": {
+    "type": "number"
+   },
+   "MonExternalLengthOrig": {
+    "type": "integer"
+   },
+   "MonExternalWidthInches": {
+    "type": "number"
+   },
+   "MonExternalWidthMm": {
+    "type": "number"
+   },
+   "MonExternalWidthOrig": {
+    "type": "integer"
+   },
+   "MonInternalHeightInches": {
+    "type": "number"
+   },
+   "MonInternalHeightMm": {
+    "type": "number"
+   },
+   "MonInternalHeightOrig": {
+    "type": "integer"
+   },
+   "MonInternalLengthInches": {
+    "type": "number"
+   },
+   "MonInternalLengthMm": {
+    "type": "number"
+   },
+   "MonInternalLengthOrig": {
+    "type": "integer"
+   },
+   "MonInternalWidthInches": {
+    "type": "number"
+   },
+   "MonInternalWidthMm": {
+    "type": "number"
+   },
+   "MonInternalWidthOrig": {
+    "type": "integer"
+   },
+   "MonMeasuredBy_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "MonMeasuredByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "MonMeasuredByRef_tab"
+      },
+      "MonMeasurementDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "MonMeasurementDate0, fake"
+      },
+      "MonMeasurementNote": {
+       "type": "string",
+       "$comment": "MonMeasurementNote_tab"
+      },
+      "MonMeasurementObservation": {
+       "type": "string",
+       "$comment": "MonMeasurementObservation_tab"
+      },
+      "MonUnit": {
+       "type": "string",
+       "$comment": "MonUnit_tab"
+      },
+      "MonValue": {
+       "type": "number",
+       "$comment": "MonValue_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "MonUnitType": {
+    "type": "string"
+   },
+   "MonVolumeGal": {
+    "type": "number"
+   },
+   "MonVolumeLiters": {
+    "type": "number"
+   },
+   "MonVolumeOrig": {
+    "type": "integer"
+   },
+   "MulHasMultiMedia": {
+    "type": "string"
+   },
+   "MulMultiMediaRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/emultimedia/[^/]+$"
+    }
+   },
+   "NegDateOfPhotoWork_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "NegDateOfPhotoWork": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "NegDateOfPhotoWork0, fake"
+      },
+      "NegMethod": {
+       "type": "string",
+       "$comment": "NegMethod_tab"
+      },
+      "NegProduct": {
+       "type": "string",
+       "$comment": "NegProduct_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "NegNegativeNumber": {
+    "type": "string"
+   },
+   "NegNotes": {
+    "type": "string"
+   },
+   "NegPrintName": {
+    "type": "string"
+   },
+   "NotAttributedToDataLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "NotAttributedToRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "NotDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "NotDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "NotDate0, fake"
+      },
+      "NotFisNotes": {
+       "type": "string",
+       "$comment": "NotFisNotes0, fake"
+      },
+      "NotKind": {
+       "type": "string",
+       "$comment": "NotKind_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "NotNmnhAttributedToRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "NotNotebookDateWhen0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "NotNotebookDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "NotNotebookDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "NotNotebookDate0, fake"
+      },
+      "NotNotebookNote": {
+       "type": "string",
+       "$comment": "NotNotebookNote_tab"
+      },
+      "NotNotebookResearcher": {
+       "type": "string",
+       "$comment": "NotNotebookResearcher_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "NotNotebookMakeNoteAvailable_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "NotNotes": {
+    "type": "string"
+   },
+   "NteBibliographyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+     }
+    }
+   },
+   "ObjAcquriedFromRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "ObjCollectionArea": {
+    "type": "string"
+   },
+   "ObjDateAcquired": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ObjEcode": {
+    "type": "string"
+   },
+   "ObjKindOfObject": {
+    "type": "string"
+   },
+   "ObjNumberOfDuplicates": {
+    "type": "string"
+   },
+   "ObjObjectNotes": {
+    "type": "string"
+   },
+   "ObjObjectNumber": {
+    "type": "string"
+   },
+   "ObjOtherNumbersNumber_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ObjOtherNumbersNumber": {
+       "type": "string",
+       "$comment": "ObjOtherNumbersNumber_tab"
+      },
+      "ObjOtherNumbersSource": {
+       "type": "string",
+       "$comment": "ObjOtherNumbersSource_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ObjRelatedObjectsRelationship_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "ObjRelatedObjectsRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "ObjRelatedObjectsRef_tab"
+      },
+      "ObjRelatedObjectsRelationship": {
+       "type": "string",
+       "$comment": "ObjRelatedObjectsRelationship_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "ObjRepositoryLocal": {
+    "type": "string"
+   },
+   "ObjRepositoryRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "ObjStorageLocation": {
+    "type": "string"
+   },
+   "PalLithology": {
+    "type": "string"
+   },
+   "PalMorphology": {
+    "type": "string"
+   },
+   "PalStrBibliographyRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "PalStrComments_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PalStrDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PalStrDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "PalStrDate0, fake"
+      },
+      "PalStrKind": {
+       "type": "string",
+       "$comment": "PalStrKind_tab"
+      },
+      "PalStrStratigraphyRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/enhmstratigraphy/[^/]+$",
+       "$comment": "PalStrStratigraphyRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PalStrInterpreterRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "PalStrLithostratLocal": {
+    "type": "string"
+   },
+   "PalStrRole_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PalStrStratigraphyLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PheSeason": {
+    "type": "string"
+   },
+   "PreAdditionalPrepRemarks_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PreAdditionalPrepRemarks": {
+       "type": "string",
+       "$comment": "PreAdditionalPrepRemarks_tab"
+      },
+      "PreOtherCount": {
+       "type": "string",
+       "$comment": "PreOtherCount_tab"
+      },
+      "PreOtherOriginalCount": {
+       "type": "string",
+       "$comment": "PreOtherOriginalCount_tab"
+      },
+      "PreOtherPermanentLocation": {
+       "type": "string",
+       "$comment": "PreOtherPermanentLocation_tab"
+      },
+      "PreOtherPrepType": {
+       "type": "string",
+       "$comment": "PreOtherPrepType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PreDateRemoved_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PreDateRemoved": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "PreDateRemoved0, fake"
+      },
+      "PreRecatloguedAsRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "PreRecatloguedAsRef_tab"
+      },
+      "PreRemovedRecataloguedRemarks": {
+       "type": "string",
+       "$comment": "PreRemovedRecataloguedRemarks_tab"
+      },
+      "PreSpecCount": {
+       "type": "string",
+       "$comment": "PreSpecCount_tab"
+      },
+      "PreSpecPrepType": {
+       "type": "string",
+       "$comment": "PreSpecPrepType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PreDateSubbed": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "PreKindOfContainer_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PreMammalsAssociationLoc_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PreMammalsAssociationLocRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/elocations/[^/]+$",
+       "$comment": "PreMammalsAssociationLocRef_tab"
+      },
+      "PreMammalsAssociationNote": {
+       "type": "string",
+       "$comment": "PreMammalsAssociationNote_tab"
+      },
+      "PreMammalsAssociationType": {
+       "type": "string",
+       "$comment": "PreMammalsAssociationType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PreMammalsPrepRemarks_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PreMammalsPrepTypeFlag_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PreMammalsPrepType_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PreMammalsSupplLoc_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PreMammalsSupplLocRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/elocations/[^/]+$",
+       "$comment": "PreMammalsSupplLocRef_tab"
+      },
+      "PreMammalsSupplPrepRemarks": {
+       "type": "string",
+       "$comment": "PreMammalsSupplPrepRemarks_tab"
+      },
+      "PreMammalsSupplPrepType": {
+       "type": "string",
+       "$comment": "PreMammalsSupplPrepType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PreOLocation_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PreOLocationRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/elocations/[^/]+$",
+       "$comment": "PreOLocationRef_tab"
+      },
+      "PreOPrepRemarks": {
+       "type": "string",
+       "$comment": "PreOPrepRemarks_tab"
+      },
+      "PreOPrepType": {
+       "type": "string",
+       "$comment": "PreOPrepType_tab"
+      },
+      "PreOPrepTypeFlag": {
+       "type": "string",
+       "$comment": "PreOPrepTypeFlag_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "PreTotalChildCount": {
+    "type": "integer"
+   },
+   "PreTotalChildFragments": {
+    "type": "integer"
+   },
+   "PreTotalCount": {
+    "type": "integer"
+   },
+   "PreTotalFragments": {
+    "type": "integer"
+   },
+   "PreTotalOriginalCount": {
+    "type": "integer"
+   },
+   "PreTotalUncatalogued": {
+    "type": "integer"
+   },
+   "PriAccessionNumberDataLocal": {
+    "type": "string"
+   },
+   "PriAccessionNumberRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/efmnhtransactions/[^/]+$"
+   },
+   "PriAdditionalNumber": {
+    "type": "string"
+   },
+   "PriAlcohol": {
+    "type": "integer"
+   },
+   "PriAssociatedLots": {
+    "type": "string"
+   },
+   "PriBarcode": {
+    "type": "string"
+   },
+   "PriCandS": {
+    "type": "integer"
+   },
+   "PriCaptive": {
+    "type": "string"
+   },
+   "PriCast": {
+    "type": "string"
+   },
+   "PriCatalogueNo": {
+    "type": "integer"
+   },
+   "PriCataloguedByDataLocal": {
+    "type": "string"
+   },
+   "PriCataloguedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "PriCollectingEventNoLocal": {
+    "type": "string"
+   },
+   "PriConditionNotes": {
+    "type": "string"
+   },
+   "PriContinentLocal": {
+    "type": "string"
+   },
+   "PriCoordinateIndicator": {
+    "type": "string"
+   },
+   "PriCountryLocal": {
+    "type": "string"
+   },
+   "PriCountyShireLocal": {
+    "type": "string"
+   },
+   "PriCulturallySensitive": {
+    "type": "string"
+   },
+   "PriDateCat": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "PriDoNotLoan": {
+    "type": "string"
+   },
+   "PriElevationVerbatim": {
+    "type": "string"
+   },
+   "PriGeneticSample": {
+    "type": "string"
+   },
+   "PriHazardousIndicator": {
+    "type": "string"
+   },
+   "PriHistory": {
+    "type": "string"
+   },
+   "PriIDHistory": {
+    "type": "string"
+   },
+   "PriInventory": {
+    "type": "string"
+   },
+   "PriInvoiceNumberDataLocal": {
+    "type": "string"
+   },
+   "PriInvoiceNumberRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/efmnhtransactions/[^/]+$"
+   },
+   "PriIslandGroupLocal": {
+    "type": "string"
+   },
+   "PriIslandNameLocal": {
+    "type": "string"
+   },
+   "PriLoanStatus": {
+    "type": "string"
+   },
+   "PriLocalityNotes": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorAssoc": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorExhibit": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorFnotes": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorNotes": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorSuppl": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorTags": {
+    "type": "string"
+   },
+   "PriMammalsIndicatorTissue": {
+    "type": "string"
+   },
+   "PriMammalsPrepAlc": {
+    "type": "string"
+   },
+   "PriMammalsPrepAsr": {
+    "type": "string"
+   },
+   "PriMammalsPrepBrain": {
+    "type": "string"
+   },
+   "PriMammalsPrepCarc": {
+    "type": "string"
+   },
+   "PriMammalsPrepCran": {
+    "type": "string"
+   },
+   "PriMammalsPrepEnd": {
+    "type": "string"
+   },
+   "PriMammalsPrepMan": {
+    "type": "string"
+   },
+   "PriMammalsPrepMounted": {
+    "type": "string"
+   },
+   "PriMammalsPrepOthr": {
+    "type": "string"
+   },
+   "PriMammalsPrepSkel": {
+    "type": "string"
+   },
+   "PriMammalsPrepSkin": {
+    "type": "string"
+   },
+   "PriMammalsPrepSkull": {
+    "type": "string"
+   },
+   "PriMount": {
+    "type": "integer"
+   },
+   "PriMultimedia": {
+    "type": "string"
+   },
+   "PriOceanLocal": {
+    "type": "string"
+   },
+   "PriOnLoan": {
+    "type": "string"
+   },
+   "PriOther": {
+    "type": "string"
+   },
+   "PriOtherNo": {
+    "type": "string"
+   },
+   "PriOtherNotes": {
+    "type": "string"
+   },
+   "PriPartCounterpart": {
+    "type": "string"
+   },
+   "PriPreciseLocationLocal": {
+    "type": "string"
+   },
+   "PriPreviousNumber": {
+    "type": "string"
+   },
+   "PriPrimaryPrepIndicators_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "PriProbabilityLocal": {
+    "type": "number"
+   },
+   "PriProvinceLocal": {
+    "type": "string"
+   },
+   "PriRareAndEndangeredIndicator": {
+    "type": "string"
+   },
+   "PriRiverBasinLocal": {
+    "type": "string"
+   },
+   "PriSeaGulfLocal": {
+    "type": "string"
+   },
+   "PriSequencelLink": {
+    "type": "string"
+   },
+   "PriSex": {
+    "type": "string"
+   },
+   "PriSexAgeNotes": {
+    "type": "string"
+   },
+   "PriSiteCENumberDataLocal": {
+    "type": "string"
+   },
+   "PriSiteSummary": {
+    "type": "string"
+   },
+   "PriSkeleton": {
+    "type": "integer"
+   },
+   "PriStatus": {
+    "type": "string"
+   },
+   "PriStorage": {
+    "type": "string"
+   },
+   "PriTank": {
+    "type": "string"
+   },
+   "PriTankNumber": {
+    "type": "string"
+   },
+   "PriTissue": {
+    "type": "string"
+   },
+   "PriTypeStatus": {
+    "type": "string"
+   },
+   "PriVerified": {
+    "type": "string"
+   },
+   "PriXray": {
+    "type": "string"
+   },
+   "ProCollectionProjectRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eevents/[^/]+$"
+   },
+   "ProCollectionSiteRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ecollectionevents/[^/]+$"
+   },
+   "PrvCurrentStorage_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "PrvCurrentStorage": {
+       "type": "string",
+       "$comment": "PrvCurrentStorage_tab"
+      },
+      "PrvEventSequence": {
+       "type": "integer",
+       "$comment": "PrvEventSequence_tab"
+      },
+      "PrvPreservation": {
+       "type": "string",
+       "$comment": "PrvPreservation_tab"
+      },
+      "PrvPreservationDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "PrvPreservationDate0, fake"
+      },
+      "PrvPreservationNotes": {
+       "type": "string",
+       "$comment": "PrvPreservationNotes_tab"
+      },
+      "PrvSeries": {
+       "type": "integer",
+       "$comment": "PrvSeries_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RefBibliographicNotes_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RefBibliographicNotes": {
+       "type": "string",
+       "$comment": "RefBibliographicNotes_tab"
+      },
+      "RefReferenceDataLocal": {
+       "type": "string",
+       "$comment": "RefReferenceDataLocal_tab"
+      },
+      "RefReferenceNote": {
+       "type": "string",
+       "$comment": "RefReferenceNote_tab"
+      },
+      "RefReferenceRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ebibliography/[^/]+$",
+       "$comment": "RefReferenceRef_tab"
+      },
+      "RefReferenceType": {
+       "type": "string",
+       "$comment": "RefReferenceType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RefCatalogueRaisonne": {
+    "type": "string"
+   },
+   "RefFileReference_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RefFileReference": {
+       "type": "string",
+       "$comment": "RefFileReference_tab"
+      },
+      "RefFileTitle": {
+       "type": "string",
+       "$comment": "RefFileTitle_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RefImageReference_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RefImageReference": {
+       "type": "string",
+       "$comment": "RefImageReference_tab"
+      },
+      "RefImageType": {
+       "type": "string",
+       "$comment": "RefImageType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RefReferenceRefLocal0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "RelIsParent": {
+    "type": "string"
+   },
+   "RelNhAccordingTo_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RelNhAccordingToRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "RelNhAccordingToRef_tab"
+      },
+      "RelNhCount": {
+       "type": "integer",
+       "$comment": "RelNhCount_tab"
+      },
+      "RelNhDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "RelNhDate0, fake"
+      },
+      "RelNhID": {
+       "type": "string",
+       "$comment": "RelNhID_tab"
+      },
+      "RelNhObjectRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "RelNhObjectRef_tab"
+      },
+      "RelNhRelationship": {
+       "type": "string",
+       "$comment": "RelNhRelationship_tab"
+      },
+      "RelNhRemarks": {
+       "type": "string",
+       "$comment": "RelNhRemarks0, fake"
+      },
+      "RelNhRepositoryRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "RelNhRepositoryRef_tab"
+      },
+      "RelNhTaxonRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/etaxonomy/[^/]+$",
+       "$comment": "RelNhTaxonRef_tab"
+      },
+      "RelNhURI": {
+       "type": "string",
+       "$comment": "RelNhURI_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RelNotes": {
+    "type": "string"
+   },
+   "RelObjects_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RelObjectsRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ecatalogue/[^/]+$",
+       "$comment": "RelObjectsRef_tab"
+      },
+      "RelRelationship": {
+       "type": "string",
+       "$comment": "RelRelationship_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RelParentObjectRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ecatalogue/[^/]+$"
+   },
+   "RelRelationshipToMe_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "RelRemarks_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "RepAuthorizationDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RepAuthorizationDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "RepAuthorizationDate0, fake"
+      },
+      "RepAuthorizedByLocal": {
+       "type": "string",
+       "$comment": "RepAuthorizedByLocal_tab"
+      },
+      "RepAuthorizedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "RepAuthorizedByRef_tab"
+      },
+      "RepRole": {
+       "type": "string",
+       "$comment": "RepRole_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RepDocumentationDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "RepDocumentation": {
+       "type": "string",
+       "$comment": "RepDocumentation_tab"
+      },
+      "RepDocumentationDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "RepDocumentationDate0, fake"
+      },
+      "RepFile": {
+       "type": "string",
+       "$comment": "RepFile_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "RepRepatriationDate": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "RepRepatriationNo": {
+    "type": "string"
+   },
+   "RepRepatriationNotes": {
+    "type": "string"
+   },
+   "RepStatus": {
+    "type": "string"
+   },
+   "RepTribeLocal": {
+    "type": "string"
+   },
+   "RepTribeRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "RigRightsLocal_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "RigRightsRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/erights/[^/]+$"
+    }
+   },
+   "SecCanDelete_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecCanDisplay_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecCanEdit_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecDepartment_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SecRecordStatus": {
+    "type": "string"
+   },
+   "SliHCount_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "SliHCount": {
+       "type": "integer",
+       "$comment": "SliHCount_tab"
+      },
+      "SliHPrepByLocal": {
+       "type": "string",
+       "$comment": "SliHPrepByLocal_tab"
+      },
+      "SliHPrepByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "SliHPrepByRef_tab"
+      },
+      "SliHPrepDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "SliHPrepDate0, fake"
+      },
+      "SliHSlideNo": {
+       "type": "string",
+       "$comment": "SliHSlideNo_tab"
+      },
+      "SliHStain": {
+       "type": "string",
+       "$comment": "SliHStain_tab"
+      },
+      "SliHTissueType": {
+       "type": "string",
+       "$comment": "SliHTissueType_tab"
+      },
+      "SliSizeMM": {
+       "type": "number",
+       "$comment": "SliSizeMM_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "SliHOtherNo_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SliHPrepNotes0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "SliHSlide": {
+    "type": "string"
+   },
+   "SliHTotal": {
+    "type": "integer"
+   },
+   "SpeHCarapace": {
+    "type": "string"
+   },
+   "SpeHClearedStained": {
+    "type": "string"
+   },
+   "SpeHDried": {
+    "type": "string"
+   },
+   "SpeHDry": {
+    "type": "integer"
+   },
+   "SpeHLarvae": {
+    "type": "string"
+   },
+   "SpeHReceivedAs": {
+    "type": "string"
+   },
+   "SpeHShell": {
+    "type": "string"
+   },
+   "SpeHSlide": {
+    "type": "string"
+   },
+   "SpeHStomach": {
+    "type": "string"
+   },
+   "SpeHTotal": {
+    "type": "integer"
+   },
+   "SpeHWet": {
+    "type": "integer"
+   },
+   "SpeOCatalogNo": {
+    "type": "integer"
+   },
+   "SpeOIndicatorPartial": {
+    "type": "string"
+   },
+   "SpeOPrepHead": {
+    "type": "string"
+   },
+   "SpeOPrepSkinF": {
+    "type": "string"
+   },
+   "SpeOPrepSkinR": {
+    "type": "string"
+   },
+   "SpeOPrepSyrinx": {
+    "type": "string"
+   },
+   "SpeOPrepTrachea": {
+    "type": "string"
+   },
+   "SpeOPrepWing": {
+    "type": "string"
+   },
+   "SpeOTissueAvailable": {
+    "type": "string"
+   },
+   "SumAccessionNumberDataLocal": {
+    "type": "string"
+   },
+   "SumAccessionNumberRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/efmnhtransactions/[^/]+$"
+   },
+   "SummaryData": {
+    "type": "string"
+   },
+   "TasCommenceNotifyOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasCommenceNotifyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasCommencementDate_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "TasCommencementDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "TasCommencementDate0, fake"
+      },
+      "TasCompleted": {
+       "type": "string",
+       "$comment": "TasCompleted_tab"
+      },
+      "TasCompletionDate": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "TasCompletionDate0, fake"
+      },
+      "TasDescription": {
+       "type": "string",
+       "$comment": "TasDescription_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "TasCompletionNotifyOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasCompletionNotifyRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasDependOnCompletionOffset_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasDependOnPosition_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TasDependOnTask_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasEndNotifyDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "TasPersonAssignedToRef_nesttab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "array",
+      "null"
+     ],
+     "items": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "format": "uri",
+      "pattern": "^emu:/fmnh/eparties/[^/]+$"
+     }
+    }
+   },
+   "TasResults_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TasStartNotifyDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "TasTaskAssignerRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "TasTaskDuration_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TasTimeTakenOnTask_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   },
+   "TaxTaxonomyRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    }
+   },
+   "TisCollectionNotes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisCollectorInitials_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisCollectorNo_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisCollectorRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "TisCurrentStorageMed_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisDateTissuePrepared_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "TisDateTissuePrepared": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "TisDateTissuePrepared0, fake"
+      },
+      "TisLocus": {
+       "type": "string",
+       "$comment": "TisLocus_tab"
+      },
+      "TisMammalsTissueType": {
+       "type": "string",
+       "$comment": "TisMammalsTissueType_tab"
+      },
+      "TisPreparedByDataLocal": {
+       "type": "string",
+       "$comment": "TisPreparedByDataLocal_tab"
+      },
+      "TisPreparedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "TisPreparedByRef_tab"
+      },
+      "TisTissueNumber": {
+       "type": "string",
+       "$comment": "TisTissueNumber_tab"
+      },
+      "TisTissueRemarks": {
+       "type": "string",
+       "$comment": "TisTissueRemarks_tab"
+      },
+      "TisTissueType": {
+       "type": "string",
+       "$comment": "TisTissueType_tab"
+      },
+      "TisTubeNumber": {
+       "type": "string",
+       "$comment": "TisTubeNumber_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "TisDnaAvailable_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisFieldPreservation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisInitStorageMedium_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisLocationNotes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisOInitStorageMedium_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisOLocus_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "TisOLocus": {
+       "type": "string",
+       "$comment": "TisOLocus_tab"
+      },
+      "TisOTissueRemarks": {
+       "type": "string",
+       "$comment": "TisOTissueRemarks_tab"
+      },
+      "TisOTissueType": {
+       "type": "string",
+       "$comment": "TisOTissueType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "TisORepository_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisOStorageLocation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisOTubeNo_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisRepository_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisStorageLocation_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisTissueUsedUp_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TisTubeNo_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "TypDateVerified": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "TypICBNType": {
+    "type": "string"
+   },
+   "TypInformalType": {
+    "type": "string"
+   },
+   "TypOtherTypeReferenceRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+    }
+   },
+   "TypPrimaryTypeReferenceRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+   },
+   "TypTypeNotes": {
+    "type": "string"
+   },
+   "TypVerifiedByRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "UsaRequestor_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "UsaRequestorRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "UsaRequestorRef_tab"
+      },
+      "UsaUse": {
+       "type": "string",
+       "$comment": "UsaUse_tab"
+      },
+      "UsaUseDetails": {
+       "type": "string",
+       "$comment": "UsaUseDetails_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "UsaUseRightsRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/erights/[^/]+$"
+    }
+   },
+   "ValDateValued": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ValNextDue": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "ValReasonForValuation": {
+    "type": "string"
+   },
+   "ValValuationAmount": {
+    "type": "number"
+   },
+   "ValValuationCost": {
+    "type": "number"
+   },
+   "ValValuationNotes": {
+    "type": "string"
+   },
+   "ValValuationPeriod": {
+    "type": "integer"
+   },
+   "ValValuationPeriodType": {
+    "type": "string"
+   },
+   "ValValuedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "VerCaptureMethod": {
+    "type": "string"
+   },
+   "VerCapturedByRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "VerDateCaptured": {
+    "type": "string",
+    "format": "partial-date"
+   },
+   "VerEntryNotes": {
+    "type": "string"
+   },
+   "VerOCRLabelText": {
+    "type": "string"
+   },
+   "VerVerbatimLabel": {
+    "type": "string"
+   },
+   "VouBibliography_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "VouBibliographyRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/ebibliography/[^/]+$",
+       "$comment": "VouBibliographyRef_tab"
+      },
+      "VouRemarks": {
+       "type": "string",
+       "$comment": "VouRemarks_tab"
+      },
+      "VouType": {
+       "type": "string",
+       "$comment": "VouType_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "VouDate0": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "partial-date"
+    }
+   },
+   "VouExsiccataNumber": {
+    "type": "string"
+   },
+   "VouExsiccataReferenceRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ebibliography/[^/]+$"
+   },
+   "VouExsiccataTitle": {
+    "type": "string"
+   },
+   "VouObjectRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/ecatalogue/[^/]+$"
+    }
+   },
+   "VouVoucheredByRef_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "format": "uri",
+     "pattern": "^emu:/fmnh/eparties/[^/]+$"
+    }
+   },
+   "XraCountXrayed_grp": {
+    "type": "array",
+    "items": {
+     "type": [
+      "object",
+      "null"
+     ],
+     "properties": {
+      "XraCountXrayed": {
+       "type": "string",
+       "$comment": "XraCountXrayed_tab"
+      },
+      "XraDateXrayed": {
+       "type": "string",
+       "format": "partial-date",
+       "$comment": "XraDateXrayed0, fake"
+      },
+      "XraExposureTime": {
+       "type": "string",
+       "$comment": "XraExposureTime_tab"
+      },
+      "XraKv": {
+       "type": "number",
+       "$comment": "XraKv_tab"
+      },
+      "XraMa": {
+       "type": "number",
+       "$comment": "XraMa_tab"
+      },
+      "XraXrayNumber": {
+       "type": "string",
+       "$comment": "XraXrayNumber_tab"
+      },
+      "XraXrayPreparedByDataLocal": {
+       "type": "string",
+       "$comment": "XraXrayPreparedByDataLocal_tab"
+      },
+      "XraXrayPreparedByRef": {
+       "type": "string",
+       "format": "uri",
+       "pattern": "^emu:/fmnh/eparties/[^/]+$",
+       "$comment": "XraXrayPreparedByRef_tab"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "XraDistance_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraExposureNotes_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraFilmType_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraSpecimensXrayed_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraView_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraXrayRemarks_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "XraXraySystem_tab": {
+    "type": "array",
+    "items": {
+     "type": [
+      "string",
+      "null"
+     ]
+    }
+   },
+   "ZooBirth": {
+    "type": "string"
+   },
+   "ZooComments": {
+    "type": "string"
+   },
+   "ZooDam": {
+    "type": "string"
+   },
+   "ZooDeath": {
+    "type": "string"
+   },
+   "ZooFounder": {
+    "type": "string"
+   },
+   "ZooHouseName": {
+    "type": "string"
+   },
+   "ZooIsisNo": {
+    "type": "string"
+   },
+   "ZooNecropsyNo": {
+    "type": "string"
+   },
+   "ZooSire": {
+    "type": "string"
+   },
+   "ZooStudBook": {
+    "type": "string"
+   },
+   "ZooTissue": {
+    "type": "string"
+   },
+   "ZooZooLocal": {
+    "type": "string"
+   },
+   "ZooZooRef": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/eparties/[^/]+$"
+   },
+   "irn": {
+    "type": "string",
+    "format": "uri",
+    "pattern": "^emu:/fmnh/ecatalogue/[^/]+$"
+   }
+  },
+  "additionalProperties": false
+ },
+ "@namespaces": {
+  "emu": {
+   "name": "http://axiell.com/emu#"
+  }
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/shared/tenants/fmnh"
+  },
+  "start": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/"
+  },
+  "search": {
+   "method": "GET",
+   "href": "http://10.10.10.26:8084/shared/tenants"
+  },
+  "emu:update": {
+   "method": "PATCH",
+   "href": "http://10.10.10.26:8084/shared/tenants/fmnh",
+   "encoding": "json",
+   "schemaUrl": "http://json.schemastore.org/json-patch"
+  },
+  "emu:update-all": {
+   "method": "PATCH",
+   "href": "http://10.10.10.26:8084/shared/tenants",
+   "encoding": "json",
+   "schemaUrl": "http://json.schemastore.org/json-patch"
+  }
+ }
+}

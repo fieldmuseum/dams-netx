@@ -1,0 +1,143 @@
+{
+ "id": "emu:/fmnh/eevents/963",
+ "version": 1,
+ "data": {
+  "AdmPublishWebNoPasswordFlag": "Y",
+  "EveTypeOfEvent": "Video",
+  "ExtendedData": "963\n\n[MM-100.111] Episode 1.11 - Meet Kipunji - Video (2011 - 11 Nov 2011)",
+  "DatCompletionDate": "2011-11-11",
+  "SummaryData": "[MM-100.111] Episode 1.11 - Meet Kipunji - Video (2011 - 11 Nov 2011)",
+  "SecCanDisplay_tab": [
+   "Group Default"
+  ],
+  "SecCanEdit_tab": [
+   "Group Default"
+  ],
+  "EveEventDescription": "The Kipunji is an enigmatic primate that was discovered by scientists in 2005. Its discovery not only meant a new species to science but the description of a new genus of African monkey. The mammal collection at The Field Museum has the only specimen of this species and Bill\nStanley the Negaunee Collection Manager is in charge of taking care of it. Join Bill in this intriguing story and learn why the Kipunji is so special.\n\n\nLearn more about the work and staff of the Mammal Division at the Field Museum.\n\nhttp://fieldmuseum.org/explore/department/zoology/mammals",
+  "AdmPublishWebPasswordFlag": "Y",
+  "AdmPublishWebPassword": "Yes",
+  "EveIntendedAudience_tab": [
+   "General Public"
+  ],
+  "EveInternalOrExternalEvent": "Internal",
+  "EveEventNumber": "MM-100.111",
+  "irn": {
+   "id": "emu:/fmnh/eevents/963",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/eevents/963"
+    }
+   }
+  },
+  "EveEventTitle": "Episode 1.11 - Meet Kipunji",
+  "MulMultiMediaRef_tab": [
+   {
+    "id": "emu:/fmnh/emultimedia/576428",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/576428"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/576429",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/576429"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/576423",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/576423"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/576418",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/576418"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/576417",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/576417"
+     }
+    }
+   },
+   {
+    "id": "emu:/fmnh/emultimedia/757218",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/emultimedia/757218"
+     }
+    }
+   }
+  ],
+  "AdmTimeModified": "18:27:28",
+  "DatCommencementDate": "2011",
+  "SecCanDelete_tab": [
+   "Group Default"
+  ],
+  "AdmDateModified": "2021-01-02",
+  "AdmGUIDPreferredValue": "e92227f9-29a7-4b69-9f8a-ac9d72b9fae8",
+  "AdmInsertedBy": "Kate Webbink",
+  "AdmGUIDPreferredType": "UUID4",
+  "AdmModifiedBy": "emu",
+  "SecDepartment_tab": [
+   "Technology",
+   "Communications"
+  ],
+  "AdmTimeInserted": "16:04:22",
+  "EveMasterEventRef": {
+   "id": "emu:/fmnh/eevents/872",
+   "@controls": {
+    "self": {
+     "href": "http://10.10.10.26:8084/fmnh/eevents/872"
+    }
+   }
+  },
+  "EveEventOrganisersRef_tab": [
+   {
+    "id": "emu:/fmnh/eparties/173558",
+    "@controls": {
+     "self": {
+      "href": "http://10.10.10.26:8084/fmnh/eparties/173558"
+     }
+    }
+   }
+  ],
+  "AdmDateInserted": "2014-02-11",
+  "AdmPublishWebNoPassword": "Yes",
+  "ExhExhibitionObjects_grp": [
+   {
+    "ObjAttachedObjectsRef": {
+     "id": "emu:/fmnh/ecatalogue/2685890",
+     "@controls": {
+      "self": {
+       "href": "http://10.10.10.26:8084/fmnh/ecatalogue/2685890"
+      }
+     }
+    }
+   }
+  ],
+  "AdmGUIDIsPreferred_grp": [
+   {
+    "AdmGUIDType": "UUID4",
+    "AdmGUIDValue": "e92227f9-29a7-4b69-9f8a-ac9d72b9fae8",
+    "AdmGUIDIsPreferred": "Yes"
+   }
+  ]
+ },
+ "@controls": {
+  "self": {
+   "href": "http://10.10.10.26:8084/fmnh/eevents/963"
+  }
+ }
+}
