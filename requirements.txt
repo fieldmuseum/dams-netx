@@ -1,10 +1,14 @@
 bs4
+celery
 decouple
 dict2xml
 fabric
 imu-api
 lxml
-python-dotenv
+paramiko
 pyexiftool
+pygltflib
 pylint
 pytest
+python-dotenv
+scp
