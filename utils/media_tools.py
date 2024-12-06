@@ -82,7 +82,8 @@ def copy_files_in_list(paths_list_csv:str='', from_path_prefix:str='', env:str='
 
     ssh = SSHClient()
     ssh.load_system_host_keys()
-    ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
+    ssh.connect(hostname=server, username=login_id, password=login_pw)
+    # ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
 
     paths_list = ct.rows(paths_list_csv)
     # from_path_list = [row['from_path'] for row in paths_list]
@@ -92,7 +93,7 @@ def copy_files_in_list(paths_list_csv:str='', from_path_prefix:str='', env:str='
         # import list of from-names and to-names
         for row in paths_list:
             print(f"moving {from_path_prefix}{row['from_path']} to {row['to_path']}")
-            scp.put(f"{from_path_prefix}{row['from_path']}", row['to_path'])
+            scp.put(f"{from_path_prefix}{row['from_path']}", f"{dir_path}/{row['to_path']}")
         # for from_path in from_path_list:
         #     # from_path_clean = re.sub(r'(.+\\/)+', '', from_path)
 
