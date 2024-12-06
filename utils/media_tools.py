@@ -99,7 +99,7 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
 
         for row in paths_list:
             i += 1
-            if os.path.exists(f'{from_path_prefix}{row['from_path']}'):
+            if os.path.exists(f"{from_path_prefix}{row['from_path']}"):
                 print(f"{i}/{len(paths_list)} : moving {from_path_prefix}{row['from_path']} to {dir_path}{row['to_path']}")
                 scp.put(files = f"{from_path_prefix}{row['from_path']}",
                         remote_path = f"{dir_path}{row['to_path']}", 
