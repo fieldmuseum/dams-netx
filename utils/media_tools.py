@@ -93,9 +93,9 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
     with SCPClient(ssh.get_transport()) as scp:
         # import list of from-names and to-names
         for row in paths_list:
-            print(f"moving {from_path_prefix}/{row['from_path']} to {dir_path}/{row['to_path']}")
-            scp.put(files = f"{from_path_prefix}/{row['from_path']}",
-                    remote_path = f"{dir_path}/{row['to_path']}", 
+            print(f"moving {from_path_prefix}{row['from_path']} to {dir_path}{row['to_path']}")
+            scp.put(files = f"{from_path_prefix}{row['from_path']}",
+                    remote_path = f"{dir_path}{row['to_path']}", 
                     recursive = True)
         # for from_path in from_path_list:
         #     # from_path_clean = re.sub(r'(.+\\/)+', '', from_path)
