@@ -59,7 +59,7 @@ def rename_files_in_list(names_list_csv:str='', from_name_list:list=[]):
             os.rename(from_name, to_name)
             
 
-def copy_files_in_list(paths_list_csv:str='', env:str='TEST'):
+def copy_files_in_list(paths_list_csv:str='', from_path_prefix:str='', env:str='TEST'):
     '''
     Copy a list of files (strings) to a corresponding set of paths from a CSV
 
@@ -91,8 +91,8 @@ def copy_files_in_list(paths_list_csv:str='', env:str='TEST'):
     with SCPClient(ssh.get_transport()) as scp:
         # import list of from-names and to-names
         for row in paths_list:
-            print(f"moving {row['from_path']} to {row['to_path']}")
-            scp.put(row['from_path'], row['to_path'])
+            print(f"moving {from_path_prefix}{row['from_path']} to {row['to_path']}")
+            scp.put(f"{from_path_prefix}{row['from_path']}", row['to_path'])
         # for from_path in from_path_list:
         #     # from_path_clean = re.sub(r'(.+\\/)+', '', from_path)
 
