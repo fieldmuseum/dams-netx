@@ -92,16 +92,23 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
 
     with SCPClient(ssh.get_transport()) as scp:
         # import list of from-names and to-names
-        for row in paths_list:
-            print(f"moving {from_path_prefix}{row['from_path']} to {dir_path}{row['to_path']}")
-            scp.put(files = f"{from_path_prefix}{row['from_path']}",
-                    remote_path = f"{dir_path}{row['to_path']}", 
-                    recursive = True)
-        # for from_path in from_path_list:
-        #     # from_path_clean = re.sub(r'(.+\\/)+', '', from_path)
+        
+        missing = []
+        
+        i = 0
 
-        #     # rename files
-        #     if from_path in from_path_list:
-        #         from_index = from_path_list.index(from_path)
-        #         to_path = to_path_list[from_index]
-        #         SCPClient.put(from_path, to_path)
+        for row in paths_list:
+            i += 1
+            if os.path.exists(f'{from_path_prefix}{row['from_path']}'):
+                print(f"{i}/{len(paths_list)} : moving {from_path_prefix}{row['from_path']} to {dir_path}{row['to_path']}")
+                scp.put(files = f"{from_path_prefix}{row['from_path']}",
+                        remote_path = f"{dir_path}{row['to_path']}", 
+                        recursive = True)
+            else:
+                print(f"{i}/{len(paths_list)} : MISSING FILE: {from_path_prefix}{row['from_path']}")
+                missing.append(row)
+    
+    # output errors:
+    if len(missing) > 0:
+        print(f"Writing {len(missing)} missing files to 'missing_files.csv'")
+        ct.write_list_of_dict_to_csv(missing, 'missing_files.csv')
