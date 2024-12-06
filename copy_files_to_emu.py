@@ -19,11 +19,11 @@ def main():
     # #     - to_name (formed from EMu-PDF filename)
 
     # Import CSV with 
-    from_to = uc.rows('from_to_thumbs.csv')
+    from_to = uc.rows('from_to_files.csv')
 
     # Copy files from local to server
     um.copy_files_in_list(paths_list_csv=from_to, 
-                          from_path_prefix='thumb_batch/',
+                          from_path_prefix='testing/thumb_batch/',
                           env='TEST')
 
 
