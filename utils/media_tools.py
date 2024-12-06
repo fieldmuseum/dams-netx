@@ -59,9 +59,9 @@ def rename_files_in_list(names_list_csv:str='', from_name_list:list=[]):
             os.rename(from_name, to_name)
             
 
-def copy_files_in_list(paths_list_csv:str='', from_path_prefix:str='', env:str='TEST'):
+def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TEST'):
     '''
-    Copy a list of files (strings) to a corresponding set of paths from a CSV
+    Copy a list of files (strings) to a corresponding set of paths in a new location
 
     paths_list_csv: filepath to a CSV (as a string). The CSV should contain 2 columns:
         - from_path = path where a file will be pulled from
@@ -85,7 +85,7 @@ def copy_files_in_list(paths_list_csv:str='', from_path_prefix:str='', env:str='
     ssh.connect(hostname=server, username=login_id, password=login_pw)
     # ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
 
-    paths_list = ct.rows(paths_list_csv)
+    # paths_list = ct.rows(paths_list_csv)
     # from_path_list = [row['from_path'] for row in paths_list]
     # to_path_list = [row['to_path'] for row in paths_list]
 
