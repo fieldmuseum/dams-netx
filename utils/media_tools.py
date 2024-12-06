@@ -76,7 +76,7 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
     login_pw = config['LOGIN_PASSWORD']
     if env == 'LIVE':
         server = config['HOST']
-        dir_path = config['ORIGIN_MEDIA_BASE_DIR']
+        dir_path = config['ORIGIN_PATH_MEDIA']
     else:
         server = config['TEST_HOST']
         dir_path = config['ALT_MEDIA_BASE_DIR']
