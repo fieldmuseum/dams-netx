@@ -1,3 +1,8 @@
+'''
+Importer to migrate files (e.g. thumbnail-previews) directly to EMu server / bypassing frontend
+NOTE - a user needs to run 'update resource' on the frontend for these to display in an MM record.
+'''
+
 import utils.media_tools as um
 import utils.csv_tools as uc
 
@@ -21,8 +26,8 @@ def main():
     # Import CSV with 
     from_to = uc.rows('from_to_files.csv')
 
-    # test on subset:
-    from_to = from_to[404:]
+    # # test on subset:
+    # from_to = from_to[404:]
 
     # Copy files from local to server
     um.copy_files_in_list(paths_list=from_to, 

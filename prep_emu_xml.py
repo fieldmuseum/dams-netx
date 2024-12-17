@@ -63,11 +63,11 @@ def parse_emu_to_dss(
             )
 
             prepped_record.find(condition['then_field']).text = emu_condition_value
-        
+
         # handle fields with conditional STATIC values
         elif condition['then_logic'] == 'STATIC':
             prepped_record.find(condition['then_field']).text = condition['then_value']
-            
+
 
 
     # Populate table-fields
@@ -110,28 +110,38 @@ def parse_emu_to_dss(
 
                 # Loop through prioritized group first (e.g. 'Install' tab vs main 'MM' tab):
                 if mm_exob_ins is not None:
-                    
-                    if value[1].find('.') > -1:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][0], value[1])
 
-                    elif type(value[0]) is list:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins, value[0][0], value[1], False)
+                    if value[1].find('.') > -1:
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins,
+                                                                             value[0][0],
+                                                                             value[1])
+
+                    elif isinstance(value[0], list):
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_ins,
+                                                                             value[0][0],
+                                                                             value[1],
+                                                                             False)
 
                     else:
                         grouped_value = xml_tools.get_group_value(mm_exob_ins, value[0], value[1])
 
-                # Only use ExOb main MM tab if MM is only attached on main MM 
+                # Only use ExOb main MM tab if MM is only attached on main MM
                 #   (i.e. if grouped_value is still NONE after looping thru install MM fields)
 
                 if grouped_value is None or grouped_value == '':
                     if value[1].find('.') > -1:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1])
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul,
+                                                                             value[0][1],
+                                                                             value[1])
 
-                    elif type(value[0]) is list:
-                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul, value[0][1], value[1], False)
+                    elif isinstance(value[0], list):
+                        grouped_value = xml_tools.get_unique_group_ref_value(mm_exob_mul,
+                                                                             value[0][1],
+                                                                             value[1],
+                                                                             False)
 
                     else:
-                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])  
+                        grouped_value = xml_tools.get_group_value(mm_exob_mul, value[0], value[1])
 
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
@@ -145,7 +155,8 @@ def parse_emu_to_dss(
 
     for key,value in concat_fields.items():
 
-        # TODO - loop through for multiple reverse-attachments of one kind
+        # NOTE / to do - stuff to add:
+        #   Loop through for multiple reverse-attachments of one kind
         #   (e.g. if >1 rev-attached Event records)
 
         concat_values = None
@@ -220,7 +231,7 @@ def main():  # main_xml_input, event_xml, catalog_xml):
     # Load EMu records & fix xml-tags
     emu_tree = ET.ElementTree()
 
-    # TODO - test/try to account for empty input-dir
+    # NOTE / to do - test/try to account for empty input-dir
     emu_records_raw1 = emu_tree.parse(glob.glob(main_xml_input)[0])
 
     emu_records_raw2 = xml_tools.fix_emu_xml_tags(emu_records_raw1)
@@ -254,45 +265,53 @@ def main():  # main_xml_input, event_xml, catalog_xml):
         mm_exob_mul = None
         mm_exob_ins = None
 
-        if None in [emu_record.find('AudIdentifier').text, emu_record.find('MulIdentifier').text, emu_record.find('ChaMd5Sum').text]:
-            log_warn_nofile = f'Skipping {emu_record.find("AudIdentifier").text} -- No MD5 sum (ChaMd5Sum) / no file'
+        emu_aud_id_text = emu_record.find("AudIdentifier").text
+        emu_ids = [emu_aud_id_text,
+                   emu_record.find('MulIdentifier').text,
+                   emu_record.find('ChaMd5Sum').text
+                   ]
+
+        if None in emu_ids:
+            log_warn_nofile = f'Skipping {emu_aud_id_text} -- No MD5 sum (ChaMd5Sum) / no file'
             print(log_warn_nofile)
             logging.warning(log_warn_nofile)
 
         else:
 
             for event_record in eve_records_raw2:
-                if event_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                if event_record.find('AudIdentifier').text == emu_aud_id_text:
                     if event_record.findall('AdmGUIDValue') is not None:
                         mm_event = event_record
                         # print("event = " + str(mm_event.findall('./')))
 
             for cat_record in cat_records_raw2:
-                if cat_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                if cat_record.find('AudIdentifier').text == emu_aud_id_text:
                     mm_catalog = cat_record
-            
+
             for exob_mul_record in exobj_mul_records_raw2:
-                if exob_mul_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                if exob_mul_record.find('AudIdentifier').text == emu_aud_id_text:
                     mm_exob_mul = exob_mul_record
 
             for exob_ins_record in exobj_ins_records_raw2:
-                if exob_ins_record.find('AudIdentifier').text == emu_record.find('AudIdentifier').text:
+                if exob_ins_record.find('AudIdentifier').text == emu_aud_id_text:
                     mm_exob_ins = exob_ins_record
 
 
             # loop thru dss schema fields & populate from EMu xml
-            if emu_record.find('MulIdentifier').text is not None and emu_record.find('ChaMd5Sum').text is not None:
-                prepped_record = parse_emu_to_dss(
-                    emu_record,
-                    mm_event,
-                    mm_catalog,
-                    mm_exob_mul,
-                    mm_exob_ins,
-                    conditions
-                    )
+            if emu_record.find('MulIdentifier').text is not None:
+                if emu_record.find('ChaMd5Sum').text is not None:
 
-                if prepped_record is not None:
-                    dss_records.append(prepped_record)
+                    prepped_record = parse_emu_to_dss(
+                        emu_record,
+                        mm_event,
+                        mm_catalog,
+                        mm_exob_mul,
+                        mm_exob_ins,
+                        conditions
+                        )
+
+                    if prepped_record is not None:
+                        dss_records.append(prepped_record)
 
 
     # Output Prepped DSS-XML
