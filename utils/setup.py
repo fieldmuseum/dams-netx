@@ -71,7 +71,7 @@ def start_log_dams_netx(config:dict=None, log_level=logging.INFO, cmd_args:list=
     logging.basicConfig(
         filename=log_file, 
         level=log_level, 
-        format='%(asctime)s %(message)s', 
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
         datefmt='%H:%M:%S')
 
     start_time = datetime.datetime.now()
@@ -89,6 +89,8 @@ def get_most_recent_file_in_dir(directory:str) -> str:
     '''Return filepath for most recently modified file in a given dir'''
 
     max_mod_time = 0
+    max_dir = None
+    max_file = None
     
     for dirname,subdirs,files in os.walk(directory):
         for fname in files:

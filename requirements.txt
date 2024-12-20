@@ -3,9 +3,11 @@ celery
 decouple
 dict2xml
 fabric
+flask
 imu-api
 lxml
 paramiko
+pika
 pyexiftool
 pygltflib
 pylint
