@@ -43,4 +43,4 @@ def handle_webhook():
     #     return jsonify({'status': 'error', 'message': 'Failed to process webhook'}), 500
 
 if __name__ == '__main__':
-    app.run(host=webhook_url, port=webhook_port)
+    app.run(host='0.0.0.0', port=webhook_port)
