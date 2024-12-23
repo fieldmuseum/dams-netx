@@ -26,6 +26,8 @@ def publish_to_rabbitmq(message):
 @app.route('/webhook', methods=['POST'])
 def handle_webhook():
     '''Receive JSON payload from NetX'''
+    print(f"Headers: {request.headers}")
+    print(f"Body: {request.get_data()}")    
     data = request.get_json()
     if data:
         # Publish to RabbitMQ
