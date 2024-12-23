@@ -34,8 +34,9 @@ def publish_to_rabbitmq(message='',
     channel = connection.channel()
     channel.queue_declare(queue=rmq_que)
     channel.basic_publish(exchange=rmq_exch, routing_key=rmq_key, body=message)
+    print(channel)
     connection.close()
-    return channel
+    # return channel
 
 @app.route('/webhook', methods=['POST'])
 def handle_webhook():
@@ -63,14 +64,16 @@ def handle_webhook():
     data = json.dumps(netx_example)
     # # # # Mockup # # # #
 
-    if data:
-        # Publish to RabbitMQ
-        publish_to_rabbitmq(json.dumps(data))
-        webhook_msg = {'status':'success','message': 'Message sent to RabbitMQ'}
-        return jsonify(webhook_msg), 200
-    else:
-        webhook_msg = {'status':'error','message': 'Invalid payload'}
-        return jsonify(webhook_msg), 400
+    print(data)
+
+    # if data:
+    # Publish to RabbitMQ
+    publish_to_rabbitmq(json.dumps(data))
+    webhook_msg = {'status':'success','message': 'Message sent to RabbitMQ'}
+    return jsonify(webhook_msg), 200
+    # else:
+    #     webhook_msg = {'status':'error','message': 'Invalid payload'}
+    #     return jsonify(webhook_msg), 400
 
     # try:
     #     publish_to_rabbitmq(json.dumps(data))
