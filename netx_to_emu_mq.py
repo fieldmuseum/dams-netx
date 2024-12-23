@@ -43,8 +43,14 @@ def handle_webhook():
 
     '''Receive JSON payload from NetX'''
     print(f"Headers: {request.headers}")
-    print(f"Body: {request.get_data()}")    
-    data = request.get_json()
+    print(f"Body: {request.get_data()}")
+    data = None
+
+    if request.is_json():
+        data = request.get_json()
+    else:
+        print('Not json')
+        data = request.get_data()
 
     # # Mockup for a start
     # # # # # #
