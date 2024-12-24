@@ -22,25 +22,7 @@ def handle_webhook():
         print('Not json')
         data = request.get_data()
 
-    # # Mockup for a start
-    # # # # # #
-    # netx_example = {
-    #     "event": {
-    #         "assetId": 101,
-    #         "systemEventType": "ASSET_CREATE",
-    #         "eventId": "0c218a59-8d6c-4c20-b5fe-372f75162d13",
-    #         "eventTime": 1674076946,
-    #         "userId": 1
-    #     },
-    #     "token": "6od7VUynjVQbDgLUdzeNvc5KuRs",
-    #     "messageTime": 1674076946,
-    #     "messageId": "78480073-b8d2-4494-85a9-638f5a15e409",
-    #     "subscriptionId": 201
-    #     }
-    # data = json.dumps(netx_example)
-    # # # # # Mockup # # # #
-
-    print(data)
+    # print(data)
 
     if data:
         

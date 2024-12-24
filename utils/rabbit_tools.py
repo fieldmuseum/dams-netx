@@ -50,8 +50,6 @@ def publish_to_rabbitmq(message:str='', env:str='LIVE'):
         pika.ConnectionParameters(host=rmq_config['HOST'], 
                                   port=rmq_config['PORT'],
                                   virtual_host='/',
-                                  heartbeat=None,
-                                #   blocked_connection_timeout=10,
                                   credentials=rmq_config['credentials']))
     
     
