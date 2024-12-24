@@ -35,7 +35,7 @@ def get_live_or_test_rmq(env:str='LIVE'):
 
     return rmq_config
 
-def publish_to_rabbitmq(message:str='', env:str='TEST'):
+def publish_to_rabbitmq(message:str='', env:str='LIVE'):
     '''
     Connect and publish a message to rabbitMQ.
     Given a message (formatted as JSON) and env (LIVE or TEST),
