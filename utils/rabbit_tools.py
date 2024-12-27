@@ -47,12 +47,12 @@ def publish_to_rabbitmq(message:str='', env:str='LIVE'):
     print(rmq_config)
 
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host=rmq_config['HOST'], 
+        pika.ConnectionParameters(host=rmq_config['HOST'],
                                   port=rmq_config['PORT'],
                                   virtual_host='/',
                                   credentials=rmq_config['credentials']))
-    
-    
+
+
     print(connection)
     channel = connection.channel()
     channel.queue_declare(queue=rmq_config['QUEUE'])
