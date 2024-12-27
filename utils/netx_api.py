@@ -4,12 +4,17 @@ Functions for using the NetX JSON-RPC API
 - NetX API docs - https://developer.netx.net
 '''
 
-import datetime, re, requests
+import datetime
+import re
+import requests
 import utils.setup as setup
 
 
 def netx_api_setup_headers(headers:dict=None, netx_api_token:str=None) -> dict:
-    '''Sets up the required default headers for using the NetX API. Allows for overriding the headers'''
+    '''
+    Sets up the required default headers for using the NetX API.
+    Allows for overriding the headers
+    '''
 
     if headers is not None:
         return headers
@@ -18,7 +23,8 @@ def netx_api_setup_headers(headers:dict=None, netx_api_token:str=None) -> dict:
     headers = {
         'Authorization': 'apiToken ' + netx_api_token,
         # 'Content-Type': 'application/json'
-        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+        # 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36
+        #               (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
         # 'jsonrpc': '2.0', # 'X-Api-Version': '3',
         # 'id': '1234567890'
     }
@@ -78,7 +84,16 @@ def netx_api_setup_request(config:dict=None, headers:dict=None, netx_env:str=Non
     return {'config': config, 'base_url':netx_base_url, 'headers': headers}
 
 
-def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_env:str=None, uri_suffix:str=None, request:str=None, body:dict=None, file=None) -> dict:
+def netx_api_make_request(
+        method:str=None,
+        params:list=None,
+        headers=None,
+        netx_env:str=None,
+        uri_suffix:str=None,
+        request:str=None,
+        body:dict=None,
+        file=None
+        ) -> dict:
     '''Makes a request to the NetX API'''
 
     json = None
@@ -102,30 +117,31 @@ def netx_api_make_request(method:str=None, params:list=None, headers=None, netx_
         method = ''
 
     headers = netx_request['headers']
-    # if file is not None:
-    #     headers['Content-Type'] = 'multipart/form-data'
 
     netx_call = None
-    if request is None:
-        netx_call = requests.post
-    elif request.lower() == 'put':
-        netx_call = requests.put
 
-#     try:
-    if file is None and body is None:
-        r = netx_call(uri, json=json, headers=headers)
-    else:
-        files = {'file': open(file, 'rb')}
-        r = netx_call(uri, data=body, files=files, headers=headers)
+    try:
+        if request is None:
+            netx_call = requests.post
+        elif request.lower() == 'put':
+            netx_call = requests.put
 
-    r.raise_for_status()
-    if r.status_code == 200:
-        return r.json()
-    else:
-        print(f'Error - {r.status_code}')
+        if file is None and body is None:
+            r = netx_call(uri, json=json, headers=headers)
+        else:
+            files = {'file': open(file, 'rb')}
+            r = netx_call(uri, data=body, files=files, headers=headers)
 
-    # except requests.exceptions.HTTPError as http_error:
-    #     raise requests.exceptions.HTTPError("Could not use method '" + method + "' : " + http_error.response.text)
+        r.raise_for_status()
+
+    except requests.exceptions.HTTPError as http_error:
+        raise requests.exceptions.HTTPError(
+            f"Could not use method {method} : {http_error.response.text}"
+            )
+    except requests.RequestException as e:
+        print(f"Error requesting data from {uri} : {e}")
+
+    return r.json()
 
 
 def netx_api_try_request(method:str, params:dict, headers:dict=None, netx_env:str=None) -> dict:
@@ -143,17 +159,24 @@ def netx_api_try_request(method:str, params:dict, headers:dict=None, netx_env:st
         return r.status_code
 
     except requests.exceptions.HTTPError as http_error:
-        raise requests.exceptions.HTTPError("Could not " + method + " : " + http_error.response.text)
+        raise requests.exceptions.HTTPError(
+            f"Could not use method {method} : {http_error.response.text}"
+            )
 
 
-def netx_remove_asset_from_folder(asset_id:int, folder_id:int, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_remove_asset_from_folder(
+        asset_id:int,
+        folder_id:int,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, Removes an asset from a folder via the NetX API
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#removeassetfromfolder
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "asset.id",
             "asset.base",
@@ -168,19 +191,23 @@ def netx_remove_asset_from_folder(asset_id:int, folder_id:int, data_to_get:list=
         folder_id,
         {"data": data_to_get}
         ]
-    # print(params)
 
     return netx_api_make_request(method, params, netx_env=netx_env)
 
 
-def netx_add_asset_to_folder(asset_id:int, folder_id:int, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_add_asset_to_folder(
+        asset_id:int,
+        folder_id:int,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, Adds an asset to a folder via the NetX API
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#addassettofolder
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "asset.id",
             "asset.base",
@@ -206,7 +233,7 @@ def netx_get_folder_by_path(folder_path:str, data_to_get:list=None, netx_env:str
     - See method help: https://developer.netx.net/#getfolderbypath
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "folder.id",
             "folder.base",
@@ -219,19 +246,23 @@ def netx_get_folder_by_path(folder_path:str, data_to_get:list=None, netx_env:str
         folder_path,
         {"data": data_to_get}
         ]
-    # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
-def netx_create_collection(collection_title:str, asset_id_list:list, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_create_collection(
+        collection_title:str,
+        asset_id_list:list,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, create a collection of listed assets via the NetX API
     - Also returns the collections's id, name, and number of assets.
     - See method help: https://developer.netx.net/#createcollection
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "collection.id",
             "collection.base",
@@ -256,7 +287,7 @@ def netx_delete_collection(collection_id:str=None, netx_env:str=None) -> dict:
     - See method help: https://developer.netx.net/#getcollection
     '''
 
-    # if data_to_get==None:
+    # if data_to_get is None:
     #     data_to_get = [
     #         "collection.id",
     #         "collection.base",
@@ -279,7 +310,7 @@ def netx_get_collection(collection_id:str=None, data_to_get:list=None, netx_env:
     - See method help: https://developer.netx.net/#getcollection
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "collection.id",
             "collection.base",
@@ -303,7 +334,7 @@ def netx_get_collections(data_to_get:list=None, netx_env:str=None, size:int=None
     - See method help: https://developer.netx.net/#getcollections
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "collection.id",
             "collection.base",
@@ -337,7 +368,7 @@ def netx_get_collections_by_user(
     - See method help: https://developer.netx.net/#getcollectionsbyuser
     '''
 
-    # if data_to_get==None:
+    # if data_to_get is None:
     #     data_to_get = [
     #         "collection.id",
     #         "collection.base",
@@ -364,7 +395,7 @@ def netx_update_collection(
     - See method help: https://developer.netx.net/#updatecollection
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "collection.id",
             "collection.base",
@@ -396,7 +427,7 @@ def netx_get_assets_by_collection(
     - See method help: https://developer.netx.net/#getassetsbycollection
     '''
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "asset.id"
             ]
@@ -411,13 +442,22 @@ def netx_get_assets_by_collection(
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
-def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], netx_env:str=None) -> dict:
+def netx_get_asset_by_filename(
+        file_name:str,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     For a given filename, returns a dict that includes NetX asset.id (default).
     Other asset-data can be returned also/instead -- see https://developer.netx.net/#search.
 
     - NOTE - NetX getAssetsByQuery is more flexible, if this function should be more general.
     '''
+
+    if data_to_get is None:
+        data_to_get = [
+            "asset.id"
+            ]
 
     method = 'getAssetsByQuery'
 
@@ -447,7 +487,7 @@ def netx_get_asset_by_filename(file_name:str, data_to_get:list=['asset.id'], net
 def netx_get_asset_by_field(
     search_field:str="fileChecksum",
     search_value:str=None,
-    data_to_get:list=['asset.id'],
+    data_to_get:list=None,
     netx_test:str=None,
     criteria:str='exact'
     ) -> dict:
@@ -459,6 +499,11 @@ def netx_get_asset_by_field(
 
     - NOTE - NetX getAssetsByQuery is more flexible, if this function should be more general.
     '''
+
+    if data_to_get is None:
+        data_to_get = [
+            "asset.id"
+            ]
 
     method = 'getAssetsByQuery'
 
@@ -472,7 +517,6 @@ def netx_get_asset_by_field(
     field_or_attribute = "field"
 
     if search_field not in netx_api_fields:
-        # print(f'WARNING - check search field-name {search_field}')
         field_or_attribute = "attribute"
 
     elif re.match(r".*Date$", search_field) is not None:
@@ -507,7 +551,6 @@ def netx_get_asset_by_field(
             "data": data_to_get
         }
         ]
-    # print(params)
 
     check = netx_api_make_request(method=method, params=params, netx_env=netx_test)
 
@@ -526,7 +569,7 @@ def netx_get_asset_by_range(
     search_field:str="modDate",
     search_min:str=None,
     search_max:str=None,
-    data_to_get:list=['asset.id'],  #  'asset.attributes'],
+    data_to_get:list=None,
     netx_test:str=None,
     ) -> dict:
     '''
@@ -536,6 +579,10 @@ def netx_get_asset_by_range(
 
     Leave the 'search_max' / 'search_min' value blank for greater than / less than searches.
     '''
+    if data_to_get is None:
+        data_to_get = [
+            "asset.id"
+            ]
 
     method = 'getAssetsByQuery'
 
@@ -598,18 +645,27 @@ def netx_get_asset_by_range(
     return netx_api_make_request(method=method, params=params, netx_env=netx_test)
 
 
-def netx_update_asset(asset_id:int, data_to_update:dict, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_update_asset(
+        # asset_id:int,
+        data_to_update:dict,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, Update an asset via the NetX API
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#updateasset
     '''
 
-    if data_to_update is None or type(data_to_update) != dict:
-        raise Exception(f'Check data_to_update {data_to_update} -- Input should be dict of NetX fields:updated-values')
+    if data_to_update is None or not isinstance(data_to_update, dict):
+        raise Exception(
+            f'Check data_to_update {data_to_update} - Input should be dict of netx-fields:values'
+            )
 
     if 'id' not in data_to_update.keys():
-        raise Exception(f'Check data_to_update {data_to_update} -- Its first key/value should be "id":"[netx-asset-id]"')
+        raise Exception(
+            f'Check data_to_update {data_to_update} - first key/value should be id:[netx-asset-id]'
+            )
 
     if data_to_get is None or len(data_to_get) < 1:
         data_to_get = [
@@ -652,12 +708,23 @@ def convert_date_for_netx(date_string_raw:str) -> str:
     Convert a date-string from a "YYYY-M-D" format to NetX's preferred milliseconds-since-epoch
     '''
 
-    epoch = datetime.datetime.utcfromtimestamp(0)
+    # epoch = datetime.datetime.utcfromtimestamp(0)
+    epoch = datetime.datetime.fromtimestamp(0, tz=datetime.timezone.utc)
 
     # parse H:M:S from date-string, if present
     if re.match(r'.*\s+\d{1,2}:\d{1,2}(:\d{1,2})*', date_string_raw) is not None:
-        time_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)', r'\g<3>', date_string_raw)
-        date_string_raw = re.sub(r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)', r'\g<1>', date_string_raw)
+        time_string_raw = re.sub(
+            r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)',
+            r'\g<3>',
+            date_string_raw
+            )
+
+        date_string_raw = re.sub(
+            r'(.*)(\s+)(\d{1,2}:\d{1,2}(:\d{1,2})*)(.*)',
+            r'\g<1>',
+            date_string_raw
+            )
+
         # print(f'time string: {time_string_raw}')
         # print(f'date string: {date_string_raw}')
     else:
@@ -678,20 +745,26 @@ def convert_date_for_netx(date_string_raw:str) -> str:
     return str(int((date_ymd - epoch).total_seconds() * 1000))
 
 
-def netx_import_asset(folder_id:int, filepath:str, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_import_asset(folder_id:int,
+                      filepath:str,
+                      filename:str,
+                      netx_env:str=None
+                      ) -> dict:
     '''
     In NetX, Imports a new asset via the NetX API, and returns its NetX asset ID if succesful.
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#import-asset
     '''
 
-    uri_suffix = f'import/asset'
+    uri_suffix = 'import/asset'
 
-        # # Add file to request
+    # # Add file to request
     # files = {'file': open(filepath+filename, 'rb')}
-    # r = requests.post(url, files=files, data={'folderId':folder_id, 'fileName':filename}, headers={'Authorization': 'apiToken {sTuffNjunk}')
+    # r = requests.post(url, files=files,
+    #                   data={'folderId':folder_id, 'fileName':filename},
+    #                   headers={'Authorization': 'apiToken {sTuffNjunk}')
 
-    method = None  # 'addAssetToFolder'
+    method = None
 
     file_data = {
         # 'file':open(filepath + filename, 'rb'),
@@ -701,13 +774,25 @@ def netx_import_asset(folder_id:int, filepath:str, filename:str, data_to_get:lis
 
     file_to_upload = filepath+filename
 
-    with open(filepath + filename, 'rb') as f:
-        r = netx_api_make_request(method=method, netx_env=netx_env, uri_suffix=uri_suffix, body=file_data, file=file_to_upload)
+    with open(filepath + filename, 'rb'): # as f:
+        r = netx_api_make_request(
+            method=method,
+            netx_env=netx_env,
+            uri_suffix=uri_suffix,
+            body=file_data,
+            file=file_to_upload
+            )
 
-    return r # netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
+    return r
 
 
-def netx_reimport_asset(asset_id:int, filepath:str, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_reimport_asset(
+        asset_id:int,
+        filepath:str,
+        filename:str,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, Reimports an existing asset via the NetX API
     - Also returns the asset's id, name, filename, and folders.
@@ -725,7 +810,7 @@ def netx_reimport_asset(asset_id:int, filepath:str, filename:str, data_to_get:li
 
     # requests.put(files=)
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "asset.id",
             "asset.base",
@@ -737,21 +822,32 @@ def netx_reimport_asset(asset_id:int, filepath:str, filename:str, data_to_get:li
         file_to_upload,
         {"data": data_to_get}
         ]
-    # print(params)
 
     # with open(file_to_upload['file'], 'rb') as f:
-    #     r = netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, request='put')
+    #     r = netx_api_make_request(method=method,
+    #                               params=params, netx_env=netx_env,
+    #                               uri_suffix=uri_suffix, request='put')
 
-    return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix, request='put')
+    return netx_api_make_request(
+        method=method,
+        params=params,
+        netx_env=netx_env,
+        uri_suffix=uri_suffix,
+        request='put'
+        )
 
 
-def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_env:str=None) -> dict:
+def netx_version_asset(
+        asset_id:int,
+        filename:str,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
     '''
     In NetX, Imports a new version of an existing asset via the NetX API
     - Also returns the asset's id, name, filename, and folders.
     - See method help: https://developer.netx.net/#version-asset
     '''
-
 
     uri_suffix = f'import/asset/{asset_id}/version'
 
@@ -762,7 +858,7 @@ def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_e
     }
 
 
-    if data_to_get==None:
+    if data_to_get is None:
         data_to_get = [
             "asset.id",
             "asset.base",
@@ -776,7 +872,12 @@ def netx_version_asset(asset_id:int, filename:str, data_to_get:list=None, netx_e
         ]
     # print(params)
 
-    return netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
+    return netx_api_make_request(
+        method=method,
+        params=params,
+        netx_env=netx_env,
+        uri_suffix=uri_suffix
+        )
 
 
 def netx_import_view(asset_id:int,
@@ -805,13 +906,19 @@ def netx_import_view(asset_id:int,
 
     file_to_upload = filepath+filename
 
-    with open(filepath + filename, 'rb') as f:
-        r = netx_api_make_request(method=method, netx_env=netx_env, uri_suffix=uri_suffix, body=file_data, file=file_to_upload)
+    with open(filepath + filename, 'rb'): # as f:
+        r = netx_api_make_request(
+            method=method,
+            netx_env=netx_env,
+            uri_suffix=uri_suffix,
+            body=file_data,
+            file=file_to_upload
+            )
 
-    return r # netx_api_make_request(method=method, params=params, netx_env=netx_env, uri_suffix=uri_suffix)
+    return r
 
 
-def netx_get_groups_by_user(user_id:str, paging:list=[0,30], netx_env:str=None) -> dict:
+def netx_get_groups_by_user(user_id:str, paging:list=None, netx_env:str=None) -> dict:
     '''
     For a given user ID, returns a list of NetX group IDs and names.
     The 'paging' argument should be a list of start-number, and results per page
@@ -820,6 +927,9 @@ def netx_get_groups_by_user(user_id:str, paging:list=[0,30], netx_env:str=None) 
     '''
 
     method = 'getGroupsByUser'
+
+    if paging is None:
+        paging = [0,30]
 
     params = [
         user_id,
@@ -830,12 +940,11 @@ def netx_get_groups_by_user(user_id:str, paging:list=[0,30], netx_env:str=None) 
             }
         }
         ]
-    # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
-def netx_get_users_by_group(group_id:str, paging:list=[0,70], netx_env:str=None) -> dict:
+def netx_get_users_by_group(group_id:str, paging:list=None, netx_env:str=None) -> dict:
     '''
     For a given group ID, returns a list of NetX user IDs, levels, and names.
     The 'paging' argument should be a list of start-number, and results per page
@@ -844,6 +953,9 @@ def netx_get_users_by_group(group_id:str, paging:list=[0,70], netx_env:str=None)
     '''
 
     method = 'getUsersByGroup'
+
+    if paging is None:
+        paging = [0,70]
 
     params = [
         group_id,
@@ -854,7 +966,6 @@ def netx_get_users_by_group(group_id:str, paging:list=[0,70], netx_env:str=None)
             }
         }
         ]
-    # print(params)
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
@@ -865,7 +976,7 @@ def netx_get_self(netx_env:str=None) -> dict:
     - See method help: https://developer.netx.net/#getself
     '''
 
-    # if data_to_get==None:
+    # if data_to_get is None:
     #     data_to_get = [
     #         "asset.id",
     #         "asset.base",
@@ -882,4 +993,8 @@ def netx_get_self(netx_env:str=None) -> dict:
         # {"data": data_to_get}
         ]
 
-    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+    return netx_api_make_request(
+        method=method,
+        params=params,
+        netx_env=netx_env
+        )
