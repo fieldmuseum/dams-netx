@@ -330,6 +330,11 @@ def main():  # main_xml_input, event_xml, catalog_xml):
                     )
                 )
 
+    if not os.path.exists(f'{dest_prefix}dss_prepped.xml'):
+        log_error_no_dss = f'ERROR -- No DSS file output to {dest_prefix}'
+        print(log_error_no_dss)
+        logging.error(log_error_no_dss)
+
     setup.stop_log_dams_netx()
 
 
