@@ -8,14 +8,14 @@ from dotenv import dotenv_values
 
 config = dotenv_values('.env')
 rmq_creds = pika.PlainCredentials(
-    username=config['RABBITMQ_USER_ID'],
-    password=config['RABBITMQ_USER_PW']
+    username=config['TEST_RABBITMQ_USER_ID'],
+    password=config['TEST_RABBITMQ_USER_PW']
     )
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(
-        host='0.0.0.0',
-        port=5672,
+        host=config['TEST_RABBITMQ_HOST'],
+        port=config['TEST_RABBITMQ_PORT'],
         credentials=rmq_creds
         )
     )
