@@ -8,8 +8,8 @@ from dotenv import dotenv_values
 
 config = dotenv_values('.env')
 rmq_creds = pika.PlainCredentials(
-    username=config['TEST_RABBITMQ_USER_ID'],
-    password=config['TEST_RABBITMQ_USER_PW']
+    username=config['RABBITMQ_USER_ID'],
+    password=config['RABBITMQ_USER_PW']
     )
 
 connection = pika.BlockingConnection(
@@ -22,8 +22,8 @@ connection = pika.BlockingConnection(
 
 channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+channel.queue_declare(queue='rabbit-test')
 
-channel.basic_publish(exchange='', routing_key='hello', body='Test message bla')
-print(" [x] Sent 'Test message bla'")
+channel.basic_publish(exchange='', routing_key='rabbit-test', body='Test rabbit blabla')
+print(" [x] Sent 'Test rabbit blabla'")
 connection.close()
