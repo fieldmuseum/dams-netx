@@ -14,8 +14,8 @@ rmq_creds = pika.PlainCredentials(
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(
-        host='localhost',
-        port=15672,
+        host='0.0.0.0',
+        port=5672,
         credentials=rmq_creds
         )
     )
