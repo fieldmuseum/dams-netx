@@ -22,16 +22,16 @@ def handle_webhook():
         print('Not json')
         data = request.get_data()
 
-    # print(data)
+    print(data)
 
     if data:
-        
+
         # Publish to RabbitMQ
         try:
             ur.publish_to_rabbitmq(json.dumps(data))
             webhook_msg = {'status':'success','message':'Message sent to RabbitMQ'}
             return jsonify(webhook_msg), 200
-        
+
         except Exception as e:
             app.logger.exception("Failed to publish message: %s", e)
             return jsonify({'status': 'error', 'message': 'Failed to process webhook'}), 500
@@ -45,5 +45,5 @@ if __name__ == '__main__':
     config = dotenv_values('.env')
     app.run(host='0.0.0.0',
             port=config['WEBHOOK_PORT'],
-            ssl_context="adhoc"
+            # ssl_context="adhoc"
             )
