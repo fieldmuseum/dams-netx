@@ -1,7 +1,10 @@
-'''Update NetX collections/groups of assets via NetX API if corresponding groups were edited in EMu'''
+'''
+Update NetX collections/groups of assets via NetX API 
+if corresponding groups were edited in EMu
+'''
 
 import logging
-import re
+import sys
 import time
 import xml.etree.ElementTree as ET
 from utils import netx_api as un
@@ -10,7 +13,7 @@ from utils import setup
 
 
 def check_asset_in_netx(emu_irn:str, live_or_test:str):
-    ''' For a given EMu irn, check/get corresponding NetX ID '''
+    '''For a given EMu irn, check/get corresponding NetX ID'''
 
     asset_id = None
 
@@ -43,7 +46,10 @@ def check_asset_in_netx(emu_irn:str, live_or_test:str):
 
 
 def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
-    '''given xml records (as an ElementTree), return a list of Group-records & grouped MM assetIDs'''
+    '''
+    Given xml records (as an ElementTree), 
+    return a list of Group-records & grouped MM assetIDs
+    '''
 
     groups_to_update = []
 
@@ -69,18 +75,18 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
             # Get the Group IRN, Title, type, UserId
             if elem.tag == 'atom' and elem.text:
                 if elem.attrib['name'] == 'irn':
-                    prepped_record['irn'] = elem.text                    
+                    prepped_record['irn'] = elem.text
 
                 if elem.attrib['name'] == 'GroupName':
                     prepped_record['title'] = elem.text
-                    
+
                 if elem.attrib['name'] == 'GroupType':
                     prepped_record['type'] = elem.text
-                    
+
                 if elem.attrib['name'] == 'UserId':
                     prepped_record['owner'] = elem.text
-                    
-                                        
+
+
 
             # Get a list of MM_irns in the group
             if elem.tag == 'table' and elem.text:
@@ -93,7 +99,7 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
                         # # smaller test-set
                         # elem = elem[:6]
                         print(f'LEN OF ELEM = {len(elem)}')
-                        
+
                         for row in elem:
                             # print(f'row = {row}')
                             # print(f'row text = {row.text}')
@@ -108,17 +114,17 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
                                             emu_irn = subrow.text,
                                             live_or_test=live_or_test
                                             )
-                                        
+
                                         if netx_id is not None:
                                             netx_id_list.append(netx_id)
-                        
+
                         prepped_record['mm_irn_list'] = mm_irn_list
                         prepped_record['netx_id_list'] = netx_id_list
-                
+
                         # NOTE - Consider:
                         #   1 - Checking if all EMu MM irn's are in NetX collection
                         #   2 - If not all in, merge NetX/EMu lists, update NetX coll.
-                        # 
+                        #
                         #   For now, skipping & only controlling group content via EMu
 
         if prepped_record not in groups_to_update:
@@ -128,12 +134,17 @@ def get_groups_to_update(xml_element:ET.ElementTree, live_or_test) -> list:
     return groups_to_update
 
 
-def main():
+def main(live_or_test:str=None, input_date:str=None):
     '''main function'''
 
-    setup.start_log_dams_netx(config=None)
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv(2)
 
-    live_or_test, input_date = setup.get_sys_argv(2)
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)
 
@@ -142,11 +153,11 @@ def main():
         config['ORIGIN_PATH_XML'],
         config['TEST_ORIGIN_PATH_XML']
         )
-    
+
 
     try:
 
-        # Prep input-XML for groups       
+        # Prep input-XML for groups
         groups_input = full_xml_prefix + 'NetX_groups/' + input_date + '/xml*'
         groups_input_path = f'Input groups XML path = {groups_input}'
         print(groups_input_path)
@@ -158,17 +169,16 @@ def main():
 
         # Get existing NetX collections IDs & titles
         netx_group_data_raw = un.netx_get_collections(netx_env = live_or_test)
-        
+
         if 'result' not in netx_group_data_raw:
             print(f'ERROR with netx_get_collections - {netx_group_data_raw}')
             logging.error(netx_group_data_raw)
             return
 
-        else:
-           list_size = netx_group_data_raw['result']['size']
-           netx_group_data = un.netx_get_collections(netx_env = live_or_test, size = list_size)
-           netx_group_list = netx_group_data['result']
-           # netx_group_title_list = [row['title'] for row in netx_group_list]
+        list_size = netx_group_data_raw['result']['size']
+        netx_group_data = un.netx_get_collections(netx_env = live_or_test, size = list_size)
+        netx_group_list = netx_group_data['result']
+        # netx_group_title_list = [row['title'] for row in netx_group_list]
 
 
         # # smaller test-set
@@ -193,11 +203,11 @@ def main():
             if len(netx_match) > 0:
 
                 # Use first matching group in NetX
-                # # TODO - Check for duplicates?
+                # # TO DO - Check for duplicates?
                 print(netx_match[0]['title'])
 
                 netx_match_id = netx_match[0]['id']
-            
+
                 # if f"EMu - {emu_row['title']} - {emu_row['irn']}" == netx_row['title']:
 
                 # print(f'emu_row = {emu_row["title"]}')
@@ -210,36 +220,35 @@ def main():
                     data_to_get = None,
                     netx_env = live_or_test
                     )
-                
+
                 if 'result' not in updated_coll:
                     print(f'ERROR with netx_update_collection - {updated_coll}')
                     logging.error(updated_coll)
                     return
 
-                else:
-                    updated_coll_id = updated_coll['result']['id']                  
-                    print(f'Updated existing collection - collId {updated_coll_id}')
-                    
+                updated_coll_id = updated_coll['result']['id']
+                print(f'Updated existing collection - collId {updated_coll_id}')
+
 
             else:
 
                 print(f"Adding: {emu_row_netx_title}")
                 print(emu_row['netx_id_list'])
-                
+
                 new_coll = un.netx_create_collection(
                     collection_title = emu_row_netx_title,
                     asset_id_list = emu_row['netx_id_list'],
                     data_to_get = None,
                     netx_env = live_or_test
                     )
-                
+
                 if 'result' not in new_coll:
                     print(f'ERROR with netx_create_collection - {new_coll}')
                     logging.error(new_coll)
                     return
 
                 else:
-                    new_coll_id = new_coll['result']['id']                  
+                    new_coll_id = new_coll['result']['id']
                     print(f'Added new collection - collId {new_coll_id}')
 
                 # print(f'Added new collection -  {new_coll}')
@@ -248,7 +257,7 @@ def main():
         #     log_err = f'ERROR - {remove_folder_data} -- {err}'
         #     print(log_err)
         #     logging.error(log_err)
-    
+
     except IndexError as index_err:
         log_index_err = f'ERROR - check for empty input NetX_audit XML dirs on input-date {input_date} - {index_err}'
         print(log_index_err)
