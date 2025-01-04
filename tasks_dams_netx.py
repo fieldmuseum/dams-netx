@@ -75,7 +75,7 @@ def main():
     # 11 (dams-netx) Remove unpublished/deleted collections
     netx_remove_collection.main(live_or_test, today)
 
+    setup.stop_log_dams_netx()
 
 if __name__ == '__main__':
     main()
-
