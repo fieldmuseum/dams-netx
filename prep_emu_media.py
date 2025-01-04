@@ -19,7 +19,7 @@ from utils import emu_netx_map as emu_netx
 from utils import setup
 
 
-def main():
+def main(live_or_test:str=None, input_date:str=None):
     """
     Outputs all records' data and copies files into dir for NetX
     Input is an EMu XML export file, outputs to a CSV file with the
@@ -28,13 +28,17 @@ def main():
     :param file_path: filename of the XML file to parse
     :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
     """
-    # Main function
 
     # Start logs
-    setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
-    # input_date = sys.argv[1]
-    # live_or_test = sys.argv[2]
-    live_or_test, input_date = setup.get_sys_argv()
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv()
+
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
+
 
     config = setup.get_config_dams_netx(live_or_test)
 
@@ -90,7 +94,9 @@ def main():
 
                     record['SecDepartment'] = sec_dept_all[0]
 
-            if set(['ChaMd5Sum', 'SecDepartment', 'MulIdentifier', 'AudIdentifier']).issubset(record):
+            if set(
+                ['ChaMd5Sum', 'SecDepartment', 'MulIdentifier', 'AudIdentifier']
+                ).issubset(record):
                 records.append(record)
             else:
                 log_warn_nofile = f'Skipping MM irn {record["irn"]} -- No ChaMd5Sum or file'
@@ -251,7 +257,7 @@ def validate_files_copied(csv_records, dest_prefix):
     for csv_r in csv_records:
         if 'pathAdd' in csv_r.keys():
             path = dest_prefix + csv_r['pathAdd'] + csv_r['file']
-        else:    #    if 'pathMove' in r.keys():
+        else:    #  if 'pathMove' in r.keys():
             path = dest_prefix + csv_r['pathMove'] + csv_r['file']
         if not os.path.exists(path):
             raise Exception(f'prep_file: {path} does not exist')
@@ -350,7 +356,9 @@ def output_error_log(config, invalid_records):
             if key not in field_names:
                 field_names.append(key)
 
-    with open(config['LOG_OUTPUT'] + 'prep_file_prep_errors.csv', mode='w', encoding='utf-8') as csv_file:
+    outfile = f"{config['LOG_OUTPUT']}prep_file_prep_errors.csv"
+
+    with open(outfile, mode='w', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=field_names)
         writer.writeheader()
         writer.writerows(invalid_records)
