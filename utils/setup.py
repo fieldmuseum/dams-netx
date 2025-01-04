@@ -1,13 +1,18 @@
 '''Utils for general setup, config, and logging'''
 
-import datetime, logging, os, re, sys
+import datetime
+import logging
+import os
+import re
+import sys
 from dotenv import dotenv_values
 
 def get_config_dams_netx(netx_env:str=None):
     '''Load variable from .env, and allow forcing the "NETX_ENV" to "TEST"'''
 
     config = dotenv_values(".env")
-    if not config: raise Exception("No .env config file found")
+    if not config:
+        raise Exception("No .env config file found")
 
     if netx_env == "TEST":
         config['NETX_ENV'] = "TEST"
@@ -80,14 +85,16 @@ def start_log_dams_netx(config:dict=None, log_level=logging.INFO, cmd_args:list=
         datefmt='%H:%M:%S')
 
     start_time = datetime.datetime.now()
-    logging.info(f'STARTED - {start_time} : {__file__} {cmd_args}')
+    # logging.info(f'STARTED - {start_time} : {__file__} {cmd_args}')
+    logging.info('STARTED - %s : %s %s', start_time, __file__, cmd_args)
 
 
 def stop_log_dams_netx():
     '''Record finish time and stop logging'''
 
     stop_time = datetime.datetime.now()
-    logging.info(f'FINISHED {stop_time} : {__file__}')
+    # logging.info(f'FINISHED {stop_time} : {__file__}')
+    logging.info('FINISHED %s : %s', stop_time, __file__)
 
 
 def get_most_recent_file_in_dir(directory:str) -> str:
