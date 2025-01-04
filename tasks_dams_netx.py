@@ -26,6 +26,8 @@ def main():
     # Start logs
     setup.start_log_dams_netx(config=None, cmd_args=[live_or_test, today])
 
+    config = setup.get_config_dams_netx(live_or_test)
+
 
     # # # # Start dams-netx steps:
 
@@ -36,9 +38,12 @@ def main():
 
     # 2 - Run NetXIO to ingest media files
     if live_or_test == 'LIVE':
-        netx_io =  'sudo java -Xms512M -Xmx2048M -cp "/home/kwebbink/NetxIO/netxio-4.1.15.jar" com.netxposure.external.client.io.NetxIO -config "/home/kwebbink/NetxIO/netxio.properties"'
+        netx_io_props = config['NETXIO_PROPS']
     else:
-        netx_io = 'sudo java -Xms512M -Xmx2048M -cp "/home/kwebbink/NetxIO/netxio-4.1.15.jar" com.netxposure.external.client.io.NetxIO -config "/home/kwebbink/NetxIO/netxio_test.properties"'
+        netx_io_props = config['TEST_NETXIO_PROPS']
+    
+    netx_io_jar = config['NETXIO_JAR']
+    netx_io =  f'sudo java -Xms512M -Xmx2048M -cp "{netx_io_jar}" com.netxposure.external.client.io.NetxIO -config "{netx_io_props}"'
     logging.info('NETX_IO:  %s', netx_io)
     os.system(netx_io)
     time.sleep(1)
@@ -62,9 +67,11 @@ def main():
 
     # 6 - (NetXIO) Run NexIO DSS-xml-file import
     if live_or_test == 'LIVE':
-        netx_io_dss = 'sudo java -Xms512M -Xmx2048M -cp "/home/kwebbink/NetxIO/netxio-4.1.15.jar" com.netxposure.external.client.io.NetxIO -config "/home/kwebbink/NetxIO/netxio_dss.properties"'
+        netxio_dss_props = config['NETXIO_DSS_PROPS']
     else:
-        netx_io_dss = 'sudo java -Xms512M -Xmx2048M -cp "/home/kwebbink/NetxIO/netxio-4.1.15.jar" com.netxposure.external.client.io.NetxIO -config "/home/kwebbink/NetxIO/netxio_dss_test.properties"'
+        netxio_dss_props = config['TEST_NETXIO_DSS_PROPS']
+
+    netx_io_dss = f'sudo java -Xms512M -Xmx2048M -cp "{netx_io_jar}" com.netxposure.external.client.io.NetxIO -config "{netxio_dss_props}"'
     logging.info('NETX_IO_DSS:  %s', netx_io_dss)
     os.system(netx_io_dss)
     time.sleep(1)
