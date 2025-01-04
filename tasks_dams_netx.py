@@ -12,25 +12,17 @@ import prep_pathadd
 import netx_add_folder
 import netx_remove_asset
 import netx_update_collections
-# import netx_create_collection
 import netx_remove_collection
-# from sync_queue.celery import app
+from utils import setup
 
-# @app.task
-# def add(x:int=0, y:int=1):
-#     '''run a test function'''
-#     print('x+y')
-#     return x + y
-# add.apply_async((2, 2), queue='lopri', countdown=10)
-
-# media_prep = prep_emu_media.main.apply_async((today, 'LIVE'), queue='dams-test', countdown=4)
-# media_prep.get()
 
 def main():
     '''Run through dams-netx sync tasks'''
 
     today = str(datetime.today())[:10]
     live_or_test = 'LIVE'
+
+    setup.start_log_dams_netx(config=None, cmd_args=[live_or_test, today])
 
 
     # 1 - Prep media files
