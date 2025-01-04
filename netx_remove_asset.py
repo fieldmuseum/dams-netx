@@ -1,6 +1,7 @@
 '''Remove assets via NetX API if they were unpublished/deleted in EMu'''
 
 import logging
+import sys
 import time
 import xml.etree.ElementTree as ET
 from utils import netx_api as un
@@ -102,12 +103,17 @@ def get_irns_to_remove(xml_element:ET.ElementTree) -> list:
     return records_to_remove
 
 
-def main():
+def main(live_or_test:str=None, input_date:str=None):
     '''main function'''
 
-    setup.start_log_dams_netx(config=None)
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv(2)
 
-    live_or_test, input_date = setup.get_sys_argv(2)
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)
 

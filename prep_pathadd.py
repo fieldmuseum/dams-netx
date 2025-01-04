@@ -13,7 +13,7 @@ from utils import setup
 from utils import emu_netx_map as emu_netx
 
 
-def main():
+def main(live_or_test:str=None, input_date:str=None):
     """
     Outputs all records' data and copies files into dir for NetX
     Input is an EMu XML export file, outputs to a CSV file with the
@@ -24,10 +24,15 @@ def main():
     """
 
     # Start logs
-    setup.start_log_dams_netx(config=None, cmd_args=sys.argv)
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv(2)
 
-    # Main function
-    live_or_test, input_date = setup.get_sys_argv(2)
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
+
 
     config = setup.get_config_dams_netx(live_or_test)
 

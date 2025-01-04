@@ -4,21 +4,28 @@ import logging
 import math
 import time
 import re
+import sys
 from datetime import datetime
 from utils import netx_api as un
 from utils import csv_tools as uc
 from utils import setup
 
-def main():
+def main(live_or_test:str=None):
     '''main function'''
 
-    setup.start_log_dams_netx(config=None)
+    # Setup paths to input XML
+    if live_or_test is None:
+        input_args = sys.argv
+        live_or_test = setup.get_sys_argv(1)
 
-    live_or_test = setup.get_sys_argv(1)
+    else:
+        input_args = [live_or_test]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)
 
-    # Point the .env 'GROUP_ADD_CSV' variable at the CSV file with the list of assets 
+    # Point the .env 'GROUP_ADD_CSV' variable at the CSV file with the list of assets
     input_csv = config['GROUP_ADD_CSV']
     group_add_rows = uc.rows(input_csv)
     asset_id_list = [int(row['assetId']) for row in group_add_rows if len(re.findall(r'\D', row['assetId'])) == 0]
@@ -46,10 +53,10 @@ def main():
             collection_title=f'{collection_title}_{chunk_number}',
             asset_id_list=asset_list_chunk,  # asset_id_list,
             netx_env=live_or_test)
-        
+
         chunk_number += 1
-        
-    
+
+
         if 'result' in collection_data:
             col_id = collection_data['result']['id']
             col_title = collection_data['result']['title']
@@ -61,7 +68,7 @@ def main():
         else:
             print(f'ERROR - {collection_data}')
             logging.error(collection_data)
-        
+
         time.sleep(10)
 
     setup.stop_log_dams_netx()

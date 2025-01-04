@@ -185,18 +185,20 @@ def parse_emu_to_dss(
     return prepped_record
 
 
-def main():  # main_xml_input, event_xml, catalog_xml):
+def main(live_or_test:str=None, input_date:str=None):  # main_xml_input, event_xml, catalog_xml):
     '''Given an input-date, prep XML export from that date'''
 
-    # Main function
-
     # Setup paths to input XML
-    live_or_test, input_date = setup.get_sys_argv(2)
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv(2)
+
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)
-
-    # Start logs
-    setup.start_log_dams_netx(config=config, cmd_args=sys.argv)
 
     # # Check if test or live paths should be used
     # if live_or_test == "LIVE":

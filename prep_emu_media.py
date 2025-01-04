@@ -32,7 +32,7 @@ def main(live_or_test:str=None, input_date:str=None):
     # Start logs
     if live_or_test is None and input_date is None:
         input_args = sys.argv
-        live_or_test, input_date = setup.get_sys_argv()
+        live_or_test, input_date = setup.get_sys_argv(2)
 
     else:
         input_args = [live_or_test, input_date]

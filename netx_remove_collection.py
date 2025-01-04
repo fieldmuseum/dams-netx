@@ -2,6 +2,7 @@
 
 import logging
 import re
+import sys
 import time
 import xml.etree.ElementTree as ET
 from utils import netx_api as un
@@ -14,7 +15,7 @@ def remove_group_from_netx(row:dict, current_netx_groups:list, live_or_test:str)
 
     # In case API needs rate-limiting
     time.sleep(0.1)
-    
+
     netx_match = []
     # netx_match = [group for group in netx_group_list['results'] if group['title'] == emu_row_netx_title]
     for group in current_netx_groups:
@@ -23,7 +24,7 @@ def remove_group_from_netx(row:dict, current_netx_groups:list, live_or_test:str)
             netx_match.append(group['id'])
     # print(netx_match)
 
-    
+
 
     # # Given Identifier/Filename, Get Asset ID
     # asset_data = un.netx_get_asset_by_field(
@@ -96,12 +97,19 @@ def get_irns_to_remove(xml_element:ET.ElementTree) -> list:
     return records_to_remove
 
 
-def main():
+def main(live_or_test:str=None, input_date:str=None):
     '''main function'''
 
-    setup.start_log_dams_netx(config=None)
+    # Setup paths to input XML
+    if live_or_test is None and input_date is None:
+        input_args = sys.argv
+        live_or_test, input_date = setup.get_sys_argv(2)
 
-    live_or_test, input_date = setup.get_sys_argv(2)
+    else:
+        input_args = [live_or_test, input_date]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
+
 
     config = setup.get_config_dams_netx(live_or_test)
 
@@ -110,10 +118,10 @@ def main():
         config['ORIGIN_PATH_XML'],
         config['TEST_ORIGIN_PATH_XML']
         )
-    
+
     unpub_records_to_remove = []
     delete_records_to_remove = []
-    
+
     try:
 
         unpub_input = full_xml_prefix + 'NetX_audit_unpublished_groups/' + input_date + '/xml*'
@@ -153,18 +161,16 @@ def main():
         # unpub_xml = unpub_xml[:10]
         # delete_xml = delete_xml[:10]
 
-        
+
         # Get existing NetX collections IDs & titles
         netx_group_data = un.netx_get_collections(netx_env = live_or_test)
-        
+
         if 'result' not in netx_group_data:
             print(f'ERROR with netx_get_collections - {netx_group_data}')
             logging.error(netx_group_data)
             return
 
-        else:
-           netx_group_list = netx_group_data['result']['results']
-
+        netx_group_list = netx_group_data['result']['results']
 
 
         records_to_remove = unpub_records_to_remove + delete_records_to_remove
@@ -184,7 +190,7 @@ def main():
     #     log_err = f'ERROR - {remove_folder_data} -- {err}'
     #     print(log_err)
     #     logging.error(log_err)
-    
+
     except IndexError as index_err:
         log_index_err = f'ERROR - check for empty input NetX_audit XML dirs on input-date {input_date} - {index_err}'
         print(log_index_err)

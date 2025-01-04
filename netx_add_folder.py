@@ -1,6 +1,7 @@
 '''Add ingested assets to secondary folders via NetX API'''
 
 import logging
+import sys
 import time
 from utils import netx_api as un
 from utils import csv_tools as uc
@@ -102,13 +103,17 @@ def get_unique_folder_id_list(path_add_rows:list, live_or_test:str):
     return folder_id_list
 
 
-def main():
+def main(live_or_test:str=None):
     '''main function'''
 
-    setup.start_log_dams_netx(config=None)
+    if live_or_test is None:
+        input_args = sys.argv
+        live_or_test = setup.get_sys_argv(1)
 
-    live_or_test = setup.get_sys_argv(1)
-    # live_or_test = sys.argv[1]
+    else:
+        input_args = [live_or_test]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)  # dotenv_values(".env")
 

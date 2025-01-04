@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import shutil
+import sys
 # from fileinput import filename
 from utils import setup
 from utils import netx_api
@@ -27,12 +28,24 @@ def list_files(directory:str):
     return paths
 
 
-def main():
+def main(live_or_test:str=None):
     '''Main function'''
 
-    setup.start_log_dams_netx()
+    # setup.start_log_dams_netx()
 
-    live_or_test = setup.get_sys_argv(number_of_args=1)
+    # if live_or_test is None:
+    #     live_or_test = setup.get_sys_argv(number_of_args=1)
+
+
+    # Start logs
+    if live_or_test is None:
+        input_args = sys.argv
+        live_or_test = setup.get_sys_argv(number_of_args=1)
+
+    else:
+        input_args = [live_or_test]
+
+    setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
     config = setup.get_config_dams_netx(live_or_test)
 
