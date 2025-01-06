@@ -7,8 +7,6 @@ import utils.rabbit_tools as ur
 
 app = Flask(__name__)
 
-config = dotenv_values('.env')
-
 @app.route('/webhook', methods=['GET'])
 def handle_webhook():
     '''Receive JSON payload from NetX'''
@@ -28,7 +26,8 @@ def handle_webhook():
 
     if data:
 
-        rmq_env = config['RMQ_ENV']
+        rmq_config = dotenv_values('.env')
+        rmq_env = rmq_config['RMQ_ENV']
 
         # Publish to RabbitMQ
         try:
