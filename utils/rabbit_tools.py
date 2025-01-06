@@ -55,7 +55,7 @@ def publish_to_rabbitmq(message:str='', env:str='LIVE'):
 
     print(connection)
     channel = connection.channel()
-    channel.queue_declare(queue=rmq_config['QUEUE'])
+    channel.queue_declare(queue=rmq_config['QUEUE'], durable=True)
     channel.basic_publish(exchange=rmq_config['EXCHANGE'],
                           routing_key=rmq_config['ROUTING_KEY'],
                           body=message)
