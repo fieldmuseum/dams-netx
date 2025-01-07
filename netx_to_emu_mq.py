@@ -50,12 +50,12 @@ def handle_webhook():
 if __name__ == '__main__':
     config = dotenv_values('.env')
 
-    serve(app,
-          host="0.0.0.0",
-          port=config['WEBHOOK_PORT'])
+    # serve(app,
+    #       host="0.0.0.0",
+    #       port=config['WEBHOOK_PORT'])
 
-    # app.run(host='0.0.0.0',
-    #         port=config['WEBHOOK_PORT'],
-    #         # debug=True,
-    #         ssl_context="adhoc"
-    #         )
+    app.run(host='0.0.0.0',
+            port=config['WEBHOOK_PORT'],
+            # debug=True,
+            ssl_context="adhoc"
+            )
