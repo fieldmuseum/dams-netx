@@ -3,6 +3,7 @@
 import json
 from flask import Flask, request, jsonify
 from dotenv import dotenv_values
+from waitress import serve
 import utils.rabbit_tools as ur
 
 app = Flask(__name__)
@@ -11,7 +12,7 @@ app = Flask(__name__)
 def handle_webhook():
     '''Receive JSON payload from NetX'''
 
-    print("Headers: {'Content-Type': 'text/plain'}")  #  {request.headers}")
+    print(f"Headers: {request.headers}")  # Headers: {'Content-Type': 'text/plain'}")  #  
     print(f"Body: {request.get_data()}")
     data = None
 
@@ -33,7 +34,7 @@ def handle_webhook():
         try:
             ur.publish_to_rabbitmq(json.dumps(data), env=rmq_env)
             webhook_msg = {'status':'success','message':'Message sent to RabbitMQ'}
-            print(webhook_msg)
+            print(jsonify(webhook_msg))
             return jsonify(webhook_msg), 200
 
         except Exception as e:
@@ -48,8 +49,13 @@ def handle_webhook():
 
 if __name__ == '__main__':
     config = dotenv_values('.env')
-    app.run(host='0.0.0.0',
-            port=config['WEBHOOK_PORT'],
-            # debug=True,
-            ssl_context="adhoc"
-            )
+
+    serve(app,
+          host="0.0.0.0",
+          port=config['WEBHOOK_PORT'])
+
+    # app.run(host='0.0.0.0',
+    #         port=config['WEBHOOK_PORT'],
+    #         # debug=True,
+    #         ssl_context="adhoc"
+    #         )
