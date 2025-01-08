@@ -8,7 +8,7 @@ import utils.rabbit_tools as ur
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['GET'])
+@app.route('/webhook', methods=['GET','POST'])
 def handle_webhook():
     '''Receive JSON payload from NetX'''
 
