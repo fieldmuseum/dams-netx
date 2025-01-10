@@ -21,23 +21,24 @@ def main():
     '''Run through dams-netx sync tasks'''
 
     today = str(datetime.today())[:10]
-    live_or_test = 'LIVE'
+    prep_live_or_test = 'LIVE'
+    netx_live_or_test = 'LIVE'
 
     # Start logs
-    setup.start_log_dams_netx(config=None, cmd_args=[live_or_test, today])
+    setup.start_log_dams_netx(config=None, cmd_args=[prep_live_or_test, today])
 
-    config = setup.get_config_dams_netx(live_or_test)
+    config = setup.get_config_dams_netx(prep_live_or_test)
 
 
     # # # # Start dams-netx steps:
 
     # 1 - Prep media files
-    logging.info(' - - prep_emu_media - %s - %s - - -', live_or_test, today)
-    prep_emu_media.main(live_or_test=live_or_test, input_date=today)
+    logging.info(' - - prep_emu_media - %s - %s - - -', prep_live_or_test, today)
+    prep_emu_media.main(live_or_test=prep_live_or_test, input_date=today)
 
 
     # 2 - Run NetXIO to ingest media files
-    if live_or_test == 'LIVE':
+    if netx_live_or_test == 'LIVE':
         netx_io_props = config['NETXIO_PROPS']
     else:
         netx_io_props = config['TEST_NETXIO_PROPS']
@@ -58,15 +59,15 @@ def main():
 
     # 4 - (dams-netx) Check for NetXIO lostandfound
     logging.info(' - - check_netxio_errors - - -')
-    check_netxio_errors.main(live_or_test)
+    check_netxio_errors.main(prep_live_or_test)
 
     # 5 - (dams-netx) Prep XML for DSS
     logging.info(' - - prep_emu_xml - - -')
-    prep_emu_xml.main(live_or_test, today)
+    prep_emu_xml.main(prep_live_or_test, today)
 
 
     # 6 - (NetXIO) Run NexIO DSS-xml-file import
-    if live_or_test == 'LIVE':
+    if netx_live_or_test == 'LIVE':
         netxio_dss_props = config['NETXIO_DSS_PROPS']
     else:
         netxio_dss_props = config['TEST_NETXIO_DSS_PROPS']
@@ -79,23 +80,23 @@ def main():
 
     # 7 - (dams-netx) Prep pathAdd folder-update
     logging.info(' - - prep_pathadd - - -')
-    prep_pathadd.main(live_or_test, today)
+    prep_pathadd.main(prep_live_or_test, today)
 
     # 8 - (dams-netx) Update folders via NetX API
     logging.info(' - - netx_add_folder - - -')
-    netx_add_folder.main(live_or_test)
+    netx_add_folder.main(prep_live_or_test)
 
     # 9 - (dams-netx) Move unpublished/deleted assets to "Remove_from_NetX" folder
     logging.info(' - - netx_remove_asset - - -')
-    netx_remove_asset.main(live_or_test, today)
+    netx_remove_asset.main(prep_live_or_test, today)
 
     # 10 - (dams-netx) Update Groups via NetX API
     logging.info(' - - netx_update_collections - - -')
-    netx_update_collections.main(live_or_test, today)
+    netx_update_collections.main(prep_live_or_test, today)
 
     # 11 (dams-netx) Remove unpublished/deleted collections
     logging.info(' - - netx_remove_collection - - -')
-    netx_remove_collection.main(live_or_test, today)
+    netx_remove_collection.main(prep_live_or_test, today)
 
 
     # Stop logs
