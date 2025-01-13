@@ -3,7 +3,7 @@
 import json
 from flask import Flask, request, jsonify
 from dotenv import dotenv_values
-from waitress import serve
+# from waitress import serve
 import utils.rabbit_tools as ur
 
 app = Flask(__name__)
@@ -58,5 +58,5 @@ if __name__ == '__main__':
             port=config['WEBHOOK_PORT'],
             # debug=True,
             # ssl_context="adhoc"
-            ssl_context=(config['HTTPS_CERT'], config['HTTPS_PRIVKEY'])
+            # ssl_context=(config['HTTPS_CERT'], config['HTTPS_PRIVKEY'])
             )
