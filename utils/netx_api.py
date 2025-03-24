@@ -442,6 +442,36 @@ def netx_get_assets_by_collection(
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
 
 
+def netx_get_asset_by_id(
+        id_list:list,
+        data_to_get:list=None,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    For a given NetX asset ID, returns a dict that includes NetX asset.base (default).
+    Other asset-data can be returned also/instead -- see https://developer.netx.net/#getassets .
+
+    - NOTE - NetX getAssetsByQuery is more flexible, if NetX asset ID is unknown.
+    '''
+
+    if data_to_get is None:
+        data_to_get = [
+            "asset.base"
+            ]
+
+    method = 'getAssets'
+
+    params = [
+        id_list,
+        {
+            "data": data_to_get
+        }
+        ]
+    # print(params)
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
 def netx_get_asset_by_filename(
         file_name:str,
         data_to_get:list=None,
@@ -645,6 +675,24 @@ def netx_get_asset_by_range(
     return netx_api_make_request(method=method, params=params, netx_env=netx_test)
 
 
+def netx_get_asset_attributes(
+        id_list:list,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    For a given NetX asset ID (list of int), returns a dict that includes all custom attributes.
+    see https://developer.netx.net/#getassetattributes .
+
+    - NOTE - NetX getAssetsByQuery is more flexible, if NetX asset ID is unknown.
+    '''
+
+    method = 'getAssetAttributes'
+
+    params = id_list
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
 def netx_update_asset(
         # asset_id:int,
         data_to_update:dict,
@@ -734,11 +782,11 @@ def convert_date_for_netx(date_string_raw:str) -> str:
     if not re.match(r'^\d{4}-\d{1,2}-\d{1,2}$', date_string_raw):
         raise Exception(f'Input date {date_string_raw} is not formatted in "YYYY-MM-DD"')
 
-    date_time_string = f'{date_string_raw} {time_string_raw}'
+    date_time_string = f'{date_string_raw} {time_string_raw}+00:00'
 
     # re-format input date from string 'YYYY-MM-DD' to datetime-object
     # # https://pythonguides.com/convert-a-string-to-datetime-in-python/
-    date_ymd = datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M:%S')
+    date_ymd = datetime.datetime.strptime(date_time_string, '%Y-%m-%d %H:%M:%S%z')
 
     print(date_ymd)
 
