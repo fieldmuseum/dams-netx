@@ -2,7 +2,7 @@
 Importer to migrate files (e.g. thumbnail-previews) directly to EMu server / bypassing frontend
 NOTE 
 - a user needs to run 'update resource' on the frontend for these to display in an MM record.
-- JPG-thumbnails for PDFs can be batch-prepped in Acrobat
+- JPG-thumbnails for PDFs can be batch-prepped in Bridge
 '''
 
 import utils.media_tools as um
@@ -27,7 +27,7 @@ def main():
     # #     - to_name (formed from EMu-PDF filename)
 
     # Import CSV
-    from_to = uc.rows('from_to_files.csv')
+    from_to = uc.rows('testing/from_to_files.csv')
 
     # # test on subset:
     # from_to = from_to[404:]
