@@ -78,6 +78,10 @@ def copy_files_in_list(paths_list:list=None, from_path_prefix:str='', env:str='T
         server = config['HOST']
         # dir_path = config['ORIGIN_PATH_MEDIA']
         dir_path = config['ORIGIN_MEDIA_BASE_DIR']
+    elif env == 'WEB':
+        server = config['WEB_HOST']
+        dir_path = config['ORIGIN_MEDIA_BASE_DIR']
+        login_pw = config['WEB_LOGIN_PASSWORD']
     else:
         server = config['TEST_HOST']
         dir_path = config['ALT_MEDIA_BASE_DIR']

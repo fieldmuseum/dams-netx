@@ -34,8 +34,8 @@ def main():
 
     # Copy files from local to server
     um.copy_files_in_list(paths_list=from_to,
-                          from_path_prefix='testing/thumb_batch/',
-                          env='LIVE')
+                          from_path_prefix='',
+                          env='WEB')
 
 
 if __name__ == "__main__":
