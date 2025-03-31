@@ -3,6 +3,7 @@
 import csv
 import os
 import re
+import utils.setup as setup
 from xml.etree import ElementTree as ET
 
 def emu_netx_atoms() -> dict:
@@ -12,35 +13,35 @@ def emu_netx_atoms() -> dict:
     '''
 
     emu_netx_atoms = {
-            'AudIdentifier':'AudIdentifier',
-            'irn':'irn',
-            'MulTitle':'MulTitle',
-            'MulDescription':'MulDescription',
-            'AudAccessURI':'AudAccessURI',
-            'AudCitation':'AudCitation',
-            'SecRecordStatus':'SecRecordStatus',
-            'AdmPublishWebNoPassword':'AdmPublishWebNoPassword',
-            'AdmPublishWebPassword':'AdmPublishWebPassword',
-            'AdmAssetSourceDAMS':'AdmAssetSourceDAMS',
-            'AudTaxonCoverage':'AudTaxonCoverage',
-            'AudRelatedGeography':'AudRelatedGeography',
-            'AudAssociatedSpecimen':'AudAssociatedSpecimen',
-            'AudAssociatedObservations':'AudAssociatedObservations',
-            'AudNumbers':'AudNumbers',
-            'AudVernacularName':'AudVernacularName',
-            'AudSex':'AudSex',
-            'AudLifeStage':'AudLifeStage',
-            'AudCaptureDevice':'AudCaptureDevice',
-            'AudFundingAttribution':'AudFundingAttribution',
-            'AdmDateInserted':'AdmDateInserted',
-            'AdmDateModified':'AdmDateModified',
-            'AdmInsertedBy':'AdmInsertedBy',
-            'AdmModifiedBy':'AdmModifiedBy',
-            'RelNotes':'RelNotes',
-            'MulIdentifier':'MulIdentifier',
-            'DetSource':'DetSource',
-            'ChaMediaForm':'ChaMediaForm',
-            'DetResourceType':'DetResourceType',
+        'AudIdentifier':'AudIdentifier',
+        'irn':'irn',
+        'MulTitle':'MulTitle',
+        'MulDescription':'MulDescription',
+        'AudAccessURI':'AudAccessURI',
+        'AudCitation':'AudCitation',
+        'SecRecordStatus':'SecRecordStatus',
+        'AdmPublishWebNoPassword':'AdmPublishWebNoPassword',
+        'AdmPublishWebPassword':'AdmPublishWebPassword',
+        'AdmAssetSourceDAMS':'AdmAssetSourceDAMS',
+        'AudTaxonCoverage':'AudTaxonCoverage',
+        'AudRelatedGeography':'AudRelatedGeography',
+        'AudAssociatedSpecimen':'AudAssociatedSpecimen',
+        'AudAssociatedObservations':'AudAssociatedObservations',
+        'AudNumbers':'AudNumbers',
+        'AudVernacularName':'AudVernacularName',
+        'AudSex':'AudSex',
+        'AudLifeStage':'AudLifeStage',
+        'AudCaptureDevice':'AudCaptureDevice',
+        'AudFundingAttribution':'AudFundingAttribution',
+        'AdmDateInserted':'AdmDateInserted',
+        'AdmDateModified':'AdmDateModified',
+        'AdmInsertedBy':'AdmInsertedBy',
+        'AdmModifiedBy':'AdmModifiedBy',
+        'RelNotes':'RelNotes',
+        'MulIdentifier':'MulIdentifier',
+        'DetSource':'DetSource',
+        'ChaMediaForm':'ChaMediaForm',
+        'DetResourceType':'DetResourceType',
     }
 
     return emu_netx_atoms
@@ -243,6 +244,9 @@ def get_dss_xml(dss_xml_path:dict) -> dict:
         netx_emu_tree = ET.parse(dss_xml_path)
         netx_emu_root = netx_emu_tree.getroot()
 
+        destination = []
+        source = []
+
         for child in netx_emu_root:
             if child.attrib['name'] == 'XML Metadata sync':
                 for grandkid in child:
@@ -321,3 +325,26 @@ def emu_iiif_metadata_labels() -> dict:
     }
 
     return metadata_labels
+
+
+def get_emu_netx_map(config):
+    '''Use NetX syncedMetadata.xml to setup EMu/NetX mapping dictionary'''
+
+    dss_xml = config['DSS_XML']
+
+    emu_netx_fields_raw = ET.parse(dss_xml)
+    emu_netx_fields = emu_netx_fields_raw.getroot()
+    emu_dss = emu_netx_fields.find(path=".//*[@name='XML Metadata sync']")
+    emu_fields = [emu for emu in emu_dss if 'column' in emu.attrib]  # .findall(path='.//field')]
+    netx_fields = [netx for netx in emu_dss if 'attribute' in netx.attrib ]  # emu_dss.findall(path='.//map')]
+    # field_map = list(zip(emu_fields[1:], netx_fields))  # quick/dirty version
+    field_map = []
+    for emu_field in emu_fields:
+        for netx_field in netx_fields:
+            if emu_field.attrib['name'] == netx_field.attrib['field']:
+                emu_netx_match = {
+                    netx_field.attrib['attribute'] : emu_field.attrib['column']
+                }
+                field_map.append(emu_netx_match)
+
+    return field_map

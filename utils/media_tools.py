@@ -2,11 +2,11 @@
 
 import os
 import re
-import utils.csv_tools as ct
-import utils.setup as setup
 from pygltflib import GLTF2, BufferFormat
 from paramiko import SSHClient
 from scp import SCPClient
+from utils import csv_tools as ct
+from utils import setup
 
 # convert gltf to glb
 def gltf_bin_to_glb(in_gltf:str='',
@@ -15,7 +15,7 @@ def gltf_bin_to_glb(in_gltf:str='',
                     out_file:str='test.glb'
                     ):
     '''convert a 3d GLTF file with associated BIN (buffer) file to GLB format'''
-    
+
     original = GLTF2().load(in_gltf)
 
     # If any buffer URIs (e.g. external '.bin' files), convert them to data.
@@ -23,7 +23,7 @@ def gltf_bin_to_glb(in_gltf:str='',
         if to_binary is True:
             original.convert_buffers(BufferFormat.BINARYBLOB)
             original.save_binary(out_file)
-        
+
         else:
             original.convert_buffers(BufferFormat.DATAURI)
             original.save(out_file)
@@ -36,7 +36,7 @@ def gltf_bin_to_glb(in_gltf:str='',
 #     '''validate GLTF file using pygltflib'''
 
 
-def rename_files_in_list(names_list_csv:str='', from_name_list:list=[]):
+def rename_files_in_list(names_list_csv:str='', from_name_list:list=None):
     '''
     rename a list of files (strings) to a corresponding set of names from a CSV
     names_list_csv: filepath to a CSV (as a string). The CSV should contain 2 columns:
@@ -57,9 +57,9 @@ def rename_files_in_list(names_list_csv:str='', from_name_list:list=[]):
             from_index = from_name_list.index(from_name_clean)
             to_name = to_name_list[from_index]
             os.rename(from_name, to_name)
-            
 
-def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TEST'):
+
+def copy_files_in_list(paths_list:list=None, from_path_prefix:str='', env:str='TEST'):
     '''
     Copy a list of files (strings) to a corresponding set of paths in a new location
 
@@ -76,10 +76,14 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
     login_pw = config['LOGIN_PASSWORD']
     if env == 'LIVE':
         server = config['HOST']
-        dir_path = config['ORIGIN_PATH_MEDIA']
+        # dir_path = config['ORIGIN_PATH_MEDIA']
+        dir_path = config['ORIGIN_MEDIA_BASE_DIR']
     else:
         server = config['TEST_HOST']
         dir_path = config['ALT_MEDIA_BASE_DIR']
+
+    if paths_list is None:
+        paths_list = []
 
     ssh = SSHClient()
     ssh.load_system_host_keys()
@@ -92,9 +96,9 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
 
     with SCPClient(ssh.get_transport()) as scp:
         # import list of from-names and to-names
-        
+
         missing = []
-        
+
         i = 0
 
         for row in paths_list:
@@ -102,13 +106,15 @@ def copy_files_in_list(paths_list:list=[], from_path_prefix:str='', env:str='TES
             if os.path.exists(f"{from_path_prefix}{row['from_path']}"):
                 print(f"{i}/{len(paths_list)} : moving {from_path_prefix}{row['from_path']} to {dir_path}{row['to_path']}")
                 scp.put(files = f"{from_path_prefix}{row['from_path']}",
-                        remote_path = f"{dir_path}{row['to_path']}", 
+                        remote_path = f"{dir_path}{row['to_path']}",
                         recursive = True)
             else:
                 print(f"{i}/{len(paths_list)} : MISSING FILE: {from_path_prefix}{row['from_path']}")
                 missing.append(row)
-    
+
     # output errors:
     if len(missing) > 0:
         print(f"Writing {len(missing)} missing files to 'missing_files.csv'")
-        ct.write_list_of_dict_to_csv(missing, 'missing_files.csv')
+        ct.write_list_of_dict_to_csv(input_records=missing, 
+                                     field_names=missing[0].keys(),
+                                     output_csv_file_name= 'missing_files.csv')
