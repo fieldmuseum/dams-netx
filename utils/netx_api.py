@@ -7,7 +7,7 @@ Functions for using the NetX JSON-RPC API
 import datetime
 import re
 import requests
-import utils.setup as setup
+from utils import setup
 
 
 def netx_api_setup_headers(headers:dict=None, netx_api_token:str=None) -> dict:
@@ -100,13 +100,12 @@ def netx_api_make_request(
 
     if params is not None:
         json = netx_api_setup_request_body(method=method, params=params)
-    # # print(json)
+        # print(json)
     # elif file is not None:
     #     json = json['params'][0]
     #     json['file'] = file
 
     netx_request = netx_api_setup_request(headers=headers, netx_env=netx_env)
-    # print(netx_request)
 
     if uri_suffix is None:
         uri = netx_request['base_url'] + 'rpc/'
@@ -1024,14 +1023,6 @@ def netx_get_self(netx_env:str=None) -> dict:
     - See method help: https://developer.netx.net/#getself
     '''
 
-    # if data_to_get is None:
-    #     data_to_get = [
-    #         "asset.id",
-    #         "asset.base",
-    #         "asset.file",
-    #         "asset.folders"
-    #         ]
-
     method = 'getSelf'
 
     params = [
@@ -1046,3 +1037,27 @@ def netx_get_self(netx_env:str=None) -> dict:
         params=params,
         netx_env=netx_env
         )
+
+
+def netx_get_attributes(
+        list_size:int=200,
+        netx_env:str=None
+        ) -> dict:
+    '''
+    In NetX, returns a dict that includes all custom attributes.
+    see https://developer.netx.net/#getattributes .
+
+    '''
+
+    params = [
+        {
+            "page": {
+                "startIndex": 0,
+                "size": list_size
+            }
+        }
+        ]
+
+    method = 'getAttributes'
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
