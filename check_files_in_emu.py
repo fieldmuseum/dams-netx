@@ -65,7 +65,7 @@ def main():
                 # - include thumb/600x600 jpg?
                 thumbs = re.findall(r'\S+\.(thumb|600x600)\.jpe*g',
                                     filename)
-                if len(jpg) > 0:
+                if len(thumbs) > 0:
                     directory['thumbs_or_600'] += f'|{thumbs[0]}'
 
 
