@@ -226,7 +226,7 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
 
         # if os.path.exists(f"{row['dir_path']}"):
         print(f"{i}/{len(prepped_filepaths)} : checking {row['dir_path']}")
-        print(f"list of files:  {sftp.listdir_attr(row)}")
+        print(f"list of files:  {sftp.listdir_attr(row['dir_path'])}")
 
         row['dir_contents'] = sftp.listdir_attr(row)
 
