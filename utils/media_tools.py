@@ -223,7 +223,7 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
             row['dir_filenames'] = [entry.filename for entry in row['dir_contents']]
 
         except Exception as err:
-            print(f"An error occurred trying to copy {row['dir_path']}: {err}")
+            print(f"An error occurred trying to check {row['dir_path']}: {err}")
 
 
         if row not in directory_contents:
