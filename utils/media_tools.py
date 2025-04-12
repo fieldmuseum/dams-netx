@@ -141,7 +141,7 @@ def prep_paths_from_irns(records:list=None, base_path_new:str=None) -> list:
         # parse each irn to form its corresponding filepath
         irn = str(record['irn'])
         prepped_dir = f'{irn[0:(len(irn)-3)]}/{irn[(len(irn)-3):len(irn)]}/'
-        dir_path = f'{base_path_new}/{prepped_dir}'
+        dir_path = f'{base_path_new}{prepped_dir}'
         record['dir_path'] = dir_path
         if record not in prepped_list:
             prepped_list.append(record)
@@ -192,7 +192,6 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
     ssh = SSHClient()
     ssh.load_system_host_keys()
     ssh.connect(hostname=server, username=login_id, password=login_pw)
-    # ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
 
     prepped_filepaths = prep_paths_from_irns(records=filename_list,
                                              base_path_new=dir_path)
@@ -208,36 +207,21 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
     for row in prepped_filepaths:
         i += 1
 
-        # stdin, stdout, stderr = ssh.exec_command(f"ls {row['dir_path']}")
-        # print('----------------stdin----------------')
-        # print(stdin)
-        # print('----------------stdout----------------')
-        # print(stdout)
-        # print('----------------stderr----------------')
-        # print(stderr)
-
-        # print('----------------stdout formatted----------------')
-        # for line in stdout:
-        #     print('... ' + line.strip('\n'))
-
-        # row['stdin'] = stdin
-        # row['stdout'] = stdout
-        # row['stderr'] = stderr
-
-        # if os.path.exists(f"{row['dir_path']}"):
         print(f"{i}/{len(prepped_filepaths)} : checking {row['dir_path']}")
-        print(f"list of files:  {sftp.listdir_attr(row['dir_path'])}")
 
-        row['dir_contents'] = sftp.listdir_attr(row['dir_path'])
+        row['dir_contents'] = ''
+        row['dir_filenames'] = []
 
-        row['dir_filenames'] = [entry.filename for entry in row['dir_contents']]
-        print(row['dir_filenames'])
+        if sftp.stat(row['dir_path']):
+
+            # print(f"list of files:  {sftp.listdir_attr(row['dir_path'])}")
+
+            row['dir_contents'] = sftp.listdir_attr(row['dir_path'])
+
+            row['dir_filenames'] = [entry.filename for entry in row['dir_contents']]
+
 
         if row not in directory_contents:
             directory_contents.append(row)
-
-        # else:
-        #     print(f"{i}/{len(prepped_filepaths)} : MISSING DIR: {row['dir_path']}")
-        #     missing.append(row)
 
     return directory_contents, missing
