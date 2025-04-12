@@ -228,7 +228,7 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
         print(f"{i}/{len(prepped_filepaths)} : checking {row['dir_path']}")
         print(f"list of files:  {sftp.listdir_attr(row['dir_path'])}")
 
-        row['dir_contents'] = sftp.listdir_attr(row)
+        row['dir_contents'] = sftp.listdir_attr(row['dir_path'])
 
         row['dir_filenames'] = [entry.filename for entry in row['dir_contents']]
         print(row['dir_filenames'])
