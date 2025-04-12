@@ -44,17 +44,29 @@ def main():
     else:
 
         for directory in dirs:
-            # Check whether PDF records
-            directory['PDF'] = re.findall(r'\S+\.pdf',
-                                          directory['dir_filenames'])
+            directory['PDF'] = ''
+            directory['JPG'] = ''
+            directory['thumbs_or_600'] = ''
 
-            # - include a JPG?
-            directory['JPG'] = re.findall(r'\S+\.jpe*g',
-                                          directory['dir_filenames'])
+            for filename in directory['dir_filenames']:
 
-            # - and if so, does JPG's name [minus extension] match PDF's name?
-            directory['thumbs_or_600'] = re.findall(r'\S+\.(thumb|600x600)\.jpe*g',
-                                          directory['dir_filenames'])
+                # Check whether PDF records
+                pdf = re.findall(r'\S+\.pdf',filename)
+                if len(pdf) > 0:
+                    directory['PDF'] += f'|{pdf[0]}'
+
+                # - include a JPG?
+                jpg = re.findall(r'\S+\.jpe*g',filename)
+                if len(jpg) > 0:
+                    directory['JPG'] += f'|{jpg[0]}'
+
+                # - and if so, does JPG's name [-extension] match PDF's name?
+
+                # - include thumb/600x600 jpg?
+                thumbs = re.findall(r'\S+\.(thumb|600x600)\.jpe*g',
+                                    filename)
+                if len(jpg) > 0:
+                    directory['thumbs_or_600'] += f'|{thumbs[0]}'
 
 
         print(f"Writing {len(dirs)} rows to 'dir_contents.csv'")
