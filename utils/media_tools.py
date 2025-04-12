@@ -2,6 +2,7 @@
 
 import os
 import re
+import time
 from pygltflib import GLTF2, BufferFormat
 from paramiko import SSHClient
 from scp import SCPClient
@@ -141,7 +142,7 @@ def prep_paths_from_irns(records:list=None, base_path_new:str=None) -> list:
         # parse each irn to form its corresponding filepath
         irn = str(record['irn'])
         prepped_dir = f'{irn[0:(len(irn)-3)]}/{irn[(len(irn)-3):len(irn)]}/'
-        dir_path = f'{base_path_new}{prepped_dir}'
+        dir_path = f'{base_path_new}/{prepped_dir}'
         record['dir_path'] = dir_path
         if record not in prepped_list:
             prepped_list.append(record)
@@ -206,6 +207,7 @@ def check_files_in_list(filename_list:list=None, env:str='TEST'):
 
     for row in prepped_filepaths:
         i += 1
+        time.sleep(0.5)
 
         print(f"{i}/{len(prepped_filepaths)} : checking {row['dir_path']}")
 
