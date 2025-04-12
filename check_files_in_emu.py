@@ -20,14 +20,14 @@ def main():
     # 3. Rename "emultime.csv" --> "filename_list.csv"
 
     # Import CSV
-    filenames = uc.rows('testing/filename_list_TEST.csv')
+    filenames = uc.rows('testing/filename_list.csv')
 
     # # test on subset:
     # filenames = filenames[:3]
 
     # Check which files (main + resolution/docs) actually exist on Shackleton
     dirs, missing = um.check_files_in_list(filename_list=filenames,
-                                           env='TEST')
+                                           env='LIVE')
 
     # output errors:
     if len(missing) > 0:
