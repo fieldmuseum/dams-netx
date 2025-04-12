@@ -67,7 +67,7 @@ def copy_files_in_list(paths_list:list=None, from_path_prefix:str='', env:str='T
         - from_path = path where a file will be pulled from
         - to_path = the new path where a file should go
     
-    env: set this to 'LIVE' or 'TEST' to copy to a live or test server 
+    env: set this to 'LIVE', 'TEST', or 'WEB' to copy to a live, test or web server 
     
     REMOVED--from_path_list: the list of paths + files that need to be moved
     '''
@@ -94,10 +94,6 @@ def copy_files_in_list(paths_list:list=None, from_path_prefix:str='', env:str='T
     ssh.connect(hostname=server, username=login_id, password=login_pw)
     # ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
 
-    # paths_list = ct.rows(paths_list_csv)
-    # from_path_list = [row['from_path'] for row in paths_list]
-    # to_path_list = [row['to_path'] for row in paths_list]
-
     with SCPClient(ssh.get_transport()) as scp:
         # import list of from-names and to-names
 
@@ -122,3 +118,126 @@ def copy_files_in_list(paths_list:list=None, from_path_prefix:str='', env:str='T
         ct.write_list_of_dict_to_csv(input_records=missing, 
                                      field_names=missing[0].keys(),
                                      output_csv_file_name= 'missing_files.csv')
+
+
+def prep_paths_from_irns(records:list=None, base_path_new:str=None) -> list:
+    '''
+    Given a list of AccessURI values, prep emu filepaths.
+    Returns a list of prepped paths to a MM record's folder on the server
+
+    :param records: list - list of dictionaries, in which one key is 'irn' for Multimedia irns
+    :param base_path_new: str - the server path to the multimedia share (include trailing slash)
+
+    :return: list - original list of dictionaries with new key 'dir_path' for prepped server path
+
+    '''
+
+    if records is None:
+        records = []
+
+    prepped_list = []
+
+    for record in records:
+        # parse each irn to form its corresponding filepath
+        irn = str(record['irn'])
+        prepped_dir = f'{irn[0:(len(irn)-3)]}/{irn[(len(irn)-3):len(irn)]}/'
+        dir_path = f'{base_path_new}/{prepped_dir}'
+        record['dir_path'] = dir_path
+        if record not in prepped_list:
+            prepped_list.append(record)
+
+
+    return prepped_list
+
+
+def check_files_in_list(filename_list:list=None, env:str='TEST'):
+    '''
+    Copy a list of files (strings) to a corresponding set of paths in a new location
+
+    filename_list_csv: filepath to a CSV (as a string). The CSV should include:
+        - irn = a column of Multimedia irn's
+        - other columns are options
+    
+    env: set this to 'LIVE', 'TEST', or 'WEB' to check on a live, test or web server
+
+    :returns: Two objects:
+        - directory_contents:
+            list - directories and their contents as a list of dictionaries including:
+                irn
+                directory path
+                directory file-contents
+        
+        - missing
+            - a list of rows whose paths were missing from the server
+
+    '''
+    config = setup.get_config_dams_netx()
+    login_id = config['LOGIN_USERNAME']
+    login_pw = config['LOGIN_PASSWORD']
+    if env == 'LIVE':
+        server = config['HOST']
+        # dir_path = config['ORIGIN_PATH_MEDIA']
+        dir_path = config['ORIGIN_MEDIA_BASE_DIR']
+    elif env == 'WEB':
+        server = config['WEB_HOST']
+        dir_path = config['ORIGIN_MEDIA_BASE_DIR']
+        login_pw = config['WEB_LOGIN_PASSWORD']
+    else:
+        server = config['TEST_HOST']
+        dir_path = config['ALT_MEDIA_BASE_DIR']
+
+    if filename_list is None:
+        filename_list = []
+
+    ssh = SSHClient()
+    ssh.load_system_host_keys()
+    ssh.connect(hostname=server, username=login_id, password=login_pw)
+    # ssh.connect(f'{login_id}@{server}:{dir_path}', password=login_pw)
+
+    prepped_filepaths = prep_paths_from_irns(records=filename_list,
+                                             base_path_new=dir_path)
+
+    directory_contents = []
+
+    missing = []
+
+    sftp = ssh.open_sftp()
+
+    i = 0
+
+    for row in prepped_filepaths:
+        i += 1
+
+        # stdin, stdout, stderr = ssh.exec_command(f"ls {row['dir_path']}")
+        # print('----------------stdin----------------')
+        # print(stdin)
+        # print('----------------stdout----------------')
+        # print(stdout)
+        # print('----------------stderr----------------')
+        # print(stderr)
+
+        # print('----------------stdout formatted----------------')
+        # for line in stdout:
+        #     print('... ' + line.strip('\n'))
+
+        # row['stdin'] = stdin
+        # row['stdout'] = stdout
+        # row['stderr'] = stderr
+
+        # if os.path.exists(f"{row['dir_path']}"):
+        print(f"{i}/{len(prepped_filepaths)} : checking {row['dir_path']}")
+        print(f"list of files:  {sftp.listdir_attr(row)}")
+
+        row['dir_contents'] = sftp.listdir_attr(row)
+
+        row['dir_filenames'] = [entry.filename for entry in row['dir_contents']]
+        print(row['dir_filenames'])
+
+        if row not in directory_contents:
+            directory_contents.append(row)
+
+        # else:
+        #     print(f"{i}/{len(prepped_filepaths)} : MISSING DIR: {row['dir_path']}")
+        #     missing.append(row)
+
+    return directory_contents, missing
