@@ -3,7 +3,6 @@
 import csv
 import os
 import re
-import utils.setup as setup
 from xml.etree import ElementTree as ET
 
 def emu_netx_atoms() -> dict:
@@ -12,7 +11,7 @@ def emu_netx_atoms() -> dict:
     and values = EMu fields
     '''
 
-    emu_netx_atoms = {
+    atoms = {
         'AudIdentifier':'AudIdentifier',
         'irn':'irn',
         'MulTitle':'MulTitle',
@@ -44,7 +43,7 @@ def emu_netx_atoms() -> dict:
         'DetResourceType':'DetResourceType',
     }
 
-    return emu_netx_atoms
+    return atoms
 
 
 def emu_netx_tables() -> dict:
@@ -53,7 +52,7 @@ def emu_netx_tables() -> dict:
     and values = EMu table-field column names (e.g. DetSubject_Tab)
     '''
 
-    emu_netx_tables = {
+    tables = {
         'DetSubject_tab':'DetSubject_tab',
         'SecDepartment_tab':'SecDepartment_tab',
         'AudSubjectOrientation_tab':'AudSubjectOrientation_tab',
@@ -61,29 +60,33 @@ def emu_netx_tables() -> dict:
         'ChaRepository_tab':'ChaRepository_tab'
     }
 
-    return emu_netx_tables
+    return tables
 
 
 def emu_netx_refs() -> dict:
     '''
     Returns a dict where keys = corresponding NetX fields
     and values = list of EMu "Ref" attachment fields and pull-thru fields
-    If a double-nested field is included, '.'-delimit as [link column].[pull-through] in a single string
-    e.g. - For DetMediaRightsRef:  RigOwnershipRef_tab.SummaryData
+    If a double-nested field is included, 
+      '.'-delimit as [link column].[pull-through] in a single string
+      e.g. - For DetMediaRightsRef:  RigOwnershipRef_tab.SummaryData
     '''
 
-    emu_netx_refs = {
+    refs = {
         'DetMediaRightsRef_irn':['DetMediaRightsRef', 'irn'],
         'DetMediaRightsRef_Summary':['DetMediaRightsRef', 'SummaryData'],
         'DetMediaRightsRef_RigType':['DetMediaRightsRef', 'RigType'],
-        'DetMediaRightsRef_RigOwner_Summary':['DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'],  # try RigOwnershipRef_tab/SummaryData ?
+        'DetMediaRightsRef_RigOwner_Summary':[
+            'DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'
+            ],
+        # try RigOwnershipRef_tab/SummaryData ?
         'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
         'DetMediaRightsRef_Rig1WebLink':['DetMediaRightsRef', 'Rig1WebLink'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
         'RelParentMediaRef_AudIdentifier':['RelParentMediaRef', 'AudIdentifier']
     }
 
-    return emu_netx_refs
+    return refs
 
 
 def emu_netx_groups_or_reftabs() -> dict:
@@ -94,15 +97,16 @@ def emu_netx_groups_or_reftabs() -> dict:
     If groups includes attachment-fields, only the pull-through fields are listed.
     (e.g. only "SummaryData", not "MulMultimediaCreatorRef_tab.SummaryData")
     
-    If a double-nested field is included, '.'-delimit as [link column].[pull-through] in a single string
-    e.g. - For ExOb_Event (StaEventRef):  StaEventRef.SummaryData
+    If a double-nested field is included,
+      '.'-delimit as [link column].[pull-through] in a single string
+      e.g. - For ExOb_Event (StaEventRef):  StaEventRef.SummaryData
     
     If a NetX field may pull from multiple EMu groups, list the group-names in order of priority.
     e.g. - For ExOb_Event, the Ex.Ob's Install-tab media ('InsMultimediaRef_tab') 
     takes priority over main 'Multimedia-tab' media ('MulMultiMediaRef_tab')
     '''
 
-    emu_netx_groups_or_reftabs = {
+    groups_or_reftabs = {
         'MulMultimediaCreatorRef_tab_SummaryData':['Creator','SummaryData'],
         'MulMultimediaCreatorRef_tab_irn':['Creator','irn'],
         'MulMultimediaCreatorRole_tab':['Creator','MulMultimediaCreatorRole'],
@@ -118,15 +122,21 @@ def emu_netx_groups_or_reftabs() -> dict:
         'SupHeight': ['Supplementary', 'SupHeight'],
         'SupWidth': ['Supplementary', 'SupWidth'],
         'SupFileSize': ['Supplementary', 'SupFileSize'],
-        'ExOb_Mul_InvNo':[['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],'StaEventCatalogueNumber'],
-        'ExOb_Event':[['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],'StaEventRef.SummaryData'],  # Double-nested reverse-attachment...
+        'ExOb_Mul_InvNo':[
+            ['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],
+            'StaEventCatalogueNumber'
+            ],
+        'ExOb_Event':[
+            ['InsMultimediaRef_tab', 'MulMultiMediaRef_tab'],
+            'StaEventRef.SummaryData'
+            ],  # Double-nested reverse-attachment...
         'ExOb_Depth':['InsMultimediaRef_tab','MeaConfirmedDepth'],
         'ExOb_Width':['InsMultimediaRef_tab','MeaConfirmedWidth'],
         'ExOb_Height':['InsMultimediaRef_tab','MeaConfirmedHeight'],
         'ExOb_Weight':['InsMultimediaRef_tab','MeaConfirmedWeight']
     }
 
-    return emu_netx_groups_or_reftabs
+    return groups_or_reftabs
 
 
 
@@ -154,12 +164,12 @@ def emu_netx_ref_concatenate() -> dict:
     and values = list of EMu Ref fields to concatenate.
     Values will be joined in the order they are listed, delimited by pipes: "a | b | c"
     '''
-    emu_netx_ref_concatenate = {
+    ref_concatenate = {
         'EveEvent':['MulMultiMediaRef_tab',['EveEventNumber','EveTypeOfEvent','EveEventTitle']],
         'EveEventURLs':['MulMultiMediaRef_tab','AdmGUIDValue']
     }
 
-    return emu_netx_ref_concatenate
+    return ref_concatenate
 
 
 def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
@@ -170,19 +180,22 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
     dept_folders = []
     with open(dept_csv, encoding='utf-8', mode = 'r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-        for r in reader: 
+        for r in reader:
             dept_folders.append(r)
-        
+
     # make lists of level_1 & level_2 values
     # NOTE - NOT unique lists; a value's index will be used to get the corresponding parent
-    dept_emu = []
-    for row in dept_folders: dept_emu.append(row['emu'])
+    dept_emu = [row['emu'] for row in dept_folders]
+    # for row in dept_folders:
+    #     dept_emu.append(row['emu'])
 
-    dept_level_1 = []
-    for row in dept_folders: dept_level_1.append(row['netx_level_1'])
+    dept_level_1 = [row['netx_level_1'] for row in dept_folders]
+    # for row in dept_folders:
+    #     dept_level_1.append(row['netx_level_1'])
 
-    dept_level_2 = []
-    for row in dept_folders: dept_level_2.append(row['netx_level_2'])
+    dept_level_2 = [row['netx_level_2'] for row in dept_folders]
+    # for row in dept_folders:
+    #     dept_level_2.append(row['netx_level_2'])
 
     department = department_raw.strip()
 
@@ -190,11 +203,11 @@ def get_folder_hierarchy(department_raw:str, dept_csv:str) -> str:
         # lookup level_1 value at same index for level_2 key/value
         parent = dept_level_1[dept_level_2.index(department)]
         return parent + '/' + department + '/'
-    
-    elif department in dept_level_1: 
+
+    elif department in dept_emu:
         # return department + '/'
         return dept_level_1[dept_emu.index(department)] + '/'
-    
+
     else:
         print(f"No matching folder hierarchy value for {department}")
         return None
@@ -209,13 +222,13 @@ def get_emu_netx_conditions(conditions_csv:str) -> str:
     if os.path.isfile(conditions_csv):
         with open(conditions_csv, encoding='utf-8', mode = 'r') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
-            for r in reader: 
+            for r in reader:
                 if r not in conditions:
                     conditions.append(r)
-    
+
     else:
         print(f'No conditions_csv found for CONDITIONS_CSV value: {conditions_csv}')
-        
+
     # dept_emu = []
     # for row in dept_folders: dept_emu.append(row['emu'])
 
@@ -252,7 +265,7 @@ def get_dss_xml(dss_xml_path:dict) -> dict:
                 for grandkid in child:
                     if grandkid.tag == "source":
                         source = grandkid
-                    else: 
+                    else:
                         for greatgrand in grandkid:
                             if greatgrand.tag == "records":
                                 destination = greatgrand
@@ -260,7 +273,7 @@ def get_dss_xml(dss_xml_path:dict) -> dict:
         for child in destination:
             if child.tag == 'records':
                 records = child
-        
+
         netx_emu_map = {}
 
         for emu_field in source:
@@ -286,7 +299,8 @@ def clean_emu_filename(emu_filename:str) -> str:
 
     clean_name = re.sub(r'[\'!@#\$%\^\*\?<>%"\{\}/\\&\.,\:;\s+\(\)\[\]\-]', '_', emu_filename)
     clean_name = re.sub(r'_+', '_', clean_name)
-    clean_name = re.sub(r'(.+)(_.+$)', r'\g<1>' + clean_ext, clean_name) # (.+(_.+)*)(_)(.+$)', r'\g<1>.\g<3>', clean_name)
+    clean_name = re.sub(r'(.+)(_.+$)', r'\g<1>' + clean_ext, clean_name)
+    # (.+(_.+)*)(_)(.+$)', r'\g<1>.\g<3>', clean_name)
 
     return clean_name
 
@@ -336,7 +350,8 @@ def get_emu_netx_map(config):
     emu_netx_fields = emu_netx_fields_raw.getroot()
     emu_dss = emu_netx_fields.find(path=".//*[@name='XML Metadata sync']")
     emu_fields = [emu for emu in emu_dss if 'column' in emu.attrib]  # .findall(path='.//field')]
-    netx_fields = [netx for netx in emu_dss if 'attribute' in netx.attrib ]  # emu_dss.findall(path='.//map')]
+    netx_fields = [netx for netx in emu_dss if 'attribute' in netx.attrib ]
+    # emu_dss.findall(path='.//map')]
     # field_map = list(zip(emu_fields[1:], netx_fields))  # quick/dirty version
     field_map = []
     for emu_field in emu_fields:
