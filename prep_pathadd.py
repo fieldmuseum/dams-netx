@@ -60,7 +60,7 @@ def main(live_or_test:str=None, input_date:str=None):
     logging.info(input_file_log)
 
 
-    # TODO - test/try to account for empty input-dir
+    # TO DO - test/try to account for empty input-dir
     tree = ET.parse(glob.glob(main_xml_input)[0])
 
     root = tree.getroot()
