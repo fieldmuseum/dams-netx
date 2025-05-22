@@ -2866,9 +2866,13 @@
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) {
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%
+    /* max-width: 1100px; */
+    /* margin: 0 auto; */
+    width: 100%;  
+    /* modified for FMNH from here */
+    max-width: 1200px;
+    margin: 15 auto;
+    line-height: 1.3em;
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate)>h1 {
@@ -2966,16 +2970,18 @@
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h4,
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h5,
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h6 {
-    font: 24px/30px themeFontRegular, sans-serif;
+    /* font: 24px/30px themeFontRegular, sans-serif; */
     color: #000;
-    letter-spacing: -.5px;
-    overflow: hidden;
-    text-overflow: ellipsis
+    letter-spacing: .2px;
+    /* overflow: hidden;
+    text-overflow: ellipsis */
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h1 {
     font: 40px/150% themeFontLight, sans-serif;
-    white-space: nowrap
+    letter-spacing: .2px;
+    /* white-space: nowrap */
+    white-space: normal
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h2 {
@@ -2987,11 +2993,13 @@
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) h5 {
-    font: 16px/20px themeFontSemibold, sans-serif
+    font: 16px/20px themeFontSemibold, sans-serif;
+    letter-spacing: .2px
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) p {
-    font: 16px/20px themeFontRegular, sans-serif
+    font: 16px/20px themeFontRegular, sans-serif;
+    letter-spacing: .2px
 }
 
 .theme-clean .page div[class*=template]:not(.nx-autotemplate) .nx-childviews>div.block-divider {
