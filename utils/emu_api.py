@@ -7,9 +7,13 @@ Functions for using texcdp (the EMu API)
 import datetime
 import re
 import urllib.parse
+import logging
+import http.client as http_client
 import requests
 from utils import setup
 
+# Uncomment to log at debug-level
+http_client.HTTPConnection.debuglevel = 1
 
 def emu_api_get_token(
     config:dict=None,
@@ -71,11 +75,10 @@ def emu_api_get_token(
     if r.status_code == 201:
         print(r.headers['Authorization'])
         return r.headers['Authorization']  # json()
-    else:
-        raise Exception(
-            f'Check API & config - API response status code {r.status_code} | text: {r.text}'
-            )
 
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
     '''
@@ -152,10 +155,10 @@ def emu_api_get_resources(emu_env:str=None):
 
     if r.status_code < 300:
         return r.json()
-    else:
-        raise Exception(
-            f'Check API & config - API response status code {r.status_code} | text: {str(r)}'
-            )
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 
 def emu_api_check_resource(emu_table:str=None, emu_env:str=None):
@@ -215,8 +218,8 @@ def emu_api_get_schema(emu_table:str=None, emu_env:str=None):
         return r.json()
 
     raise Exception(
-        f'Check API & config - API response status code {r.status_code} | text: {str(r)}'
-        )  # .json())}')
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 
 def emu_api_check_field_type(
@@ -388,10 +391,10 @@ def emu_api_query_text(
 
     if r.status_code < 300:
         return r.json()
-    else:
-        raise Exception(
-            f'Check API & config - API response status code {r.status_code} | text: {str(r)}'
-            )  # .json())}')
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 
 def emu_api_query_numeric(
@@ -412,7 +415,7 @@ def emu_api_query_numeric(
 
     if operator not in allowed_ops:
         raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
-    
+
     return emu_api_query_text(
         emu_table=emu_table, 
         search_field=search_field, 
@@ -461,17 +464,24 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
 
     # print(str(datetime.datetime.now()) + ' - starting post')
 
-    r = requests.post(url=uri, headers=headers, json=new_emu_record)
+    r = requests.post(url=uri, headers=headers, json=new_emu_record, timeout=10)
 
     # print(str(datetime.datetime.now()) + ' - finishing post')
 
     if r.status_code < 300:
         return r.json()
-    else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
+
+    raise Exception(
+    f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+    )
 
 
-def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=None, emu_env:str=None):
+def emu_api_update_record(
+        emu_table:str=None,
+        emu_irn:int=None,
+        emu_record:dict=None,
+        emu_env:str=None
+        ):
     '''Update EMu record (specified by table + irn)'''
 
     # print(str(datetime.datetime.now()) + ' - starting setup')
@@ -485,23 +495,24 @@ def emu_api_update_record(emu_table:str=None, emu_irn:int=None, emu_record:dict=
 
     json_prep_list = []
     for k,v in emu_record.items():
-        # TODO - reference field in schema to get correct path/value structure for atom/table/tec
+        # TO DO - reference field in schema to get correct path/value structure for atom/table/tec
         json_prep = {
             "op": "replace", "path":f'/{k}', "value": v
         }
         json_prep_list.append(json_prep)
-    
+
     # print(str(datetime.datetime.now()) + ' - starting patch')
 
-    r = requests.patch(url=uri, headers=headers, json=json_prep_list)
+    r = requests.patch(url=uri, headers=headers, json=json_prep_list, timeout=10)
 
     # print(str(datetime.datetime.now()) + ' - finishing patch')
 
     if r.status_code < 300:
         return r.json()
-    else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
 
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 
 def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
@@ -513,12 +524,21 @@ def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
 
     if category not in allowed_categories:
         raise Exception(f'Check category "{category}" - Must be one of {allowed_categories}')
-    
-    media_record = emu_api_query_numeric("emultimedia", "irn", "exact", mm_irn, emu_env)
+
+    media_record = emu_api_get_record_by_irn("emultimedia", "irn", "exact", mm_irn, emu_env)
+
+    print(media_record['matches'][0]['data'].keys())
 
     mime_type = media_record['matches'][0]['data']['MulMimeType']
     mime_format = media_record['matches'][0]['data']['MulMimeFormat']
-    mulIdentifier = media_record['matches'][0]['data']['MulIdentifier']
+
+    mul_identifier = None
+    if 'MulIdentifier' in media_record['matches'][0]['data'].keys():
+        mul_identifier = media_record['matches'][0]['data']['MulIdentifier']
+
+    if mul_identifier is None:
+        print(f'No file found for IRN {mm_irn}')
+        return
 
     emu_api_setup = emu_api_setup_request(emu_env=emu_env)
 
@@ -526,24 +546,125 @@ def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
     headers = emu_api_setup['headers']
     config = emu_api_setup['config']
 
-    uri = base_url + f'media/{mm_irn}:{category}:{mime_type}:{mime_format}:{mulIdentifier}'
+    uri = base_url + f'media/{mm_irn}:{category}:{mime_type}:{mime_format}:{mul_identifier}'
 
-    r = requests.get(url=uri, headers=headers)
+    r = requests.get(url=uri, headers=headers, timeout=100)
 
     print(str(datetime.datetime.now()) + ' - finishing call')
-    
+
     if r.status_code < 300:
-        
-        file_path = config['TEST_EMU_FILE_OUT'] + mulIdentifier
+
+        file_path = config['TEST_EMU_FILE_OUT'] + mul_identifier
         file = open(file_path, "wb")
         file.write(r.content)
         file.close()
 
-        return # r.json()
-    else:
-        raise Exception(f'Check API & config - API response status code {r.status_code} | text: {str(r)}')
+        return
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
 
 
-def emu_api_delete_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
-    '''Delete specific EMu record'''
-    return
+def emu_api_ingest_media(mm_irn:int, media_file_path:str, emu_env:str=None):
+    '''Ingest a media file to an EMu Multimedia record'''
+
+    print(str(datetime.datetime.now()) + ' - starting setup')
+
+    # Check if record exists
+    media_record = emu_api_get_record_by_irn("emultimedia", "irn", "exact", mm_irn, emu_env)
+
+    # Check if it already includes a main file
+    # mime_type = media_record['matches'][0]['data']['MulMimeType']
+    # mime_format = media_record['matches'][0]['data']['MulMimeFormat']
+    if len(media_record['matches']) > 0:
+        if 'MulIdentifier' in media_record['matches'][0]['data']:
+            mul_identifier = media_record['matches'][0]['data']['MulIdentifier']
+            print(f'Overwriting existing file in MM irn {mm_irn} : {mul_identifier}')
+
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+    # config = emu_api_setup['config']
+
+    uri = base_url + f'media/{mm_irn}'
+
+    prepped_file = {"file":media_file_path}
+
+    r = requests.put(url=uri, headers=headers, json=prepped_file, timeout=100)
+
+    print(str(datetime.datetime.now()) + ' - finishing call')
+
+    if r.status_code < 300:
+
+        print(f'Status :  {r.status_code}')
+        print(f'Adding file. {r.content}')
+        print(f'Headers :  {r.headers}')
+        print(f'Request :  {r.request}')
+        print(f'Reason :  {r.reason}')
+
+        return
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
+
+
+def emu_api_ingest_media_http(mm_irn:int, media_path:str, media_name:str, emu_env:str=None):
+    '''Ingest a remote media file (using HTTP multipart mode) to an EMu Multimedia record'''
+
+    print(str(datetime.datetime.now()) + ' - starting setup')
+
+    # # Check if record exists
+    # media_record = emu_api_get_record_by_irn("emultimedia", "irn", "exact", mm_irn, emu_env)
+
+    # # Check if it already includes a main file
+    # # mime_type = media_record['matches'][0]['data']['MulMimeType']
+    # # mime_format = media_record['matches'][0]['data']['MulMimeFormat']
+    # if len(media_record['matches']) > 0:
+    #     if 'MulIdentifier' in media_record['matches'][0]['data']:
+    #         mul_identifier = media_record['matches'][0]['data']['MulIdentifier']
+    #         print(f'Overwriting existing file in MM irn {mm_irn} : {mul_identifier}')
+
+    emu_api_setup = emu_api_setup_request(emu_env=emu_env)
+
+    base_url = emu_api_setup['base_url']
+    headers = emu_api_setup['headers']
+    headers.pop('Content-Type')  # requests needs to set this.
+
+    uri = base_url + f'media/{mm_irn}'
+
+    prepped_file = {"file": open(media_path+media_name, 'rb')}
+
+    print(headers)
+    print(uri)
+
+    logging.basicConfig()
+    logging.getLogger().setLevel(logging.DEBUG)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.DEBUG)
+    requests_log.propagate = True
+
+    r = requests.put(url=uri, headers=headers, files=prepped_file, timeout=100)
+
+    print(str(datetime.datetime.now()) + ' - finishing call')
+
+    if r.status_code < 300:
+
+        print(f'Status :  {r.status_code}')
+        print(f'Adding file. {r.content}')
+        print(f'Headers :  {r.headers}')
+        print(f'Request :  {r.request}')
+        print(f'Reason :  {r.reason}')
+
+        return
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
+
+
+# def emu_api_delete_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str=None):
+#     '''Delete specific EMu record'''
+#     return
