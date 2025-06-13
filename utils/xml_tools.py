@@ -123,7 +123,7 @@ def get_group_value(emu_record: ET.Element, group_tag: ET.Element, child_tag: st
 
     child_list = []
 
-    if emu_record.find(group_tag) is not None:
+    if emu_record is not None and emu_record.find(group_tag) is not None:
         for emu_tuple in emu_record.find(group_tag):
             for child_field in emu_tuple:
                 if str(child_field.tag) == child_tag:
@@ -148,7 +148,7 @@ def get_unique_group_value(emu_record: ET.Element, group_tag: ET.Element, child_
     netx_attr = None
     child_list = []
 
-    if emu_record.find(group_tag) is not None:
+    if emu_record is not None and emu_record.find(group_tag) is not None:
         for emu_tuple in emu_record.find(group_tag):
             for child_field in emu_tuple:
                 if str(child_field.tag) == child_tag:
@@ -228,7 +228,7 @@ def get_conditional_group_value(
     # child_list = []
     netx_attr_value = None
 
-    if emu_record.find(group_tag) is not None:
+    if emu_record is not None and emu_record.find(group_tag) is not None:
         for emu_tuple in emu_record.find(group_tag):
             for child_if_field in emu_tuple:
                 if str(child_if_field.tag) == child_if_tag:
