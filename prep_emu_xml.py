@@ -58,7 +58,7 @@ def parse_emu_to_dss(
                 child_if_tag=condition['if_field1'],
                 child_if_logic=condition['if_logic1'],
                 child_if_value=condition['if_value1'],
-                child_then_field=condition['then_field'],
+                # child_then_field=condition['then_field'],
                 child_then_value=condition['then_value']
             )
 
