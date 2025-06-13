@@ -183,7 +183,7 @@ def get_unique_group_ref_value(
         child_tag = nested_tag[0]
         nested_child_tag = nested_tag[1]
 
-    if emu_record.find(group_tag) is not None:
+    if emu_record is not None and emu_record.find(group_tag) is not None:
         for emu_tuple in emu_record.find(group_tag):
             for child_field in emu_tuple:
                 if str(child_field.tag) == child_tag:
