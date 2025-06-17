@@ -7,13 +7,18 @@ Functions for using texcdp (the EMu API)
 import datetime
 import re
 import urllib.parse
-import logging
-import http.client as http_client
+# import logging
+# import http.client as http_client
 import requests
 from utils import setup
 
-# Uncomment to log at debug-level
-http_client.HTTPConnection.debuglevel = 1
+# # Uncomment to log at debug-level
+# http_client.HTTPConnection.debuglevel = 1
+# logging.basicConfig()
+# logging.getLogger().setLevel(logging.DEBUG)
+# requests_log = logging.getLogger("requests.packages.urllib3")
+# requests_log.setLevel(logging.DEBUG)
+# requests_log.propagate = True
 
 def emu_api_get_token(
     config:dict=None,
@@ -69,16 +74,87 @@ def emu_api_get_token(
         url=uri,
         headers=headers,
         json=json,
-        timeout=10,
+        timeout=60,
         )
 
     if r.status_code == 201:
-        print(r.headers['Authorization'])
+        # print(r.headers['Authorization'])
         return r.headers['Authorization']  # json()
 
     raise Exception(
         f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
         )
+
+def emu_api_delete_tokens(
+        config:dict=None,
+        headers:dict=None,
+        token_to_delete:str=None,
+        emu_env:str='TEST'
+        ):
+    '''
+    Deletes all of a user's tokens
+    https://help.emu.axiell.com/emurestapi/latest/04-Resources-Tokens.html
+    DELETE /{tenant}/tokens
+    '''
+
+    # Load the config
+    if config is None:
+        config = setup.get_config_dams_netx()
+
+        if not config:
+            raise Exception("No .env config file found")
+
+    emu_env = config["EMU_ENV"]
+
+    if emu_env=="LIVE":
+        base_uri = config["EMU_API_BASE_URL"]
+
+        # if user_id is None:
+        #     user_id = config["EMU_API_ID"]
+
+        # if user_pw is None:
+        #     user_pw = config["EMU_API_PW"]
+
+    else:
+        base_uri = config["TEST_EMU_API_BASE_URL"]
+
+        # if user_id is None:
+        #     user_id = config["TEST_EMU_API_ID"]
+
+        # if user_pw is None:
+        #     user_pw = config["TEST_EMU_API_PW"]
+
+
+    # json = {
+    #     "username":user_id,
+    #     "password":user_pw
+    # }
+
+    if headers is None:
+        headers = emu_api_setup_headers()
+
+    uri = base_uri + "tokens"
+
+    if token_to_delete is not None:
+        uri = base_uri + "tokens/" + token_to_delete
+
+    # print(uri)
+
+    r = requests.delete(
+        url=uri,
+        headers=headers,
+        # json=json,
+        timeout=10,
+        )
+
+    if r.status_code < 301:
+        # print(f'token deleted: {r.text}')
+        return
+
+    raise Exception(
+        f'Check API & config - response status code {r.status_code} | {r.reason} | text: {r.text}'
+        )
+
 
 def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
     '''
@@ -96,7 +172,7 @@ def emu_api_setup_headers(headers:dict=None, emu_api_token:dict=None) -> dict:
     }
 
     if emu_api_token is not None:
-        print(f'adding emu_api_token to header: {emu_api_token}')
+        # print(f'adding emu_api_token to header: {emu_api_token}')
         headers['Authorization'] = emu_api_token
 
     return headers
@@ -389,6 +465,9 @@ def emu_api_query_text(
         timeout=10
         )  # , data=json_prep) # params=f'?filter={json_raw}',
 
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
+
     if r.status_code < 300:
         return r.json()
 
@@ -441,7 +520,7 @@ def emu_api_get_record_by_irn(
 
     if operator not in allowed_ops:
         raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
-    
+
     return emu_api_query_text(
         emu_table=emu_table, 
         search_field=search_field, 
@@ -468,6 +547,10 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
 
     # print(str(datetime.datetime.now()) + ' - finishing post')
 
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
+
+
     if r.status_code < 300:
         return r.json()
 
@@ -479,10 +562,17 @@ def emu_api_add_record(emu_table:str=None, new_emu_record:dict=None, emu_env:str
 def emu_api_update_record(
         emu_table:str=None,
         emu_irn:int=None,
+        operation:str='add',
         emu_record:dict=None,
         emu_env:str=None
         ):
-    '''Update EMu record (specified by table + irn)'''
+    '''
+    Update EMu record (specified by table + irn)
+
+    (from https://help.emu.axiell.com/emurestapi/latest/05-Appendices-Patch.html )
+        Allowed 'operation' values include: 
+            - add, replace, remove, copy, move
+    '''
 
     # print(str(datetime.datetime.now()) + ' - starting setup')
 
@@ -497,17 +587,21 @@ def emu_api_update_record(
     for k,v in emu_record.items():
         # TO DO - reference field in schema to get correct path/value structure for atom/table/tec
         json_prep = {
-            "op": "replace", "path":f'/{k}', "value": v
+            "op": operation, "path":f'/{k}', "value": v
         }
         json_prep_list.append(json_prep)
 
     # print(str(datetime.datetime.now()) + ' - starting patch')
 
-    r = requests.patch(url=uri, headers=headers, json=json_prep_list, timeout=10)
+    r = requests.patch(url=uri, headers=headers, json=json_prep_list, timeout=100)
 
     # print(str(datetime.datetime.now()) + ' - finishing patch')
 
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
+
     if r.status_code < 300:
+
         return r.json()
 
     raise Exception(
@@ -551,6 +645,9 @@ def emu_api_get_media(mm_irn:str=None, category:str='media', emu_env:str=None):
     r = requests.get(url=uri, headers=headers, timeout=100)
 
     print(str(datetime.datetime.now()) + ' - finishing call')
+
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
 
     if r.status_code < 300:
 
@@ -596,13 +693,16 @@ def emu_api_ingest_media(mm_irn:int, media_file_path:str, emu_env:str=None):
 
     print(str(datetime.datetime.now()) + ' - finishing call')
 
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
+
     if r.status_code < 300:
 
-        print(f'Status :  {r.status_code}')
-        print(f'Adding file. {r.content}')
-        print(f'Headers :  {r.headers}')
-        print(f'Request :  {r.request}')
-        print(f'Reason :  {r.reason}')
+        # print(f'Status :  {r.status_code}')
+        # print(f'Adding file. {r.content}')
+        # print(f'Headers :  {r.headers}')
+        # print(f'Request :  {r.request}')
+        # print(f'Reason :  {r.reason}')
 
         return
 
@@ -637,26 +737,23 @@ def emu_api_ingest_media_http(mm_irn:int, media_path:str, media_name:str, emu_en
 
     prepped_file = {"file": open(media_path+media_name, 'rb')}
 
-    print(headers)
-    print(uri)
+    # print(headers)
+    # print(uri)
 
-    logging.basicConfig()
-    logging.getLogger().setLevel(logging.DEBUG)
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True
-
-    r = requests.put(url=uri, headers=headers, files=prepped_file, timeout=100)
+    r = requests.put(url=uri, headers=headers, files=prepped_file, timeout=1000)
 
     print(str(datetime.datetime.now()) + ' - finishing call')
 
+    # delete token
+    emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
+
     if r.status_code < 300:
 
-        print(f'Status :  {r.status_code}')
-        print(f'Adding file. {r.content}')
-        print(f'Headers :  {r.headers}')
-        print(f'Request :  {r.request}')
-        print(f'Reason :  {r.reason}')
+        # print(f'Status :  {r.status_code}')
+        # print(f'Adding file. {r.content}')
+        # print(f'Headers :  {r.headers}')
+        # print(f'Request :  {r.request}')
+        # print(f'Reason :  {r.reason}')
 
         return
 
