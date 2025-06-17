@@ -748,13 +748,6 @@ def emu_api_ingest_media_http(mm_irn:int, media_path:str, media_name:str, emu_en
     emu_api_delete_tokens(config=None, headers=headers, emu_env=emu_env)
 
     if r.status_code < 300:
-
-        # print(f'Status :  {r.status_code}')
-        # print(f'Adding file. {r.content}')
-        # print(f'Headers :  {r.headers}')
-        # print(f'Request :  {r.request}')
-        # print(f'Reason :  {r.reason}')
-
         return
 
     raise Exception(

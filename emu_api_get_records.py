@@ -16,8 +16,8 @@ def main():
     # rows = uc.rows(file = 'testing/emu_media_input/emultimedia.csv')
     mm_irns = range(110,153)
 
-    # Smaller test sample
-    mm_irns = range(115,125)
+    # # Smaller test sample
+    # mm_irns = range(115,125)
 
     mm_output_list = []
 

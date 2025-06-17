@@ -16,7 +16,7 @@ def main():
     rows = uc.rows(file = 'testing/emu_media_input/emultimedia.csv')
 
     # Smaller test sample
-    rows = rows[4:]
+    rows = rows[24:]
 
     i = 0
 

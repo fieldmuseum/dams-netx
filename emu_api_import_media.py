@@ -22,11 +22,6 @@ def main(ingest_media:str=False):
 
     i = 0
 
-    # ue.emu_api_delete_tokens(config=None,
-    #                          user_id=config['TEST_EMU_API_ID'],
-    #                          emu_env='TEST'
-    #                          )
-
     for record in rows:
 
         media_file = None
