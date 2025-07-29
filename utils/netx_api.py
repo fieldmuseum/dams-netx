@@ -1061,3 +1061,76 @@ def netx_get_attributes(
     method = 'getAttributes'
 
     return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_get_view_id(
+        asset_id:int=None,
+        data_to_get:list=None,
+        netx_env:str=None
+        ):
+    '''
+    For a given NetX asset ID, returns the view id(s).
+    See https://developer.netx.net/#getviewsbyasset .
+    '''
+
+    if data_to_get is None:
+        data_to_get = [
+            "view.id",
+            "view.base",
+            "view.file"
+            ]
+
+    method = 'getViewsByAsset'
+
+    params = [
+        asset_id,
+        {
+            "data": data_to_get
+        }
+        ]
+
+    return netx_api_make_request(method=method, params=params, netx_env=netx_env)
+
+
+def netx_retrieve_asset_file(
+        asset_id:str=None,
+        # view_or_download:str="download",
+        file_to_get:str=None,  # one of: ["original", "preview", "thumbnail"]
+        netx_env:str=None
+        ) -> dict:
+    '''
+    For a given NetX asset ID, returns (a bit-stream of?) the specified file:
+    - original, preview or thumbnail.
+    See https://developer.netx.net/#file-retrieval-methods .
+
+    - NOTE - different base URLs affect whether file is downloaded or displayed/viewed.
+    '''
+
+    urls_for_retrieval = {
+        "original":"",
+        "preview":"/preview",
+        "thumbnail":"/thumbnail"
+    }
+
+    if file_to_get is None:
+        file_to_get = "original"
+
+    file_to_get_url = urls_for_retrieval[file_to_get]  
+
+    # Add URI suffix to append file-retrieval suffix after base URL (netx.base.url/api/)
+    uri_suffix = f"file/asset/{asset_id}{file_to_get_url}"
+
+
+    # if view_or_download == "view":
+
+    #     # get asset's view_id - TO FIX
+    #     view_id = netx_get_asset_by_id(
+    #         id_list=[asset_id],
+    #         data_to_get=['asset.base','asset.views'],
+    #         netx_env=netx_env
+    #         )
+
+    #     uri_suffix = f"file/asset/{asset_id}/view/{view_id}{file_to_get_url}"
+
+
+    return netx_api_make_request(uri_suffix=uri_suffix, netx_env=netx_env)
