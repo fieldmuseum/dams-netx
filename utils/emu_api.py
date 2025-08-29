@@ -1,24 +1,29 @@
 '''
-Functions for using texcdp (the EMu API)
-- texrestapi docs - https://nexus.melbourne.axiell.com/texrestapi/latest/ 
+Functions for using the EMu Rest API (emurestapi)
+- texrestapi docs - https://help.emu.axiell.com/emurestapi/latest/ 
 - Reminder: set 'EMU' variables in your .env (see '.env.example')
 '''
 
 import datetime
 import re
 import urllib.parse
-# import logging
-# import http.client as http_client
 import requests
 from utils import setup
 
-# # Uncomment to log at debug-level
+# # # # # # # # # # # # # #
+# # Uncomment to log at debug-level:
+#
+# import logging
+# import http.client as http_client
+#
 # http_client.HTTPConnection.debuglevel = 1
 # logging.basicConfig()
 # logging.getLogger().setLevel(logging.DEBUG)
 # requests_log = logging.getLogger("requests.packages.urllib3")
 # requests_log.setLevel(logging.DEBUG)
 # requests_log.propagate = True
+# # # # # # # # # # # # # #
+
 
 def emu_api_get_token(
     config:dict=None,
@@ -496,9 +501,9 @@ def emu_api_query_numeric(
         raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
 
     return emu_api_query_text(
-        emu_table=emu_table, 
-        search_field=search_field, 
-        operator=operator, 
+        emu_table=emu_table,
+        search_field=search_field,
+        operator=operator,
         search_value_single=search_value_single,
         search_value_range=search_value_range,
         emu_env=emu_env)
@@ -522,9 +527,9 @@ def emu_api_get_record_by_irn(
         raise Exception(f'Check operator "{operator}" - Must be one of {allowed_ops}')
 
     return emu_api_query_text(
-        emu_table=emu_table, 
-        search_field=search_field, 
-        operator=operator, 
+        emu_table=emu_table,
+        search_field=search_field,
+        operator=operator,
         search_value_single=search_value_single,
         emu_env=emu_env)
 
@@ -567,7 +572,9 @@ def emu_api_update_record(
         emu_env:str=None
         ):
     '''
-    Update EMu record (specified by table + irn)
+    Update EMu record (specified by table + irn). 
+    For the 'emu_record' arg, provide updated data formatted as:
+      {'field1':'new-value1','field2':'new-value2'}
 
     (from https://help.emu.axiell.com/emurestapi/latest/05-Appendices-Patch.html )
         Allowed 'operation' values include: 
