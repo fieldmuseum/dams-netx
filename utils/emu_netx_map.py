@@ -113,6 +113,7 @@ def emu_netx_groups_or_reftabs() -> dict:
         'MulOtherNumber_tab':['OtherNumbers','MulOtherNumber'],
         'MulOtherNumberSource_tab':['OtherNumbers','MulOtherNumberSource'],
         'RelRelatedMediaRef_tab_SummaryData':['RelatedMedia','SummaryData'],
+        'RelRelatedMediaRef_tab_AudIdentifier':['RelatedMedia','AudIdentifier'], # prepend 'mm.fm.org/'
         'RelRelationship_tab':['RelatedMedia','RelRelationship'],
         'CatDepartment':['MulMultiMediaRef_tab','CatDepartment'], # make unique list
         'CatCatalog':['MulMultiMediaRef_tab','CatCatalog'], # make unique list

@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 
 def media_schema_xml() -> ET.Element:
     '''basic XML schema for NetX media record imported via DSS'''
-    
-    media_schema_xml = ET.fromstring(
+
+    media_schema_xml_et = ET.fromstring(
         text='''
         <data>
             <NetxFilename/>
@@ -51,6 +51,7 @@ def media_schema_xml() -> ET.Element:
             <RelParentMediaRef_SummaryData/>
             <RelParentMediaRef_AudIdentifier/>
             <RelRelatedMediaRef_tab_SummaryData/>
+            <RelRelatedMediaRef_tab_AudIdentifier/>
             <RelRelationship_tab/>
             <CatCatalog/>
             <CatDepartment/>
@@ -84,12 +85,12 @@ def media_schema_xml() -> ET.Element:
         # <EveEventsRef_tab_GUID/>
         # <EveEventsRef_tab_SummaryData/>
 
-    return media_schema_xml
+    return media_schema_xml_et
 
 def media_schema_json():
     '''wishful thinking'''
 
-    media_schema_json = {
+    media_schema_dict = {
         'data': {
             'NetxFilename': None,
             'AudIdentifier': None,
@@ -117,7 +118,6 @@ def media_schema_json():
             'AdmAssetSourceDAMS': None,
             'AudTaxonCoverage': None,
             'AudRelatedGeography': None,
-            'AudAssociatedSpecimen': None,
             'AudAssociatedObservations': None,
             'AudNumbers': None,
             'AudVernacularName': None,
@@ -127,9 +127,6 @@ def media_schema_json():
             'AudSubjectPart_tab': None,
             'AudCaptureDevice': None,
             'AudFundingAttribution': None,
-            'AudAccessURI': None,
-            'DetMediaRightsRef_RigType': None,
-            'DetMediaRightsRef_RigOtherNumber': None,
             'EveEventsRef_tab_irn': None,
             'EveEventsRef_tab_GUID': None,
             'EveEventsRef_tab_SummaryData': None,
@@ -168,4 +165,4 @@ def media_schema_json():
         }
     }
 
-    return media_schema_json
+    return media_schema_dict

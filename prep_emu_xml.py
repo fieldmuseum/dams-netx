@@ -45,6 +45,11 @@ def parse_emu_to_dss(
             if key == "AudAssociatedSpecimen" and prepped_record.find(key).text is not None:
                 guid = prepped_record.find(key).text
                 prepped_record.find(key).text = f'https://db.fieldmuseum.org/{guid}'
+                if guid.find('|') > -1:
+                    prepped_record.find(key).text = re.sub(r'\s*\|\s*',
+                                                           ' | https://db.fieldmuseum.org/',
+                                                           prepped_record.find(key).text
+                                                           )
 
 
     # Populate DSS fields with conditional values
@@ -149,6 +154,17 @@ def parse_emu_to_dss(
             if grouped_value is not None:
                 prepped_record.find(key).text = grouped_value
 
+                # Properly concatenate multiple related-MM guids
+                # if key == 'RefRelRelatedMediaRef_tab_AudIdentifier':
+                if 'AudIdentifier' in key:
+                    prepped_record.find(key).text = f'https://mm.fieldmuseum.org/{grouped_value}'
+
+                    if grouped_value.find('|') > -1:
+                        prepped_record.find(key).text = re.sub(r'\s*\|\s*',
+                                                            ' | https://mm.fieldmuseum.org/',
+                                                            prepped_record.find(key).text
+                                                            )
+
 
     # Populate fields where values need concatenation (e.g. reverse-attached Event fields)
     concat_fields = emu_netx.emu_netx_ref_concatenate()
@@ -180,6 +196,11 @@ def parse_emu_to_dss(
                 if mm_event is not None and len(mm_event.findall('.//' + value[1])) > 0:
                     pj_guid = mm_event.find('.//' + value[1]).text
                     prepped_record.find(key).text = f'https://pj.fieldmuseum.org/event/{pj_guid}'
+                    if pj_guid.find('|') > -1:
+                        prepped_record.find(key).text = re.sub(r'\s*\|\s*',
+                                                               ' | https://pj.fieldmuseum.org/event/',
+                                                               prepped_record.find(key).text
+                                                               )
 
 
     return prepped_record
