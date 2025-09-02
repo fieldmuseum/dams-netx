@@ -96,6 +96,11 @@ def parse_emu_to_dss(
             ref_values = xml_tools.get_ref_value(emu_record, value[0], value[1])
             if ref_values is not None: # and re.match(r'^\s+$', ref_values) is None:
                 prepped_record.find(key).text = ref_values
+
+                # Properly concatenate 'mm.fm.org' to form link
+                if 'AudIdentifier' in key:
+                    prepped_record.find(key).text = f'https://mm.fieldmuseum.org/{ref_values}'
+
             else:
                 prepped_record.find(key).text = ''
 
@@ -155,7 +160,6 @@ def parse_emu_to_dss(
                 prepped_record.find(key).text = grouped_value
 
                 # Properly concatenate multiple related-MM guids
-                # if key == 'RefRelRelatedMediaRef_tab_AudIdentifier':
                 if 'AudIdentifier' in key:
                     prepped_record.find(key).text = f'https://mm.fieldmuseum.org/{grouped_value}'
 
