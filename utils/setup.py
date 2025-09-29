@@ -22,23 +22,31 @@ def get_config_dams_netx(netx_env:str=None):
 def get_sys_argv(number_of_args:int=2):
     '''Return "live/test" & "date" sys.argv variables standardly across scripts'''
 
-    live_or_test = None
+    live_or_test = None  # prep-scripts use live or test
     input_date = None
+    netx_live_or_test = None  # whether to use live or test NetX
 
     if len(sys.argv) > 1:
         live_or_test = sys.argv[1]
         if live_or_test not in ["LIVE", "TEST"]:
-            raise Exception("Check 1st command-line arg -- expected 'LIVE' or 'TEST'")
+            raise Exception("Check 1st command-line arg -- expected 'LIVE' or 'TEST' for prep-scripts")
 
     if len(sys.argv) > 2:
         input_date = sys.argv[2]
         if not re.match(r'^\d{4}\-\d{1,2}\-\d{1,2}$', input_date):
             raise Exception("Check 2nd command-line arg -- expected 'YYYY-M-D' (no lead zeroes)")
 
+    if len(sys.argv) > 3:
+        live_or_test = sys.argv[3]
+        if live_or_test not in ["LIVE", "TEST"]:
+            raise Exception("Check 3rd command-line arg -- expected 'LIVE' or 'TEST' for NetX env")
+
     if number_of_args==1:
         return live_or_test
-    else:
+    elif number_of_args == 2:
         return live_or_test, input_date
+    else:
+        return live_or_test, input_date, netx_live_or_test
 
 
 def get_path_from_env(live_or_test, live_path, test_path):

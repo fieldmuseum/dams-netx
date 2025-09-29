@@ -17,12 +17,22 @@ import netx_remove_collection
 from utils import setup
 
 
-def main():
+def main(prep_live_or_test:str=None, netx_live_or_test:str=None, today:str=None):
     '''Run through dams-netx sync tasks'''
 
-    today = str(datetime.today())[:10]
-    prep_live_or_test = 'LIVE'
-    netx_live_or_test = 'LIVE'
+
+    prep_live_or_test, today, netx_live_or_test = setup.get_sys_argv(3)
+
+    # Setup paths to input XML
+    if prep_live_or_test is None:
+        prep_live_or_test = 'LIVE'
+
+    if netx_live_or_test is None:
+        netx_live_or_test = 'LIVE'
+
+    if today is None:
+        today = str(datetime.today())[:10]
+
 
     # Start logs
     setup.start_log_dams_netx(config=None, cmd_args=[prep_live_or_test, today])
@@ -42,7 +52,7 @@ def main():
         netx_io_props = config['NETXIO_PROPS']
     else:
         netx_io_props = config['TEST_NETXIO_PROPS']
-    
+
     netx_io_jar = config['NETXIO_JAR']
     netx_io =  f'sudo java -Xms512M -Xmx2048M -cp "{netx_io_jar}" com.netxposure.external.client.io.NetxIO -config "{netx_io_props}"'
     logging.info('NETX_IO:  %s', netx_io)
