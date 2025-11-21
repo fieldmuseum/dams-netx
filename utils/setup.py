@@ -37,8 +37,8 @@ def get_sys_argv(number_of_args:int=2):
             raise Exception("Check 2nd command-line arg -- expected 'YYYY-M-D' (no lead zeroes)")
 
     if len(sys.argv) > 3:
-        live_or_test = sys.argv[3]
-        if live_or_test not in ["LIVE", "TEST"]:
+        netx_live_or_test = sys.argv[3]
+        if netx_live_or_test not in ["LIVE", "TEST"]:
             raise Exception("Check 3rd command-line arg -- expected 'LIVE' or 'TEST' for NetX env")
 
     if number_of_args==1:
