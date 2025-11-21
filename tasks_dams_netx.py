@@ -33,6 +33,10 @@ def main(prep_live_or_test:str=None, netx_live_or_test:str=None, today:str=None)
     if today is None:
         today = str(datetime.today())[:10]
 
+    print(f"Prep env [prep_live_or_test] is:  {prep_live_or_test}")
+    print(f"NetX env [netx_live_or_test] is:  {netx_live_or_test}")
+    print(f"date ['today' variable] is:  {today}")
+
 
     # Start logs
     setup.start_log_dams_netx(config=None, cmd_args=[prep_live_or_test, today])

@@ -19,7 +19,7 @@ from utils import emu_netx_map as emu_netx
 from utils import setup
 
 
-def main(live_or_test:str=None, input_date:str=None):
+def main(live_or_test:str=None, input_date:str=None, netx_live_or_test:str=None):
     """
     Outputs all records' data and copies files into dir for NetX
     Input is an EMu XML export file, outputs to a CSV file with the
@@ -40,7 +40,7 @@ def main(live_or_test:str=None, input_date:str=None):
     setup.start_log_dams_netx(config=None, cmd_args=input_args)
 
 
-    config = setup.get_config_dams_netx(live_or_test)
+    config = setup.get_config_dams_netx(netx_live_or_test)
 
     dept_csv = config['DEPARTMENT_CSV']
 
