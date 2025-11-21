@@ -29,6 +29,8 @@ def main(live_or_test:str=None, input_date:str=None, netx_live_or_test:str=None)
     :return: list of dictionaries, dictionary includes: AudIdentifier, prep_file
     """
 
+    print(f"INITIALLY: live_or_test var is {live_or_test}")
+
     # Start logs
     if live_or_test is None and input_date is None:
         input_args = sys.argv
@@ -43,6 +45,8 @@ def main(live_or_test:str=None, input_date:str=None, netx_live_or_test:str=None)
     config = setup.get_config_dams_netx(netx_live_or_test)
 
     dept_csv = config['DEPARTMENT_CSV']
+
+    print(f"NOW: live_or_test var is {live_or_test}")
 
     # Check if test or live paths should be used
     full_prefix = setup.get_path_from_env(
