@@ -90,10 +90,11 @@ def main(live_or_test:str=None, input_date:str=None):
                 record['SecDepartment'] = sec_dept_all[0]
 
                 # Get secondary SecDepartment values for pathAdd
-                if len(sec_dept_all) > 1:
-                    record['PathAddDepts'] = sec_dept_all
-                else:
-                    record['PathAddDepts'] = None
+                # if len(sec_dept_all) > 1:
+                #     record['PathAddDepts'] = sec_dept_all
+                # else:
+                #     record['PathAddDepts'] = None
+                record['PathAddDepts'] = sec_dept_all
 
         if set(['ChaMd5Sum', 'SecDepartment', 'MulIdentifier', 'AudIdentifier']).issubset(record):
             # if 'MulIdentifier' in record and record['MulIdentifier'] is not None:
