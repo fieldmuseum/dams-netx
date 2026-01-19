@@ -223,9 +223,10 @@ def prep_file(record):
 def pathmove(record:dict, dept_csv:str):
     """
     Creates the pathMove value for a record (folder path without filename)
-    e.g. Multimedia/Geology/Paleobotany/
+    e.g. Geology/Paleobotany/
 
     :param record: dict of the record data
+    :param dept_csv: str of filepath to dept hierarchy CSV
     :return: returns a string of the pathMove value
     """
 
@@ -244,11 +245,12 @@ def pathadd(record:dict, dept_csv:str):
     Creates the pathAdd value(s) for a record (folder path without filename)
     e.g.
     [
-        {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Geology/Paleobotany/'},
-        {'file':identifier-123-abc.jpg, 'pathAdd':'Multimedia/Library/Photo Archives/'}
+        {'file':identifier-123-abc.jpg, 'pathAdd':'Geology/Paleobotany/'},
+        {'file':identifier-123-abc.jpg, 'pathAdd':'Photo Archives/'}
     ]
 
     :param record: dict of the record data
+    :param dept_csv: str of filepath to dept hierarchy CSV
     :return: returns a list of dicts with an asset's pathAdd rows
     """
     path_add_list = []
@@ -263,10 +265,17 @@ def pathadd(record:dict, dept_csv:str):
             dept_folder = emu_netx.get_folder_hierarchy(dept, dept_csv)
             if dept_folder is not None:
                 pathadd_folder = f'{dept_folder}'
-                path_add_row = {'file':filename, 'pathAdd':pathadd_folder}
-
+                path_add_row = {'file':filename, 'pathAdd':pathadd_folder}                    
                 if path_add_row not in path_add_list:
                     path_add_list.append(path_add_row)
+                
+                # Also add to Portal if media is public (& portal-folder exists)
+                if record['AdmPublishWebNoPassword'].lower() in ["yes", 'y']:
+                    pathadd_public_folder = f'Portal/Museum Media/{dept_folder}'
+                    path_add_public_row = {'file':filename, 'pathAdd':pathadd_public_folder}                    
+                    if path_add_public_row not in path_add_list:
+                        path_add_list.append(path_add_public_row)
+
 
     if len(path_add_list) > 0:
         return path_add_list
@@ -285,7 +294,8 @@ def validate_records(records):
         'irn',
         'MulIdentifier',
         'SecRecordStatus',
-        'SecDepartment'
+        'SecDepartment',
+        'AdmPublishWebNoPassword'
         ]
 
     for record in records:
