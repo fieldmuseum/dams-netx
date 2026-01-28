@@ -86,6 +86,8 @@
                 <field name="field_64" column="DetResourceType"/>
                 <field name="field_65" column="DetMediaRightsRef_Rig1WebLink"/>
                 <field name="field_66" column="RelRelatedMediaRef_tab_AudIdentifier"/>
+				<field name="field_67" column="DetContributorRef_tab_SummaryData"/>
+				<field name="field_68" column="DetContributorRole_tab"/>
 				<!--field name="field_!!" column="AdmAssetSourceDAMS"/-->
 
 		</source>
@@ -160,6 +162,8 @@
                 <map field="field_64" attribute="Resource Type" skip_null="false"/>
                 <map field="field_65" attribute="License URL" skip_null="false"/>
                 <map field="field_66" attribute="Related Media Identifier" skip_null="false"/>
+				<map field="field_67" attribute="Contributor" skip_null="false"/>
+				<map field="field_68" attribute="Contributor Role" skip_null="false"/>
 
 				<!--map field="field_!!" attribute="Data Source" skip_null="false"/-->
 
