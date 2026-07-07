@@ -156,10 +156,10 @@ def parse_emu_to_dss(
             else:
                 grouped_value = xml_tools.get_group_value(emu_record, value[0], value[1])
 
-            if grouped_value is not None:
-                print(f'Checking error -- key = {key}')
-                print(f'- error check:  prepped_record = {prepped_record}')
-                print(f'- error check:  grouped_val = {grouped_value}')
+            if grouped_value is not None and prepped_record.find(key) is not None:
+                # print(f'Checking error -- key = {key}')
+                # print(f'- error check:  prepped_record = {prepped_record}')
+                # print(f'- error check:  grouped_val = {grouped_value}')
                 prepped_record.find(key).text = grouped_value
 
                 # Properly concatenate multiple related-MM guids

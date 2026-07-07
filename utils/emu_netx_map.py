@@ -136,7 +136,7 @@ def emu_netx_groups_or_reftabs() -> dict:
         'ExOb_Height':['InsMultimediaRef_tab','MeaConfirmedHeight'],
         'ExOb_Weight':['InsMultimediaRef_tab','MeaConfirmedWeight'],
         'DetContributorRef_tab_SummaryData':['Contributor','SummaryData'],
-        'DetContributorRef_tab_irn':['Contributor','irn'],
+        # 'DetContributorRef_tab_irn':['Contributor','irn'],
         'DetContributorRole_tab':['Contributor','DetContributorRole'],
     }
 
