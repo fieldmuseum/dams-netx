@@ -164,8 +164,8 @@ def media_schema_json():
             'ExOb_Width':None,
             'ExOb_Height':None,
             'ExOb_Weight':None,
-            'DetContributorRef_tab_SummaryData': None,
-            'DetContributorRole_tab' = None
+            'DetContributorRef_tab_SummaryData':None,
+            'DetContributorRole_tab': None
         }
     }
 
