@@ -79,7 +79,7 @@ def emu_netx_refs() -> dict:
         'DetMediaRightsRef_RigOwner_Summary':[
             'DetMediaRightsRef', 'RigOwnershipRef_tab.SummaryData'
             ],
-        # try RigOwnershipRef_tab/SummaryData ?
+        # try RigOwnershipRef_tab/SummaryData ?RelRelatedMediaRef_tab_AudIdentifier
         'DetMediaRightsRef_RigOtherNumber':['DetMediaRightsRef', 'RigOtherNumber'],
         'DetMediaRightsRef_Rig1WebLink':['DetMediaRightsRef', 'Rig1WebLink'],
         'RelParentMediaRef_SummaryData':['RelParentMediaRef', 'SummaryData'],
@@ -134,7 +134,10 @@ def emu_netx_groups_or_reftabs() -> dict:
         'ExOb_Depth':['InsMultimediaRef_tab','MeaConfirmedDepth'],
         'ExOb_Width':['InsMultimediaRef_tab','MeaConfirmedWidth'],
         'ExOb_Height':['InsMultimediaRef_tab','MeaConfirmedHeight'],
-        'ExOb_Weight':['InsMultimediaRef_tab','MeaConfirmedWeight']
+        'ExOb_Weight':['InsMultimediaRef_tab','MeaConfirmedWeight'],
+        'DetContributorRef_tab_SummaryData':['Contributor','SummaryData'],
+        'DetContributorRef_tab_irn':['Contributor','irn'],
+        'DetContributorRole_tab':['Contributor','DetContributorRole'],
     }
 
     return groups_or_reftabs
