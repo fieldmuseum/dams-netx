@@ -76,6 +76,8 @@ def media_schema_xml() -> ET.Element:
             <ExOb_Width/>
             <ExOb_Height/>
             <ExOb_Weight/>
+            <DetContributorRef_tab_SummaryData/>
+            <DetContributorRole_tab/>
         </data>
         '''
         )
@@ -162,6 +164,8 @@ def media_schema_json():
             'ExOb_Width':None,
             'ExOb_Height':None,
             'ExOb_Weight':None,
+            'DetContributorRef_tab_SummaryData': None,
+            'DetContributorRole_tab' = None
         }
     }
 
